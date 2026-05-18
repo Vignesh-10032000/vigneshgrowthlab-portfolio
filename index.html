@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vignesh Prabhu M - Portfolio</title>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;font-family:'Segoe UI',system-ui,sans-serif}
+    body{background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 50%,#0f172a 100%);color:#e2e8f0;min-height:100vh}
+
+    /* NAV */
+    nav{position:fixed;top:0;width:100%;background:rgba(15,23,42,0.88);backdrop-filter:blur(14px);z-index:200;border-bottom:1px solid #1e293b}
+    .nav-inner{max-width:1100px;margin:0 auto;padding:15px 24px;display:flex;justify-content:space-between;align-items:center}
+    .nav-logo{font-size:1.5rem;font-weight:900;background:linear-gradient(90deg,#60a5fa,#22d3ee);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .nav-links{display:flex;gap:22px}
+    .nav-links a{color:#94a3b8;text-decoration:none;font-size:0.93rem;transition:color .2s}
+    .nav-links a:hover,.nav-links a.active{color:#60a5fa}
+
+    /* SECTIONS */
+    section{padding:80px 24px}
+    .container{max-width:1100px;margin:0 auto}
+    .section-alt{background:rgba(30,41,59,0.35)}
+    .section-title{font-size:1.8rem;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:10px}
+    .section-sub{color:#64748b;font-size:0.9rem;margin-bottom:28px}
+    .icon-blue{color:#60a5fa}
+
+    /* HERO */
+    #hero{padding:140px 24px 80px;text-align:center}
+    .hero-name{font-size:clamp(2.4rem,7vw,4.5rem);font-weight:900;background:linear-gradient(90deg,#60a5fa,#22d3ee,#60a5fa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:14px}
+    .hero-title{font-size:clamp(1rem,2.5vw,1.35rem);color:#94a3b8;margin-bottom:20px}
+    .hero-desc{color:#64748b;max-width:620px;margin:0 auto 34px;line-height:1.75}
+    .btn-group{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:9px;text-decoration:none;font-size:0.93rem;font-weight:500;transition:all .2s;border:none;cursor:pointer}
+    .btn-blue{background:#2563eb;color:#fff}.btn-blue:hover{background:#1d4ed8}
+    .btn-green{background:#16a34a;color:#fff}.btn-green:hover{background:#15803d}
+    .btn-gray{background:#1e293b;color:#e2e8f0}.btn-gray:hover{background:#334155}
+
+    /* ABOUT */
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+    .card{background:rgba(30,41,59,0.65);border:1px solid #334155;border-radius:14px;padding:24px;transition:transform .2s}
+    .card:hover{transform:translateY(-3px)}
+    .card-heading{font-size:1.1rem;font-weight:600;color:#60a5fa;margin-bottom:16px}
+    .card p{color:#94a3b8;line-height:1.75;margin-bottom:12px;font-size:0.93rem}
+    .card p:last-child{margin-bottom:0}
+    .highlight{color:#22d3ee;font-weight:600}
+    .highlight-green{color:#4ade80;font-weight:600}
+    .edu-item{display:flex;gap:12px;margin-bottom:16px;align-items:flex-start}
+    .edu-icon{color:#22d3ee;flex-shrink:0;margin-top:2px}
+    .edu-item strong{display:block;color:#e2e8f0;font-size:0.95rem}
+    .edu-item span{font-size:0.82rem;color:#64748b}
+
+    /* PROJECTS */
+    .projects-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+    .project-card{background:linear-gradient(135deg,rgba(30,41,59,0.9),rgba(30,41,59,0.5));border:1px solid #334155;border-radius:14px;padding:24px;transition:border-color .2s,box-shadow .2s,transform .2s}
+    .project-card:hover{border-color:#3b82f6;box-shadow:0 0 24px rgba(59,130,246,.15);transform:translateY(-3px)}
+    .project-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;gap:8px}
+    .project-title{font-size:1.05rem;font-weight:700;color:#60a5fa}
+    .project-status{font-size:0.72rem;color:#4ade80;margin-bottom:6px}
+    .badge{font-size:0.7rem;background:rgba(37,99,235,0.2);color:#60a5fa;padding:3px 8px;border-radius:4px;white-space:nowrap;flex-shrink:0}
+    .project-desc{color:#94a3b8;font-size:0.88rem;margin-bottom:14px;line-height:1.65}
+    .tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+    .tag{font-size:0.73rem;background:#1e293b;color:#94a3b8;padding:4px 10px;border-radius:999px}
+    .highlights{list-style:none;display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
+    .highlights li{font-size:0.83rem;color:#64748b;display:flex;gap:6px;align-items:flex-start}
+    .highlights li::before{content:"›";color:#22d3ee;font-weight:700;flex-shrink:0}
+    .project-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+    .btn-live{display:inline-flex;align-items:center;gap:6px;font-size:0.82rem;font-weight:500;padding:7px 14px;border-radius:8px;background:rgba(37,99,235,0.2);border:1px solid rgba(59,130,246,0.35);color:#93c5fd;text-decoration:none;transition:all .2s}
+    .btn-live:hover{background:rgba(37,99,235,0.35);color:#bfdbfe}
+
+    /* EXPERIENCE */
+    .exp-list{display:flex;flex-direction:column;gap:18px}
+    .exp-card{background:rgba(30,41,59,0.6);border:1px solid #334155;border-radius:14px;padding:24px;transition:border-color .2s}
+    .exp-card:hover{border-color:#3b82f6}
+    .exp-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;flex-wrap:wrap;gap:8px}
+    .exp-role{font-size:1.1rem;font-weight:700;color:#60a5fa}
+    .exp-company{color:#94a3b8;font-size:0.88rem;margin-bottom:4px}
+    .exp-period{font-size:0.82rem;color:#64748b;white-space:nowrap}
+    .exp-meta{font-size:0.8rem;color:#475569;margin-bottom:10px}
+    .exp-meta span{color:#64748b}
+    .exp-resp{list-style:none;display:flex;flex-direction:column;gap:5px}
+    .exp-resp li{font-size:0.85rem;color:#64748b;display:flex;gap:8px;align-items:flex-start;line-height:1.6}
+    .exp-resp li::before{content:"▸";color:#22d3ee;flex-shrink:0;font-size:0.75rem;margin-top:3px}
+
+    /* SKILLS */
+    .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:20px}
+    .skill-card{border-radius:12px;padding:22px;border:1px solid #334155}
+    .skill-card.blue{background:linear-gradient(135deg,rgba(30,58,138,0.4),rgba(30,41,59,0.4))}
+    .skill-card.cyan{background:linear-gradient(135deg,rgba(22,78,99,0.4),rgba(30,41,59,0.4))}
+    .skill-card.purple{background:linear-gradient(135deg,rgba(76,29,149,0.4),rgba(30,41,59,0.4))}
+    .skill-card-title{font-weight:600;margin-bottom:14px}
+    .skill-card.blue .skill-card-title{color:#60a5fa}
+    .skill-card.cyan .skill-card-title{color:#22d3ee}
+    .skill-card.purple .skill-card-title{color:#c084fc}
+    .skill-pills{display:flex;flex-wrap:wrap;gap:8px}
+    .pill{font-size:0.8rem;padding:5px 11px;border-radius:7px}
+    .pill-blue{background:rgba(37,99,235,0.2);color:#93c5fd}
+    .pill-cyan{background:rgba(8,145,178,0.2);color:#67e8f9}
+    .pill-purple{background:rgba(124,58,237,0.2);color:#d8b4fe}
+    .pill-pink{background:rgba(219,39,119,0.2);color:#f9a8d4;border:1px solid rgba(219,39,119,0.25)}
+
+    .dm-card{background:linear-gradient(135deg,rgba(131,24,67,0.3),rgba(154,52,18,0.2));border:1px solid rgba(236,72,153,0.3);border-radius:12px;padding:24px}
+    .dm-title{font-weight:700;color:#f472b6;margin-bottom:14px;font-size:1rem;display:flex;align-items:center;gap:8px}
+
+    /* CERTIFICATIONS */
+    .certs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
+    .cert-card{background:rgba(30,41,59,0.6);border:1px solid #334155;border-radius:10px;padding:16px;transition:border-color .2s}
+    .cert-card:hover{border-color:#3b82f6}
+    .cert-name{font-weight:600;color:#e2e8f0;margin-bottom:3px;font-size:0.92rem}
+    .cert-issuer{font-size:0.8rem;color:#64748b;margin-bottom:8px}
+    .cert-link{font-size:0.8rem;color:#60a5fa;text-decoration:none;display:inline-flex;align-items:center;gap:4px}
+    .cert-link:hover{color:#93c5fd}
+    .certs-heading{font-size:1.35rem;font-weight:700;display:flex;align-items:center;gap:8px;margin:44px 0 0}
+
+    /* MODAL */
+    .modal-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0.75);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:16px}
+    .modal-overlay.open{display:flex}
+    .modal-box{max-width:640px;width:100%;background:#111827;border:1px solid #334155;border-radius:16px;padding:28px;position:relative;max-height:82vh;overflow-y:auto}
+    .modal-close{position:absolute;top:16px;right:16px;background:#1e293b;border:none;color:#94a3b8;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:background .2s}
+    .modal-close:hover{background:#334155;color:#fff}
+    .modal-title{font-size:1.2rem;font-weight:700;color:#60a5fa;margin-bottom:6px}
+    .modal-desc{color:#94a3b8;font-size:0.9rem;margin-bottom:14px;line-height:1.65}
+    .modal-section-label{font-size:0.78rem;font-weight:600;color:#64748b;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;margin-top:14px}
+
+    /* CONTACT */
+    #contact{text-align:center}
+    #contact h3{font-size:2rem;font-weight:700;margin-bottom:14px}
+    #contact>div>p{color:#94a3b8;max-width:560px;margin:0 auto 10px;line-height:1.7;font-size:0.93rem}
+    .contact-sub{color:#64748b;font-size:0.85rem;margin-bottom:28px!important}
+    .contact-links{display:flex;flex-wrap:wrap;justify-content:center;gap:22px;margin-bottom:28px}
+    .contact-links a,.contact-loc{display:flex;align-items:center;gap:8px;color:#94a3b8;text-decoration:none;font-size:0.93rem;transition:color .2s}
+    .contact-links a:hover{color:#60a5fa}
+    .social-row{display:flex;justify-content:center;gap:12px}
+    .social-btn{padding:10px;border-radius:50%;transition:background .2s;display:flex}
+    .social-btn.linkedin{background:#1d4ed8}.social-btn.linkedin:hover{background:#1e40af}
+    .social-btn.github{background:#374151}.social-btn.github:hover{background:#4b5563}
+
+    footer{padding:22px;border-top:1px solid #1e293b;text-align:center;color:#475569;font-size:0.83rem}
+
+    @media(max-width:768px){
+      .about-grid,.projects-grid,.skills-grid,.certs-grid{grid-template-columns:1fr}
+      .nav-links{gap:14px;font-size:0.83rem}
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">VP</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="container">
+    <h1 class="hero-name">Vignesh Prabhu M</h1>
+    <p class="hero-title">Full-Stack Developer &amp; Digital Marketer</p>
+    <p class="hero-desc">Building intelligent web applications with AI-driven insights. Passionate about creating scalable solutions that enhance user experience and drive business value.</p>
+    <div class="btn-group">
+      <a href="/cdn-cgi/l/email-protection#f7819e909992849f878596959f82c7c6c7b7909a969e9bd994989a" class="btn btn-blue">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        Get in Touch
+      </a>
+      <a href="vignesh prabhu-resume_ats updated.pdf" download class="btn btn-green">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download Resume
+      </a>
+      <a href="https://www.linkedin.com/in/vignesh-prabhu-m-06b173253" target="_blank" rel="noopener" class="btn btn-gray">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section-alt">
+  <div class="container">
+    <h2 class="section-title">
+      <svg class="icon-blue" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      About Me
+    </h2>
+    <div class="about-grid">
+      <div class="card">
+        <div class="card-heading">Professional Summary</div>
+        <p>Enthusiastic postgraduate in <span class="highlight">Computer Applications</span> with a strong passion for technology and innovation. Specializing in <span class="highlight">full-stack web development</span> and <span class="highlight">digital marketing</span>, I bring hands-on experience in building scalable applications using modern frameworks.</p>
+        <p>Currently working as a <span class="highlight">Full-Stack Developer</span>, developing AI-powered solutions with Django, Python, and Docker. My experience spans from creating real-time E-Bike rental platforms with AI integration to running digital marketing campaigns.</p>
+        <p>With a solid foundation in <span class="highlight">Python, SQL, Django, REST APIs, Docker</span> and expertise in <span class="highlight">Meta Ads, Social Media Management &amp; SEO</span>, I excel at bridging technical implementation with business value. Previous experience in healthcare operations has strengthened my skills in data accuracy, compliance, and process optimization.</p>
+        <p><span class="highlight-green">Currently open to new opportunities</span> where I can apply my technical skills, continue learning, and contribute to innovative projects that drive organizational success.</p>
+      </div>
+      <div class="card">
+        <div class="card-heading">Education</div>
+        <div class="edu-item">
+          <svg class="edu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          <div><strong>Master of Computer Application</strong><span>Dr.MCET | GPA: 7.1 | 2025</span></div>
+        </div>
+        <div class="edu-item">
+          <svg class="edu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          <div><strong>BSc in Computer Science</strong><span>NASC | GPA: 6.6 | 2021</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <h2 class="section-title">
+      <svg class="icon-blue" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="8" x="2" y="2" rx="2"/><rect width="20" height="8" x="2" y="14" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+      Featured Projects
+    </h2>
+    <p class="section-sub">Freelance client builds and hands-on products shipped to production.</p>
+    <div class="projects-grid">
+
+      <!-- Project 1 -->
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-title">Day2Day Gift - E-Commerce Platform</div>
+          <span class="badge">Client Project</span>
+        </div>
+        <p class="project-status">🟢 Freelance Service</p>
+        <p class="project-desc">Modern e-commerce web application for gift shopping with intuitive user experience</p>
+        <div class="tags">
+          <span class="tag">React</span><span class="tag">Tailwind CSS</span><span class="tag">JavaScript</span><span class="tag">Responsive Design</span>
+        </div>
+        <ul class="highlights">
+          <li>Developed responsive and user-friendly interface for seamless shopping experience</li>
+          <li>Implemented product catalog with search and filtering capabilities</li>
+          <li>Created mobile-optimized design for cross-device compatibility</li>
+          <li>Deployed and maintained live production application</li>
+        </ul>
+        <div class="project-actions">
+          <a href="https://daytodaygifts.netlify.app/" target="_blank" rel="noopener" class="btn-live">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Live Demo
+          </a>
+          <button class="btn-live" onclick="openModal('day2day')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+            Quick View
+          </button>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-title">Eat and Play - Food &amp; Entertainment Web App</div>
+          <span class="badge">Client Project</span>
+        </div>
+        <p class="project-status">🟢 Freelance Service</p>
+        <p class="project-desc">Interactive web application combining food ordering with entertainment features</p>
+        <div class="tags">
+          <span class="tag">React</span><span class="tag">JavaScript</span><span class="tag">API Integration</span><span class="tag">Modern UI/UX</span>
+        </div>
+        <ul class="highlights">
+          <li>Built dynamic product listing and detail pages</li>
+          <li>Integrated real-time data fetching and state management</li>
+          <li>Designed engaging user interface for enhanced customer interaction</li>
+          <li>Optimized performance for fast loading and smooth navigation</li>
+        </ul>
+        <div class="project-actions">
+          <a href="https://meatandeatd.netlify.app/" target="_blank" rel="noopener" class="btn-live">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Live Demo
+          </a>
+          <button class="btn-live" onclick="openModal('eatplay')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+            Quick View
+          </button>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-title">Zap Rider - AI-Powered E-Bike Rental Platform</div>
+          <span class="badge">Live Project</span>
+        </div>
+        <p class="project-status">🟢 Freelance Service</p>
+        <p class="project-desc">Real-time E-Bike rental management system with AI-driven automation and predictive analytics</p>
+        <div class="tags">
+          <span class="tag">Django</span><span class="tag">Python</span><span class="tag">MySQL</span><span class="tag">Docker</span><span class="tag">REST API</span><span class="tag">AI Integration</span><span class="tag">Twilio</span>
+        </div>
+        <ul class="highlights">
+          <li>Designed secure user and admin portals with OTP-based login</li>
+          <li>Integrated SMS notifications via Twilio/MSG91</li>
+          <li>Implemented JWT authentication for secure API access</li>
+          <li>Configured Docker containers for seamless deployment</li>
+        </ul>
+        <div class="project-actions">
+          <button class="btn-live" onclick="openModal('zaprider')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+            Quick View
+          </button>
+        </div>
+      </div>
+
+      <!-- Project 4 -->
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-title">Amazon Sales Data Analysis</div>
+          <span class="badge">Internship Project</span>
+        </div>
+        <p class="project-desc">Comprehensive data analysis project to uncover trends and customer behavior insights</p>
+        <div class="tags">
+          <span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Matplotlib</span><span class="tag">Power BI</span><span class="tag">Excel</span>
+        </div>
+        <ul class="highlights">
+          <li>Cleaned and transformed large datasets using Python</li>
+          <li>Created interactive Power BI dashboards</li>
+          <li>Delivered insights for inventory management and pricing strategy</li>
+          <li>Improved customer segmentation analysis</li>
+        </ul>
+        <div class="project-actions">
+          <button class="btn-live" onclick="openModal('amazon')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+            Quick View
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="section-alt">
+  <div class="container">
+    <h2 class="section-title">
+      <svg class="icon-blue" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+      Professional Experience
+    </h2>
+    <p class="section-sub">Client delivery, internships, and domain expertise that shaped my build process.</p>
+    <div class="exp-list">
+
+      <div class="exp-card">
+        <div class="exp-top">
+          <div>
+            <div class="exp-role">Full-Stack Developer</div>
+            <div class="exp-company">Freelancing | Coimbatore, Tamil Nadu</div>
+          </div>
+          <span class="exp-period">OCT 2025 – NOV 2025</span>
+        </div>
+        <div class="exp-meta">Project: <span>Zap Rider - AI-Powered E-Bike Rental Web Platform</span> &nbsp;|&nbsp; Stack: <span>Django, Python, MySQL, Docker, REST API, AI Integration, Twilio/MSG91</span></div>
+        <ul class="exp-resp">
+          <li>Developing real-time E-Bike rental management system using AI-driven automation and predictive analytics to optimize ride availability</li>
+          <li>Designed and implemented secure user and admin portals featuring OTP-based login, ride verification, booking management, and payment tracking</li>
+          <li>Integrated SMS notifications for customer updates through Twilio/MSG91 and implemented JWT authentication for secure API access</li>
+          <li>Configured Docker containers for seamless deployment and scalability, using environment-based configuration for production readiness</li>
+          <li>Leveraging AI insights to improve operational efficiency and enhance customer experience through data-based recommendations</li>
+        </ul>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-top">
+          <div>
+            <div class="exp-role">Data Analyst Intern</div>
+            <div class="exp-company">Innobyte Services | Remote</div>
+          </div>
+          <span class="exp-period">2024</span>
+        </div>
+        <div class="exp-meta">Project: <span>Amazon Sales Data Analysis</span> &nbsp;|&nbsp; Stack: <span>Python (Pandas, Matplotlib), Power BI, Excel</span></div>
+        <ul class="exp-resp">
+          <li>Conducted comprehensive data analysis on Amazon sales data to uncover trends, customer behaviour, and product performance insights</li>
+          <li>Cleaned, transformed, and modelled datasets using Python (Pandas) for accurate data-driven reporting</li>
+          <li>Created interactive Power BI dashboards visualizing sales performance, region-wise demand, and revenue growth</li>
+          <li>Delivered business insights that contributed to improving inventory management, pricing strategy, and customer segmentation</li>
+        </ul>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-top">
+          <div>
+            <div class="exp-role">HC &amp; Insurance Operations Senior Rep.</div>
+            <div class="exp-company">NTT DATA | India &nbsp;|&nbsp; Client: Centene</div>
+          </div>
+          <span class="exp-period">NOV 2021 – DEC 2022</span>
+        </div>
+        <div class="exp-meta">Project: <span>Claim Analyst</span> &nbsp;|&nbsp; Stack: <span>Data Processing, Claims Review, Process Accuracy, Business Communication</span></div>
+        <ul class="exp-resp">
+          <li>Handled and validated healthcare claims with a focus on accuracy and compliance</li>
+          <li>Resolved denials and coordinated with teams to ensure timely issue resolution</li>
+          <li>Maintained data confidentiality while meeting daily quality and productivity targets</li>
+          <li>Strengthened skills in data handling, client communication, and process reporting</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <h2 class="section-title">
+      <svg class="icon-blue" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"/></svg>
+      Technical Skills
+    </h2>
+    <div class="skills-grid">
+      <div class="skill-card blue">
+        <div class="skill-card-title">Languages</div>
+        <div class="skill-pills">
+          <span class="pill pill-blue">Python</span>
+          <span class="pill pill-blue">SQL</span>
+        </div>
+      </div>
+      <div class="skill-card cyan">
+        <div class="skill-card-title">Frameworks</div>
+        <div class="skill-pills">
+          <span class="pill pill-cyan">Django</span>
+          <span class="pill pill-cyan">REST API</span>
+        </div>
+      </div>
+      <div class="skill-card purple">
+        <div class="skill-card-title">Tools &amp; Platforms</div>
+        <div class="skill-pills">
+          <span class="pill pill-purple">Docker</span>
+          <span class="pill pill-purple">Git</span>
+          <span class="pill pill-purple">GitHub</span>
+        </div>
+      </div>
+    </div>
+    <div class="dm-card">
+      <div class="dm-title">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+        Digital Marketing
+      </div>
+      <div class="skill-pills">
+        <span class="pill pill-pink">Social Media Management</span>
+        <span class="pill pill-pink">Meta Ads (Facebook &amp; Instagram)</span>
+        <span class="pill pill-pink">Google Ads</span>
+        <span class="pill pill-pink">Content Strategy</span>
+        <span class="pill pill-pink">SEO &amp; SEM</span>
+        <span class="pill pill-pink">Email Marketing</span>
+        <span class="pill pill-pink">Analytics &amp; Reporting</span>
+        <span class="pill pill-pink">Campaign Optimization</span>
+      </div>
+    </div>
+
+    <div class="certs-heading">
+      <svg class="icon-blue" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+      Certifications
+    </div>
+    <div class="certs-grid">
+      <div class="cert-card">
+        <div class="cert-name">Python Basics</div>
+        <div class="cert-issuer">HackerRank | 2024</div>
+        <a class="cert-link" href="https://drive.google.com/file/d/16yweKSe5cOAkw_veyu8c3a3mMwEmUM_T/view?usp=sharing" target="_blank" rel="noopener">View Certificate <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+      </div>
+      <div class="cert-card">
+        <div class="cert-name">SQL Basics</div>
+        <div class="cert-issuer">HackerRank | 2025</div>
+        <a class="cert-link" href="https://www.hackerrank.com/certificates/iframe/7c0d3f9a96ab" target="_blank" rel="noopener">View Certificate <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+      </div>
+      <div class="cert-card">
+        <div class="cert-name">AWS Academy Cloud Foundation</div>
+        <div class="cert-issuer">Amazon Web Services | 2024</div>
+        <a class="cert-link" href="https://www.credly.com/badges/99a6af1a-42ac-4b88-8692-1933dfb1c63d/public_url" target="_blank" rel="noopener">View Certificate <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section-alt">
+  <div class="container">
+    <h3>Let's Connect</h3>
+    <p>I'm currently open to new opportunities and collaborations. Whether you have a project in mind or just want to chat about technology, feel free to reach out!</p>
+    <p class="contact-sub">Open for freelance and full-time opportunities — happy to chat about projects or collaborations.</p>
+    <div class="contact-links">
+      <a href="/cdn-cgi/l/email-protection#314758565f54425941435053594401000171565c50585d1f525e5c">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        <span class="__cf_email__" data-cfemail="90e6f9f7fef5e3f8e0e2f1f2f8e5a0a1a0d0f7fdf1f9fcbef3fffd">[email&#160;protected]</span>
+      </a>
+      <a href="tel:+918220034139">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.1.93.3 1.84.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.97.4 1.88.6 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        +91 8220034139
+      </a>
+      <div class="contact-loc">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        Coimbatore, Tamil Nadu
+      </div>
+    </div>
+    <div class="social-row">
+      <a href="https://www.linkedin.com/in/vignesh-prabhu-m-06b173253" target="_blank" rel="noopener" class="social-btn linkedin">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+      </a>
+      <a href="https://github.com/vigneshprabhu010" target="_blank" rel="noopener" class="social-btn github">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer><p>© 2025 Vignesh Prabhu M. Built with HTML &amp; CSS.</p></footer>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="modal-day2day" onclick="if(event.target===this)closeModal('day2day')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('day2day')">✕</button>
+    <div class="modal-title">Day2Day Gift - E-Commerce Platform</div>
+    <p class="modal-desc">Modern e-commerce web application for gift shopping with intuitive user experience and smooth checkout.</p>
+    <div class="modal-section-label">Tech Stack</div>
+    <div class="tags"><span class="tag">React</span><span class="tag">Tailwind CSS</span><span class="tag">JavaScript</span><span class="tag">Responsive Design</span></div>
+    <div class="modal-section-label">Key Highlights</div>
+    <ul class="highlights">
+      <li>Developed responsive and user-friendly interface for seamless shopping experience</li>
+      <li>Implemented product catalog with search and filtering capabilities</li>
+      <li>Created mobile-optimized design for cross-device compatibility</li>
+      <li>Deployed and maintained live production application</li>
+    </ul>
+    <div style="margin-top:18px">
+      <a href="https://daytodaygifts.netlify.app/" target="_blank" rel="noopener" class="btn-live">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Open Live Site
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-eatplay" onclick="if(event.target===this)closeModal('eatplay')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('eatplay')">✕</button>
+    <div class="modal-title">Eat and Play - Food &amp; Entertainment Web App</div>
+    <p class="modal-desc">Interactive web application combining food ordering with entertainment features for enhanced customer engagement.</p>
+    <div class="modal-section-label">Tech Stack</div>
+    <div class="tags"><span class="tag">React</span><span class="tag">JavaScript</span><span class="tag">API Integration</span><span class="tag">Modern UI/UX</span></div>
+    <div class="modal-section-label">Key Highlights</div>
+    <ul class="highlights">
+      <li>Built dynamic product listing and detail pages</li>
+      <li>Integrated real-time data fetching and state management</li>
+      <li>Designed engaging user interface for enhanced customer interaction</li>
+      <li>Optimized performance for fast loading and smooth navigation</li>
+    </ul>
+    <div style="margin-top:18px">
+      <a href="https://meatandeatd.netlify.app/" target="_blank" rel="noopener" class="btn-live">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Open Live Site
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-zaprider" onclick="if(event.target===this)closeModal('zaprider')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('zaprider')">✕</button>
+    <div class="modal-title">Zap Rider - AI-Powered E-Bike Rental Platform</div>
+    <p class="modal-desc">Real-time E-Bike rental management system with AI-driven automation and predictive analytics for optimal ride availability.</p>
+    <div class="modal-section-label">Tech Stack</div>
+    <div class="tags"><span class="tag">Django</span><span class="tag">Python</span><span class="tag">MySQL</span><span class="tag">Docker</span><span class="tag">REST API</span><span class="tag">AI Integration</span><span class="tag">Twilio</span></div>
+    <div class="modal-section-label">Key Highlights</div>
+    <ul class="highlights">
+      <li>Designed secure user and admin portals with OTP-based login</li>
+      <li>Integrated SMS notifications via Twilio/MSG91</li>
+      <li>Implemented JWT authentication for secure API access</li>
+      <li>Configured Docker containers for seamless deployment</li>
+    </ul>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-amazon" onclick="if(event.target===this)closeModal('amazon')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('amazon')">✕</button>
+    <div class="modal-title">Amazon Sales Data Analysis</div>
+    <p class="modal-desc">Comprehensive data analysis project conducted during internship at Innobyte Services to uncover trends and customer behavior insights.</p>
+    <div class="modal-section-label">Tech Stack</div>
+    <div class="tags"><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Matplotlib</span><span class="tag">Power BI</span><span class="tag">Excel</span></div>
+    <div class="modal-section-label">Key Highlights</div>
+    <ul class="highlights">
+      <li>Cleaned and transformed large datasets using Python</li>
+      <li>Created interactive Power BI dashboards</li>
+      <li>Delivered insights for inventory management and pricing strategy</li>
+      <li>Improved customer segmentation analysis</li>
+    </ul>
+  </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Active nav
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 110) current = s.id; });
+    navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+  });
+
+  // Modal
+  function openModal(id) { document.getElementById('modal-' + id).classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeModal(id) { document.getElementById('mo
