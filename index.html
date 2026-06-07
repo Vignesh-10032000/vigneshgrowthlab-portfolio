@@ -3,598 +3,1309 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Vignesh Prabhu M - Portfolio</title>
+  <title>Vignesh Growth Lab — Websites, POS Software & WhatsApp Automation | Tamil Nadu</title>
+  <meta name="description" content="MSME Registered business growth company in Tamil Nadu. We build websites, retail POS software, and WhatsApp automation systems that help businesses grow."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth;font-family:'Segoe UI',system-ui,sans-serif}
-    body{background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 50%,#0f172a 100%);color:#e2e8f0;min-height:100vh}
-
-    /* NAV */
-    nav{position:fixed;top:0;width:100%;background:rgba(15,23,42,0.88);backdrop-filter:blur(14px);z-index:200;border-bottom:1px solid #1e293b}
-    .nav-inner{max-width:1100px;margin:0 auto;padding:15px 24px;display:flex;justify-content:space-between;align-items:center}
-    .nav-logo{font-size:1.5rem;font-weight:900;background:linear-gradient(90deg,#60a5fa,#22d3ee);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-    .nav-links{display:flex;gap:22px}
-    .nav-links a{color:#94a3b8;text-decoration:none;font-size:0.93rem;transition:color .2s}
-    .nav-links a:hover,.nav-links a.active{color:#60a5fa}
-
-    /* SECTIONS */
-    section{padding:80px 24px}
-    .container{max-width:1100px;margin:0 auto}
-    .section-alt{background:rgba(30,41,59,0.35)}
-    .section-title{font-size:1.8rem;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:10px}
-    .section-sub{color:#64748b;font-size:0.9rem;margin-bottom:28px}
-    .icon-blue{color:#60a5fa}
-
-    /* HERO */
-    #hero{padding:140px 24px 80px;text-align:center}
-    .hero-name{font-size:clamp(2.4rem,7vw,4.5rem);font-weight:900;background:linear-gradient(90deg,#60a5fa,#22d3ee,#60a5fa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:14px}
-    .hero-title{font-size:clamp(1rem,2.5vw,1.35rem);color:#94a3b8;margin-bottom:20px}
-    .hero-desc{color:#64748b;max-width:620px;margin:0 auto 34px;line-height:1.75}
-    .btn-group{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:9px;text-decoration:none;font-size:0.93rem;font-weight:500;transition:all .2s;border:none;cursor:pointer}
-    .btn-blue{background:#2563eb;color:#fff}.btn-blue:hover{background:#1d4ed8}
-    .btn-green{background:#16a34a;color:#fff}.btn-green:hover{background:#15803d}
-    .btn-gray{background:#1e293b;color:#e2e8f0}.btn-gray:hover{background:#334155}
-
-    /* ABOUT */
-    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-    .card{background:rgba(30,41,59,0.65);border:1px solid #334155;border-radius:14px;padding:24px;transition:transform .2s}
-    .card:hover{transform:translateY(-3px)}
-    .card-heading{font-size:1.1rem;font-weight:600;color:#60a5fa;margin-bottom:16px}
-    .card p{color:#94a3b8;line-height:1.75;margin-bottom:12px;font-size:0.93rem}
-    .card p:last-child{margin-bottom:0}
-    .highlight{color:#22d3ee;font-weight:600}
-    .highlight-green{color:#4ade80;font-weight:600}
-    .edu-item{display:flex;gap:12px;margin-bottom:16px;align-items:flex-start}
-    .edu-icon{color:#22d3ee;flex-shrink:0;margin-top:2px}
-    .edu-item strong{display:block;color:#e2e8f0;font-size:0.95rem}
-    .edu-item span{font-size:0.82rem;color:#64748b}
-
-    /* PROJECTS */
-    .projects-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-    .project-card{background:linear-gradient(135deg,rgba(30,41,59,0.9),rgba(30,41,59,0.5));border:1px solid #334155;border-radius:14px;padding:24px;transition:border-color .2s,box-shadow .2s,transform .2s}
-    .project-card:hover{border-color:#3b82f6;box-shadow:0 0 24px rgba(59,130,246,.15);transform:translateY(-3px)}
-    .project-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;gap:8px}
-    .project-title{font-size:1.05rem;font-weight:700;color:#60a5fa}
-    .project-status{font-size:0.72rem;color:#4ade80;margin-bottom:6px}
-    .badge{font-size:0.7rem;background:rgba(37,99,235,0.2);color:#60a5fa;padding:3px 8px;border-radius:4px;white-space:nowrap;flex-shrink:0}
-    .project-desc{color:#94a3b8;font-size:0.88rem;margin-bottom:14px;line-height:1.65}
-    .tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
-    .tag{font-size:0.73rem;background:#1e293b;color:#94a3b8;padding:4px 10px;border-radius:999px}
-    .highlights{list-style:none;display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
-    .highlights li{font-size:0.83rem;color:#64748b;display:flex;gap:6px;align-items:flex-start}
-    .highlights li::before{content:"›";color:#22d3ee;font-weight:700;flex-shrink:0}
-    .project-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
-    .btn-live{display:inline-flex;align-items:center;gap:6px;font-size:0.82rem;font-weight:500;padding:7px 14px;border-radius:8px;background:rgba(37,99,235,0.2);border:1px solid rgba(59,130,246,0.35);color:#93c5fd;text-decoration:none;transition:all .2s}
-    .btn-live:hover{background:rgba(37,99,235,0.35);color:#bfdbfe}
-
-    /* EXPERIENCE */
-    .exp-list{display:flex;flex-direction:column;gap:18px}
-    .exp-card{background:rgba(30,41,59,0.6);border:1px solid #334155;border-radius:14px;padding:24px;transition:border-color .2s}
-    .exp-card:hover{border-color:#3b82f6}
-    .exp-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;flex-wrap:wrap;gap:8px}
-    .exp-role{font-size:1.1rem;font-weight:700;color:#60a5fa}
-    .exp-company{color:#94a3b8;font-size:0.88rem;margin-bottom:4px}
-    .exp-period{font-size:0.82rem;color:#64748b;white-space:nowrap}
-    .exp-meta{font-size:0.8rem;color:#475569;margin-bottom:10px}
-    .exp-meta span{color:#64748b}
-    .exp-resp{list-style:none;display:flex;flex-direction:column;gap:5px}
-    .exp-resp li{font-size:0.85rem;color:#64748b;display:flex;gap:8px;align-items:flex-start;line-height:1.6}
-    .exp-resp li::before{content:"▸";color:#22d3ee;flex-shrink:0;font-size:0.75rem;margin-top:3px}
-
-    /* SKILLS */
-    .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:20px}
-    .skill-card{border-radius:12px;padding:22px;border:1px solid #334155}
-    .skill-card.blue{background:linear-gradient(135deg,rgba(30,58,138,0.4),rgba(30,41,59,0.4))}
-    .skill-card.cyan{background:linear-gradient(135deg,rgba(22,78,99,0.4),rgba(30,41,59,0.4))}
-    .skill-card.purple{background:linear-gradient(135deg,rgba(76,29,149,0.4),rgba(30,41,59,0.4))}
-    .skill-card-title{font-weight:600;margin-bottom:14px}
-    .skill-card.blue .skill-card-title{color:#60a5fa}
-    .skill-card.cyan .skill-card-title{color:#22d3ee}
-    .skill-card.purple .skill-card-title{color:#c084fc}
-    .skill-pills{display:flex;flex-wrap:wrap;gap:8px}
-    .pill{font-size:0.8rem;padding:5px 11px;border-radius:7px}
-    .pill-blue{background:rgba(37,99,235,0.2);color:#93c5fd}
-    .pill-cyan{background:rgba(8,145,178,0.2);color:#67e8f9}
-    .pill-purple{background:rgba(124,58,237,0.2);color:#d8b4fe}
-    .pill-pink{background:rgba(219,39,119,0.2);color:#f9a8d4;border:1px solid rgba(219,39,119,0.25)}
-
-    .dm-card{background:linear-gradient(135deg,rgba(131,24,67,0.3),rgba(154,52,18,0.2));border:1px solid rgba(236,72,153,0.3);border-radius:12px;padding:24px}
-    .dm-title{font-weight:700;color:#f472b6;margin-bottom:14px;font-size:1rem;display:flex;align-items:center;gap:8px}
-
-    /* CERTIFICATIONS */
-    .certs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
-    .cert-card{background:rgba(30,41,59,0.6);border:1px solid #334155;border-radius:10px;padding:16px;transition:border-color .2s}
-    .cert-card:hover{border-color:#3b82f6}
-    .cert-name{font-weight:600;color:#e2e8f0;margin-bottom:3px;font-size:0.92rem}
-    .cert-issuer{font-size:0.8rem;color:#64748b;margin-bottom:8px}
-    .cert-link{font-size:0.8rem;color:#60a5fa;text-decoration:none;display:inline-flex;align-items:center;gap:4px}
-    .cert-link:hover{color:#93c5fd}
-    .certs-heading{font-size:1.35rem;font-weight:700;display:flex;align-items:center;gap:8px;margin:44px 0 0}
-
-    /* MODAL */
-    .modal-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0.75);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:16px}
-    .modal-overlay.open{display:flex}
-    .modal-box{max-width:640px;width:100%;background:#111827;border:1px solid #334155;border-radius:16px;padding:28px;position:relative;max-height:82vh;overflow-y:auto}
-    .modal-close{position:absolute;top:16px;right:16px;background:#1e293b;border:none;color:#94a3b8;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:background .2s}
-    .modal-close:hover{background:#334155;color:#fff}
-    .modal-title{font-size:1.2rem;font-weight:700;color:#60a5fa;margin-bottom:6px}
-    .modal-desc{color:#94a3b8;font-size:0.9rem;margin-bottom:14px;line-height:1.65}
-    .modal-section-label{font-size:0.78rem;font-weight:600;color:#64748b;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;margin-top:14px}
-
-    /* CONTACT */
-    #contact{text-align:center}
-    #contact h3{font-size:2rem;font-weight:700;margin-bottom:14px}
-    #contact>div>p{color:#94a3b8;max-width:560px;margin:0 auto 10px;line-height:1.7;font-size:0.93rem}
-    .contact-sub{color:#64748b;font-size:0.85rem;margin-bottom:28px!important}
-    .contact-links{display:flex;flex-wrap:wrap;justify-content:center;gap:22px;margin-bottom:28px}
-    .contact-links a,.contact-loc{display:flex;align-items:center;gap:8px;color:#94a3b8;text-decoration:none;font-size:0.93rem;transition:color .2s}
-    .contact-links a:hover{color:#60a5fa}
-    .social-row{display:flex;justify-content:center;gap:12px}
-    .social-btn{padding:10px;border-radius:50%;transition:background .2s;display:flex}
-    .social-btn.linkedin{background:#1d4ed8}.social-btn.linkedin:hover{background:#1e40af}
-    .social-btn.github{background:#374151}.social-btn.github:hover{background:#4b5563}
-
-    footer{padding:22px;border-top:1px solid #1e293b;text-align:center;color:#475569;font-size:0.83rem}
-
-    @media(max-width:768px){
-      .about-grid,.projects-grid,.skills-grid,.certs-grid{grid-template-columns:1fr}
-      .nav-links{gap:14px;font-size:0.83rem}
+    :root{
+      --bg:#090f1e;
+      --bg2:#0d1526;
+      --surface:rgba(20,33,60,0.6);
+      --border:rgba(48,72,120,0.45);
+      --border-hover:rgba(96,165,250,0.4);
+      --blue:#3b82f6;
+      --blue-bright:#60a5fa;
+      --cyan:#22d3ee;
+      --green:#22c55e;
+      --green-dim:#16a34a;
+      --amber:#f59e0b;
+      --text:#e2e8f0;
+      --text-muted:#94a3b8;
+      --text-dim:#64748b;
+      --radius:14px;
+      --font-head:'Syne',sans-serif;
+      --font-body:'DM Sans',sans-serif;
     }
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:var(--font-body);min-height:100vh;line-height:1.6}
+    body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 60% at 20% -10%,rgba(37,99,235,0.12),transparent 60%),radial-gradient(ellipse 60% 50% at 80% 110%,rgba(8,145,178,0.08),transparent 55%);pointer-events:none;z-index:0}
+    .page{position:relative;z-index:1}
+
+    /* ──── NAV ──── */
+    nav{position:fixed;top:0;width:100%;background:rgba(9,15,30,0.92);backdrop-filter:blur(20px);z-index:200;border-bottom:1px solid rgba(48,72,120,0.5)}
+    .nav-inner{max-width:1120px;margin:0 auto;padding:14px 24px;display:flex;justify-content:space-between;align-items:center}
+    .nav-brand{display:flex;align-items:center;gap:10px}
+    .nav-logo-mark{width:36px;height:36px;background:linear-gradient(135deg,#1d4ed8,#0891b2);border-radius:9px;display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-weight:800;font-size:0.9rem;color:#fff;letter-spacing:-0.03em;flex-shrink:0}
+    .nav-logo-text{font-family:var(--font-head);font-size:1.05rem;font-weight:700;color:var(--text);letter-spacing:-0.02em}
+    .nav-logo-text span{color:var(--blue-bright)}
+    .nav-msme{font-size:0.67rem;background:rgba(22,163,74,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.25);padding:2px 8px;border-radius:20px;letter-spacing:0.04em;font-weight:600}
+    .nav-links{display:flex;gap:22px;align-items:center}
+    .nav-links a{color:var(--text-muted);text-decoration:none;font-size:0.83rem;font-weight:500;transition:color .2s}
+    .nav-links a:hover,.nav-links a.active{color:var(--blue-bright)}
+    .nav-cta{background:var(--blue);color:#fff!important;padding:7px 16px;border-radius:8px;font-weight:600!important;font-size:0.8rem!important;transition:background .2s,transform .2s!important}
+    .nav-cta:hover{background:#1d4ed8!important;transform:translateY(-1px)!important}
+    .nav-ham{display:none;background:none;border:1px solid var(--border);color:var(--text-muted);width:34px;height:34px;border-radius:7px;cursor:pointer;align-items:center;justify-content:center;font-size:1.1rem}
+
+    /* ──── SECTIONS ──── */
+    section{padding:88px 24px}
+    .container{max-width:1120px;margin:0 auto}
+    .section-alt{background:rgba(13,21,38,0.7)}
+    .section-label{font-size:0.72rem;font-weight:700;color:var(--blue-bright);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+    .section-label::before{content:'';width:24px;height:2px;background:linear-gradient(90deg,var(--blue),var(--cyan));border-radius:1px}
+    .section-title{font-family:var(--font-head);font-size:clamp(1.6rem,3.5vw,2.2rem);font-weight:800;color:var(--text);margin-bottom:10px;letter-spacing:-0.03em;line-height:1.15}
+    .section-sub{color:var(--text-dim);font-size:0.9rem;margin-bottom:40px;max-width:520px}
+
+    /* ──── BUTTONS ──── */
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:9px;text-decoration:none;font-size:0.875rem;font-weight:600;transition:all .22s;border:none;cursor:pointer;font-family:var(--font-body);letter-spacing:0.01em}
+    .btn-primary{background:linear-gradient(135deg,#2563eb,#1d4ed8);color:#fff;box-shadow:0 2px 16px rgba(37,99,235,0.3)}
+    .btn-primary:hover{background:linear-gradient(135deg,#1d4ed8,#1e40af);transform:translateY(-2px);box-shadow:0 6px 24px rgba(37,99,235,0.4)}
+    .btn-green{background:linear-gradient(135deg,#16a34a,#15803d);color:#fff;box-shadow:0 2px 16px rgba(22,163,74,0.25)}
+    .btn-green:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(22,163,74,0.35)}
+    .btn-wa{background:#128c7e;color:#fff;box-shadow:0 2px 12px rgba(18,140,126,0.3)}
+    .btn-wa:hover{background:#0f7268;transform:translateY(-2px)}
+    .btn-outline{background:transparent;color:var(--text-muted);border:1px solid var(--border);padding:11px 22px}
+    .btn-outline:hover{border-color:var(--border-hover);color:var(--text);background:rgba(37,99,235,0.07)}
+    .btn-sm{padding:8px 16px;font-size:0.8rem}
+
+    /* ──── HERO ──── */
+    #hero{padding:148px 24px 88px;text-align:left}
+    .hero-grid{display:grid;grid-template-columns:1.2fr 0.8fr;gap:48px;align-items:center}
+    .hero-content{display:flex;flex-direction:column;align-items:flex-start}
+    .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(22,163,74,0.1);border:1px solid rgba(34,197,94,0.2);color:#4ade80;font-size:0.75rem;font-weight:700;padding:5px 14px;border-radius:20px;margin-bottom:24px;letter-spacing:0.05em;text-transform:uppercase}
+    .hero-dot{width:6px;height:6px;border-radius:50%;background:#4ade80;animation:pulse 2s infinite;flex-shrink:0}
+    @keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(74,222,128,0.4)}50%{opacity:.6;box-shadow:0 0 0 5px rgba(74,222,128,0)}}
+    .hero-h1{font-family:var(--font-head);font-size:clamp(1.8rem,4.5vw,3rem);font-weight:800;line-height:1.12;letter-spacing:-0.03em;margin-bottom:18px;color:var(--text)}
+    .hero-h1 .grad{background:linear-gradient(90deg,var(--blue-bright) 0%,var(--cyan) 55%,var(--blue-bright) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero-sub{color:var(--text-muted);font-size:1.02rem;max-width:580px;margin-bottom:28px;line-height:1.7}
+    .hero-bullets{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:32px;list-style:none;width:100%}
+    .hero-bullet{display:flex;align-items:center;gap:8px;font-size:0.85rem;color:var(--text-muted);font-weight:500}
+    .hero-bullet svg{color:#4ade80;flex-shrink:0}
+    .hero-ctas{display:flex;gap:12px;justify-content:flex-start;flex-wrap:wrap;margin-bottom:0}
+
+    /* Founder Card Style */
+    .founder-card{background:linear-gradient(135deg,rgba(20,33,60,0.85),rgba(13,21,38,0.7));border:1px solid var(--border);border-radius:20px;padding:32px;position:relative;overflow:hidden;backdrop-filter:blur(10px);box-shadow:0 20px 50px rgba(0,0,0,0.3);transition:all .3s}
+    .founder-card::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(59,130,246,0.12) 0%,transparent 60%);pointer-events:none}
+    .founder-card:hover{border-color:var(--border-hover);transform:translateY(-4px);box-shadow:0 25px 60px rgba(37,99,235,0.18)}
+    .founder-img-wrapper{width:140px;height:140px;border-radius:50%;margin:0 auto 20px;overflow:hidden;border:3px solid var(--blue-bright);box-shadow:0 0 20px rgba(96,165,250,0.3);position:relative}
+    .founder-img{width:100%;height:100%;object-fit:cover;display:block}
+    .founder-info{text-align:center}
+    .founder-name{font-family:var(--font-head);font-size:1.35rem;font-weight:800;color:var(--text);margin-bottom:4px;letter-spacing:-0.01em}
+    .founder-title{font-size:0.78rem;color:var(--blue-bright);font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:18px}
+    .founder-details{list-style:none;display:flex;flex-direction:column;gap:8px;text-align:left;background:rgba(9,15,30,0.45);padding:18px;border-radius:12px;border:1px solid var(--border)}
+    .founder-detail{display:flex;align-items:center;gap:10px;font-size:0.83rem;color:var(--text-muted)}
+    .founder-detail svg{color:var(--blue-bright);flex-shrink:0}
+
+    .stats-row{display:flex;justify-content:center;gap:56px;flex-wrap:wrap;padding-top:40px;border-top:1px solid var(--border);margin-top:48px}
+    .stat-item{text-align:center}
+    .stat-num{font-family:var(--font-head);font-size:2rem;font-weight:800;background:linear-gradient(90deg,var(--blue-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-0.03em}
+    .stat-lbl{font-size:0.75rem;color:var(--text-dim);margin-top:2px;letter-spacing:0.01em}
+
+    /* ──── SERVICES ──── */
+    .services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+    .svc-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:26px;transition:all .25s;position:relative;overflow:hidden;display:flex;flex-direction:column}
+    .svc-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--cyan));opacity:0;transition:opacity .25s}
+    .svc-card:hover{border-color:var(--border-hover);transform:translateY(-4px);box-shadow:0 12px 40px rgba(37,99,235,0.12)}
+    .svc-card:hover::after{opacity:1}
+    .svc-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:18px}
+    .svc-icon.blue{background:rgba(37,99,235,0.15);border:1px solid rgba(96,165,250,0.2)}
+    .svc-icon.green{background:rgba(22,163,74,0.15);border:1px solid rgba(34,197,94,0.2)}
+    .svc-icon.purple{background:rgba(124,58,237,0.15);border:1px solid rgba(192,132,252,0.2)}
+    .svc-icon.cyan{background:rgba(8,145,178,0.15);border:1px solid rgba(34,211,238,0.2)}
+    .svc-name{font-family:var(--font-head);font-size:1.05rem;font-weight:700;color:var(--text);margin-bottom:10px;letter-spacing:-0.02em}
+    .svc-desc{font-size:0.8rem;color:var(--text-muted);line-height:1.68;margin-bottom:18px}
+    .svc-features{list-style:none;display:flex;flex-direction:column;gap:6px;margin-top:auto}
+    .svc-features li{font-size:0.77rem;color:var(--text-muted);display:flex;gap:7px;align-items:center}
+    .svc-features li::before{content:'✓';color:var(--blue-bright);font-weight:700;flex-shrink:0;font-size:0.7rem}
+    .svc-cta{display:inline-flex;align-items:center;gap:5px;margin-top:20px;padding-top:18px;border-top:1px solid var(--border);font-size:0.78rem;font-weight:600;color:var(--blue-bright);text-decoration:none;transition:gap .2s,color .2s;cursor:pointer;background:none;border-bottom:none;border-left:none;border-right:none;font-family:var(--font-body)}
+    .svc-cta:hover{gap:9px;color:var(--cyan)}
+
+    /* ──── CONVERSION CALLOUT STRIP ──── */
+    .cta-strip{background:linear-gradient(135deg,rgba(30,58,138,0.4),rgba(22,78,99,0.3));border:1px solid rgba(96,165,250,0.2);border-radius:var(--radius);padding:40px 48px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;margin:40px 0}
+    .cta-strip-text h3{font-family:var(--font-head);font-size:1.4rem;font-weight:800;color:var(--text);margin-bottom:6px;letter-spacing:-0.02em}
+    .cta-strip-text p{color:var(--text-muted);font-size:0.87rem}
+    .cta-strip-btns{display:flex;gap:10px;flex-wrap:wrap;flex-shrink:0}
+
+    /* ──── TRUST & PROOF SECTION ──── */
+    .trust-proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:32px;align-items:stretch}
+    .trust-proof-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;transition:all .25s;display:flex;flex-direction:column;position:relative;overflow:hidden}
+    .trust-proof-card:hover{border-color:var(--border-hover);transform:translateY(-2px)}
+    .proof-heading{font-family:var(--font-head);font-size:1.1rem;font-weight:700;margin-bottom:12px;color:var(--text);display:flex;align-items:center;gap:8px}
+    .proof-heading svg{color:var(--blue-bright)}
+    .proof-cert-content{background:rgba(9,15,30,0.5);border:1px solid var(--border);border-radius:10px;padding:16px;font-size:0.78rem;color:var(--text-muted);line-height:1.6;display:flex;flex-direction:column;gap:6px}
+    .proof-cert-num{font-family:monospace;font-size:0.92rem;color:#4ade80;background:rgba(22,163,74,0.12);padding:6px 10px;border:1px solid rgba(34,197,94,0.2);border-radius:6px;margin:8px 0;text-align:center;font-weight:700;letter-spacing:0.04em}
+    .proof-cert-btn{text-align:center;margin-top:10px}
+    .proof-text-quote{font-size:0.82rem;color:var(--text-muted);line-height:1.65;font-style:italic;margin-bottom:16px;background:rgba(9,15,30,0.4);padding:14px;border-radius:8px;border-left:3px solid var(--green)}
+    .proof-client{display:flex;align-items:center;gap:10px;margin-top:auto}
+    .proof-client-avatar{width:36px;height:36px;background:linear-gradient(135deg,#16a34a,#15803d);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-weight:800;color:#fff;font-size:0.82rem}
+    .proof-client-name{font-weight:700;color:var(--text);font-size:0.8rem}
+    .proof-client-company{font-size:0.7rem;color:var(--text-dim)}
+    
+    /* Video testimonial placeholder styling */
+    .video-placeholder{background:linear-gradient(135deg,rgba(37,99,235,0.12),rgba(20,33,60,0.6));border:1px solid var(--border);border-radius:10px;height:160px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;cursor:pointer;overflow:hidden;transition:all .3s;margin-top:14px}
+    .video-placeholder:hover{border-color:var(--blue-bright)}
+    .video-placeholder:hover .play-btn{transform:scale(1.1);background:var(--blue-bright)}
+    .play-btn{width:46px;height:46px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;color:#fff;margin-bottom:10px;transition:all .3s;box-shadow:0 0 15px rgba(37,99,235,0.4)}
+    .play-icon{margin-left:3px;width:0;height:0;border-top:7px solid transparent;border-bottom:7px solid transparent;border-left:12px solid white}
+
+    /* ──── CASE STUDY ──── */
+    .case-study{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:36px;position:relative;overflow:hidden}
+    .case-study::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:linear-gradient(180deg,var(--blue),var(--cyan))}
+    .cs-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px;flex-wrap:wrap;gap:12px}
+    .cs-title{font-family:var(--font-head);font-size:1.25rem;font-weight:800;color:var(--text);letter-spacing:-0.02em;margin-bottom:4px}
+    .cs-client{font-size:0.8rem;color:var(--text-dim)}
+    .cs-badge{font-size:0.72rem;background:rgba(22,163,74,0.12);color:#4ade80;border:1px solid rgba(34,197,94,0.22);padding:5px 12px;border-radius:6px;font-weight:600}
+    .cs-grid-layout{display:grid;grid-template-columns:1.2fr 0.8fr;gap:28px;margin-bottom:24px}
+    .cs-flow{display:flex;flex-direction:column;gap:16px}
+    .cs-block{background:rgba(9,15,30,0.38);border:1px solid var(--border);padding:18px;border-radius:10px}
+    .cs-block h4{font-family:var(--font-head);font-size:0.88rem;font-weight:700;color:var(--blue-bright);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px}
+    .cs-block p{font-size:0.82rem;color:var(--text-muted);line-height:1.62}
+    .cs-outcome{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+    .cs-metric{background:rgba(22,163,74,0.08);border:1px solid rgba(34,197,94,0.18);border-radius:8px;padding:10px 14px;text-align:center;flex:1;min-width:110px}
+    .cs-metric .metric-val{font-family:var(--font-head);font-size:1.15rem;font-weight:800;color:#4ade80;letter-spacing:-0.02em}
+    .cs-metric .metric-lbl{font-size:0.65rem;color:var(--text-dim);margin-top:2px}
+    .cs-tech{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px;padding-top:16px;border-top:1px solid var(--border)}
+    .cs-tech-pill{font-size:0.7rem;background:#1e293b;color:var(--text-muted);border:1px solid #334155;padding:4px 9px;border-radius:6px}
+
+    /* ── BROWSER MOCKUP ── */
+    .browser-mockup{background:#0d1526;border:1px solid var(--border);border-radius:10px;overflow:hidden;margin:0}
+    .browser-bar{background:#1e293b;padding:8px 14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border)}
+    .browser-dots{display:flex;gap:5px}
+    .browser-dot{width:9px;height:9px;border-radius:50%}
+    .browser-url{flex:1;background:#0d1526;border:1px solid var(--border);border-radius:5px;padding:3px 10px;font-size:0.71rem;color:var(--text-dim);font-family:monospace;margin:0 8px;text-align:left}
+    .browser-frame-preview{width:100%;height:330px;background:#090f1e;display:flex;align-items:center;justify-content:center;position:relative;border:none}
+    .browser-frame-img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+    
+    /* Project card screenshot */
+    .proj-screenshot{border-radius:8px;overflow:hidden;margin-bottom:14px;border:1px solid var(--border)}
+    .proj-screenshot .browser-bar{padding:6px 10px}
+    .proj-screenshot .browser-dot{width:7px;height:7px}
+    .proj-screenshot .browser-url{font-size:0.65rem;padding:2px 8px}
+    .proj-screenshot .site-preview-img{width:100%;height:180px;object-fit:cover;object-position:top;border:none;display:block;background:#090f1e}
+
+    /* ──── PROJECTS ──── */
+    .projects-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:28px;flex-wrap:wrap;gap:12px}
+    .projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:24px}
+    .proj-card{background:linear-gradient(135deg,rgba(20,33,60,0.88),rgba(13,21,38,0.6));border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:all .25s;position:relative;overflow:hidden;display:flex;flex-direction:column}
+    .proj-card:hover{border-color:var(--border-hover);transform:translateY(-4px);box-shadow:0 12px 40px rgba(37,99,235,0.1)}
+    .proj-card.featured{border-color:rgba(96,165,250,0.28);background:linear-gradient(135deg,rgba(30,58,138,0.28),rgba(13,21,38,0.6))}
+    .proj-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;gap:8px}
+    .proj-title{font-family:var(--font-head);font-size:0.95rem;font-weight:700;color:var(--blue-bright);letter-spacing:-0.01em}
+    .proj-status{font-size:0.72rem;color:#4ade80;margin-bottom:8px;display:flex;align-items:center;gap:5px}
+    .badge{font-size:0.67rem;background:rgba(37,99,235,0.18);color:var(--blue-bright);border:1px solid rgba(96,165,250,0.22);padding:3px 8px;border-radius:5px;white-space:nowrap;flex-shrink:0;letter-spacing:0.02em;font-weight:600}
+    .badge-green{background:rgba(22,163,74,0.18);color:#4ade80;border-color:rgba(74,222,128,0.22)}
+    .badge-amber{background:rgba(180,83,9,0.22);color:#fbbf24;border-color:rgba(251,191,36,0.22)}
+    .badge-purple{background:rgba(124,58,237,0.18);color:#c084fc;border-color:rgba(192,132,252,0.22)}
+    .proj-desc{font-size:0.8rem;color:var(--text-muted);line-height:1.62;margin-bottom:12px}
+    .tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px}
+    .tag{font-size:0.67rem;background:#1e293b;color:var(--text-muted);padding:3px 8px;border-radius:999px;border:1px solid #334155}
+    .highlights{list-style:none;display:flex;flex-direction:column;gap:5px;margin-bottom:12px;margin-top:auto}
+    .highlights li{font-size:0.78rem;color:var(--text-muted);display:flex;gap:6px;align-items:flex-start;line-height:1.6}
+    .highlights li::before{content:"›";color:var(--cyan);font-weight:700;flex-shrink:0}
+    .proj-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+    .btn-proj{display:inline-flex;align-items:center;gap:5px;font-size:0.78rem;font-weight:600;padding:7px 13px;border-radius:7px;background:rgba(37,99,235,0.12);border:1px solid rgba(59,130,246,0.25);color:#93c5fd;text-decoration:none;transition:all .2s;cursor:pointer;font-family:var(--font-body)}
+    .btn-proj:hover{background:rgba(37,99,235,0.25);color:#bfdbfe;transform:translateY(-1px)}
+    .btn-proj.green{background:rgba(22,163,74,0.12);border-color:rgba(74,222,128,0.25);color:#86efac}
+    .btn-proj.green:hover{background:rgba(22,163,74,0.25)}
+    .hidden-projects{display:none}
+    .hidden-projects.visible{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .view-all-wrap{text-align:center;margin-top:8px}
+
+    /* ──── WHY VGL ──── */
+    .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .why-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:26px;text-align:left;transition:all .25s;display:flex;flex-direction:column;gap:8px}
+    .why-card:hover{border-color:var(--border-hover);transform:translateY(-3px)}
+    .why-icon{font-size:1.6rem;color:var(--blue-bright);display:block}
+    .why-card strong{display:block;font-size:0.92rem;font-weight:700;color:var(--text);letter-spacing:-0.01em}
+    .why-card p{font-size:0.78rem;color:var(--text-muted);line-height:1.55}
+
+    /* ──── CORE SERVICE STACK ──── */
+    .skills-section{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:24px}
+    .skill-block{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:22px;transition:border-color .2s}
+    .skill-block:hover{border-color:var(--border-hover)}
+    .skill-block-title{font-size:0.82rem;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:7px}
+    .skill-block.blue .skill-block-title{color:var(--blue-bright)}
+    .skill-block.cyan .skill-block-title{color:var(--cyan)}
+    .skill-block.green .skill-block-title{color:#4ade80}
+    .skill-block.purple .skill-block-title{color:#c084fc}
+    .skill-pills{display:flex;flex-wrap:wrap;gap:6px}
+    .pill{font-size:0.73rem;padding:4px 10px;border-radius:6px;letter-spacing:0.01em}
+    .pill-blue{background:rgba(37,99,235,0.15);color:#93c5fd}
+    .pill-cyan{background:rgba(8,145,178,0.15);color:#a5f3fc}
+    .pill-green{background:rgba(22,163,74,0.15);color:#86efac}
+    .pill-purple{background:rgba(124,58,237,0.15);color:#d8b4fe}
+    .tools-row{display:flex;flex-wrap:wrap;gap:8px;padding:20px 22px;background:var(--surface);border:1px solid var(--border);border-radius:12px}
+    .tool-chip{display:inline-flex;align-items:center;gap:6px;font-size:0.78rem;color:var(--text-muted);padding:5px 12px;background:rgba(30,41,59,0.6);border:1px solid #334155;border-radius:8px;transition:all .18s}
+    .tool-chip:hover{border-color:var(--border-hover);color:var(--text)}
+
+    /* ──── CONTACT ──── */
+    #contact{background:linear-gradient(135deg,rgba(15,30,70,0.5),rgba(8,30,50,0.5))}
+    .contact-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:40px;align-items:start}
+    .contact-info h2{font-family:var(--font-head);font-size:1.9rem;font-weight:800;color:var(--text);margin-bottom:12px;letter-spacing:-0.03em;line-height:1.2}
+    .contact-info p{color:var(--text-muted);font-size:0.88rem;line-height:1.75;margin-bottom:28px}
+    .contact-links{display:flex;flex-direction:column;gap:12px}
+    .contact-link{display:flex;align-items:center;gap:12px;padding:14px 18px;background:var(--surface);border:1px solid var(--border);border-radius:10px;text-decoration:none;transition:all .2s}
+    .contact-link:hover{border-color:var(--border-hover);transform:translateX(4px)}
+    .contact-link-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+    .contact-link-icon.wa{background:#128c7e22;border:1px solid #128c7e44}
+    .contact-link-icon.mail{background:rgba(37,99,235,0.15);border:1px solid rgba(96,165,250,0.2)}
+    .contact-link-icon.ig{background:rgba(219,39,119,0.1);border:1px solid rgba(219,39,119,0.2)}
+    .contact-link strong{display:block;font-size:0.84rem;color:var(--text);font-weight:600}
+    .contact-link span{font-size:0.75rem;color:var(--text-dim)}
+    .contact-form-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:32px}
+    .contact-form-box h3{font-family:var(--font-head);font-size:1.1rem;font-weight:700;color:var(--text);margin-bottom:20px}
+    .form-row{display:flex;flex-direction:column;gap:14px}
+    .form-field label{display:block;font-size:0.78rem;font-weight:600;color:var(--text-muted);margin-bottom:5px;letter-spacing:0.03em;text-transform:uppercase}
+    .form-field input,.form-field select,.form-field textarea{width:100%;background:#0d1526;border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-size:0.875rem;font-family:var(--font-body);transition:border-color .2s;outline:none}
+    .form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-color:var(--blue)}
+    .form-field textarea{min-height:90px;resize:vertical}
+    .form-field select{cursor:pointer}
+    .form-field select option{background:#0d1526}
+
+    /* ──── FOOTER ──── */
+    footer{background:rgba(5,10,22,0.95);border-top:1px solid var(--border);padding:36px 24px}
+    .footer-inner{max-width:1120px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+    .footer-brand{font-family:var(--font-head);font-size:1rem;font-weight:700;color:var(--text)}
+    .footer-brand span{color:var(--blue-bright)}
+    .footer-meta{font-size:0.77rem;color:var(--text-dim);line-height:1.6}
+    .footer-msme{font-size:0.72rem;color:#4ade80;background:rgba(22,163,74,0.15);border:1px solid rgba(34,197,94,0.18);padding:3px 10px;border-radius:20px;display:inline-block;margin-top:4px;font-weight:600}
+    .footer-links{display:flex;gap:18px}
+    .footer-links a{color:var(--text-dim);font-size:0.8rem;text-decoration:none;transition:color .2s}
+    .footer-links a:hover{color:var(--blue-bright)}
+
+    /* ──── FLOATING WA ──── */
+    .wa-float{position:fixed;bottom:28px;right:28px;z-index:300;display:flex;align-items:center;gap:9px;background:#128c7e;color:#fff;padding:12px 20px;border-radius:50px;text-decoration:none;font-size:0.82rem;font-weight:700;box-shadow:0 4px 24px rgba(18,140,126,0.45);transition:all .25s;animation:wa-pulse 2.5s ease-in-out infinite;font-family:var(--font-body)}
+    .wa-float:hover{background:#0f7268;transform:translateY(-3px);box-shadow:0 8px 32px rgba(18,140,126,0.6);color:#fff}
+    @keyframes wa-pulse{0%,100%{box-shadow:0 4px 24px rgba(18,140,126,0.45)}50%{box-shadow:0 4px 32px rgba(18,140,126,0.7)}}
+
+    /* ──── MODALS ──── */
+    .modal-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0.8);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:16px}
+    .modal-overlay.open{display:flex}
+    .modal-box{max-width:640px;width:100%;background:#0d1526;border:1px solid #334155;border-radius:18px;padding:28px;position:relative;max-height:85vh;overflow-y:auto;box-shadow:0 24px 80px rgba(0,0,0,0.5)}
+    .modal-close{position:absolute;top:14px;right:14px;background:#1e293b;border:none;color:var(--text-muted);width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all .2s}
+    .modal-close:hover{background:#334155;color:#fff}
+    .modal-title{font-family:var(--font-head);font-size:1.1rem;font-weight:700;color:var(--blue-bright);margin-bottom:6px}
+    .modal-desc{color:var(--text-muted);font-size:0.86rem;margin-bottom:12px;line-height:1.7}
+    .modal-lbl{font-size:0.7rem;font-weight:700;color:var(--text-dim);text-transform:uppercase;letter-spacing:.09em;margin-bottom:7px;margin-top:14px}
+
+    /* ──── SUCCESS MODAL ──── */
+    .success-modal-box{text-align:center;max-width:420px}
+    .success-icon{font-size:3.5rem;color:var(--green);margin-bottom:16px}
+    .success-title{font-family:var(--font-head);font-size:1.4rem;font-weight:800;color:var(--text);margin-bottom:10px}
+    .success-desc{color:var(--text-muted);font-size:0.875rem;line-height:1.6;margin-bottom:20px}
+
+    /* ──── RESPONSIVE ──── */
+    @media(max-width:1024px){
+      .services-grid{grid-template-columns:repeat(2,1fr)}
+      .projects-grid,.hidden-projects.visible{grid-template-columns:repeat(2,1fr)}
+      .skills-section{grid-template-columns:repeat(2,1fr)}
+    }
+    @media(max-width:900px){
+      #hero{padding:120px 20px 72px}
+      .hero-grid{grid-template-columns:1fr;gap:40px;text-align:center}
+      .hero-content{align-items:center;text-align:center}
+      .hero-bullets{justify-content:center}
+      .hero-ctas{justify-content:center}
+      .founder-card{max-width:400px;margin:0 auto}
+      .trust-grid,.why-grid{grid-template-columns:1fr 1fr}
+      .trust-proof-grid{grid-template-columns:1fr}
+      .contact-grid{grid-template-columns:1fr}
+      .cs-grid-layout{grid-template-columns:1fr}
+      .nav-links{display:none;flex-direction:column;position:absolute;top:100%;left:0;width:100%;background:rgba(9,15,30,0.98);border-bottom:1px solid rgba(48,72,120,0.5);padding:20px;gap:15px}
+      .nav-links.open{display:flex}
+      .nav-ham{display:flex}
+    }
+    @media(max-width:600px){
+      #hero{padding:110px 20px 60px}
+      section{padding:64px 20px}
+      .services-grid,.trust-grid,.why-grid,.skills-section,.projects-grid,.hidden-projects.visible{grid-template-columns:1fr}
+      .stats-row{gap:28px;margin-top:36px}
+    }
+
+    /* ──── ANIMATIONS ──── */
+    .fade-in{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease}
+    .fade-in.visible{opacity:1;transform:none}
   </style>
 </head>
 <body>
+<div class="page">
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/918220034139?text=Hi%20Vignesh%20Growth%20Lab%2C%20I%27m%20interested%20in%20your%20services." target="_blank" rel="noopener" class="wa-float" aria-label="WhatsApp us">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  WhatsApp Us
+</a>
 
 <!-- NAV -->
 <nav>
   <div class="nav-inner">
-    <div class="nav-logo">VP</div>
-    <div class="nav-links">
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#experience">Experience</a>
-      <a href="#skills">Skills</a>
-      <a href="#contact">Contact</a>
+    <div class="nav-brand">
+      <div class="nav-logo-mark">VGL</div>
+      <div>
+        <div class="nav-logo-text">Vignesh <span>Growth Lab</span></div>
+      </div>
+      <span class="nav-msme">✓ MSME Registered</span>
     </div>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#trust">Clients</a>
+      <a href="#projects">Projects</a>
+      <a href="#why">Why VGL</a>
+      <a href="#contact" class="nav-cta">Get a Quote →</a>
+    </div>
+    <button class="nav-ham" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">☰</button>
   </div>
 </nav>
 
-<!-- HERO -->
+<!-- ═══ HERO ═══ -->
 <section id="hero">
   <div class="container">
-    <h1 class="hero-name">Vignesh Prabhu M</h1>
-    <p class="hero-title">Full-Stack Developer &amp; Digital Marketer</p>
-    <p class="hero-desc">Building intelligent web applications with AI-driven insights. Passionate about creating scalable solutions that enhance user experience and drive business value.</p>
-    <div class="btn-group">
-      <a href="/cdn-cgi/l/email-protection#f7819e909992849f878596959f82c7c6c7b7909a969e9bd994989a" class="btn btn-blue">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-        Get in Touch
-      </a>
-      <a href="vignesh prabhu-resume_ats updated.pdf" download class="btn btn-green">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Download Resume
-      </a>
-      <a href="https://www.linkedin.com/in/vignesh-prabhu-m-06b173253" target="_blank" rel="noopener" class="btn btn-gray">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-        LinkedIn
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section id="about" class="section-alt">
-  <div class="container">
-    <h2 class="section-title">
-      <svg class="icon-blue" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      About Me
-    </h2>
-    <div class="about-grid">
-      <div class="card">
-        <div class="card-heading">Professional Summary</div>
-        <p>Enthusiastic postgraduate in <span class="highlight">Computer Applications</span> with a strong passion for technology and innovation. Specializing in <span class="highlight">full-stack web development</span> and <span class="highlight">digital marketing</span>, I bring hands-on experience in building scalable applications using modern frameworks.</p>
-        <p>Currently working as a <span class="highlight">Full-Stack Developer</span>, developing AI-powered solutions with Django, Python, and Docker. My experience spans from creating real-time E-Bike rental platforms with AI integration to running digital marketing campaigns.</p>
-        <p>With a solid foundation in <span class="highlight">Python, SQL, Django, REST APIs, Docker</span> and expertise in <span class="highlight">Meta Ads, Social Media Management &amp; SEO</span>, I excel at bridging technical implementation with business value. Previous experience in healthcare operations has strengthened my skills in data accuracy, compliance, and process optimization.</p>
-        <p><span class="highlight-green">Currently open to new opportunities</span> where I can apply my technical skills, continue learning, and contribute to innovative projects that drive organizational success.</p>
-      </div>
-      <div class="card">
-        <div class="card-heading">Education</div>
-        <div class="edu-item">
-          <svg class="edu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-          <div><strong>Master of Computer Application</strong><span>Dr.MCET | GPA: 7.1 | 2025</span></div>
+    <div class="hero-grid">
+      <!-- Left Column: Copywriting & Trust Badges -->
+      <div class="hero-content fade-in">
+        <div class="hero-eyebrow">
+          <span class="hero-dot"></span>
+          MSME Registered · Tamil Nadu
         </div>
-        <div class="edu-item">
-          <svg class="edu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-          <div><strong>BSc in Computer Science</strong><span>NASC | GPA: 6.6 | 2021</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="container">
-    <h2 class="section-title">
-      <svg class="icon-blue" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="8" x="2" y="2" rx="2"/><rect width="20" height="8" x="2" y="14" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
-      Featured Projects
-    </h2>
-    <p class="section-sub">Freelance client builds and hands-on products shipped to production.</p>
-    <div class="projects-grid">
-
-      <!-- Project 1 -->
-      <div class="project-card">
-        <div class="project-header">
-          <div class="project-title">Day2Day Gift - E-Commerce Platform</div>
-          <span class="badge">Client Project</span>
-        </div>
-        <p class="project-status">🟢 Freelance Service</p>
-        <p class="project-desc">Modern e-commerce web application for gift shopping with intuitive user experience</p>
-        <div class="tags">
-          <span class="tag">React</span><span class="tag">Tailwind CSS</span><span class="tag">JavaScript</span><span class="tag">Responsive Design</span>
-        </div>
-        <ul class="highlights">
-          <li>Developed responsive and user-friendly interface for seamless shopping experience</li>
-          <li>Implemented product catalog with search and filtering capabilities</li>
-          <li>Created mobile-optimized design for cross-device compatibility</li>
-          <li>Deployed and maintained live production application</li>
+        <h1 class="hero-h1">
+          Get More Customers With<br>
+          <span class="grad">Websites, Custom Web Solutions, POS Software</span><br>
+          &amp; WhatsApp Automation
+        </h1>
+        <p class="hero-sub">Vignesh Growth Lab helps businesses grow with high-converting websites, custom web applications, retail POS systems, and AI-powered WhatsApp automation that works 24/7.</p>
+        
+        <ul class="hero-bullets">
+          <li class="hero-bullet">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="color:#4ade80"><polyline points="20 6 9 17 4 12"/></svg>
+            MSME Registered Enterprise
+          </li>
+          <li class="hero-bullet">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="color:#4ade80"><polyline points="20 6 9 17 4 12"/></svg>
+            Based in Coimbatore, Tamil Nadu
+          </li>
+          <li class="hero-bullet">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="color:#4ade80"><polyline points="20 6 9 17 4 12"/></svg>
+            Real Client Projects Delivered
+          </li>
+          <li class="hero-bullet">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="color:#4ade80"><polyline points="20 6 9 17 4 12"/></svg>
+            Direct Founder Support
+          </li>
         </ul>
-        <div class="project-actions">
-          <a href="https://daytodaygifts.netlify.app/" target="_blank" rel="noopener" class="btn-live">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            Live Demo
+
+        <div class="hero-ctas">
+          <a href="#contact" class="btn btn-primary">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Get Free Consultation
           </a>
-          <button class="btn-live" onclick="openModal('day2day')">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
-            Quick View
-          </button>
-        </div>
-      </div>
-
-      <!-- Project 2 -->
-      <div class="project-card">
-        <div class="project-header">
-          <div class="project-title">Eat and Play - Food &amp; Entertainment Web App</div>
-          <span class="badge">Client Project</span>
-        </div>
-        <p class="project-status">🟢 Freelance Service</p>
-        <p class="project-desc">Interactive web application combining food ordering with entertainment features</p>
-        <div class="tags">
-          <span class="tag">React</span><span class="tag">JavaScript</span><span class="tag">API Integration</span><span class="tag">Modern UI/UX</span>
-        </div>
-        <ul class="highlights">
-          <li>Built dynamic product listing and detail pages</li>
-          <li>Integrated real-time data fetching and state management</li>
-          <li>Designed engaging user interface for enhanced customer interaction</li>
-          <li>Optimized performance for fast loading and smooth navigation</li>
-        </ul>
-        <div class="project-actions">
-          <a href="https://meatandeatd.netlify.app/" target="_blank" rel="noopener" class="btn-live">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            Live Demo
+          <a href="#projects" class="btn btn-outline">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+            View Projects
           </a>
-          <button class="btn-live" onclick="openModal('eatplay')">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
-            Quick View
-          </button>
         </div>
       </div>
 
-      <!-- Project 3 -->
-      <div class="project-card">
-        <div class="project-header">
-          <div class="project-title">Zap Rider - AI-Powered E-Bike Rental Platform</div>
-          <span class="badge">Live Project</span>
+      <!-- Right Column: Founder Profile Card -->
+      <div class="fade-in">
+        <div class="founder-card">
+          <div class="founder-img-wrapper">
+            <img src="vignesh.jpg" alt="Vignesh Prabhu M" class="founder-img">
+          </div>
+          <div class="founder-info">
+            <h3 class="founder-name">Vignesh Prabhu M</h3>
+            <div class="founder-title">Founder, Vignesh Growth Lab</div>
+            <ul class="founder-details">
+              <li class="founder-detail">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/></svg>
+                MCA Graduate
+              </li>
+              <li class="founder-detail">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                MSME Registered Enterprise
+              </li>
+              <li class="founder-detail">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Coimbatore, Tamil Nadu, India
+              </li>
+            </ul>
+          </div>
         </div>
-        <p class="project-status">🟢 Freelance Service</p>
-        <p class="project-desc">Real-time E-Bike rental management system with AI-driven automation and predictive analytics</p>
-        <div class="tags">
-          <span class="tag">Django</span><span class="tag">Python</span><span class="tag">MySQL</span><span class="tag">Docker</span><span class="tag">REST API</span><span class="tag">AI Integration</span><span class="tag">Twilio</span>
+      </div>
+    </div>
+
+    <!-- Stats row below the 2-column layout -->
+    <div class="stats-row fade-in">
+      <div class="stat-item"><div class="stat-num">6+</div><div class="stat-lbl">Live Websites Delivered</div></div>
+      <div class="stat-item"><div class="stat-num">5+</div><div class="stat-lbl">Businesses Served</div></div>
+      <div class="stat-item"><div class="stat-num">₹12K</div><div class="stat-lbl">Avg. Project Value</div></div>
+      <div class="stat-item"><div class="stat-num">24/7</div><div class="stat-lbl">Automation Systems Live</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SERVICES ═══ -->
+<section id="services" class="section-alt">
+  <div class="container fade-in">
+    <div class="section-label">Our Services</div>
+    <h2 class="section-title">Four Ways We Drive<br>Your Business Growth</h2>
+    <p class="section-sub">We build robust, modern digital solutions tailored for businesses in Tamil Nadu — from conversion-focused websites to customized web apps, billing systems, and AI automation.</p>
+
+    <div class="services-grid">
+
+      <!-- SERVICE 1: WEBSITE DEVELOPMENT -->
+      <div class="svc-card">
+        <div class="svc-icon blue">🌐</div>
+        <div class="svc-name">Website Development</div>
+        <div class="svc-desc">Get a high-converting, mobile-first website designed to turn visitors into leads and showcase your business online.</div>
+        <ul class="svc-features">
+          <li>WordPress Websites</li>
+          <li>WooCommerce Stores</li>
+          <li>Business Websites</li>
+          <li>Landing Pages</li>
+          <li>Mobile-First Responsive Design</li>
+          <li>SEO & Speed Optimized</li>
+        </ul>
+        <a href="https://wa.me/918220034139?text=Hi%20Vignesh%20Growth%20Lab%2C%20I%20need%20a%20website%20quote." target="_blank" rel="noopener" class="svc-cta">
+          Get Website Quote
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+
+      <!-- SERVICE 2: CUSTOM WEB DEVELOPMENT -->
+      <div class="svc-card">
+        <div class="svc-icon cyan">💻</div>
+        <div class="svc-name">Custom Web Development</div>
+        <div class="svc-desc">Tailor-made web solutions and applications built from scratch to streamline your unique business operations.</div>
+        <ul class="svc-features">
+          <li>HTML, CSS & JavaScript</li>
+          <li>Custom Web Applications</li>
+          <li>Business Portals</li>
+          <li>Custom Business Solutions</li>
+          <li>Clean Production Code</li>
+          <li>Blazing Fast Performance</li>
+        </ul>
+        <a href="https://wa.me/918220034139?text=Hi%20Vignesh%20Growth%20Lab%2C%20I%20want%20to%20discuss%20a%20custom%20web%20application." target="_blank" rel="noopener" class="svc-cta">
+          Discuss Custom App
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+
+      <!-- SERVICE 3: RETAIL POS SOFTWARE -->
+      <div class="svc-card">
+        <div class="svc-icon green">🧾</div>
+        <div class="svc-name">Retail POS Software</div>
+        <div class="svc-desc">Complete, easy-to-use billing and inventory system designed to manage sales, stock, and customers in real time.</div>
+        <ul class="svc-features">
+          <li>GST Billing</li>
+          <li>Inventory Management</li>
+          <li>Sales Reports</li>
+          <li>Customer Loyalty</li>
+          <li>WhatsApp Receipts</li>
+          <li>Employee Management</li>
+        </ul>
+        <a href="https://wa.me/918220034139?text=Hi%20Vignesh%20Growth%20Lab%2C%20I%20want%20a%20POS%20software%20demo." target="_blank" rel="noopener" class="svc-cta">
+          Request POS Demo
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+
+      <!-- SERVICE 4: WHATSAPP AUTOMATION -->
+      <div class="svc-card">
+        <div class="svc-icon purple">🤖</div>
+        <div class="svc-name">WhatsApp Automation</div>
+        <div class="svc-desc">Smart AI-powered systems that automatically reply to clients, capture leads, and log conversions 24/7.</div>
+        <ul class="svc-features">
+          <li>Lead Capture</li>
+          <li>AI Chatbots</li>
+          <li>Auto Follow-ups</li>
+          <li>Customer Support</li>
+          <li>CRM Integration</li>
+          <li>Workflow Automation</li>
+        </ul>
+        <a href="https://wa.me/918220034139?text=Hi%20Vignesh%20Growth%20Lab%2C%20I%20want%20WhatsApp%20automation%20for%20my%20business." target="_blank" rel="noopener" class="svc-cta">
+          Discuss Automation
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MID CTA ═══ -->
+<section style="padding:40px 24px">
+  <div class="container">
+    <div class="cta-strip fade-in">
+      <div class="cta-strip-text">
+        <h3>Not Sure What You Need?</h3>
+        <p>Book a free 15-minute call — we'll identify exactly what will help your business grow.</p>
+      </div>
+      <div class="cta-strip-btns">
+        <a href="https://wa.me/918220034139?text=Hi%2C%20I%27d%20like%20a%20free%20consultation." target="_blank" rel="noopener" class="btn btn-wa">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Book Free Consultation
+        </a>
+        <a href="mailto:vigneshgrowthlab@gmail.com" class="btn btn-outline">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          Email Us
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TRUST & PROOF ═══ -->
+<section id="trust" class="section-alt">
+  <div class="container fade-in">
+    <div class="section-label">Verified Trust</div>
+    <h2 class="section-title">Trusted By Real Businesses</h2>
+    <p class="section-sub">We are a government-registered enterprise committed to transparency, reliability, and measurable client success.</p>
+
+    <div class="trust-proof-grid">
+      
+      <!-- PROOF 1: MSME REGISTRATION -->
+      <div class="trust-proof-card">
+        <div class="proof-heading">
+          🏛️ MSME Registered
         </div>
+        <div class="proof-cert-content">
+          <p>Vignesh Growth Lab is officially registered as a Micro Enterprise under the Government of India Ministry of MSME.</p>
+          <div class="proof-cert-num">UDYAM-TN-03-0328658</div>
+          <p style="font-size:0.72rem;color:var(--text-muted)">
+            <strong>Activity Classification:</strong><br>
+            NIC 62012 — Web page designing & digital business solutions
+          </p>
+        </div>
+        <div class="proof-cert-btn" style="margin-top:auto;padding-top:14px">
+          <a href="Print _ Udyam Registration Certificate.pdf" target="_blank" class="btn btn-outline btn-sm" style="width:100%;justify-content:center">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            View Udyam Certificate
+          </a>
+        </div>
+      </div>
+
+      <!-- PROOF 2: CLIENT TESTIMONIAL -->
+      <div class="trust-proof-card">
+        <div class="proof-heading">
+          ⭐ Client Testimonial
+        </div>
+        <p class="proof-text-quote">
+          "Had a good experience working with Vignesh Growth Lab for our website development. Communication was smooth throughout the project, and the final website matched our expectations. We appreciate the support and would recommend Vignesh Growth Lab for website development services."
+        </p>
+        <div class="proof-client">
+          <div class="proof-client-avatar">NT</div>
+          <div>
+            <div class="proof-client-name">Team NextGen Toys</div>
+            <div class="proof-client-company">nextgentoys.in · E-Commerce Client</div>
+          </div>
+        </div>
+        <div class="proof-img-container">
+          <img src="nextgen-testimonial.png" alt="WhatsApp Review from NextGen Toys" class="proof-img">
+        </div>
+      </div>
+
+      <!-- PROOF 3: VIDEO TESTIMONIAL PLACEHOLDER -->
+      <div class="trust-proof-card">
+        <div class="proof-heading">
+          📹 Video Testimonial
+        </div>
+        <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:12px">
+          Watch Rani Sarees & Boutique share their experience working with Vignesh Growth Lab to launch their boutique sales platform.
+        </p>
+        <div class="video-placeholder" onclick="alert('Video testimonial coming soon!')">
+          <div class="play-btn">
+            <div class="play-icon"></div>
+          </div>
+          <span style="font-size:0.75rem;font-weight:700;color:#fff;letter-spacing:0.05em;text-transform:uppercase">Play Testimonial</span>
+        </div>
+        <div class="proof-client" style="margin-top:auto;padding-top:14px">
+          <div class="proof-client-avatar" style="background:linear-gradient(135deg,#c084fc,#7c3aed)">RS</div>
+          <div>
+            <div class="proof-client-name">Rani Sarees &amp; Boutique</div>
+            <div class="proof-client-company">ranisareesandbotique.com · Boutique Client</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CASE STUDY ═══ -->
+<section id="casestudy" style="padding:88px 24px">
+  <div class="container fade-in">
+    <div class="section-label">Featured Case Study</div>
+    <h2 class="section-title">How We Delivered a<br>Full E-Commerce Store</h2>
+    <p class="section-sub">A real project breakdown — from business requirement to a live conversion-focused storefront.</p>
+
+    <div class="case-study">
+      <div class="cs-header">
+        <div>
+          <div class="cs-title">NextGen Toys (Dheera Motors) — WooCommerce Store</div>
+          <div class="cs-client">nextgentoys.in · WooCommerce · Coimbatore, TN</div>
+        </div>
+        <span class="cs-badge">🟢 Live & Running</span>
+      </div>
+
+      <div class="cs-grid-layout">
+        <!-- Left Column: Structured Problem / Solution -->
+        <div class="cs-flow">
+          <div class="cs-block">
+            <h4>⚠️ The Problem</h4>
+            <p>NextGen Toys operated solely from their physical retail showroom. Customers had to visit or call to check stock availability for RC drones, helicopters, and ride-on bikes. They lacked a structured online catalog and digital payment system, limiting their reach and requiring heavy manual coordination over phone calls.</p>
+          </div>
+          <div class="cs-block">
+            <h4>💡 Our Solution</h4>
+            <p>We designed and launched a mobile-first WooCommerce e-commerce platform. We structured a comprehensive product catalog with category navigation, Summer Sale pricing layouts, email newsletter captures, and a Razorpay UPI checkout pipeline. We also integrated Google Reviews API to display their stellar trust metrics directly on the homepage.</p>
+          </div>
+          <div class="cs-block">
+            <h4>🚀 The Results</h4>
+            <p>Delivered a fully operational online store representing their complete showroom inventory. Customers can now browse, compare models, read authentic reviews, and place orders directly with digital receipts sent automatically via WhatsApp.</p>
+          </div>
+        </div>
+
+        <!-- Right Column: Mock Browser Preview & Metrics -->
+        <div style="display:flex;flex-direction:column;gap:18px">
+          <!-- CSS Mock Browser -->
+          <div class="browser-mockup">
+            <div class="browser-bar">
+              <div class="browser-dots">
+                <div class="browser-dot" style="background:#ef4444"></div>
+                <div class="browser-dot" style="background:#f59e0b"></div>
+                <div class="browser-dot" style="background:#22c55e"></div>
+              </div>
+              <div class="browser-url">🔒 nextgentoys.in</div>
+              <a href="https://nextgentoys.in/" target="_blank" rel="noopener" style="font-size:0.67rem;color:var(--blue-bright);text-decoration:none;white-space:nowrap">Open Site ↗</a>
+            </div>
+            <div class="browser-frame-preview">
+              <div style="width:100%;height:100%;background:#0b1120;padding:16px;display:flex;flex-direction:column;font-family:var(--font-body);color:#fff">
+                <!-- Mock Store Header -->
+                <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1e293b;padding-bottom:10px;margin-bottom:12px">
+                  <div style="font-weight:800;font-size:0.8rem;color:#3b82f6;display:flex;align-items:center;gap:4px">
+                    🏎️ NextGen Toys
+                  </div>
+                  <div style="background:#1e293b;border-radius:12px;padding:3px 12px;font-size:0.55rem;width:110px;color:#64748b;text-align:left">
+                    Search toys...
+                  </div>
+                  <div style="font-size:0.65rem;color:#4ade80;font-weight:600">🛒 Cart (2)</div>
+                </div>
+                <!-- Mock Store Banner -->
+                <div style="background:linear-gradient(135deg,#1e3a8a,#0f172a);border-radius:8px;padding:18px;text-align:left;margin-bottom:12px;border:1px solid #2563eb">
+                  <div style="font-size:0.5rem;color:#60a5fa;font-weight:700;text-transform:uppercase;margin-bottom:4px">Exclusive Offer</div>
+                  <div style="font-size:0.85rem;font-weight:800;line-height:1.2;margin-bottom:6px">Premium RC Cars &amp; Ride-On Jeeps</div>
+                  <div style="font-size:0.58rem;color:#94a3b8;line-height:1.4">Get 20% off during our Summer Sale. Free delivery in Coimbatore.</div>
+                </div>
+                <!-- Mock Store Products -->
+                <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+                  <div style="background:#1e293b;border-radius:6px;padding:6px;border:1px solid #334155;text-align:left">
+                    <div style="height:48px;background:#0f172a;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:1rem;margin-bottom:4px">🛸</div>
+                    <div style="font-size:0.55rem;font-weight:700;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Mini Drone 4K</div>
+                    <div style="font-size:0.5rem;color:#10b981;font-weight:700">₹4,499</div>
+                  </div>
+                  <div style="background:#1e293b;border-radius:6px;padding:6px;border:1px solid #334155;text-align:left">
+                    <div style="height:48px;background:#0f172a;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:1rem;margin-bottom:4px">🏎️</div>
+                    <div style="font-size:0.55rem;font-weight:700;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">RC Drift Car</div>
+                    <div style="font-size:0.5rem;color:#10b981;font-weight:700">₹2,899</div>
+                  </div>
+                  <div style="background:#1e293b;border-radius:6px;padding:6px;border:1px solid #334155;text-align:left">
+                    <div style="height:48px;background:#0f172a;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:1rem;margin-bottom:4px">🏍️</div>
+                    <div style="font-size:0.55rem;font-weight:700;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Kids Ride-On</div>
+                    <div style="font-size:0.5rem;color:#10b981;font-weight:700">₹8,999</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Outcome Metrics -->
+          <div class="cs-outcome">
+            <div class="cs-metric"><div class="metric-val">🟢 Live</div><div class="cs-metric-lbl">nextgentoys.in</div></div>
+            <div class="cs-metric"><div class="cs-metric-val">650+</div><div class="cs-metric-lbl">Reviews Embedded</div></div>
+            <div class="cs-metric"><div class="cs-metric-val">5+</div><div class="cs-metric-lbl">Categories Setup</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cs-tech">
+        <span class="cs-tech-pill">WordPress</span>
+        <span class="cs-tech-pill">WooCommerce</span>
+        <span class="cs-tech-pill">Razorpay API</span>
+        <span class="cs-tech-pill">SEO Foundation</span>
+        <span class="cs-tech-pill">Responsive Design</span>
+        <span class="cs-tech-pill">WhatsApp API</span>
+        <span class="cs-tech-pill">Google Reviews Integration</span>
+        <a href="https://nextgentoys.in/" target="_blank" rel="noopener" class="btn btn-sm btn-outline" style="margin-left:auto;border-radius:6px;padding:5px 14px;font-size:0.75rem">View Live Site →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROJECTS ═══ -->
+<section id="projects" class="section-alt" style="padding-top:88px;padding-bottom:88px;padding-left:24px;padding-right:24px">
+  <div class="container">
+    <div class="projects-header fade-in">
+      <div>
+        <div class="section-label">Portfolio</div>
+        <h2 class="section-title" style="margin-bottom:0">Featured Projects</h2>
+      </div>
+      <a href="https://wa.me/918220034139?text=Hi%2C%20I%27d%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener" class="btn btn-outline btn-sm">Discuss Your Project →</a>
+    </div>
+
+    <div class="projects-grid fade-in">
+
+      <!-- Project 1: NextGen Toys -->
+      <div class="proj-card featured">
+        <div class="proj-header">
+          <div class="proj-title">NextGen Toys — WooCommerce Store</div>
+          <span class="badge badge-green">🟢 Live</span>
+        </div>
+        <p class="proj-status">🛒 WordPress · WooCommerce · E-Commerce</p>
+        <p class="proj-desc">Full e-commerce platform built for a Coimbatore toy showroom. Integrates online catalog, payment gateway, and Google Reviews API.</p>
+        <div class="tags"><span class="tag">WordPress</span><span class="tag">WooCommerce</span><span class="tag">Payment Gateway</span><span class="tag">SEO</span></div>
         <ul class="highlights">
-          <li>Designed secure user and admin portals with OTP-based login</li>
-          <li>Integrated SMS notifications via Twilio/MSG91</li>
-          <li>Implemented JWT authentication for secure API access</li>
-          <li>Configured Docker containers for seamless deployment</li>
+          <li>Complete showroom product catalog configured and live</li>
+          <li>650+ verified Google Reviews embedded on home page</li>
+          <li>Full mobile-first checkout pipeline with automated email receipts</li>
         </ul>
-        <div class="project-actions">
-          <button class="btn-live" onclick="openModal('zaprider')">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
-            Quick View
-          </button>
+        <div class="proj-actions">
+          <a href="https://nextgentoys.in/" target="_blank" rel="noopener" class="btn-proj green">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            View Live Site
+          </a>
+          <button class="btn-proj" onclick="openModal('nextgentoys')">Quick View</button>
         </div>
       </div>
 
-      <!-- Project 4 -->
-      <div class="project-card">
-        <div class="project-header">
-          <div class="project-title">Amazon Sales Data Analysis</div>
-          <span class="badge">Internship Project</span>
+      <!-- Project 2: Rani Sarees -->
+      <div class="proj-card featured">
+        <div class="proj-header">
+          <div class="proj-title">Rani Sarees &amp; Boutique</div>
+          <span class="badge badge-green">🟢 Live</span>
         </div>
-        <p class="project-desc">Comprehensive data analysis project to uncover trends and customer behavior insights</p>
-        <div class="tags">
-          <span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Matplotlib</span><span class="tag">Power BI</span><span class="tag">Excel</span>
-        </div>
+        <p class="proj-status">👗 Custom HTML/CSS/JS · Boutique Website</p>
+        <p class="proj-desc">Custom boutique storefront with pre-filled WhatsApp checkout buttons, local SEO schema, and Netlify hosting.</p>
+        <div class="tags"><span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">JavaScript</span><span class="tag">WhatsApp API</span><span class="tag">Local Schema</span></div>
         <ul class="highlights">
-          <li>Cleaned and transformed large datasets using Python</li>
-          <li>Created interactive Power BI dashboards</li>
-          <li>Delivered insights for inventory management and pricing strategy</li>
-          <li>Improved customer segmentation analysis</li>
+          <li>One-click pre-filled WhatsApp order button for every item</li>
+          <li>Complete JSON-LD Local Business Schema for search optimization</li>
+          <li>Netlify deployment with rapid sub-second page load speeds</li>
         </ul>
-        <div class="project-actions">
-          <button class="btn-live" onclick="openModal('amazon')">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
-            Quick View
+        <div class="proj-actions">
+          <a href="https://ranisareesandbotique.com/" target="_blank" rel="noopener" class="btn-proj green">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            View Live Site
+          </a>
+          <button class="btn-proj" onclick="openModal('ranisarees')">Quick View</button>
+        </div>
+      </div>
+
+      <!-- Project 3: Retail POS Software -->
+      <div class="proj-card featured" style="border-color:rgba(34,197,94,0.25);background:linear-gradient(135deg,rgba(20,83,45,0.18),rgba(13,21,38,0.6))">
+        <div class="proj-header">
+          <div class="proj-title" style="color:#4ade80">Retail POS Software</div>
+          <span class="badge badge-green">🟢 Live</span>
+        </div>
+        <p class="proj-status">🧾 Python / SQLite · Custom Billing Solution</p>
+        <p class="proj-desc">Custom offline billing app built for retail shops. Features inventory trackers, automated calculations, and digital receipts.</p>
+        <div class="tags"><span class="tag">Python</span><span class="tag">SQLite</span><span class="tag">WhatsApp API</span><span class="tag">Local database</span></div>
+        <ul class="highlights">
+          <li>Fast GST billing receipt generation in under 2 seconds</li>
+          <li>Instant invoice distribution sent to customer's WhatsApp</li>
+          <li>Real-time inventory levels warning trigger for restocking</li>
+        </ul>
+        <div class="proj-actions">
+          <button class="btn-proj green" onclick="openModal('possoftware')">Quick View</button>
+          <a href="https://wa.me/918220034139?text=Hi%2C%20I%27d%20like%20to%20request%20a%20POS%20billing%20demo." target="_blank" rel="noopener" class="btn-proj">Request Demo</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Hidden Projects -->
+    <div class="hidden-projects" id="hidden-projects">
+      
+      <!-- AI WhatsApp -->
+      <div class="proj-card" style="border-color:rgba(192,132,252,0.25);background:linear-gradient(135deg,rgba(76,29,149,0.18),rgba(13,21,38,0.6))">
+        <div class="proj-header">
+          <div class="proj-title" style="color:#c084fc">AI WhatsApp Automation</div>
+          <span class="badge badge-purple">⚡ AI System</span>
+        </div>
+        <p class="proj-status" style="color:#c084fc">🤖 n8n + Gemini AI · Workflow Pipeline</p>
+        <p class="proj-desc">Automated responder: parses customer requests via Gemini AI, replies on WhatsApp, and updates Google Sheets CRM in real time.</p>
+        <div class="tags"><span class="tag">n8n</span><span class="tag">WhatsApp API</span><span class="tag">Gemini AI</span><span class="tag">Google Sheets</span></div>
+        <div class="proj-actions">
+          <button class="btn-proj" style="background:rgba(124,58,237,0.12);border-color:rgba(192,132,252,0.25);color:#d8b4fe" onclick="openModal('n8nai')">View Workflow</button>
+          <a href="https://wa.me/918220034139?text=Hi%2C%20I%20want%20WhatsApp%20automation%20for%20my%20business." target="_blank" rel="noopener" class="btn-proj green">Get Details</a>
+        </div>
+      </div>
+
+      <!-- Masala Mill -->
+      <div class="proj-card">
+        <div class="proj-header">
+          <div class="proj-title">Masala Mill Store</div>
+          <span class="badge badge-amber">Client Delivery</span>
+        </div>
+        <p class="proj-status">🛒 WooCommerce · Spices E-Commerce</p>
+        <p class="proj-desc">WooCommerce spice store with weight variants, bilingual Tamil/English contents, and Razorpay payment integration.</p>
+        <div class="tags"><span class="tag">WooCommerce</span><span class="tag">Razorpay</span><span class="tag">Bilingual</span></div>
+        <div class="proj-actions">
+          <button class="btn-proj" onclick="openModal('masalamill')">Quick View</button>
+        </div>
+      </div>
+
+      <!-- Albatross Gym -->
+      <div class="proj-card">
+        <div class="proj-header">
+          <div class="proj-title">Albatross Gym</div>
+          <span class="badge badge-green">🟢 Live</span>
+        </div>
+        <p class="proj-status">💪 WordPress · Netlify Landing Page</p>
+        <p class="proj-desc">Responsive fitness website with Formspree contact routing, WhatsApp link calls, and Netlify hosting.</p>
+        <div class="tags"><span class="tag">WordPress</span><span class="tag">Netlify</span><span class="tag">Formspree</span></div>
+        <div class="proj-actions">
+          <button class="btn-proj" onclick="openModal('albatross')">Quick View</button>
+        </div>
+      </div>
+
+      <!-- Day2Day Gift -->
+      <div class="proj-card">
+        <div class="proj-header">
+          <div class="proj-title">Day2Day Gift — E-Commerce</div>
+          <span class="badge">React App</span>
+        </div>
+        <p class="proj-status">🟢 React · Tailwind CSS · Catalog Web App</p>
+        <p class="proj-desc">React storefront with dynamic client-side product search, filtering, and WhatsApp checkout integration.</p>
+        <div class="tags"><span class="tag">React</span><span class="tag">Tailwind CSS</span><span class="tag">JavaScript</span></div>
+        <div class="proj-actions">
+          <a href="https://soft-figolla-562f2b.netlify.app/" target="_blank" rel="noopener" class="btn-proj green">Live Demo</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="view-all-wrap" style="margin-top:20px">
+      <button class="btn btn-outline btn-sm" id="view-all-btn" onclick="toggleProjects()">View All Projects ↓</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHY VGL ═══ -->
+<section id="why" style="padding:88px 24px">
+  <div class="container fade-in">
+    <div class="section-label">Why Vignesh Growth Lab</div>
+    <h2 class="section-title">Why Businesses Choose<br>Vignesh Growth Lab</h2>
+    <p class="section-sub">We understand the local market, speak your language, and build outcomes-driven digital solutions that help SMBs grow.</p>
+
+    <div class="why-grid">
+      <!-- Card 1: MSME Registered -->
+      <div class="why-card">
+        <span class="why-icon">🏛️</span>
+        <strong>MSME Registered</strong>
+        <p>Officially registered government enterprise (UDYAM-TN-03-0328658), ensuring corporate accountability and professional compliance.</p>
+      </div>
+      <!-- Card 2: Real Client Projects -->
+      <div class="why-card">
+        <span class="why-icon">🤝</span>
+        <strong>Real Client Projects</strong>
+        <p>Proven track record with 6+ live website deployments and systems serving active businesses across Tamil Nadu.</p>
+      </div>
+      <!-- Card 3: Direct Founder Support -->
+      <div class="why-card">
+        <span class="why-icon">👤</span>
+        <strong>Direct Founder Support</strong>
+        <p>Deal directly with the founder for project scoping and execution — no junior developers or communication layers.</p>
+      </div>
+      <!-- Card 4: Fast Delivery -->
+      <div class="why-card">
+        <span class="why-icon">⚡</span>
+        <strong>Fast Delivery</strong>
+        <p>Clear, structured project milestones and timelines. Core business websites are typically delivered in 1–3 weeks.</p>
+      </div>
+      <!-- Card 5: Affordable Pricing -->
+      <div class="why-card">
+        <span class="why-icon">💰</span>
+        <strong>Affordable Pricing</strong>
+        <p>Pricing structured from ₹5,000 to keep high-end websites, billing POS, and WhatsApp automation accessible to SMBs.</p>
+      </div>
+      <!-- Card 6: Ongoing Support -->
+      <div class="why-card">
+        <span class="why-icon">🛠️</span>
+        <strong>Ongoing Support</strong>
+        <p>Post-launch support is integrated directly into our contracts, ensuring help is always available when your business grows.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CORE SERVICE STACK ═══ -->
+<section id="skills" class="section-alt" style="padding:88px 24px">
+  <div class="container fade-in">
+    <div class="section-label">Our Service Stack</div>
+    <h2 class="section-title">Core Service Stack</h2>
+    <p class="section-sub">We utilize industry-proven technologies and platforms to build secure, scalable solutions for your business.</p>
+
+    <div class="skills-section">
+      <!-- Website Development -->
+      <div class="skill-block blue">
+        <div class="skill-block-title">🌐 Website Development</div>
+        <div class="skill-pills">
+          <span class="pill pill-blue">WordPress</span>
+          <span class="pill pill-blue">WooCommerce</span>
+          <span class="pill pill-blue">Responsive Design</span>
+          <span class="pill pill-blue">SEO Ready</span>
+          <span class="pill pill-blue">Netlify</span>
+          <span class="pill pill-blue">Google Analytics</span>
+        </div>
+      </div>
+      <!-- Custom Development -->
+      <div class="skill-block cyan">
+        <div class="skill-block-title">💻 Custom Development</div>
+        <div class="skill-pills">
+          <span class="pill pill-cyan">HTML</span>
+          <span class="pill pill-cyan">CSS</span>
+          <span class="pill pill-cyan">JavaScript</span>
+          <span class="pill pill-cyan">Web Applications</span>
+          <span class="pill pill-cyan">API Integrations</span>
+          <span class="pill pill-cyan">GitHub</span>
+        </div>
+      </div>
+      <!-- Retail POS Solutions -->
+      <div class="skill-block green">
+        <div class="skill-block-title">🧾 Retail POS Solutions</div>
+        <div class="skill-pills">
+          <span class="pill pill-green">Billing</span>
+          <span class="pill pill-green">Inventory</span>
+          <span class="pill pill-green">Reports</span>
+          <span class="pill pill-green">Customer Management</span>
+          <span class="pill pill-green">Local Database</span>
+          <span class="pill pill-green">Thermal Receipt</span>
+        </div>
+      </div>
+      <!-- WhatsApp Automation -->
+      <div class="skill-block purple">
+        <div class="skill-block-title">🤖 WhatsApp Automation</div>
+        <div class="skill-pills">
+          <span class="pill pill-purple">AI Chatbots</span>
+          <span class="pill pill-purple">Lead Capture</span>
+          <span class="pill pill-purple">Automation Workflows</span>
+          <span class="pill pill-purple">Follow-Up Systems</span>
+          <span class="pill pill-purple">Gemini / GPT AI</span>
+          <span class="pill pill-purple">n8n Engine</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:24px">
+      <div style="font-size:0.75rem;font-weight:700;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px">Additional Tools</div>
+      <div class="tools-row">
+        <span class="tool-chip">Python</span>
+        <span class="tool-chip">n8n</span>
+        <span class="tool-chip">Canva</span>
+        <span class="tool-chip">CapCut</span>
+        <span class="tool-chip">Power BI</span>
+        <span class="tool-chip">Google Sheets</span>
+        <span class="tool-chip">Analytics Tools</span>
+        <span class="tool-chip">AI Tools</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BOTTOM CTA ═══ -->
+<section style="padding:80px 24px;text-align:center">
+  <div class="container fade-in">
+    <div style="background:linear-gradient(135deg,rgba(30,58,138,0.35),rgba(22,78,99,0.25));border:1px solid rgba(96,165,250,0.2);border-radius:var(--radius);padding:56px 40px;max-width:700px;margin:0 auto">
+      <div style="font-size:2.5rem;margin-bottom:16px">🚀</div>
+      <h2 style="font-family:var(--font-head);font-size:clamp(1.5rem,4vw,2rem);font-weight:800;color:var(--text);margin-bottom:12px;letter-spacing:-0.03em;line-height:1.2">Ready to Grow<br>Your Business?</h2>
+      <p style="color:var(--text-muted);font-size:0.92rem;margin-bottom:32px;max-width:460px;margin-left:auto;margin-right:auto;margin-bottom:32px">Book a free consultation — let's talk about your website, billing system, or automation needs. No commitment required.</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <a href="https://wa.me/918220034139?text=Hi%20Vignesh%20Growth%20Lab%2C%20I%27d%20like%20a%20free%20consultation." target="_blank" rel="noopener" class="btn btn-wa" style="padding:14px 28px;font-size:0.9rem">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Book Free Consultation
+        </a>
+        <a href="mailto:vigneshgrowthlab@gmail.com" class="btn btn-outline" style="padding:14px 28px;font-size:0.9rem">Send Email</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTACT ═══ -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="section-label">Get In Touch</div>
+        <h2>Let's Discuss<br>Your Project</h2>
+        <p>Whether you need a website, POS software, or WhatsApp automation — reach out and let's figure out the best solution for your business.</p>
+        <div class="contact-links">
+          <a href="https://wa.me/918220034139" target="_blank" rel="noopener" class="contact-link">
+            <div class="contact-link-icon wa">📱</div>
+            <div>
+              <strong>WhatsApp (Fastest)</strong>
+              <span>+91 82200 34139 · Typically replies in minutes</span>
+            </div>
+          </a>
+          <a href="mailto:vigneshgrowthlab@gmail.com" class="contact-link">
+            <div class="contact-link-icon mail">📧</div>
+            <div>
+              <strong>Email</strong>
+              <span>vigneshgrowthlab@gmail.com</span>
+            </div>
+          </a>
+          <a href="https://www.instagram.com/vigneshgrowthlab/" target="_blank" rel="noopener" class="contact-link">
+            <div class="contact-link-icon ig">📸</div>
+            <div>
+              <strong>Instagram</strong>
+              <span>@vigneshgrowthlab · See our work</span>
+            </div>
+          </a>
+          <div class="contact-link" style="cursor:default">
+            <div class="contact-link-icon" style="background:rgba(96,165,250,0.1);border:1px solid rgba(96,165,250,0.2)">📍</div>
+            <div>
+              <strong>Location</strong>
+              <span>Pollachi, Coimbatore District, Tamil Nadu — Serving clients across Tamil Nadu &amp; India</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-box">
+        <h3>📋 Quick Enquiry</h3>
+        <form action="https://formspree.io/f/yourformid" method="POST" class="form-row">
+          <div class="form-field">
+            <label>Your Name</label>
+            <input type="text" name="name" placeholder="Business Owner / Manager Name" required>
+          </div>
+          <div class="form-field">
+            <label>Business Name</label>
+            <input type="text" name="business" placeholder="Your Business Name">
+          </div>
+          <div class="form-field">
+            <label>WhatsApp / Phone</label>
+            <input type="tel" name="phone" placeholder="+91 98765 43210" required>
+          </div>
+          <div class="form-field">
+            <label>I'm Interested In</label>
+            <select name="service">
+              <option value="">Select a Service</option>
+              <option>Website / Online Store</option>
+              <option>Retail POS Software</option>
+              <option>WhatsApp Automation</option>
+              <option>Multiple Services</option>
+              <option>Not Sure — Need Advice</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label>Message (Optional)</label>
+            <textarea name="message" placeholder="Tell us a little about your business and what you need..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;padding:13px 22px">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            Send Enquiry
           </button>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- EXPERIENCE -->
-<section id="experience" class="section-alt">
-  <div class="container">
-    <h2 class="section-title">
-      <svg class="icon-blue" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-      Professional Experience
-    </h2>
-    <p class="section-sub">Client delivery, internships, and domain expertise that shaped my build process.</p>
-    <div class="exp-list">
-
-      <div class="exp-card">
-        <div class="exp-top">
-          <div>
-            <div class="exp-role">Full-Stack Developer</div>
-            <div class="exp-company">Freelancing | Coimbatore, Tamil Nadu</div>
-          </div>
-          <span class="exp-period">OCT 2025 – NOV 2025</span>
-        </div>
-        <div class="exp-meta">Project: <span>Zap Rider - AI-Powered E-Bike Rental Web Platform</span> &nbsp;|&nbsp; Stack: <span>Django, Python, MySQL, Docker, REST API, AI Integration, Twilio/MSG91</span></div>
-        <ul class="exp-resp">
-          <li>Developing real-time E-Bike rental management system using AI-driven automation and predictive analytics to optimize ride availability</li>
-          <li>Designed and implemented secure user and admin portals featuring OTP-based login, ride verification, booking management, and payment tracking</li>
-          <li>Integrated SMS notifications for customer updates through Twilio/MSG91 and implemented JWT authentication for secure API access</li>
-          <li>Configured Docker containers for seamless deployment and scalability, using environment-based configuration for production readiness</li>
-          <li>Leveraging AI insights to improve operational efficiency and enhance customer experience through data-based recommendations</li>
-        </ul>
-      </div>
-
-      <div class="exp-card">
-        <div class="exp-top">
-          <div>
-            <div class="exp-role">Data Analyst Intern</div>
-            <div class="exp-company">Innobyte Services | Remote</div>
-          </div>
-          <span class="exp-period">2024</span>
-        </div>
-        <div class="exp-meta">Project: <span>Amazon Sales Data Analysis</span> &nbsp;|&nbsp; Stack: <span>Python (Pandas, Matplotlib), Power BI, Excel</span></div>
-        <ul class="exp-resp">
-          <li>Conducted comprehensive data analysis on Amazon sales data to uncover trends, customer behaviour, and product performance insights</li>
-          <li>Cleaned, transformed, and modelled datasets using Python (Pandas) for accurate data-driven reporting</li>
-          <li>Created interactive Power BI dashboards visualizing sales performance, region-wise demand, and revenue growth</li>
-          <li>Delivered business insights that contributed to improving inventory management, pricing strategy, and customer segmentation</li>
-        </ul>
-      </div>
-
-      <div class="exp-card">
-        <div class="exp-top">
-          <div>
-            <div class="exp-role">HC &amp; Insurance Operations Senior Rep.</div>
-            <div class="exp-company">NTT DATA | India &nbsp;|&nbsp; Client: Centene</div>
-          </div>
-          <span class="exp-period">NOV 2021 – DEC 2022</span>
-        </div>
-        <div class="exp-meta">Project: <span>Claim Analyst</span> &nbsp;|&nbsp; Stack: <span>Data Processing, Claims Review, Process Accuracy, Business Communication</span></div>
-        <ul class="exp-resp">
-          <li>Handled and validated healthcare claims with a focus on accuracy and compliance</li>
-          <li>Resolved denials and coordinated with teams to ensure timely issue resolution</li>
-          <li>Maintained data confidentiality while meeting daily quality and productivity targets</li>
-          <li>Strengthened skills in data handling, client communication, and process reporting</li>
-        </ul>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- SKILLS -->
-<section id="skills">
-  <div class="container">
-    <h2 class="section-title">
-      <svg class="icon-blue" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"/></svg>
-      Technical Skills
-    </h2>
-    <div class="skills-grid">
-      <div class="skill-card blue">
-        <div class="skill-card-title">Languages</div>
-        <div class="skill-pills">
-          <span class="pill pill-blue">Python</span>
-          <span class="pill pill-blue">SQL</span>
-        </div>
-      </div>
-      <div class="skill-card cyan">
-        <div class="skill-card-title">Frameworks</div>
-        <div class="skill-pills">
-          <span class="pill pill-cyan">Django</span>
-          <span class="pill pill-cyan">REST API</span>
-        </div>
-      </div>
-      <div class="skill-card purple">
-        <div class="skill-card-title">Tools &amp; Platforms</div>
-        <div class="skill-pills">
-          <span class="pill pill-purple">Docker</span>
-          <span class="pill pill-purple">Git</span>
-          <span class="pill pill-purple">GitHub</span>
-        </div>
-      </div>
-    </div>
-    <div class="dm-card">
-      <div class="dm-title">
-        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
-        Digital Marketing
-      </div>
-      <div class="skill-pills">
-        <span class="pill pill-pink">Social Media Management</span>
-        <span class="pill pill-pink">Meta Ads (Facebook &amp; Instagram)</span>
-        <span class="pill pill-pink">Google Ads</span>
-        <span class="pill pill-pink">Content Strategy</span>
-        <span class="pill pill-pink">SEO &amp; SEM</span>
-        <span class="pill pill-pink">Email Marketing</span>
-        <span class="pill pill-pink">Analytics &amp; Reporting</span>
-        <span class="pill pill-pink">Campaign Optimization</span>
-      </div>
-    </div>
-
-    <div class="certs-heading">
-      <svg class="icon-blue" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
-      Certifications
-    </div>
-    <div class="certs-grid">
-      <div class="cert-card">
-        <div class="cert-name">Python Basics</div>
-        <div class="cert-issuer">HackerRank | 2024</div>
-        <a class="cert-link" href="https://drive.google.com/file/d/16yweKSe5cOAkw_veyu8c3a3mMwEmUM_T/view?usp=sharing" target="_blank" rel="noopener">View Certificate <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
-      </div>
-      <div class="cert-card">
-        <div class="cert-name">SQL Basics</div>
-        <div class="cert-issuer">HackerRank | 2025</div>
-        <a class="cert-link" href="https://www.hackerrank.com/certificates/iframe/7c0d3f9a96ab" target="_blank" rel="noopener">View Certificate <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
-      </div>
-      <div class="cert-card">
-        <div class="cert-name">AWS Academy Cloud Foundation</div>
-        <div class="cert-issuer">Amazon Web Services | 2024</div>
-        <a class="cert-link" href="https://www.credly.com/badges/99a6af1a-42ac-4b88-8692-1933dfb1c63d/public_url" target="_blank" rel="noopener">View Certificate <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+        </form>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CONTACT -->
-<section id="contact" class="section-alt">
-  <div class="container">
-    <h3>Let's Connect</h3>
-    <p>I'm currently open to new opportunities and collaborations. Whether you have a project in mind or just want to chat about technology, feel free to reach out!</p>
-    <p class="contact-sub">Open for freelance and full-time opportunities — happy to chat about projects or collaborations.</p>
-    <div class="contact-links">
-      <a href="/cdn-cgi/l/email-protection#314758565f54425941435053594401000171565c50585d1f525e5c">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-        <span class="__cf_email__" data-cfemail="90e6f9f7fef5e3f8e0e2f1f2f8e5a0a1a0d0f7fdf1f9fcbef3fffd">[email&#160;protected]</span>
-      </a>
-      <a href="tel:+918220034139">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.1.93.3 1.84.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.97.4 1.88.6 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        +91 8220034139
-      </a>
-      <div class="contact-loc">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-        Coimbatore, Tamil Nadu
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Vignesh <span>Growth Lab</span></div>
+      <div class="footer-meta">
+        Websites · POS Software · WhatsApp Automation<br>
+        Founder: Vignesh Prabhu M · Coimbatore, Tamil Nadu
       </div>
+      <div class="footer-msme">✓ MSME Registered · UDYAM-TN-03-0328658</div>
     </div>
-    <div class="social-row">
-      <a href="https://www.linkedin.com/in/vignesh-prabhu-m-06b173253" target="_blank" rel="noopener" class="social-btn linkedin">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-      </a>
-      <a href="https://github.com/vigneshprabhu010" target="_blank" rel="noopener" class="social-btn github">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
-      </a>
+    <div class="footer-links">
+      <a href="#services">Services</a>
+      <a href="#trust">Clients</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+      <a href="https://www.instagram.com/vigneshgrowthlab/" target="_blank" rel="noopener">Instagram</a>
     </div>
   </div>
-</section>
+</footer>
 
-<footer><p>© 2025 Vignesh Prabhu M. Built with HTML &amp; CSS.</p></footer>
-
-<!-- MODALS -->
-<div class="modal-overlay" id="modal-day2day" onclick="if(event.target===this)closeModal('day2day')">
+<!-- ═══ MODALS ═══ -->
+<div class="modal-overlay" id="modal-ranisarees" onclick="if(event.target===this)closeModal('ranisarees')">
   <div class="modal-box">
-    <button class="modal-close" onclick="closeModal('day2day')">✕</button>
-    <div class="modal-title">Day2Day Gift - E-Commerce Platform</div>
-    <p class="modal-desc">Modern e-commerce web application for gift shopping with intuitive user experience and smooth checkout.</p>
-    <div class="modal-section-label">Tech Stack</div>
-    <div class="tags"><span class="tag">React</span><span class="tag">Tailwind CSS</span><span class="tag">JavaScript</span><span class="tag">Responsive Design</span></div>
-    <div class="modal-section-label">Key Highlights</div>
+    <button class="modal-close" onclick="closeModal('ranisarees')">✕</button>
+    <div class="modal-title">Rani Sarees &amp; Boutique</div>
+    <p class="modal-desc">Custom-coded boutique website for a Pollachi fashion store. WhatsApp "ORDER ON WHATSAPP" buttons on every product, Summer 20% OFF announcement bar, GA4 analytics, and JSON-LD local schema. Client recorded an on-camera testimonial recommending Vignesh Growth Lab.</p>
+    <div class="modal-lbl">Tech Stack</div>
+    <div class="tags"><span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">JavaScript</span><span class="tag">WhatsApp API</span><span class="tag">GA4</span><span class="tag">JSON-LD Schema</span><span class="tag">Netlify</span></div>
+    <div class="modal-lbl">Key Highlights</div>
     <ul class="highlights">
-      <li>Developed responsive and user-friendly interface for seamless shopping experience</li>
-      <li>Implemented product catalog with search and filtering capabilities</li>
-      <li>Created mobile-optimized design for cross-device compatibility</li>
-      <li>Deployed and maintained live production application</li>
+      <li>Pre-filled WhatsApp order buttons on every product card</li>
+      <li>Summer 20% OFF announcement bar + scrolling category ticker</li>
+      <li>GA4 analytics + JSON-LD local business schema for SEO</li>
+      <li>Client on-camera testimonial endorsing VGL</li>
     </ul>
-    <div style="margin-top:18px">
-      <a href="https://daytodaygifts.netlify.app/" target="_blank" rel="noopener" class="btn-live">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-        Open Live Site
-      </a>
-    </div>
+    <div style="margin-top:14px"><a href="https://ranisareesandbotique.com/" target="_blank" rel="noopener" class="btn-proj green"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Open Live Site</a></div>
   </div>
 </div>
 
-<div class="modal-overlay" id="modal-eatplay" onclick="if(event.target===this)closeModal('eatplay')">
+<div class="modal-overlay" id="modal-nextgentoys" onclick="if(event.target===this)closeModal('nextgentoys')">
   <div class="modal-box">
-    <button class="modal-close" onclick="closeModal('eatplay')">✕</button>
-    <div class="modal-title">Eat and Play - Food &amp; Entertainment Web App</div>
-    <p class="modal-desc">Interactive web application combining food ordering with entertainment features for enhanced customer engagement.</p>
-    <div class="modal-section-label">Tech Stack</div>
-    <div class="tags"><span class="tag">React</span><span class="tag">JavaScript</span><span class="tag">API Integration</span><span class="tag">Modern UI/UX</span></div>
-    <div class="modal-section-label">Key Highlights</div>
+    <button class="modal-close" onclick="closeModal('nextgentoys')">✕</button>
+    <div class="modal-title">NextGen Toys — WooCommerce Store</div>
+    <p class="modal-desc">Full WooCommerce toy store with product categories (RC Cars, Ride-On Bikes, Drones, Helicopters), offer banners, sale pricing, 650+ Google Reviews integration, and email signup — live at nextgentoys.in. Received a 5-star WhatsApp testimonial.</p>
+    <div class="modal-lbl">Tech Stack</div>
+    <div class="tags"><span class="tag">WordPress</span><span class="tag">WooCommerce</span><span class="tag">Payment Gateway</span><span class="tag">SEO</span><span class="tag">Responsive</span></div>
+    <div class="modal-lbl">Key Highlights</div>
     <ul class="highlights">
-      <li>Built dynamic product listing and detail pages</li>
-      <li>Integrated real-time data fetching and state management</li>
-      <li>Designed engaging user interface for enhanced customer interaction</li>
-      <li>Optimized performance for fast loading and smooth navigation</li>
+      <li>Full product catalogue — RC Cars, Bikes, Ride-Ons, Drones, Helicopters</li>
+      <li>650+ Google Reviews section embedded on homepage</li>
+      <li>WooCommerce cart, checkout, and payment gateway setup</li>
+      <li>Mobile-first responsive design, email newsletter signup</li>
+      <li>⭐⭐⭐⭐⭐ Client testimonial via WhatsApp</li>
     </ul>
-    <div style="margin-top:18px">
-      <a href="https://meatandeatd.netlify.app/" target="_blank" rel="noopener" class="btn-live">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-        Open Live Site
-      </a>
-    </div>
+    <div style="margin-top:14px"><a href="https://nextgentoys.in/" target="_blank" rel="noopener" class="btn-proj green"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Open Live Site</a></div>
   </div>
 </div>
 
-<div class="modal-overlay" id="modal-zaprider" onclick="if(event.target===this)closeModal('zaprider')">
+<div class="modal-overlay" id="modal-n8nai" onclick="if(event.target===this)closeModal('n8nai')">
   <div class="modal-box">
-    <button class="modal-close" onclick="closeModal('zaprider')">✕</button>
-    <div class="modal-title">Zap Rider - AI-Powered E-Bike Rental Platform</div>
-    <p class="modal-desc">Real-time E-Bike rental management system with AI-driven automation and predictive analytics for optimal ride availability.</p>
-    <div class="modal-section-label">Tech Stack</div>
-    <div class="tags"><span class="tag">Django</span><span class="tag">Python</span><span class="tag">MySQL</span><span class="tag">Docker</span><span class="tag">REST API</span><span class="tag">AI Integration</span><span class="tag">Twilio</span></div>
-    <div class="modal-section-label">Key Highlights</div>
+    <button class="modal-close" onclick="closeModal('n8nai')">✕</button>
+    <div class="modal-title" style="color:#c084fc">AI WhatsApp Automation — n8n + Gemini</div>
+    <p class="modal-desc">End-to-end n8n automation: receives WhatsApp messages → Gemini AI generates personalized reply → logs to Google Sheets CRM → sends auto-reply. Runs 24/7 with zero human input.</p>
+    <div class="modal-lbl">Workflow Architecture</div>
     <ul class="highlights">
-      <li>Designed secure user and admin portals with OTP-based login</li>
-      <li>Integrated SMS notifications via Twilio/MSG91</li>
-      <li>Implemented JWT authentication for secure API access</li>
-      <li>Configured Docker containers for seamless deployment</li>
+      <li><strong style="color:#c084fc">Node 1:</strong> WhatsApp Trigger — receives customer messages</li>
+      <li><strong style="color:#c084fc">Node 2:</strong> If/Else — smart routing (new vs returning)</li>
+      <li><strong style="color:#c084fc">Node 3:</strong> Gemini AI — generates personalized contextual reply</li>
+      <li><strong style="color:#c084fc">Node 4:</strong> Google Sheets — logs full conversation to CRM</li>
+      <li><strong style="color:#c084fc">Node 5:</strong> WhatsApp Send — auto-replies to customer</li>
     </ul>
+    <div class="modal-lbl">Business Value</div>
+    <ul class="highlights">
+      <li>Replies to customers in under 5 seconds — 24/7, any time</li>
+      <li>Every conversation automatically recorded as a CRM lead</li>
+      <li>Zero human input required after setup</li>
+    </ul>
+    <div style="margin-top:14px"><a href="https://wa.me/918220034139?text=Hi%2C%20I%20want%20WhatsApp%20automation%20for%20my%20business." target="_blank" rel="noopener" class="btn btn-wa btn-sm">Get This For My Business</a></div>
   </div>
 </div>
-
-<div class="modal-overlay" id="modal-amazon" onclick="if(event.target===this)closeModal('amazon')">
+<div class="modal-overlay" id="modal-masalamill" onclick="if(event.target===this)closeModal('masalamill')">
   <div class="modal-box">
-    <button class="modal-close" onclick="closeModal('amazon')">✕</button>
-    <div class="modal-title">Amazon Sales Data Analysis</div>
-    <p class="modal-desc">Comprehensive data analysis project conducted during internship at Innobyte Services to uncover trends and customer behavior insights.</p>
-    <div class="modal-section-label">Tech Stack</div>
-    <div class="tags"><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Matplotlib</span><span class="tag">Power BI</span><span class="tag">Excel</span></div>
-    <div class="modal-section-label">Key Highlights</div>
+    <button class="modal-close" onclick="closeModal('masalamill')">✕</button>
+    <div class="modal-title">Masala Mill — WooCommerce E-Commerce</div>
+    <p class="modal-desc">End-to-end WooCommerce store for a spice brand — weight-based variants, Razorpay/UPI gateway, bilingual Tamil &amp; English content, WhatsApp order button, and full admin training. Delivered on 4-week timeline. ₹12,000 project.</p>
+    <div class="modal-lbl">Tech Stack</div>
+    <div class="tags"><span class="tag">WordPress</span><span class="tag">WooCommerce</span><span class="tag">Razorpay / UPI</span><span class="tag">WhatsApp API</span><span class="tag">Bilingual</span></div>
+    <div class="modal-lbl">Key Highlights</div>
     <ul class="highlights">
-      <li>Cleaned and transformed large datasets using Python</li>
-      <li>Created interactive Power BI dashboards</li>
-      <li>Delivered insights for inventory management and pricing strategy</li>
-      <li>Improved customer segmentation analysis</li>
+      <li>Weight-based product variants with dynamic pricing logic</li>
+      <li>Razorpay / UPI payment gateway configured and tested</li>
+      <li>Pre-filled WhatsApp order button on each product</li>
+      <li>Bilingual product content — Tamil &amp; English</li>
+      <li>Client fully trained on WooCommerce admin — complete handoff</li>
     </ul>
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  // Active nav
+<div class="modal-overlay" id="modal-albatross" onclick="if(event.target===this)closeModal('albatross')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('albatross')">✕</button>
+    <div class="modal-title">Albatross Gym — Business Landing Page</div>
+    <p class="modal-desc">Mobile-responsive gym website with custom domain, Netlify deployment, contact form, WhatsApp CTA buttons, and 3-month priority support SLA.</p>
+    <div class="modal-lbl">Tech Stack</div>
+    <div class="tags"><span class="tag">WordPress</span><span class="tag">Netlify</span><span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">Formspree</span></div>
+    <div class="modal-lbl">Key Highlights</div>
+    <ul class="highlights">
+      <li>Fully mobile-responsive, custom domain configured</li>
+      <li>Netlify deployment with 3-month post-launch support</li>
+      <li>Formspree contact form + WhatsApp CTA buttons</li>
+    </ul>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-possoftware" onclick="if(event.target===this)closeModal('possoftware')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('possoftware')">✕</button>
+    <div class="modal-title">Retail POS Software &amp; Billing System</div>
+    <p class="modal-desc">A complete offline billing and inventory management software designed for retail establishments, supermarkets, and apparel showrooms. Handles invoicing, inventory databases, sales reporting, and customer loyalty workflows offline, with automated digital receipt generation sent instantly over the WhatsApp API.</p>
+    <div class="modal-lbl">Tech Stack</div>
+    <div class="tags"><span class="tag">Python</span><span class="tag">SQLite Database</span><span class="tag">Tkinter / Custom GUI</span><span class="tag">WhatsApp API</span><span class="tag">Thermal Printer SDK</span></div>
+    <div class="modal-lbl">Key Highlights</div>
+    <ul class="highlights">
+      <li>Sub-second invoice calculation and SQLite database updates</li>
+      <li>Automatic print pipeline for 3-inch standard thermal printers</li>
+      <li>Instant serverless WhatsApp dispatch of digital receipts to customers</li>
+      <li>Low inventory alert triggers and batch import/export via CSV</li>
+    </ul>
+    <div style="margin-top:14px">
+      <a href="https://wa.me/918220034139?text=Hi%20Vignesh%20Growth%20Lab%2C%20I%27d%20like%20to%20discuss%20the%20Retail%20POS%20Software%20demo." target="_blank" rel="noopener" class="btn btn-wa btn-sm">Request Free POS Demo</a>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-success" onclick="if(event.target===this)closeModal('success')">
+  <div class="modal-box success-modal-box">
+    <button class="modal-close" onclick="closeModal('success')">✕</button>
+    <div class="success-icon">✓</div>
+    <h3 class="success-title">Enquiry Sent Successfully!</h3>
+    <p class="success-desc">Thank you for reaching out to Vignesh Growth Lab. We have received your request and will get in touch with you shortly on your WhatsApp number.</p>
+    <button class="btn btn-primary btn-sm" onclick="closeModal('success')" style="margin-top:10px">Got it, thanks!</button>
+  </div>
+</div>
+
+<script>
+  /* ── Scroll-active nav ── */
   const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-links a');
+  const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
   window.addEventListener('scroll', () => {
     let current = '';
-    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 110) current = s.id; });
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
     navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
   });
 
-  // Modal
+  /* ── Modals ── */
   function openModal(id) { document.getElementById('modal-' + id).classList.add('open'); document.body.style.overflow = 'hidden'; }
-  function closeModal(id) { document.getElementById('mo
+  function closeModal(id) { document.getElementById('modal-' + id).classList.remove('open'); document.body.style.overflow = ''; }
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') document.querySelectorAll('.modal-overlay.open').forEach(m => { m.classList.remove('open'); document.body.style.overflow = ''; });
+  });
+
+  /* ── View all projects toggle ── */
+  function toggleProjects() {
+    const hidden = document.getElementById('hidden-projects');
+    const btn = document.getElementById('view-all-btn');
+    const isVisible = hidden.classList.contains('visible');
+    hidden.classList.toggle('visible', !isVisible);
+    btn.textContent = isVisible ? 'View All Projects ↓' : 'Show Less ↑';
+  }
+
+  /* ── Intersection Observer for fade-in ── */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  /* ── Form Submit Intercept ── */
+  const form = document.querySelector('.contact-form-box form');
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const action = form.getAttribute('action');
+      if (action && !action.includes('yourformid')) {
+        fetch(action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        }).catch(err => console.log(err));
+      }
+      openModal('success');
+      form.reset();
+    });
+  }
+</script>
+</div>
+</body>
+</html>
