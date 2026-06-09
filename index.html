@@ -165,11 +165,17 @@
     .cs-title{font-family:var(--font-head);font-size:1.25rem;font-weight:800;color:var(--text);letter-spacing:-0.02em;margin-bottom:4px}
     .cs-client{font-size:0.8rem;color:var(--text-dim)}
     .cs-badge{font-size:0.72rem;background:rgba(22,163,74,0.12);color:#4ade80;border:1px solid rgba(34,197,94,0.22);padding:5px 12px;border-radius:6px;font-weight:600}
+    .cs-badge-purple{font-size:0.72rem;background:rgba(168,85,247,0.15);color:#c084fc;border:1px solid rgba(168,85,247,0.25);padding:5px 12px;border-radius:6px;font-weight:600}
     .cs-grid-layout{display:grid;grid-template-columns:1.2fr 0.8fr;gap:28px;margin-bottom:24px}
     .cs-flow{display:flex;flex-direction:column;gap:16px}
     .cs-block{background:rgba(9,15,30,0.38);border:1px solid var(--border);padding:18px;border-radius:10px}
     .cs-block h4{font-family:var(--font-head);font-size:0.88rem;font-weight:700;color:var(--blue-bright);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px}
     .cs-block p{font-size:0.82rem;color:var(--text-muted);line-height:1.62}
+    .flow-node {padding:6px 12px;border-radius:6px;font-size:0.75rem;text-align:center;font-weight:600;border:1px solid transparent;transition:background 0.3s,border-color 0.3s,color 0.3s}
+    .flow-node-default {background:var(--surface);border-color:var(--border);color:var(--text)}
+    .flow-node-purple {background:rgba(168,85,247,0.08);border-color:rgba(168,85,247,0.2);color:#c084fc}
+    .flow-node-cyan {background:rgba(56,189,248,0.08);border-color:rgba(56,189,248,0.2);color:#38bdf8}
+    .flow-node-green {background:rgba(34,197,94,0.08);border-color:rgba(34,197,94,0.2);color:#4ade80}
     .cs-outcome{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
     .cs-metric{background:rgba(22,163,74,0.08);border:1px solid rgba(34,197,94,0.18);border-radius:8px;padding:10px 14px;text-align:center;flex:1;min-width:110px}
     .cs-metric .metric-val{font-family:var(--font-head);font-size:1.15rem;font-weight:800;color:#4ade80;letter-spacing:-0.02em}
@@ -548,6 +554,35 @@
       color: #16a34a;
       background: rgba(22,163,74,0.08);
       border-color: rgba(34,197,94,0.15);
+    }
+    html.light-mode .cs-block {
+      background: #F1F5F9;
+      border-color: var(--border);
+    }
+    html.light-mode .cs-badge {
+      background: rgba(22, 163, 74, 0.08);
+      color: #16a34a;
+      border-color: rgba(34, 197, 94, 0.15);
+    }
+    html.light-mode .cs-badge-purple {
+      background: rgba(124, 58, 237, 0.08);
+      color: #7c3aed;
+      border-color: rgba(124, 58, 237, 0.2);
+    }
+    html.light-mode .flow-node-purple {
+      background: rgba(124, 58, 237, 0.08);
+      border-color: rgba(124, 58, 237, 0.2);
+      color: #7c3aed;
+    }
+    html.light-mode .flow-node-cyan {
+      background: rgba(2, 132, 199, 0.08);
+      border-color: rgba(2, 132, 199, 0.2);
+      color: #0284c7;
+    }
+    html.light-mode .flow-node-green {
+      background: rgba(22, 163, 74, 0.08);
+      border-color: rgba(22, 163, 74, 0.2);
+      color: #16a34a;
     }
 
     /* ──── RESPONSIVE ──── */
@@ -1211,7 +1246,7 @@
           <div class="cs-title">AI WhatsApp Lead Management Workflow</div>
           <div class="cs-client">n8n Automation Engine · Google Sheets CRM · OpenAI</div>
         </div>
-        <span class="cs-badge" style="background:rgba(168,85,247,0.15);color:#c084fc;border-color:rgba(168,85,247,0.25)">Built with n8n</span>
+        <span class="cs-badge-purple">Built with n8n</span>
       </div>
 
       <div class="cs-grid-layout">
@@ -1225,27 +1260,27 @@
           <div class="cs-block">
             <h4>⛓️ Workflow Diagram</h4>
             <div style="display:flex; flex-direction:column; gap:6px; margin:12px 0; max-width:280px;">
-              <div style="background:var(--surface); border:1px solid var(--border); padding:6px 12px; border-radius:6px; font-size:0.75rem; text-align:center; font-weight:600;">
+              <div class="flow-node flow-node-default">
                 💬 Customer WhatsApp Message
               </div>
               <div style="text-align:center; color:var(--text-muted); font-size:0.8rem; line-height:1;">↓</div>
-              <div style="background:rgba(168,85,247,0.08); border:1px solid rgba(168,85,247,0.2); padding:6px 12px; border-radius:6px; font-size:0.75rem; text-align:center; font-weight:600; color:#c084fc;">
+              <div class="flow-node flow-node-purple">
                 ⚡ WhatsApp Trigger
               </div>
               <div style="text-align:center; color:var(--text-muted); font-size:0.8rem; line-height:1;">↓</div>
-              <div style="background:rgba(56,189,248,0.08); border:1px solid rgba(56,189,248,0.2); padding:6px 12px; border-radius:6px; font-size:0.75rem; text-align:center; font-weight:600; color:#38bdf8;">
+              <div class="flow-node flow-node-cyan">
                 🧠 AI Processing
               </div>
               <div style="text-align:center; color:var(--text-muted); font-size:0.8rem; line-height:1;">↓</div>
-              <div style="background:rgba(34,197,94,0.08); border:1px solid rgba(34,197,94,0.2); padding:6px 12px; border-radius:6px; font-size:0.75rem; text-align:center; font-weight:600; color:#4ade80;">
+              <div class="flow-node flow-node-green">
                 🎯 Lead Qualification
               </div>
               <div style="text-align:center; color:var(--text-muted); font-size:0.8rem; line-height:1;">↓</div>
-              <div style="background:var(--surface); border:1px solid var(--border); padding:6px 12px; border-radius:6px; font-size:0.75rem; text-align:center; font-weight:600;">
+              <div class="flow-node flow-node-default">
                 📊 Google Sheets CRM
               </div>
               <div style="text-align:center; color:var(--text-muted); font-size:0.8rem; line-height:1;">↓</div>
-              <div style="background:rgba(168,85,247,0.08); border:1px solid rgba(168,85,247,0.2); padding:6px 12px; border-radius:6px; font-size:0.75rem; text-align:center; font-weight:600; color:#c084fc;">
+              <div class="flow-node flow-node-purple">
                 📨 Automated WhatsApp Response
               </div>
             </div>
