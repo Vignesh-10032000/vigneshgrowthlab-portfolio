@@ -1,0 +1,25 @@
+<svg viewBox="0 0 680 420" width="100%" role="img" xmlns="http://www.w3.org/2000/svg" style="">
+  <title style="fill:rgb(0, 0, 0);stroke:none;color:rgb(11, 11, 11);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">Vignesh Growth Lab logo</title>
+  <desc style="fill:rgb(0, 0, 0);stroke:none;color:rgb(11, 11, 11);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">Blue card with solid white shield, blue code brackets inside, serif wordmark and tagline</desc>
+
+  
+  <rect x="90" y="20" width="500" height="380" rx="16" ry="16" fill="#4B72E8" style="fill:rgb(75, 114, 232);stroke:none;color:rgb(11, 11, 11);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <g transform="translate(340, 148)" style="fill:rgb(0, 0, 0);stroke:none;color:rgb(11, 11, 11);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
+    
+    <path d="&#10;      M0,72&#10;      C-27,56 -50,33 -50,6&#10;      L-50,-34&#10;      Q-50,-52 -34,-56&#10;      Q-20,-60 -14,-50&#10;      Q-8,-43 0,-47&#10;      Q8,-43 14,-50&#10;      Q20,-60 34,-56&#10;      Q50,-52 50,-34&#10;      L50,6&#10;      C50,33 27,56 0,72&#10;      Z" fill="white" stroke="white" stroke-width="2" style="fill:rgb(255, 255, 255);stroke:rgb(255, 255, 255);color:rgb(11, 11, 11);stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+    
+    <polyline points="-5,-20 -21,0 -5,20" fill="none" stroke="#4B72E8" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="fill:none;stroke:rgb(75, 114, 232);color:rgb(11, 11, 11);stroke-width:3.5px;stroke-linecap:round;stroke-linejoin:round;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+    
+    <polyline points="5,-20 21,0 5,20" fill="none" stroke="#4B72E8" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="fill:none;stroke:rgb(75, 114, 232);color:rgb(11, 11, 11);stroke-width:3.5px;stroke-linecap:round;stroke-linejoin:round;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+    
+    <line x1="6" y1="-20" x2="-6" y2="20" stroke="#4B72E8" stroke-width="3.5" stroke-linecap="round" style="fill:rgb(0, 0, 0);stroke:rgb(75, 114, 232);color:rgb(11, 11, 11);stroke-width:3.5px;stroke-linecap:round;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  </g>
+
+  
+  <text x="340" y="265" font-family="'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif" font-size="36" font-weight="normal" fill="white" text-anchor="middle" letter-spacing="0.5" style="fill:rgb(255, 255, 255);stroke:none;color:rgb(11, 11, 11);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Palatino Linotype&quot;, Palatino, &quot;Book Antiqua&quot;, Georgia, serif;font-size:36px;font-weight:400;text-anchor:middle;dominant-baseline:auto">Vignesh Growth Lab</text>
+
+  
+  <text x="340" y="300" font-family="'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif" font-size="11.5" font-weight="normal" fill="white" text-anchor="middle" letter-spacing="5.5" opacity="0.85" style="fill:rgb(255, 255, 255);stroke:none;color:rgb(11, 11, 11);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.85;font-family:&quot;Palatino Linotype&quot;, Palatino, &quot;Book Antiqua&quot;, Georgia, serif;font-size:11.5px;font-weight:400;text-anchor:middle;dominant-baseline:auto">BUILD. AUTOMATE. GROW.</text>
+</svg>
