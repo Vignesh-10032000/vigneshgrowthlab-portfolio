@@ -1,0 +1,86 @@
+---
+import { Icon } from 'astro-icon/components';
+
+import { STATS, STATS_FOOTNOTE } from '~/data/vgl/site';
+
+/**
+ * "Numbers that matter" band — the one --color-vgl-section surface on the
+ * homepage. Counters animate on intersect (see RevealMotion), tnum figures.
+ */
+---
+
+<section aria-label="Numbers that matter" data-stats class="vgl-stats">
+  <div class="vgl-container">
+    <h2>Numbers that matter</h2>
+    <div class="vgl-stats-grid">
+      {
+        STATS.map((stat) => (
+          <div>
+            <p class="vgl-num" style="font-feature-settings: 'tnum' 1">
+              {stat.value}
+            </p>
+            <p class="vgl-stat-label">{stat.label}</p>
+          </div>
+        ))
+      }
+    </div>
+    <p class="vgl-stats-foot">
+      <Icon name="ph:whatsapp-logo" style="font-size: 18px; color: var(--color-vgl-wa-text)" aria-hidden="true" />
+      {STATS_FOOTNOTE}
+    </p>
+  </div>
+</section>
+
+<style>
+  .vgl-stats {
+    margin-top: clamp(52px, 7vw, 88px);
+    padding: clamp(40px, 5vw, 60px) 0;
+    background:
+      radial-gradient(
+        900px 420px at 85% -40%,
+        color-mix(in srgb, var(--color-vgl-section-glow) 70%, transparent),
+        transparent 64%
+      ),
+      var(--color-vgl-section);
+  }
+
+  .vgl-stats h2 {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: clamp(22px, 2.4vw, 30px);
+    margin: 0 0 36px;
+  }
+
+  .vgl-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
+    gap: 36px 28px;
+  }
+
+  .vgl-num {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: clamp(34px, 3.4vw, 48px);
+    margin: 0;
+  }
+
+  .vgl-stat-label {
+    margin: 10px 0 0;
+    font-size: 12.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--color-vgl-text) 64%, transparent);
+  }
+
+  .vgl-stats-foot {
+    margin: 40px 0 0;
+    padding-top: 22px;
+    border-top: 1px solid color-mix(in srgb, var(--color-vgl-text) 18%, transparent);
+    font-size: 14.5px;
+    color: color-mix(in srgb, var(--color-vgl-text) 80%, transparent);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+</style>

@@ -1,0 +1,51 @@
+---
+import WhatsAppCta from '~/components/vgl/WhatsAppCta.astro';
+
+/** Bordered strip: lead copy left, WhatsApp CTA right. */
+export interface Props {
+  lead: string;
+  /** Muted second half of the lead sentence. */
+  leadMuted?: string;
+  ctaLabel: string;
+  ctaMessage?: string;
+  class?: string;
+}
+
+const { lead, leadMuted, ctaLabel, ctaMessage, class: className = '' } = Astro.props;
+---
+
+<div class:list={['vgl-cta-band', className]}>
+  <p>
+    {lead}
+    {leadMuted && <span>{leadMuted}</span>}
+  </p>
+  <WhatsAppCta label={ctaLabel} message={ctaMessage} class="vgl-cta-band-btn" />
+</div>
+
+<style>
+  .vgl-cta-band {
+    margin-top: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 24px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 22px;
+    border: 1px solid var(--color-vgl-neutral-700);
+    border-radius: var(--radius-vgl-md);
+  }
+
+  .vgl-cta-band > p {
+    margin: 0;
+    font-size: 14.5px;
+    color: var(--color-vgl-neutral-200);
+  }
+
+  .vgl-cta-band > p > span {
+    color: var(--color-vgl-neutral-400);
+  }
+
+  .vgl-cta-band :global(.vgl-cta-band-btn) {
+    white-space: nowrap;
+  }
+</style>

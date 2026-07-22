@@ -1,0 +1,46 @@
+---
+import { Icon } from 'astro-icon/components';
+
+import type { TechnologyGroup } from '~/data/vgl/site';
+
+export interface Props {
+  group: TechnologyGroup;
+}
+
+const { group } = Astro.props;
+---
+
+<div class="vgl-tech-group">
+  <p class="vgl-tech-label">
+    <Icon name={group.icon} style="font-size: 15px; color: var(--color-vgl-cyan)" aria-hidden="true" />
+    {group.label}
+  </p>
+  <div class="vgl-tech-chips">
+    {group.items.map((item) => <span class="vgl-tag vgl-tag-neutral">{item}</span>)}
+  </div>
+</div>
+
+<style>
+  .vgl-tech-group {
+    padding: 22px;
+    border: 1px solid var(--color-vgl-neutral-700);
+    border-radius: var(--radius-vgl-md);
+  }
+
+  .vgl-tech-label {
+    margin: 0 0 14px;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-vgl-neutral-400);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .vgl-tech-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+  }
+</style>

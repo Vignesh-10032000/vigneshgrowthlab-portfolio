@@ -1,0 +1,81 @@
+---
+/**
+ * Angled browser-chrome frame for project screenshots (design 1e).
+ * The slot carries the screenshot (or ImageFrame placeholder) at 16:10.
+ */
+export interface Props {
+  /** Perspective tilt direction. */
+  tilt?: 'left' | 'right';
+  /** Larger tilt + shadow for the featured card. */
+  featured?: boolean;
+  class?: string;
+}
+
+const { tilt = 'right', featured = false, class: className = '' } = Astro.props;
+---
+
+<div class:list={['vgl-mockup', `vgl-mockup-${tilt}`, { 'vgl-mockup-featured': featured }, className]}>
+  <div class="vgl-mockup-chrome" aria-hidden="true">
+    <span class="vgl-mockup-dot"></span>
+    <span class="vgl-mockup-dot"></span>
+    <span class="vgl-mockup-dot"></span>
+    <span class="vgl-mockup-address"></span>
+  </div>
+  <slot />
+</div>
+
+<style>
+  .vgl-mockup {
+    border: 1px solid var(--color-vgl-neutral-600);
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+    background: var(--color-vgl-neutral-900);
+    box-shadow: var(--shadow-vgl-md);
+  }
+
+  .vgl-mockup-left {
+    transform: perspective(1200px) rotateY(-3deg) rotateX(1.5deg);
+  }
+
+  .vgl-mockup-right {
+    transform: perspective(1200px) rotateY(3deg) rotateX(1.5deg);
+  }
+
+  .vgl-mockup-featured {
+    border-radius: 10px;
+    box-shadow: var(--shadow-vgl-lg);
+  }
+
+  .vgl-mockup-featured.vgl-mockup-right {
+    transform: perspective(1400px) rotateY(4deg) rotateX(2deg);
+  }
+
+  .vgl-mockup-chrome {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 7px 9px;
+    border-bottom: 1px solid var(--color-vgl-neutral-800);
+  }
+
+  .vgl-mockup-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-vgl-neutral-600);
+  }
+
+  .vgl-mockup-address {
+    flex: 1;
+    height: 9px;
+    margin-left: 5px;
+    border-radius: 5px;
+    background: var(--color-vgl-neutral-800);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .vgl-mockup {
+      transform: none;
+    }
+  }
+</style>

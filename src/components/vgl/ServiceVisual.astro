@@ -1,0 +1,169 @@
+---
+import { Icon } from 'astro-icon/components';
+
+/**
+ * Compact 58px 2.5D mini-scene per service (design 1d — "same tile grammar
+ * as the hero"). Decorative only; markup ported from Home.dc.html.
+ */
+export interface Props {
+  variant: 'website-development' | 'custom-development' | 'retail-pos-solutions' | 'whatsapp-ai-automation';
+}
+
+const { variant } = Astro.props;
+---
+
+<div aria-hidden="true" class="vgl-service-visual">
+  {
+    variant === 'website-development' && (
+      <>
+        <div
+          class="vgl-sv-tile"
+          style="left: 0; top: 4px; width: 78px; height: 50px; border-radius: 8px; transform: perspective(600px) rotateY(5deg); overflow: hidden"
+        >
+          <span style="display: flex; gap: 3px; padding: 5px 6px; border-bottom: 1px solid var(--color-vgl-neutral-800)">
+            <span class="vgl-sv-dot" />
+            <span class="vgl-sv-dot" />
+          </span>
+          <span style="display: block; margin: 7px 8px 0; width: 62%; height: 5px; border-radius: 3px; background: var(--color-vgl-neutral-400)" />
+          <span style="display: block; margin: 5px 8px 0; width: 42%; height: 4px; border-radius: 2px; background: var(--color-vgl-neutral-700)" />
+        </div>
+        <div
+          class="vgl-sv-tile"
+          style="left: 64px; top: 10px; width: 26px; height: 46px; border-radius: 7px; display: flex; flex-direction: column; gap: 4px; padding: 7px 5px"
+        >
+          <span style="width: 100%; height: 4px; border-radius: 2px; background: var(--color-vgl-neutral-500)" />
+          <span style="width: 70%; height: 3px; border-radius: 2px; background: var(--color-vgl-neutral-700)" />
+        </div>
+        <span
+          class="vgl-sv-chip"
+          style="left: 102px; top: 6px; border-color: color-mix(in srgb, var(--color-vgl-cyan) 40%, transparent); background: color-mix(in srgb, var(--color-vgl-cyan) 10%, transparent)"
+        >
+          <Icon name="ph:lightning" style="font-size: 13px; color: var(--color-vgl-cyan)" />
+        </span>
+        <span class="vgl-sv-chip" style="left: 102px; top: 36px">
+          <Icon name="ph:magnifying-glass" style="font-size: 12px; color: var(--color-vgl-neutral-300)" />
+        </span>
+      </>
+    )
+  }
+  {
+    variant === 'custom-development' && (
+      <>
+        <svg viewBox="0 0 150 58" style="position: absolute; inset: 0; width: 150px; height: 58px; overflow: visible">
+          <path
+            d="M52 22 C 66 22, 66 34, 80 34"
+            style="stroke: color-mix(in srgb, var(--color-vgl-cyan) 50%, transparent); stroke-width: 1.2; fill: none"
+          />
+          <path
+            d="M52 40 C 70 40, 84 46, 104 43"
+            style="stroke: color-mix(in srgb, var(--color-vgl-accent) 45%, transparent); stroke-width: 1.2; fill: none"
+          />
+        </svg>
+        <div
+          class="vgl-sv-tile"
+          style="left: 0; top: 6px; width: 54px; height: 44px; border-radius: 8px; display: flex; align-items: center; justify-content: center; transform: perspective(600px) rotateY(6deg)"
+        >
+          <Icon name="ph:code" style="font-size: 18px; color: var(--color-vgl-cyan)" />
+        </div>
+        <span style="position: absolute; left: 76px; top: 24px; width: 9px; height: 9px; border-radius: 50%; background: var(--color-vgl-cyan); box-shadow: 0 0 10px color-mix(in srgb, var(--color-vgl-cyan) 60%, transparent)" />
+        <div
+          class="vgl-sv-tile"
+          style="left: 100px; top: 14px; width: 44px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; gap: 5px"
+        >
+          <Icon name="ph:database" style="font-size: 13px; color: var(--color-vgl-accent-300)" />
+          <Icon name="ph:plugs-connected" style="font-size: 13px; color: var(--color-vgl-neutral-300)" />
+        </div>
+      </>
+    )
+  }
+  {
+    variant === 'retail-pos-solutions' && (
+      <>
+        <div
+          class="vgl-sv-tile"
+          style="left: 0; top: 2px; width: 64px; height: 54px; border-radius: 8px; padding: 8px 8px 0; transform: perspective(600px) rotateY(5deg)"
+        >
+          <span style="display: flex; justify-content: space-between; margin-bottom: 5px">
+            <span style="width: 50%; height: 4px; border-radius: 2px; background: var(--color-vgl-neutral-500)" />
+            <span style="width: 22%; height: 4px; border-radius: 2px; background: var(--color-vgl-neutral-600)" />
+          </span>
+          <span style="display: flex; justify-content: space-between; margin-bottom: 6px">
+            <span style="width: 38%; height: 4px; border-radius: 2px; background: var(--color-vgl-neutral-600)" />
+            <span style="width: 22%; height: 4px; border-radius: 2px; background: var(--color-vgl-neutral-600)" />
+          </span>
+          <span style="display: block; border-top: 1px dashed var(--color-vgl-neutral-600); padding-top: 5px">
+            <span style="display: block; width: 56%; height: 5px; border-radius: 3px; background: var(--color-vgl-accent-300)" />
+          </span>
+        </div>
+        <span style="position: absolute; left: 78px; bottom: 2px; display: flex; align-items: flex-end; gap: 4px; height: 34px">
+          <span style="width: 8px; height: 12px; border-radius: 2px; background: color-mix(in srgb, var(--color-vgl-cyan) 45%, transparent)" />
+          <span style="width: 8px; height: 20px; border-radius: 2px; background: color-mix(in srgb, var(--color-vgl-cyan) 65%, transparent)" />
+          <span style="width: 8px; height: 28px; border-radius: 2px; background: var(--color-vgl-cyan)" />
+        </span>
+        <span class="vgl-sv-chip" style="left: 118px; top: 8px; width: 26px; height: 26px">
+          <Icon name="ph:receipt" style="font-size: 13px; color: var(--color-vgl-neutral-300)" />
+        </span>
+      </>
+    )
+  }
+  {
+    variant === 'whatsapp-ai-automation' && (
+      <>
+        <svg viewBox="0 0 150 58" style="position: absolute; inset: 0; width: 150px; height: 58px; overflow: visible">
+          <path
+            d="M58 28 C 72 28, 74 30, 88 30"
+            style="stroke: color-mix(in srgb, var(--color-vgl-wa) 45%, transparent); stroke-width: 1.2; fill: none"
+          />
+          <path
+            d="M96 30 C 106 30, 108 30, 116 30"
+            style="stroke: color-mix(in srgb, var(--color-vgl-cyan) 45%, transparent); stroke-width: 1.2; fill: none"
+          />
+        </svg>
+        <div
+          class="vgl-sv-tile"
+          style="left: 0; top: 8px; width: 58px; height: 40px; border-color: color-mix(in srgb, var(--color-vgl-wa) 35%, var(--color-vgl-neutral-600)); border-radius: 8px; padding: 7px; transform: perspective(600px) rotateY(6deg)"
+        >
+          <span style="display: block; width: 80%; height: 9px; border-radius: 5px 5px 5px 2px; background: color-mix(in srgb, var(--color-vgl-wa) 24%, var(--color-vgl-neutral-900))" />
+          <span style="display: block; margin-top: 4px; margin-left: 20%; width: 70%; height: 9px; border-radius: 5px 5px 2px 5px; background: var(--color-vgl-neutral-800)" />
+        </div>
+        <span style="position: absolute; left: 88px; top: 26px; width: 9px; height: 9px; border-radius: 50%; background: var(--color-vgl-wa-text); box-shadow: 0 0 10px rgba(37, 211, 102, 0.5)" />
+        <span class="vgl-sv-chip" style="left: 116px; top: 16px; width: 27px; height: 27px">
+          <Icon name="ph:grid-four" style="font-size: 13px; color: var(--color-vgl-cyan)" />
+        </span>
+      </>
+    )
+  }
+</div>
+
+<style>
+  .vgl-service-visual {
+    position: relative;
+    height: 58px;
+  }
+
+  .vgl-sv-tile {
+    position: absolute;
+    border: 1px solid var(--color-vgl-neutral-600);
+    background: color-mix(in srgb, var(--color-vgl-neutral-900) 88%, var(--color-vgl-bg));
+    box-shadow: var(--shadow-vgl-sm);
+  }
+
+  .vgl-sv-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--color-vgl-neutral-600);
+  }
+
+  .vgl-sv-chip {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 25px;
+    border-radius: 8px;
+    border: 1px solid var(--color-vgl-neutral-600);
+    background: color-mix(in srgb, var(--color-vgl-neutral-900) 92%, var(--color-vgl-bg));
+  }
+</style>

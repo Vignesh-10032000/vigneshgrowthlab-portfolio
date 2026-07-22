@@ -1,0 +1,71 @@
+---
+import { Icon } from 'astro-icon/components';
+
+import ServiceVisual from '~/components/vgl/ServiceVisual.astro';
+
+/** Homepage services-overview card with the 2.5D mini-scene. */
+export interface Props {
+  slug: 'website-development' | 'custom-development' | 'retail-pos-solutions' | 'whatsapp-ai-automation';
+  title: string;
+  copy: string;
+  tags: string[];
+  href: string;
+}
+
+const { slug, title, copy, tags, href } = Astro.props;
+---
+
+<article class="vgl-card vgl-service-card">
+  <ServiceVisual variant={slug} />
+  <h3>{title}</h3>
+  <p>{copy}</p>
+  <div class="vgl-service-tags">
+    {tags.map((tag) => <span class="vgl-tag vgl-tag-neutral">{tag}</span>)}
+  </div>
+  <a href={href} class="vgl-cta vgl-service-link">
+    Explore service
+    <Icon name="ph:arrow-right" class="vgl-arrow" style="font-size: 14px" aria-hidden="true" />
+  </a>
+</article>
+
+<style>
+  .vgl-service-card {
+    padding: 26px;
+    gap: 13px;
+  }
+
+  .vgl-service-card h3 {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 19px;
+    margin: 0;
+  }
+
+  .vgl-service-card > p {
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--color-vgl-neutral-300);
+  }
+
+  .vgl-service-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .vgl-service-link {
+    margin-top: auto;
+    font-size: 14px;
+    text-decoration: none;
+    color: var(--color-vgl-accent-300);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 0;
+  }
+
+  .vgl-service-link:hover {
+    color: var(--color-vgl-accent-200);
+  }
+</style>

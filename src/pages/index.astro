@@ -1,14 +1,39 @@
 ---
-/**
- * Homepage — Phase 1 shell.
- * Phase 2 implements the full approved section order: Hero (2.5D), trust
- * strip, client testimonials, services overview, technologies, featured
- * projects, stats, comparison, founder credentials, process, FAQ, final CTA
- * + contact form.
- */
-import PageLayout from '~/layouts/PageLayout.astro';
-import WhatsAppCta from '~/components/vgl/WhatsAppCta.astro';
+/** Homepage — approved section order (Home.dc.html), exact. */
+import { Icon } from 'astro-icon/components';
 
+import PageLayout from '~/layouts/PageLayout.astro';
+import HeroHome from '~/components/vgl/HeroHome.astro';
+import TrustStrip from '~/components/vgl/TrustStrip.astro';
+import TestimonialCard from '~/components/vgl/TestimonialCard.astro';
+import SectionHeading from '~/components/vgl/SectionHeading.astro';
+import ServiceCard from '~/components/vgl/ServiceCard.astro';
+import TechnologyGroup from '~/components/vgl/TechnologyGroup.astro';
+import ProjectCard from '~/components/vgl/ProjectCard.astro';
+import DeviceMockup from '~/components/vgl/DeviceMockup.astro';
+import ImageFrame from '~/components/vgl/ImageFrame.astro';
+import ResultBadge from '~/components/vgl/ResultBadge.astro';
+import StatsGrid from '~/components/vgl/StatsGrid.astro';
+import ComparisonTable from '~/components/vgl/ComparisonTable.astro';
+import ProcessSteps from '~/components/vgl/ProcessSteps.astro';
+import FaqAccordion from '~/components/vgl/FaqAccordion.astro';
+import ContactForm from '~/components/vgl/ContactForm.astro';
+import CtaBand from '~/components/vgl/CtaBand.astro';
+import WhatsAppCta from '~/components/vgl/WhatsAppCta.astro';
+import RevealMotion from '~/components/vgl/RevealMotion.astro';
+
+import { SERVICES } from '~/data/vgl/services';
+import { getProject } from '~/data/vgl/projects';
+import {
+  TECHNOLOGY_GROUPS,
+  PROCESS_STEPS,
+  CREDENTIALS,
+  FOUNDER,
+  MORE_PROJECTS,
+  CONTACT,
+  SOCIALS,
+  DOCUMENTS,
+} from '~/data/vgl/site';
 import { jsonLd, localBusiness, faqPage } from '~/utils/structured-data';
 
 const metadata = {
@@ -16,26 +41,668 @@ const metadata = {
   description:
     'Pollachi-based MSME building fast websites, custom software, retail POS and WhatsApp AI automation for Tamil Nadu businesses. 15+ projects delivered.',
 };
+
+const nextgen = getProject('nextgen-toys')!;
+const gridProjects = ['rani-sarees', 'vgl-pos', 'ai-whatsapp-automation'].map((slug) => getProject(slug)!);
+
+// Homepage card copy is the design's shorter variant, not the full matrix summary
+const homeCardCopy: Record<string, string> = {
+  'rani-sarees': 'Custom-coded site with pre-filled WhatsApp order buttons on every product, GA4 and local schema.',
+  'vgl-pos': 'Custom retail POS with real-time stock and sales tracking — load-tested to 250 concurrent users.',
+  'ai-whatsapp-automation':
+    'Lead routing that auto-classifies enquiries straight to Google Sheets and WhatsApp — 100+ leads daily.',
+};
+
+const serviceCardCopy: Record<string, { copy: string; tags: string[] }> = {
+  'website-development': {
+    copy: 'Show up on Google and turn visitors into enquiries — fast, SEO-ready business and e-commerce sites.',
+    tags: ['WordPress', 'E-Commerce', 'SEO Ready'],
+  },
+  'custom-development': {
+    copy: 'Software that fits your workflow exactly — hand-coded web applications and API integrations.',
+    tags: ['JavaScript', 'Web Apps', 'APIs'],
+  },
+  'retail-pos-solutions': {
+    copy: 'Bill faster and see stock in real time — custom POS with inventory, reports and thermal receipts.',
+    tags: ['Flask', 'Inventory', 'Reports'],
+  },
+  'whatsapp-ai-automation': {
+    copy: 'Reduce missed leads — automatic capture, follow-up and routing straight to your phone.',
+    tags: ['n8n', 'Gemini / GPT', 'Lead Capture'],
+  },
+};
 ---
 
 <PageLayout metadata={metadata} structuredData={jsonLd(localBusiness(), faqPage())}>
-  <section class="vgl-container" style="padding-block: clamp(48px, 7vw, 96px) clamp(56px, 7vw, 96px)">
-    <h1
-      style="font-family: var(--font-heading); font-weight: 500; font-size: clamp(36px, 5vw, 68px); line-height: 1.08; letter-spacing: -0.015em; margin: 0 0 0 -0.06em"
-    >
-      <span style="display: block">Websites, POS &</span>
-      <span style="display: block">WhatsApp automation</span>
-      <span style="display: block; color: var(--color-vgl-accent-300)">for Tamil Nadu businesses.</span>
-    </h1>
-    <p
-      style="font-size: 17px; line-height: 1.65; max-width: 58ch; margin: 28px 0 0; color: var(--color-vgl-neutral-200)"
-    >
-      Vignesh Growth Lab builds fast, conversion-focused websites, custom software, retail POS systems and WhatsApp AI
-      workflows for gyms, boutiques and retail stores. Average delivery around 2 weeks — and you own 100% of it.
-    </p>
-    <div style="display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px">
-      <WhatsAppCta label="Talk to Vignesh on WhatsApp" iconSize={19} />
-      <a class="vgl-btn vgl-btn-ghost" href="/projects">View our work</a>
+  <div class="vgl-home-bg" aria-hidden="true"></div>
+
+  <HeroHome />
+
+  <section aria-label="Business credentials" class="vgl-container vgl-sec-trust">
+    <TrustStrip />
+  </section>
+
+  <section id="clients" class="vgl-container vgl-sec">
+    <SectionHeading kicker="Clients" title="Real Tamil Nadu businesses. Real results." />
+    <div class="vgl-clients-grid">
+      <TestimonialCard
+        variant="video"
+        placeholderName="Rani Sarees & Boutique"
+        videoLabel="Video testimonial from the owner of Rani Sarees and Boutique, Pollachi"
+        caption="The owner of Rani Sarees & Boutique on working with Vignesh Growth Lab."
+        captionMeta="Video testimonial · Rani Sarees & Boutique, Pollachi"
+      />
+      <TestimonialCard
+        variant="image"
+        imageSrc="/images/nextgen-testimonial.webp"
+        imageAlt="WhatsApp review from Team NextGen Toys recommending Vignesh Growth Lab for website development"
+        caption="“Communication was smooth throughout the project, and the final website matched our expectations.”"
+        captionMeta="Written review · Team NextGen Toys, Coimbatore"
+      />
     </div>
   </section>
+
+  <section id="services" class="vgl-container vgl-sec vgl-sec-services">
+    <SectionHeading kicker="Services" title="Everything a local business needs to grow online" />
+    <p class="vgl-viewall"><a href="/services">View all services →</a></p>
+    <div class="vgl-services-grid">
+      {
+        SERVICES.map((service) => (
+          <ServiceCard
+            slug={service.slug as 'website-development'}
+            title={service.serviceName}
+            copy={serviceCardCopy[service.slug].copy}
+            tags={serviceCardCopy[service.slug].tags}
+            href={service.pageRoute}
+          />
+        ))
+      }
+    </div>
+    <CtaBand
+      lead="Not sure what your business needs?"
+      leadMuted="Book a free 30-minute strategy call."
+      ctaLabel="Book a free call"
+    />
+  </section>
+
+  <section class="vgl-container vgl-sec">
+    <SectionHeading
+      cyan
+      kicker="Our stack"
+      title="Technologies We Use"
+      sub="No guesswork. Industry-standard tools that your business can rely on long-term."
+    />
+    <div class="vgl-tech-grid">
+      {TECHNOLOGY_GROUPS.map((group) => <TechnologyGroup group={group} />)}
+    </div>
+  </section>
+
+  <section id="projects" class="vgl-container vgl-sec vgl-sec-projects">
+    <SectionHeading kicker="Selected work" title="Featured projects" />
+    <p class="vgl-viewall"><a href="/projects">View all projects →</a></p>
+
+    <article class="vgl-card vgl-lift vgl-featured">
+      <div class="vgl-featured-media">
+        <DeviceMockup tilt="right" featured>
+          <ImageFrame label={nextgen.cardImageAlt} />
+        </DeviceMockup>
+        <ResultBadge text={nextgen.resultBadge} floating class="vgl-featured-badge" />
+      </div>
+      <div class="vgl-featured-body">
+        <div class="vgl-featured-tags">
+          <span class="vgl-tag vgl-tag-accent">{nextgen.projectType}</span>
+          <span class="vgl-tag vgl-tag-neutral">Coimbatore</span>
+          <span class="vgl-tag vgl-tag-tech">{nextgen.technology}</span>
+        </div>
+        <h3>{nextgen.client}</h3>
+        <p>
+          Full RC-car and drone catalogue with 650+ Google Reviews embedded. First online sale within 72 hours of
+          launch.
+        </p>
+        <div class="vgl-featured-ctas">
+          <a href={nextgen.pageRoute} class="vgl-btn vgl-btn-primary">View case study</a>
+          <a href={nextgen.liveUrl} target="_blank" rel="noopener noreferrer" class="vgl-btn vgl-btn-ghost">
+            Live site
+            <Icon name="ph:arrow-up-right" style="font-size: 15px" aria-hidden="true" />
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <div class="vgl-projects-grid">
+      {
+        gridProjects.map((project, i) => (
+          <ProjectCard project={project} tilt={i % 2 === 0 ? 'left' : 'right'} cardCopy={homeCardCopy[project.slug]} />
+        ))
+      }
+    </div>
+
+    <div class="vgl-more-grid">
+      {
+        MORE_PROJECTS.map((item) => (
+          <article class="vgl-more-card">
+            <div class="vgl-more-tags">
+              <span class="vgl-tag vgl-tag-neutral">{item.type}</span>
+              <span class="vgl-tag vgl-tag-neutral">{item.location}</span>
+            </div>
+            <h3>{item.name}</h3>
+            <p>{item.copy}</p>
+          </article>
+        ))
+      }
+    </div>
+
+    <CtaBand
+      lead="Have a similar project in mind?"
+      leadMuted="Talk directly with Vignesh."
+      ctaLabel="Start on WhatsApp"
+    />
+  </section>
+
+  <StatsGrid />
+
+  <section id="why-vgl" class="vgl-container vgl-sec">
+    <SectionHeading kicker="Why VGL" title="Why not just use Wix or hire a big agency?" />
+    <ComparisonTable />
+  </section>
+
+  <section id="about" class="vgl-container vgl-sec">
+    <div class="vgl-founder-grid">
+      <div class="vgl-founder-photo">
+        <div class="vgl-founder-frame" aria-hidden="true"></div>
+        <div class="vgl-founder-img">
+          <img
+            src={FOUNDER.photo}
+            alt={FOUNDER.photoAlt}
+            width={FOUNDER.photoWidth}
+            height={FOUNDER.photoHeight}
+            loading="lazy"
+          />
+        </div>
+        <span class="vgl-founder-badge">
+          <Icon name="ph:whatsapp-logo" style="font-size: 15px; color: var(--color-vgl-wa-text)" aria-hidden="true" />
+          Direct founder support
+        </span>
+      </div>
+      <div>
+        <SectionHeading kicker="About the founder" title="Vignesh Prabhu" />
+        <p class="vgl-founder-bio">{FOUNDER.bio}</p>
+        <p class="vgl-founder-bio-secondary">{FOUNDER.bioSecondary}</p>
+        <p class="vgl-viewall" style="margin-top: 10px"><a href="/about">Read more about Vignesh →</a></p>
+        <div class="vgl-founder-links">
+          <a class="vgl-btn vgl-btn-primary" href={DOCUMENTS.resume} target="_blank" rel="noopener noreferrer">
+            <Icon name="ph:read-cv-logo" style="font-size: 17px" aria-hidden="true" />
+            View Resume
+          </a>
+          <a class="vgl-btn vgl-btn-ghost" href={SOCIALS.linkedin} target="_blank" rel="noopener noreferrer">
+            <Icon name="ph:linkedin-logo" style="font-size: 17px" aria-hidden="true" />
+            LinkedIn
+          </a>
+          <a class="vgl-btn vgl-btn-ghost" href={SOCIALS.github} target="_blank" rel="noopener noreferrer">
+            <Icon name="ph:github-logo" style="font-size: 17px" aria-hidden="true" />
+            GitHub
+          </a>
+        </div>
+        <h3 class="vgl-cred-heading">Verified credentials</h3>
+        <div class="vgl-cred-grid">
+          {
+            CREDENTIALS.map((cred) => (
+              <a
+                href={cred.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class:list={['vgl-cred-card', { 'vgl-cred-highlight': cred.highlight }]}
+              >
+                <Icon
+                  name={cred.icon}
+                  style={`font-size: 20px; color: ${cred.highlight ? 'var(--color-vgl-accent)' : 'var(--color-vgl-cyan)'}`}
+                  aria-hidden="true"
+                />
+                <span class="vgl-cred-title">{cred.title}</span>
+                <span class="vgl-cred-link">
+                  {cred.linkLabel}
+                  <Icon name="ph:arrow-up-right" style="font-size: 12px" aria-hidden="true" />
+                </span>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="vgl-container vgl-sec">
+    <SectionHeading
+      kicker="Our Process"
+      title="What Happens After You Contact Us"
+      sub="No confusion. No waiting. Here's exactly what our process looks like."
+    />
+    <ProcessSteps steps={PROCESS_STEPS} />
+  </section>
+
+  <section id="faq" class="vgl-container vgl-sec vgl-sec-faq">
+    <SectionHeading kicker="FAQ" title="Questions Tamil Nadu business owners ask us" class="vgl-faq-heading" />
+    <FaqAccordion />
+  </section>
+
+  <section id="contact" class="vgl-container vgl-sec vgl-sec-contact">
+    <div class="vgl-contact-grid">
+      <div>
+        <h2 class="vgl-contact-title">🚀 Ready to Stop Losing Customers Online?</h2>
+        <p class="vgl-contact-sub">
+          Let's build something that actually works for your Tamil Nadu business. First call is free. No obligation.
+        </p>
+        <WhatsAppCta
+          label="Talk to Vignesh → WhatsApp Us Now"
+          message="Hi Vignesh, I'm ready to stop losing customers online. Let's talk!"
+          iconSize={19}
+          class="vgl-contact-wa"
+        />
+        <div class="vgl-contact-info">
+          <a href={CONTACT.phoneHref}>
+            <Icon name="ph:phone" style="font-size: 17px; color: var(--color-vgl-accent)" aria-hidden="true" />
+            {CONTACT.phoneDisplay}
+          </a>
+          <a href={`mailto:${CONTACT.email}`} style="word-break: break-all">
+            <Icon
+              name="ph:envelope-simple"
+              style="font-size: 17px; color: var(--color-vgl-accent)"
+              aria-hidden="true"
+            />
+            {CONTACT.email}
+          </a>
+          <span>
+            <Icon name="ph:map-pin" style="font-size: 17px; color: var(--color-vgl-accent)" aria-hidden="true" />
+            {CONTACT.location}
+          </span>
+        </div>
+        <p class="vgl-viewall" style="margin-top: 16px"><a href="/contact">Prefer a full contact page? →</a></p>
+      </div>
+      <ContactForm
+        heading="Let's Discuss Your Project"
+        intro="Fill this in 60 seconds. Vignesh personally replies within 24 hours."
+        whatsappAlt
+      />
+    </div>
+  </section>
+
+  <RevealMotion />
 </PageLayout>
+
+<style>
+  /* Homepage-only background texture: faint 84px grid + bottom-left shade
+     (the shared violet bloom is global) */
+  .vgl-home-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(1100px 800px at -10% 100%, color-mix(in srgb, black 30%, transparent), transparent 55%),
+      repeating-linear-gradient(
+        0deg,
+        color-mix(in srgb, var(--color-vgl-neutral-500) 4%, transparent) 0 1px,
+        transparent 1px 84px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        color-mix(in srgb, var(--color-vgl-neutral-500) 4%, transparent) 0 1px,
+        transparent 1px 84px
+      );
+  }
+
+  .vgl-sec {
+    padding-top: clamp(52px, 7vw, 88px);
+    scroll-margin-top: 84px;
+  }
+
+  .vgl-sec-trust {
+    padding-top: 48px;
+  }
+
+  .vgl-sec-services {
+    background: radial-gradient(
+      720px 300px at 6% 0%,
+      color-mix(in srgb, var(--color-vgl-cyan) 5%, transparent),
+      transparent 72%
+    );
+  }
+
+  .vgl-sec-projects {
+    background: radial-gradient(
+      720px 320px at 94% 0%,
+      color-mix(in srgb, var(--color-vgl-accent-900) 40%, transparent),
+      transparent 72%
+    );
+  }
+
+  .vgl-viewall {
+    margin: 14px 0 0;
+  }
+
+  .vgl-viewall a {
+    font-size: 14px;
+    color: var(--color-vgl-accent-300);
+    text-decoration: none;
+  }
+
+  .vgl-viewall a:hover {
+    color: var(--color-vgl-accent-200);
+  }
+
+  .vgl-clients-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: 18px;
+    margin-top: 36px;
+    align-items: start;
+  }
+
+  .vgl-services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 270px), 1fr));
+    gap: 18px;
+    margin-top: 36px;
+  }
+
+  .vgl-tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    gap: 16px;
+    margin-top: 32px;
+  }
+
+  /* Featured project (NextGen) */
+  .vgl-featured {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    overflow: hidden;
+    margin-top: 36px;
+  }
+
+  .vgl-featured-media {
+    position: relative;
+    padding: clamp(16px, 2.4vw, 26px);
+    display: flex;
+    align-items: center;
+  }
+
+  .vgl-featured-media > :global(:first-child) {
+    width: 100%;
+  }
+
+  .vgl-featured :global(.vgl-featured-badge) {
+    right: clamp(6px, 1.2vw, 14px);
+    bottom: clamp(6px, 1.2vw, 14px);
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .vgl-featured-body {
+    padding: clamp(24px, 3vw, 34px);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .vgl-featured-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .vgl-featured-body h3 {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 24px;
+    margin: 0;
+  }
+
+  .vgl-featured-body > p {
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--color-vgl-neutral-300);
+  }
+
+  .vgl-featured-ctas {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: auto;
+    padding-top: 10px;
+  }
+
+  .vgl-projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: 18px;
+    margin-top: 18px;
+  }
+
+  .vgl-more-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    gap: 14px;
+    margin-top: 18px;
+  }
+
+  .vgl-more-card {
+    padding: 20px 22px;
+    border: 1px solid var(--color-vgl-neutral-700);
+    border-radius: var(--radius-vgl-md);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .vgl-more-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .vgl-more-card h3 {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 16.5px;
+    margin: 0;
+  }
+
+  .vgl-more-card p {
+    margin: 0;
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--color-vgl-neutral-300);
+  }
+
+  /* Founder */
+  .vgl-founder-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: 40px clamp(28px, 5vw, 80px);
+    align-items: start;
+  }
+
+  .vgl-founder-photo {
+    max-width: 420px;
+    width: 100%;
+    justify-self: center;
+    position: relative;
+  }
+
+  .vgl-founder-frame {
+    position: absolute;
+    inset: 18px -10px -10px 18px;
+    border: 1px solid var(--color-vgl-accent-800);
+    border-radius: var(--radius-vgl-lg);
+  }
+
+  .vgl-founder-img {
+    position: relative;
+    mix-blend-mode: lighten;
+  }
+
+  .vgl-founder-img img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--radius-vgl-lg);
+  }
+
+  .vgl-founder-badge {
+    position: absolute;
+    left: 14px;
+    bottom: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 13px;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--color-vgl-wa) 40%, var(--color-vgl-neutral-600));
+    background: color-mix(in srgb, var(--color-vgl-bg) 82%, transparent);
+    backdrop-filter: blur(8px);
+    font-size: 12.5px;
+    color: var(--color-vgl-neutral-200);
+  }
+
+  .vgl-founder-bio {
+    font-size: 15.5px;
+    line-height: 1.7;
+    color: var(--color-vgl-neutral-200);
+    margin: 18px 0 0;
+    max-width: 54ch;
+  }
+
+  .vgl-founder-bio-secondary {
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: var(--color-vgl-neutral-300);
+    margin: 14px 0 0;
+    max-width: 54ch;
+  }
+
+  .vgl-founder-links {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 22px;
+  }
+
+  .vgl-cred-heading {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 18px;
+    margin: 36px 0 0;
+  }
+
+  .vgl-cred-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr));
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .vgl-cred-card {
+    padding: 16px 18px;
+    border: 1px solid var(--color-vgl-neutral-700);
+    border-radius: var(--radius-vgl-md);
+    text-decoration: none;
+    color: var(--color-vgl-text);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: border-color 0.2s ease;
+  }
+
+  .vgl-cred-card:hover {
+    border-color: var(--color-vgl-accent-700);
+  }
+
+  .vgl-cred-highlight {
+    border-color: var(--color-vgl-accent-700);
+  }
+
+  .vgl-cred-highlight:hover {
+    border-color: var(--color-vgl-accent);
+  }
+
+  .vgl-cred-title {
+    font-size: 14px;
+    font-family: var(--font-heading);
+    font-weight: 500;
+  }
+
+  .vgl-cred-link {
+    font-size: 12px;
+    color: var(--color-vgl-neutral-400);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  /* FAQ */
+  .vgl-sec-faq {
+    max-width: 900px;
+  }
+
+  .vgl-sec-faq :global(.vgl-faq-heading) {
+    margin-bottom: 28px;
+  }
+
+  /* Final CTA + contact */
+  .vgl-sec-contact {
+    padding-bottom: clamp(56px, 7vw, 96px);
+  }
+
+  .vgl-contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: 48px clamp(32px, 5vw, 88px);
+    align-items: start;
+  }
+
+  .vgl-contact-title {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: clamp(28px, 3.4vw, 44px);
+    line-height: 1.12;
+    letter-spacing: -0.012em;
+    margin: 0;
+  }
+
+  .vgl-contact-sub {
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--color-vgl-neutral-200);
+    margin: 18px 0 0;
+    max-width: 52ch;
+  }
+
+  .vgl-contact-grid :global(.vgl-contact-wa) {
+    min-height: 46px;
+    padding-inline: 22px;
+    margin-top: 26px;
+  }
+
+  .vgl-contact-info {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 14.5px;
+  }
+
+  .vgl-contact-info > a,
+  .vgl-contact-info > span {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--color-vgl-neutral-300);
+    text-decoration: none;
+  }
+
+  .vgl-contact-info > a:hover {
+    color: var(--color-vgl-accent-200);
+  }
+</style>

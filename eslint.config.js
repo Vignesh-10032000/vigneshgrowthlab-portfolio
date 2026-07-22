@@ -54,7 +54,13 @@ export default [
     },
   },
   {
-    files: ['src/components/common/Analytics.astro', 'src/components/common/Analytics.astro/**'],
+    files: [
+      'src/components/common/Analytics.astro',
+      'src/components/common/Analytics.astro/**',
+      // Formspree queue shim requires `arguments` and pre-init `var` semantics
+      'src/components/vgl/ContactForm.astro',
+      'src/components/vgl/ContactForm.astro/**',
+    ],
     rules: {
       'prefer-rest-params': 'off',
       'no-var': 'off',

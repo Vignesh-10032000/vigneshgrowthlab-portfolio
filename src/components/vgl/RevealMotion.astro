@@ -1,0 +1,73 @@
+---
+/**
+ * Motion controller (spec: Hero Explorations 1f).
+ * - Hero entrance: staggered fade-rise on load (inline transition-delays).
+ * - Below-fold sections: fade-rise at 12% visibility, once.
+ * - Stats counters: count up 900ms ease-out when the band enters view.
+ * - prefers-reduced-motion: everything static, counters show final values.
+ */
+---
+
+<script>
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  let counted = false;
+  const runCounters = (scope: Element | null) => {
+    if (!scope || counted) return;
+    counted = true;
+    if (reduced) return;
+    scope.querySelectorAll('.vgl-num').forEach((p) => {
+      const m = (p.textContent || '').match(/^(\d+)([\s\S]*)$/);
+      if (!m) return;
+      const n = +m[1];
+      const suffix = m[2];
+      const t0 = performance.now();
+      const dur = 900;
+      const step = (t: number) => {
+        const k = Math.min(1, (t - t0) / dur);
+        p.textContent = Math.round(n * k * (2 - k)) + suffix;
+        if (k < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    });
+  };
+
+  const all = () => document.querySelectorAll('[data-reveal]');
+
+  if (reduced) {
+    all().forEach((el) => el.classList.add('vgl-in'));
+    runCounters(document.querySelector('[data-stats]'));
+  } else {
+    // Hero entrance (staggered via inline transition-delay)
+    requestAnimationFrame(() =>
+      requestAnimationFrame(() => {
+        document.querySelectorAll('.vgl-hero [data-reveal], #vgl-hero-viz').forEach((el) => el.classList.add('vgl-in'));
+      })
+    );
+
+    // Tag below-fold sections for scroll reveal
+    document.querySelectorAll('main > section').forEach((section) => {
+      if (section.getBoundingClientRect().top > window.innerHeight * 0.85) {
+        section.setAttribute('data-reveal', '');
+      }
+    });
+
+    const io = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('vgl-in');
+          if (entry.target.hasAttribute('data-stats')) runCounters(entry.target);
+          io.unobserve(entry.target);
+        }),
+      { threshold: 0.12 }
+    );
+
+    all().forEach((el) => {
+      if (!el.classList.contains('vgl-in')) io.observe(el);
+    });
+
+    const stats = document.querySelector('[data-stats]');
+    if (stats && !stats.hasAttribute('data-reveal')) io.observe(stats);
+  }
+</script>
