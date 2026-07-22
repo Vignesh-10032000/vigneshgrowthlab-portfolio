@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>[per-route seoTitle from service-routes.js]</title>
+  <meta name="description" content="[per-route seoDescription from service-routes.js]">
+  <link rel="canonical" href="[per-route canonicalUrl from service-routes.js — derives from siteUrl]">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="[per-route seoTitle from service-routes.js]">
+  <meta property="og:description" content="[per-route seoDescription from service-routes.js]">
+  <meta property="og:image" content="[per-route ogImage — default {{siteUrl}}/images/og-cover.png]">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="[per-route seoTitle from service-routes.js]">
+  <meta name="twitter:description" content="[per-route seoDescription from service-routes.js]">
+  <meta name="twitter:image" content="[per-route ogImage — default {{siteUrl}}/images/og-cover.png]">
+  <link rel="stylesheet" href="_ds/nocturne-5d41d6fe-ed19-4b00-91a0-08ad62f95b6b/styles.css">
+  <script src="_ds/nocturne-5d41d6fe-ed19-4b00-91a0-08ad62f95b6b/_ds_bundle.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+  <script src="assets/image-slot.js"></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Service","name":"[per-route serviceName]","provider":{"@type":"ProfessionalService","name":"Vignesh Growth Lab"},"areaServed":"Tamil Nadu"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"{{siteUrl}}/"},{"@type":"ListItem","position":2,"name":"Services","item":"{{siteUrl}}/services"},{"@type":"ListItem","position":3,"name":"[per-route serviceName]"}]}]}</script>
+  <style>
+    html{scroll-behavior:smooth}
+    @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+    body{margin:0;color:var(--color-text);text-wrap:pretty;background:
+      radial-gradient(1100px 640px at 80% -140px, color-mix(in srgb, var(--color-accent-900) 70%, transparent), transparent 60%),
+      var(--color-bg);}
+    a{color:var(--color-accent-300);} a:hover{color:var(--color-accent-200);}
+  </style>
+</helmet>
+
+<dc-import name="VGLNav" active="services" style="position:sticky;top:0;z-index:90" hint-size="100%,64px"></dc-import>
+
+<main id="main-content">
+<section data-screen-label="Service hero" style="max-width:1200px;margin:0 auto;padding:clamp(40px,6vw,72px) clamp(20px,5vw,72px) 0">
+  <nav aria-label="Breadcrumb" style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--color-neutral-400);margin-bottom:28px;flex-wrap:wrap">
+    <a href="Home.dc.html" data-route="/" style="color:var(--color-neutral-400);text-decoration:none;padding:4px 0" style-hover="color:var(--color-accent)">Home</a><i class="ph ph-caret-right" style="font-size:11px" aria-hidden="true"></i>
+    <a href="Services.dc.html" data-route="/services" style="color:var(--color-neutral-400);text-decoration:none;padding:4px 0" style-hover="color:var(--color-accent)">Services</a><i class="ph ph-caret-right" style="font-size:11px" aria-hidden="true"></i>
+    <span aria-current="page" style="color:var(--color-neutral-200)">{{ serviceName }}</span>
+  </nav>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:40px clamp(28px,5vw,80px);align-items:center">
+    <div>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"><span style="width:44px;height:1px;background:var(--color-accent)"></span><span style="font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-accent)">Service</span></div>
+      <h1 style="font-family:var(--font-heading);font-weight:500;font-size:clamp(32px,4.4vw,56px);line-height:1.1;letter-spacing:-0.014em;margin:0;margin-left:-0.04em">{{ serviceName }}</h1>
+      <p style="font-size:16.5px;line-height:1.65;color:var(--color-neutral-200);margin:20px 0 0;max-width:54ch">{{ heroStatement }}</p>
+      <p style="font-size:14.5px;line-height:1.65;color:var(--color-neutral-300);margin:12px 0 0;max-width:54ch;display:flex;align-items:baseline;gap:10px"><i class="ph ph-target" style="color:#7fd4e0;font-size:16px;position:relative;top:2px" aria-hidden="true"></i><span><strong style="font-weight:500;color:var(--color-neutral-200)">Outcome:</strong> {{ outcome }}</span></p>
+      <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-top:26px">
+        <a class="btn" href="{{ waLink }}" target="_blank" rel="noopener noreferrer" style="border:1px solid #25D366;color:#3ddc74;text-decoration:none;display:inline-flex;align-items:center;gap:10px;min-height:46px;padding-inline:20px" style-hover="background:rgba(37,211,102,0.1)"><i class="ph ph-whatsapp-logo" style="font-size:18px" aria-hidden="true"></i>Get a free quote</a>
+        <a class="btn btn-ghost" href="#included" style="text-decoration:none;min-height:46px;display:inline-flex;align-items:center;padding-inline:20px">What's included</a>
+        <sc-if value="{{ hasPrice }}" hint-placeholder-val="{{ true }}"><span class="tag tag-accent" style="font-feature-settings:'tnum' 1">{{ startingPrice }}</span></sc-if>
+      </div>
+    </div>
+    <div style="aspect-ratio:16/11;max-width:520px;width:100%;justify-self:center">
+      <sc-if value="{{ hasHeroImage }}" hint-placeholder-val="{{ false }}"><img src="{{ heroImage }}" alt="{{ heroImageAlt }}" style="width:100%;height:100%;object-fit:cover;border-radius:14px;display:block"></sc-if>
+      <sc-if value="{{ noHeroImage }}" hint-placeholder-val="{{ true }}"><image-slot id="service-hero" shape="rounded" radius="14" placeholder="{{ serviceName }}"></image-slot></sc-if>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Proof strip" aria-label="Proof" style="max-width:1200px;margin:0 auto;padding:clamp(36px,5vw,52px) clamp(20px,5vw,72px) 0">
+  <div style="border:1px solid var(--color-neutral-700);border-radius:var(--radius-md);padding:16px clamp(16px,2.5vw,24px);display:flex;flex-wrap:wrap;gap:12px clamp(18px,2.5vw,32px);align-items:center;background:color-mix(in srgb, var(--color-neutral-900) 40%, transparent)">
+    <span style="display:flex;align-items:center;gap:9px;font-size:14px;color:var(--color-accent-200)"><i class="ph ph-trend-up" style="font-size:17px" aria-hidden="true"></i>{{ quickProof }}</span>
+    <span style="display:flex;align-items:center;gap:9px;font-size:13.5px;color:var(--color-neutral-300)"><i class="ph ph-seal-check" style="font-size:16px;color:var(--color-accent)" aria-hidden="true"></i>MSME Registered</span>
+    <span style="display:flex;align-items:center;gap:9px;font-size:13.5px;color:var(--color-neutral-300)"><i class="ph ph-whatsapp-logo" style="font-size:16px;color:#3ddc74" aria-hidden="true"></i>Direct founder support</span>
+  </div>
+</section>
+
+<section data-screen-label="Who it's for" style="max-width:1200px;margin:0 auto;padding:clamp(52px,7vw,88px) clamp(20px,5vw,72px) 0">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"><span style="width:44px;height:1px;background:var(--color-accent)"></span><span style="font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-accent)">Who it's for</span></div>
+  <h2 style="font-family:var(--font-heading);font-weight:500;font-size:clamp(24px,2.8vw,34px);line-height:1.15;margin:0">Built for businesses like yours</h2>
+  <p style="margin:14px 0 0;font-size:15.5px;line-height:1.7;color:var(--color-neutral-200);max-width:58ch">{{ whoItIsFor }}</p>
+</section>
+
+<section id="included" data-screen-label="What's included" style="max-width:1200px;margin:0 auto;padding:clamp(52px,7vw,88px) clamp(20px,5vw,72px) 0;scroll-margin-top:84px">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"><span style="width:44px;height:1px;background:var(--color-accent)"></span><span style="font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-accent)">What's included</span></div>
+  <h2 style="font-family:var(--font-heading);font-weight:500;font-size:clamp(24px,2.8vw,34px);line-height:1.15;margin:0">Everything this service ships with</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:16px;margin-top:32px">
+    <sc-for list="{{ features }}" as="f" hint-placeholder-count="6">
+      <div class="card" style="padding:22px;display:flex;flex-direction:column;gap:10px">
+        <i class="{{ f.icon }}" style="font-size:22px;color:#7fd4e0" aria-hidden="true"></i>
+        <span style="font-family:var(--font-heading);font-weight:500;font-size:16px">{{ f.title }}</span>
+        <span style="font-size:13.5px;line-height:1.6;color:var(--color-neutral-300)">{{ f.copy }}</span>
+      </div>
+    </sc-for>
+  </div>
+  <div style="margin-top:24px;padding:18px 22px;border:1px solid var(--color-neutral-700);border-radius:var(--radius-md);display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center">
+    <span style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-neutral-400)">Technologies</span>
+    <div style="display:flex;flex-wrap:wrap;gap:7px">
+      <sc-for list="{{ technologies }}" as="t" hint-placeholder-count="5"><span class="tag tag-outline" style="color:#7fd4e0;border-color:color-mix(in srgb, #7fd4e0 40%, transparent)">{{ t }}</span></sc-for>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Related project" style="max-width:1200px;margin:0 auto;padding:clamp(52px,7vw,88px) clamp(20px,5vw,72px) 0">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"><span style="width:44px;height:1px;background:var(--color-accent)"></span><span style="font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-accent)">Proof</span></div>
+  <h2 style="font-family:var(--font-heading);font-weight:500;font-size:clamp(24px,2.8vw,34px);line-height:1.15;margin:0 0 32px">A project built with this service</h2>
+  <div class="card" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));overflow:hidden;align-items:stretch">
+    <div style="min-height:240px"><image-slot id="service-related-proj" shape="rect" placeholder="{{ relatedName }}"></image-slot></div>
+    <div style="padding:28px;display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;gap:6px;flex-wrap:wrap"><span class="tag tag-accent">{{ relatedType }}</span><span class="tag tag-neutral">{{ relatedLocation }}</span></div>
+      <h3 style="font-family:var(--font-heading);font-weight:500;font-size:22px;margin:0">{{ relatedName }}</h3>
+      <p style="margin:0;font-size:14.5px;line-height:1.65;color:var(--color-neutral-300)">{{ relatedCopy }}</p>
+      <p style="margin:0;font-size:14.5px;color:var(--color-accent-200);display:flex;align-items:center;gap:8px"><i class="ph ph-trend-up" style="font-size:16px" aria-hidden="true"></i>{{ relatedResult }}</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:auto;padding-top:12px">
+        <a href="Case Study Template.dc.html" data-route="{{ relatedCaseRoute }}" class="btn btn-primary" style="text-decoration:none">Read the case study</a>
+        <sc-if value="{{ hasRelatedUrl }}" hint-placeholder-val="{{ true }}">
+          <a href="{{ relatedUrl }}" target="_blank" rel="noopener noreferrer" class="btn btn-ghost" style="text-decoration:none;display:inline-flex;align-items:center;gap:8px">Live site<i class="ph ph-arrow-up-right" style="font-size:15px" aria-hidden="true"></i></a>
+        </sc-if>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Service process" style="max-width:1200px;margin:0 auto;padding:clamp(52px,7vw,88px) clamp(20px,5vw,72px) 0">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"><span style="width:44px;height:1px;background:var(--color-accent)"></span><span style="font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-accent)">Our Process</span></div>
+  <h2 style="font-family:var(--font-heading);font-weight:500;font-size:clamp(24px,2.8vw,34px);line-height:1.15;margin:0">What happens after you contact us</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:14px;margin-top:32px">
+    <div style="padding:22px;border:1px solid var(--color-neutral-700);border-radius:var(--radius-md)"><p style="font-family:var(--font-heading);font-weight:500;font-size:14px;color:var(--color-accent);margin:0;font-feature-settings:'tnum' 1">01</p><p style="font-family:var(--font-heading);font-weight:500;font-size:16px;margin:10px 0 6px">Free 30-min strategy call</p><p style="margin:0;font-size:13.5px;line-height:1.6;color:var(--color-neutral-300)">Honest advice, no sales pitch.</p></div>
+    <div style="padding:22px;border:1px solid var(--color-neutral-700);border-radius:var(--radius-md)"><p style="font-family:var(--font-heading);font-weight:500;font-size:14px;color:var(--color-accent);margin:0;font-feature-settings:'tnum' 1">02</p><p style="font-family:var(--font-heading);font-weight:500;font-size:16px;margin:10px 0 6px">Proposal in 24 hours</p><p style="margin:0;font-size:13.5px;line-height:1.6;color:var(--color-neutral-300)">Fixed price, no hidden costs.</p></div>
+    <div style="padding:22px;border:1px solid var(--color-neutral-700);border-radius:var(--radius-md)"><p style="font-family:var(--font-heading);font-weight:500;font-size:14px;color:var(--color-accent);margin:0;font-feature-settings:'tnum' 1">03</p><p style="font-family:var(--font-heading);font-weight:500;font-size:16px;margin:10px 0 6px">Build starts within 1 week</p><p style="margin:0;font-size:13.5px;line-height:1.6;color:var(--color-neutral-300)">Average delivery ≈ 2 weeks; typical range 2–4 weeks.</p></div>
+    <div style="padding:22px;border:1px solid var(--color-neutral-700);border-radius:var(--radius-md)"><p style="font-family:var(--font-heading);font-weight:500;font-size:14px;color:var(--color-accent);margin:0;font-feature-settings:'tnum' 1">04</p><p style="font-family:var(--font-heading);font-weight:500;font-size:16px;margin:10px 0 6px">You own everything</p><p style="margin:0;font-size:13.5px;line-height:1.6;color:var(--color-neutral-300)">Code, hosting and data — 100% yours.</p></div>
+  </div>
+</section>
+
+<section data-screen-label="Service CTA" style="max-width:1200px;margin:0 auto;padding:clamp(52px,7vw,88px) clamp(20px,5vw,72px) clamp(52px,7vw,88px)">
+  <div style="padding:clamp(28px,4vw,48px);border-radius:var(--radius-lg);background:radial-gradient(700px 340px at 85% -30%, color-mix(in srgb, var(--color-section-glow) 70%, transparent), transparent 64%), var(--color-section);display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between">
+    <div style="max-width:56ch">
+      <h2 style="font-family:var(--font-heading);font-weight:500;font-size:clamp(22px,2.6vw,30px);margin:0">{{ ctaHeading }}</h2>
+      <p style="margin:10px 0 0;font-size:15px;line-height:1.65;color:color-mix(in srgb, var(--color-text) 78%, transparent)">First call is free. Custom proposal within 24 hours.</p>
+    </div>
+    <a class="btn" href="{{ waLink }}" target="_blank" rel="noopener noreferrer" style="border:1px solid #25D366;color:#3ddc74;text-decoration:none;display:inline-flex;align-items:center;gap:10px;min-height:46px;padding-inline:22px" style-hover="background:rgba(37,211,102,0.12)"><i class="ph ph-whatsapp-logo" style="font-size:19px" aria-hidden="true"></i>Talk to Vignesh on WhatsApp</a>
+  </div>
+</section>
+</main>
+
+<dc-import name="VGLFooter" hint-size="100%,420px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;route&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;website-development&quot;,&quot;custom-development&quot;,&quot;retail-pos-solutions&quot;,&quot;whatsapp-ai-automation&quot;],&quot;default&quot;:&quot;website-development&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Route&quot;},&quot;serviceName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Overrides&quot;},&quot;heroStatement&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Overrides&quot;},&quot;outcome&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Overrides&quot;},&quot;whoItIsFor&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Overrides&quot;},&quot;quickProof&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Overrides&quot;},&quot;startingPrice&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Overrides&quot;},&quot;whatsappMessage&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Overrides&quot;},&quot;ctaHeading&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Overrides&quot;},&quot;heroImage&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Media&quot;},&quot;heroImageAlt&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Media&quot;},&quot;features&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;{icon:string,title:string,copy:string}[]&quot;,&quot;section&quot;:&quot;Data&quot;},&quot;technologies&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;string[]&quot;,&quot;section&quot;:&quot;Data&quot;}}">
+class Component extends DCLogic {
+  state = { routes: null };
+  componentDidMount() {
+    import('./service-routes.js').then(m => this.setState({ routes: m.SERVICE_ROUTES })).catch(() => {});
+  }
+  renderVals() {
+    const p = this.props;
+    const slug = p.route ?? 'website-development';
+    const cfg = (this.state.routes && this.state.routes[slug]) || (this.state.routes && this.state.routes['website-development']) || {};
+    const pick = (key, fallback) => p[key] ?? cfg[key] ?? fallback;
+    const serviceName = pick('serviceName', 'Website Development');
+    const startingPrice = pick('startingPrice', '');
+    const heroImage = pick('heroImage', '');
+    const rel = cfg.related || {};
+    const relatedUrl = p.relatedUrl ?? rel.liveUrl ?? '';
+    const waMsg = p.whatsappMessage ?? cfg.waMessage ?? ("Hi Vignesh, I'm interested in " + serviceName.toLowerCase() + '.');
+    return {
+      serviceName,
+      heroStatement: pick('heroStatement', 'Fast, SEO-ready business and e-commerce websites that show up on Google, load quickly on mobile, and turn visitors into WhatsApp enquiries.'),
+      outcome: pick('outcome', 'More enquiries from Google and social — without paying monthly platform fees.'),
+      whoItIsFor: pick('whoItIsFor', 'Boutiques, retail stores and local brands that need to be found — and ordered from — online.'),
+      quickProof: pick('quickProof', 'NextGen Toys recorded its first online sale within 72 hours of launch.'),
+      hasPrice: !!startingPrice,
+      startingPrice,
+      hasHeroImage: !!heroImage,
+      noHeroImage: !heroImage,
+      heroImage,
+      heroImageAlt: pick('heroImageAlt', serviceName + ' preview'),
+      features: p.features ?? cfg.features ?? [],
+      technologies: p.technologies ?? cfg.technologies ?? [],
+      relatedName: p.relatedName ?? rel.name ?? 'NextGen Toys',
+      relatedType: p.relatedType ?? rel.type ?? 'E-Commerce Store',
+      relatedLocation: p.relatedLocation ?? rel.location ?? 'Coimbatore',
+      relatedCopy: p.relatedCopy ?? rel.copy ?? '',
+      relatedResult: p.relatedResult ?? rel.result ?? '',
+      relatedCaseRoute: p.relatedCaseRoute ?? rel.caseRoute ?? '/projects/nextgen-toys',
+      hasRelatedUrl: !!relatedUrl,
+      relatedUrl,
+      ctaHeading: pick('ctaHeading', 'Ready to get your business online?'),
+      waLink: 'https://wa.me/918220034139?text=' + encodeURIComponent(waMsg)
+    };
+  }
+}
+</script>
+</body>
+</html>

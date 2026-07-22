@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>[per-route seoTitle from project-routes.js]</title>
+  <meta name="description" content="[per-route seoDescription from project-routes.js]">
+  <link rel="canonical" href="[per-route canonicalUrl from project-routes.js — derives from siteUrl]">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="[per-route seoTitle from project-routes.js]">
+  <meta property="og:description" content="[per-route seoDescription from project-routes.js]">
+  <meta property="og:image" content="[per-route ogImage — default {{siteUrl}}/images/og-cover.png]">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="[per-route seoTitle from project-routes.js]">
+  <meta name="twitter:description" content="[per-route seoDescription from project-routes.js]">
+  <meta name="twitter:image" content="[per-route ogImage — default {{siteUrl}}/images/og-cover.png]">
+  <link rel="stylesheet" href="_ds/nocturne-5d41d6fe-ed19-4b00-91a0-08ad62f95b6b/styles.css">
+  <script src="_ds/nocturne-5d41d6fe-ed19-4b00-91a0-08ad62f95b6b/_ds_bundle.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+  <script src="assets/image-slot.js"></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"{{siteUrl}}/"},{"@type":"ListItem","position":2,"name":"Projects","item":"{{siteUrl}}/projects"},{"@type":"ListItem","position":3,"name":"[per-route client]"}]},{"@type":"CreativeWork","name":"[per-route client] — client project","creator":{"@type":"Organization","name":"Vignesh Growth Lab"}}]}</script>
+  <style>
+    html{scroll-behavior:smooth}
+    @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+    body{margin:0;color:var(--color-text);text-wrap:pretty;background:
+      radial-gradient(1100px 640px at 80% -140px, color-mix(in srgb, var(--color-accent-900) 70%, transparent), transparent 60%),
+      var(--color-bg);}
+    a{color:var(--color-accent-300);} a:hover{color:var(--color-accent-200);}
+  </style>
+</helmet>
+
+<dc-import name="VGLNav" active="projects" style="position:sticky;top:0;z-index:90" hint-size="100%,64px"></dc-import>
+
+<main id="main-content">
+<section data-screen-label="Case study hero" style="max-width:1200px;margin:0 auto;padding:clamp(40px,6vw,72px) clamp(20px,5vw,72px) 0">
+  <nav aria-label="Breadcrumb" style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--color-neutral-400);margin-bottom:28px;flex-wrap:wrap">
+    <a href="Home.dc.html" data-route="/" style="color:var(--color-neutral-400);text-decoration:none;padding:4px 0" style-hover="color:var(--color-accent)">Home</a><i class="ph ph-caret-right" style="font-size:11px" aria-hidden="true"></i>
+    <a href="Projects.dc.html" data-route="/projects" style="color:var(--color-neutral-400);text-decoration:none;padding:4px 0" style-hover="color:var(--color-accent)">Projects</a><i class="ph ph-caret-right" style="font-size:11px" aria-hidden="true"></i>
+    <span aria-current="page" style="color:var(--color-neutral-200)">{{ client }}</span>
+  </nav>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px"><span class="tag tag-accent">{{ projectType }}</span><span class="tag tag-neutral">{{ location }}</span><span class="tag tag-outline" style="color:#7fd4e0;border-color:color-mix(in srgb, #7fd4e0 40%, transparent)">{{ technology }}</span></div>
+  <h1 style="font-family:var(--font-heading);font-weight:500;font-size:clamp(34px,4.6vw,60px);line-height:1.08;letter-spacing:-0.014em;margin:0;margin-left:-0.04em">{{ client }}</h1>
+  <p style="font-size:16.5px;line-height:1.65;color:var(--color-neutral-200);margin:18px 0 0;max-width:58ch">{{ summary }}</p>
+  <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:26px">
+    <sc-if value="{{ hasLiveUrl }}" hint-placeholder-val="{{ true }}">
+      <a class="btn btn-primary" href="{{ liveUrl }}" target="_blank" rel="noopener noreferrer" style="text-decoration:none;display:inline-flex;align-items:center;gap:8px;min-height:46px;padding-inline:20px">{{ liveLabel }}<i class="ph ph-arrow-up-right" style="font-size:16px" aria-hidden="true"></i></a>
+    </sc-if>
+    <a class="btn" href="{{ waLink }}" target="_blank" rel="noopener noreferrer" style="border:1px solid #25D366;color:#3ddc74;text-decoration:none;display:inline-flex;align-items:center;gap:10px;min-height:46px;padding-inline:20px" style-hover="background:rgba(37,211,102,0.1)"><i class="ph ph-whatsapp-logo" style="font-size:18px" aria-hidden="true"></i>I want something like this</a>
+  </div>
+  <div style="aspect-ratio:21/9;margin-top:clamp(28px,4vw,44px);min-height:200px">
+    <sc-if value="{{ hasHeroImage }}" hint-placeholder-val="{{ false }}"><img src="{{ heroImage }}" alt="{{ heroImageAlt }}" style="width:100%;height:100%;object-fit:cover;border-radius:14px;display:block"></sc-if>
+    <sc-if value="{{ noHeroImage }}" hint-placeholder-val="{{ true }}"><image-slot id="case-hero" shape="rounded" radius="14" placeholder="{{ client }}"></image-slot></sc-if>
+  </div>
+</section>
+
+<section data-screen-label="Case study facts" aria-label="Project facts" style="max-width:1200px;margin:0 auto;padding:clamp(36px,5vw,52px) clamp(20px,5vw,72px) 0">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:14px">
+    <div style="padding:18px 20px;border:1px solid var(--color-neutral-700);border-radius:var(--radius-md)"><p style="margin:0;font-size:11.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-neutral-400)">Client</p><p style="margin:8px 0 0;font-size:15px;font-family:var(--font-heading);font-weight:500">{{ client }}</p></div>
+    <div style="padding:18px 20px;border:1px solid var(--color-neutral-700);border-radius:var(--radius-md)"><p style="margin:0;font-size:11.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-neutral-400)">Location</p><p style="margin:8px 0 0;font-size:15px;font-family:var(--font-heading);font-weight:500">{{ location }}</p></div>
+    <div style="padding:18px 20px;border:1px solid var(--color-neutral-700);border-radius:var(--radius-md)"><p style="margin:0;font-size:11.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-neutral-400)">Project type</p><p style="margin:8px 0 0;font-size:15px;font-family:var(--font-heading);font-weight:500">{{ projectType }}</p></div>
+    <div style="padding:18px 20px;border:1px solid var(--color-neutral-700);border-radius:var(--radius-md)"><p style="margin:0;font-size:11.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-neutral-400)">Built with</p><p style="margin:8px 0 0;font-size:15px;font-family:var(--font-heading);font-weight:500">{{ technology }}</p></div>
+  </div>
+</section>
+
+<section data-screen-label="Brief and build" style="max-width:1200px;margin:0 auto;padding:clamp(44px,6vw,72px) clamp(20px,5vw,72px) 0">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:32px clamp(28px,4vw,64px)">
+    <div>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"><span style="width:44px;height:1px;background:var(--color-accent)"></span><span style="font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-accent)">{{ challengeKicker }}</span></div>
+      <h2 style="font-family:var(--font-heading);font-weight:500;font-size:clamp(22px,2.6vw,30px);line-height:1.2;margin:0">{{ challengeTitle }}</h2>
+      <p style="margin:16px 0 0;font-size:15px;line-height:1.7;color:var(--color-neutral-300);max-width:52ch">{{ challenge }}</p>
+    </div>
+    <div>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"><span style="width:44px;height:1px;background:#7fd4e0"></span><span style="font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:#7fd4e0">What we built</span></div>
+      <h2 style="font-family:var(--font-heading);font-weight:500;font-size:clamp(22px,2.6vw,30px);line-height:1.2;margin:0">{{ solutionTitle }}</h2>
+      <p style="margin:16px 0 0;font-size:15px;line-height:1.7;color:var(--color-neutral-300);max-width:52ch">{{ solution }}</p>
+      <ul style="margin:16px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px;max-width:52ch">
+        <sc-for list="{{ delivered }}" as="d" hint-placeholder-count="3">
+          <li style="font-size:14px;line-height:1.6;color:var(--color-neutral-300);display:flex;gap:10px;align-items:baseline"><i class="ph ph-check" style="color:#7fd4e0;font-size:14px;position:relative;top:1px" aria-hidden="true"></i>{{ d }}</li>
+        </sc-for>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Results" aria-label="Results" style="margin-top:clamp(44px,6vw,72px);padding:clamp(40px,5vw,52px) 0;background:radial-gradient(800px 380px at 85% -40%, color-mix(in srgb, var(--color-section-glow) 70%, transparent), transparent 64%), var(--color-section)">
+  <div style="max-width:1200px;margin:0 auto;padding:0 clamp(20px,5vw,72px)">
+    <h2 style="font-family:var(--font-heading);font-weight:500;font-size:clamp(20px,2.2vw,26px);margin:0 0 32px">Results</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:32px 28px">
+      <sc-for list="{{ results }}" as="r" hint-placeholder-count="3">
+        <div><p style="font-family:var(--font-heading);font-weight:500;font-size:clamp(30px,3.2vw,44px);margin:0;font-feature-settings:'tnum' 1">{{ r.value }}</p><p style="margin:10px 0 0;font-size:12.5px;letter-spacing:0.06em;text-transform:uppercase;color:color-mix(in srgb, var(--color-text) 64%, transparent)">{{ r.label }}</p></div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<sc-if value="{{ hasQuote }}" hint-placeholder-val="{{ true }}">
+  <section data-screen-label="Client testimonial" style="max-width:1200px;margin:0 auto;padding:clamp(52px,7vw,88px) clamp(20px,5vw,72px) 0">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:36px clamp(28px,4vw,64px);align-items:center">
+      <figure style="margin:0">
+        <blockquote style="font-family:var(--font-heading);font-weight:500;font-size:clamp(21px,2.4vw,28px);line-height:1.45;letter-spacing:-0.01em;max-width:36ch;margin:0;text-indent:-0.474em">“{{ quote }}”</blockquote>
+        <figcaption style="font-size:15px;color:var(--color-neutral-400);margin:24px 0 0;text-indent:-1.267em">— {{ quoteAuthor }}</figcaption>
+      </figure>
+      <sc-if value="{{ hasTestimonialImage }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;justify-content:center"><img src="{{ testimonialImage }}" alt="{{ testimonialImageAlt }}" style="width:100%;max-width:320px;height:auto;border-radius:12px;border:1px solid var(--color-neutral-700);display:block"></div>
+      </sc-if>
+    </div>
+  </section>
+</sc-if>
+
+<sc-if value="{{ hasVideo }}" hint-placeholder-val="{{ false }}">
+  <section data-screen-label="Project video" style="max-width:1200px;margin:0 auto;padding:clamp(52px,7vw,88px) clamp(20px,5vw,72px) 0">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"><span style="width:44px;height:1px;background:var(--color-accent)"></span><span style="font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-accent)">In action</span></div>
+    <h2 style="font-family:var(--font-heading);font-weight:500;font-size:clamp(24px,2.8vw,34px);line-height:1.15;margin:0 0 28px">{{ videoHeading }}</h2>
+    <figure style="margin:0" class="card">
+      <video controls playsInline preload="metadata" data-video-src="{{ videoSrc }}" data-video-poster="{{ videoPoster }}" aria-label="{{ videoLabel }}" style="width:100%;aspect-ratio:16/9;display:block;background:var(--color-neutral-900);border-radius:var(--radius-md) var(--radius-md) 0 0;object-fit:contain">
+        <sc-if value="{{ hasCaptionsFile }}" hint-placeholder-val="{{ false }}"><track kind="captions" data-track-src="{{ videoCaptionsFile }}" srclang="en" label="English"></sc-if>
+      </video>
+      <figcaption style="padding:16px 22px;font-size:13.5px;line-height:1.6;color:var(--color-neutral-300)">{{ videoLabel }}</figcaption>
+    </figure>
+    <sc-if value="{{ hasTranscript }}" hint-placeholder-val="{{ false }}">
+      <details style="margin-top:14px;border:1px solid var(--color-neutral-700);border-radius:var(--radius-md);padding:14px 18px">
+        <summary style="cursor:pointer;font-size:14px;color:var(--color-neutral-200)">Read the transcript</summary>
+        <p style="margin:12px 0 0;font-size:14px;line-height:1.7;color:var(--color-neutral-300);white-space:pre-wrap">{{ videoTranscript }}</p>
+      </details>
+    </sc-if>
+  </section>
+</sc-if>
+
+<sc-if value="{{ hasGallery }}" hint-placeholder-val="{{ true }}">
+  <section data-screen-label="Gallery" style="max-width:1200px;margin:0 auto;padding:clamp(52px,7vw,88px) clamp(20px,5vw,72px) 0">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"><span style="width:44px;height:1px;background:var(--color-accent)"></span><span style="font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-accent)">Gallery</span></div>
+    <h2 style="font-family:var(--font-heading);font-weight:500;font-size:clamp(24px,2.8vw,34px);line-height:1.15;margin:0 0 32px">Inside the build</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px">
+      <sc-for list="{{ galleryItems }}" as="g" hint-placeholder-count="2">
+        <figure style="margin:0;display:flex;flex-direction:column;gap:8px">
+          <sc-if value="{{ g.src }}" hint-placeholder-val="{{ false }}"><img src="{{ g.src }}" alt="{{ g.caption }}" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px;border:1px solid var(--color-neutral-700);display:block"></sc-if>
+          <sc-if value="{{ g.isSlot }}" hint-placeholder-val="{{ true }}"><div style="aspect-ratio:4/3"><image-slot id="{{ g.slotId }}" shape="rounded" radius="12" placeholder="{{ g.caption }}"></image-slot></div></sc-if>
+          <figcaption style="font-size:12.5px;color:var(--color-neutral-400)">{{ g.caption }}</figcaption>
+        </figure>
+      </sc-for>
+    </div>
+  </section>
+</sc-if>
+
+<section data-screen-label="Case study CTA" style="max-width:1200px;margin:0 auto;padding:clamp(52px,7vw,88px) clamp(20px,5vw,72px) clamp(52px,7vw,88px)">
+  <div style="border-top:1px solid var(--color-divider);padding-top:44px;display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between">
+    <div style="max-width:52ch">
+      <h2 style="font-family:var(--font-heading);font-weight:500;font-size:clamp(22px,2.6vw,30px);margin:0">Want results like this?</h2>
+      <p style="margin:10px 0 0;font-size:15px;line-height:1.65;color:var(--color-neutral-300)">Free 30-minute strategy call. Custom proposal in 24 hours.</p>
+    </div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <a class="btn" href="{{ waLink }}" target="_blank" rel="noopener noreferrer" style="border:1px solid #25D366;color:#3ddc74;text-decoration:none;display:inline-flex;align-items:center;gap:10px;min-height:46px;padding-inline:20px" style-hover="background:rgba(37,211,102,0.1)"><i class="ph ph-whatsapp-logo" style="font-size:18px" aria-hidden="true"></i>Talk to Vignesh</a>
+      <a class="btn btn-ghost" href="Service Template.dc.html" data-route="{{ relatedServiceRoute }}" style="text-decoration:none;min-height:46px;display:inline-flex;align-items:center;padding-inline:20px">About this service</a>
+      <a class="btn btn-ghost" href="Projects.dc.html" data-route="/projects" style="text-decoration:none;min-height:46px;display:inline-flex;align-items:center;padding-inline:20px">All projects</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<dc-import name="VGLFooter" hint-size="100%,420px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;route&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;nextgen-toys&quot;,&quot;rani-sarees&quot;,&quot;vgl-pos&quot;,&quot;ai-whatsapp-automation&quot;],&quot;default&quot;:&quot;nextgen-toys&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Route&quot;},&quot;client&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Overrides&quot;},&quot;summary&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Overrides&quot;},&quot;challenge&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Overrides&quot;},&quot;solution&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Overrides&quot;},&quot;quote&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Overrides&quot;},&quot;quoteAuthor&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Overrides&quot;},&quot;whatsappMessage&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Overrides&quot;},&quot;heroImage&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Media&quot;},&quot;heroImageAlt&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Media&quot;},&quot;videoSrc&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Media&quot;},&quot;videoPoster&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Media&quot;},&quot;videoHeading&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Media&quot;},&quot;videoLabel&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Media&quot;},&quot;videoTranscript&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Media&quot;},&quot;videoCaptionsFile&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Media&quot;},&quot;testimonialImage&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Media&quot;},&quot;galleryImages&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;string[]&quot;,&quot;section&quot;:&quot;Data&quot;},&quot;galleryCaptions&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;string[]&quot;,&quot;section&quot;:&quot;Data&quot;},&quot;gallerySlots&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Data&quot;},&quot;delivered&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;string[]&quot;,&quot;section&quot;:&quot;Data&quot;},&quot;results&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;{value:string,label:string}[]&quot;,&quot;section&quot;:&quot;Data&quot;}}">
+class Component extends DCLogic {
+  state = { routes: null };
+  componentDidMount() {
+    import('./project-routes.js').then(m => this.setState({ routes: m.PROJECT_ROUTES })).catch(() => {});
+    this.syncMedia();
+  }
+  componentDidUpdate() { this.syncMedia(); }
+  syncMedia() {
+    document.querySelectorAll('[data-video-src]').forEach(v => {
+      const s = v.getAttribute('data-video-src') || '';
+      if (s && v.getAttribute('src') !== s) v.setAttribute('src', s);
+      const po = v.getAttribute('data-video-poster') || '';
+      if (po && v.getAttribute('poster') !== po) v.setAttribute('poster', po);
+    });
+    document.querySelectorAll('track[data-track-src]').forEach(t => {
+      const s = t.getAttribute('data-track-src') || '';
+      if (s && t.getAttribute('src') !== s) t.setAttribute('src', s);
+    });
+  }
+  renderVals() {
+    const p = this.props;
+    const slug = p.route ?? 'nextgen-toys';
+    const cfg = (this.state.routes && this.state.routes[slug]) || (this.state.routes && this.state.routes['nextgen-toys']) || {};
+    const pick = (key, fallback) => p[key] ?? cfg[key] ?? fallback;
+    const client = pick('client', 'NextGen Toys');
+    const liveUrl = pick('liveUrl', '');
+    const quote = pick('quote', '');
+    const testimonialImage = pick('testimonialImage', '');
+    const videoSrc = pick('videoSrc', '');
+    const heroImage = pick('heroImage', '');
+    const imgs = p.galleryImages ?? cfg.galleryImages ?? [];
+    const caps = p.galleryCaptions ?? cfg.galleryCaptions ?? [];
+    const slots = p.gallerySlots ?? cfg.gallerySlots ?? 0;
+    const galleryItems = imgs.length
+      ? imgs.map((src, i) => ({ src, isSlot: false, slotId: 'case-gallery-' + (i + 1), caption: caps[i] || (client + ' — view ' + (i + 1)) }))
+      : Array.from({ length: slots }, (_, i) => ({ src: '', isSlot: true, slotId: slug + '-gallery-' + (i + 1), caption: caps[i] || (client + ' — view ' + (i + 1)) }));
+    const waMsg = p.whatsappMessage ?? cfg.waMessage ?? ('Hi Vignesh, I saw the ' + client + ' case study.');
+    return {
+      client,
+      location: pick('location', 'Tamil Nadu'),
+      projectType: pick('projectType', 'Project'),
+      technology: pick('technology', ''),
+      summary: pick('summary', ''),
+      challengeTitle: pick('challengeTitle', 'The brief'),
+      challenge: pick('challenge', ''),
+      solutionTitle: pick('solutionTitle', 'What we built'),
+      solution: pick('solution', ''),
+      delivered: p.delivered ?? cfg.delivered ?? [],
+      results: p.results ?? cfg.results ?? [],
+      hasHeroImage: !!heroImage, noHeroImage: !heroImage,
+      heroImage, heroImageAlt: pick('heroImageAlt', client + ' project view'),
+      hasLiveUrl: !!liveUrl, liveUrl, liveLabel: pick('liveLabel', 'Visit live site'),
+      hasVideo: !!videoSrc, videoSrc,
+      videoPoster: pick('videoPoster', ''),
+      videoHeading: pick('videoHeading', 'Project video'),
+      videoLabel: pick('videoLabel', 'Video of the ' + client + ' project'),
+      challengeKicker: pick('challengeKicker', 'Project goal'),
+      hasTranscript: !!pick('videoTranscript', ''),
+      videoTranscript: pick('videoTranscript', ''),
+      hasCaptionsFile: !!pick('videoCaptionsFile', ''),
+      videoCaptionsFile: pick('videoCaptionsFile', ''),
+      hasQuote: !!quote, quote, quoteAuthor: pick('quoteAuthor', ''),
+      hasTestimonialImage: !!testimonialImage, testimonialImage,
+      testimonialImageAlt: pick('testimonialImageAlt', 'Written client review'),
+      hasGallery: galleryItems.length > 0,
+      galleryItems,
+      relatedServiceRoute: pick('relatedServiceRoute', '/services/website-development'),
+      waLink: 'https://wa.me/918220034139?text=' + encodeURIComponent(waMsg)
+    };
+  }
+}
+</script>
+</body>
+</html>
