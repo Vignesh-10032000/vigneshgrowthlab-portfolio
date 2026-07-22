@@ -1,31 +1,28 @@
 ---
 import Layout from '~/layouts/Layout.astro';
-import Header from '~/components/widgets/Header.astro';
-import Footer from '~/components/widgets/Footer.astro';
-import Announcement from '~/components/widgets/Announcement.astro';
-
-import { headerData, footerData } from '~/navigation';
+import Header from '~/components/vgl/Header.astro';
+import Footer from '~/components/vgl/Footer.astro';
+import FloatingWhatsApp from '~/components/vgl/FloatingWhatsApp.astro';
 
 import type { MetaData } from '~/types';
 
 export interface Props {
   metadata?: MetaData;
+  /** Which nav item is the current page (aria-current). */
+  active?: 'about' | 'services' | 'projects' | 'contact' | '';
+  /** JSON-LD payload for this route (from ~/utils/structured-data). */
+  structuredData?: string;
 }
 
-const { metadata } = Astro.props;
+const { metadata, active = '', structuredData } = Astro.props;
 ---
 
 <Layout metadata={metadata}>
-  <slot name="announcement">
-    <Announcement />
-  </slot>
-  <slot name="header">
-    <Header {...headerData} isSticky showRssFeed showToggleTheme />
-  </slot>
-  <main>
+  <Header active={active} />
+  <main id="main-content">
     <slot />
   </main>
-  <slot name="footer">
-    <Footer {...footerData} />
-  </slot>
+  <Footer />
+  <FloatingWhatsApp />
+  {structuredData && <script type="application/ld+json" set:html={structuredData} is:inline />}
 </Layout>

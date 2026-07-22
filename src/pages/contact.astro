@@ -1,79 +1,51 @@
 ---
-import Layout from '~/layouts/PageLayout.astro';
-import HeroText from '~/components/widgets/HeroText.astro';
-import ContactUs from '~/components/widgets/Contact.astro';
-import Features2 from '~/components/widgets/Features2.astro';
+/** Contact — Phase 1 shell. Phase 5 implements the full page incl. Formspree form. */
+import { Icon } from 'astro-icon/components';
+
+import PageLayout from '~/layouts/PageLayout.astro';
+import SectionHeading from '~/components/vgl/SectionHeading.astro';
+import WhatsAppCta from '~/components/vgl/WhatsAppCta.astro';
+
+import { CONTACT } from '~/data/vgl/site';
+import { jsonLd, contactPage } from '~/utils/structured-data';
 
 const metadata = {
-  title: 'Contact',
+  title: 'Contact — Talk to Vignesh | Vignesh Growth Lab, Pollachi',
+  description:
+    'Contact Vignesh Growth Lab: WhatsApp +91 82200 34139, vigneshgrowthlab@gmail.com, Pollachi, Tamil Nadu. Vignesh personally replies within 24 hours.',
 };
 ---
 
-<Layout metadata={metadata}>
-  <!-- HeroText Widget ******************* -->
-
-  <HeroText tagline="Contact" title="Let's Connect!" />
-
-  <ContactUs
-    id="form"
-    title="Drop us a message today!"
-    subtitle="For quicker answers, explore our FAQs section. You may find the solution you're looking  for right there! If not, our support team is delighted to help you."
-    inputs={[
-      {
-        type: 'text',
-        name: 'name',
-        label: 'Name',
-      },
-      {
-        type: 'email',
-        name: 'email',
-        label: 'Email',
-      },
-    ]}
-    textarea={{
-      label: 'Message',
-    }}
-    disclaimer={{
-      label:
-        'By submitting this contact form, you acknowledge and agree to the collection of your personal information.',
-    }}
-    description="Our support team typically responds within 24 business hours."
-  />
-
-  <!-- Features2 Widget ************** -->
-
-  <Features2
-    title="We are here to help!"
-    items={[
-      {
-        title: 'General support',
-        description: `Chat with us for inquiries related to account management, website navigation, payment issues, accessing purchased templates or general questions about the website's functionality.`,
-      },
-      {
-        title: 'Contact sales',
-        description:
-          'Chat with us for questions about purchases, customization options, licensing for commercial use, inquiries about specific template, etc.',
-      },
-      {
-        title: 'Technical support',
-        description:
-          'Chat with us when facing issues like template installation, problems editing difficulties, compatibility issues with software or download errors, or other technical challenges related to using the templates.',
-      },
-      {
-        title: 'Phone',
-        description: '+1 (234) 567-890',
-        icon: 'tabler:headset',
-      },
-      {
-        title: 'Email',
-        description: 'contact@support.com',
-        icon: 'tabler:mail',
-      },
-      {
-        title: 'Location',
-        description: '1234 Lorem Ipsum St, 12345, Miami, EEUU',
-        icon: 'tabler:map-pin',
-      },
-    ]}
-  />
-</Layout>
+<PageLayout metadata={metadata} active="contact" structuredData={jsonLd(contactPage())}>
+  <section class="vgl-container" style="padding-block: clamp(44px, 6vw, 80px) clamp(52px, 7vw, 88px)">
+    <SectionHeading
+      kicker="Contact"
+      as="h1"
+      title="Let's Discuss Your Project"
+      sub="Fill this in 60 seconds. Vignesh personally replies within 24 hours."
+    />
+    <div style="display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px">
+      <WhatsAppCta label="Chat on WhatsApp" iconSize={18} />
+    </div>
+    <div style="margin-top: 36px; display: flex; flex-direction: column; gap: 14px; font-size: 14.5px">
+      <a
+        href={CONTACT.phoneHref}
+        style="display: flex; align-items: center; gap: 10px; color: var(--color-vgl-neutral-300); text-decoration: none"
+      >
+        <Icon name="ph:phone" style="font-size: 17px; color: var(--color-vgl-accent)" aria-hidden="true" />
+        {CONTACT.phoneDisplay}
+      </a>
+      <a
+        href={`mailto:${CONTACT.email}`}
+        style="display: flex; align-items: center; gap: 10px; color: var(--color-vgl-neutral-300); text-decoration: none; word-break: break-all"
+      >
+        <Icon name="ph:envelope-simple" style="font-size: 17px; color: var(--color-vgl-accent)" aria-hidden="true" />
+        {CONTACT.email}
+      </a>
+      <span style="display: flex; align-items: center; gap: 10px; color: var(--color-vgl-neutral-300)">
+        <Icon name="ph:map-pin" style="font-size: 17px; color: var(--color-vgl-accent)" aria-hidden="true" />
+        {CONTACT.location}
+      </span>
+    </div>
+  </section>
+</PageLayout>

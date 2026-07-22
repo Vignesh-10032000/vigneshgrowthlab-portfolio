@@ -1,0 +1,46 @@
+---
+/** Projects overview — Phase 1 shell. Phase 4 implements the full page. */
+import PageLayout from '~/layouts/PageLayout.astro';
+import SectionHeading from '~/components/vgl/SectionHeading.astro';
+
+import { PROJECTS } from '~/data/vgl/projects';
+import { jsonLd, collectionPage } from '~/utils/structured-data';
+
+const metadata = {
+  title: 'Projects — Real results for Tamil Nadu businesses | Vignesh Growth Lab',
+  description:
+    '15+ projects delivered across Tamil Nadu — e-commerce stores, business websites, retail POS and AI WhatsApp automation, with measurable results.',
+};
+
+const structuredData = jsonLd(
+  collectionPage(
+    'Projects — Vignesh Growth Lab',
+    PROJECTS.map((p) => ({ name: p.client, path: p.pageRoute }))
+  )
+);
+---
+
+<PageLayout metadata={metadata} active="projects" structuredData={structuredData}>
+  <section class="vgl-container" style="padding-block: clamp(48px, 7vw, 88px)">
+    <SectionHeading
+      kicker="Projects"
+      as="h1"
+      title="Projects built around<br />measurable business outcomes."
+      sub="15+ projects delivered across Tamil Nadu — stores, boutiques, POS systems and AI automations. Here are the ones with stories worth telling."
+    />
+    <ul style="list-style: none; margin: 36px 0 0; padding: 0; display: flex; flex-direction: column; gap: 12px">
+      {
+        PROJECTS.map((project) => (
+          <li>
+            <a
+              href={project.pageRoute}
+              style="color: var(--color-vgl-accent-300); text-decoration: none; font-size: 16px"
+            >
+              {project.client} →
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</PageLayout>

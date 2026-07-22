@@ -1,0 +1,51 @@
+---
+/** Case study — Phase 1 shell. Phase 4 implements the full template. */
+import PageLayout from '~/layouts/PageLayout.astro';
+import SectionHeading from '~/components/vgl/SectionHeading.astro';
+import WhatsAppCta from '~/components/vgl/WhatsAppCta.astro';
+
+import { PROJECTS } from '~/data/vgl/projects';
+import type { Project } from '~/data/vgl/projects';
+import { jsonLd, creativeWork, breadcrumbList } from '~/utils/structured-data';
+
+export function getStaticPaths() {
+  return PROJECTS.map((project) => ({ params: { slug: project.slug }, props: { project } }));
+}
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+
+const metadata = {
+  title: project.seoTitle,
+  description: project.seoDescription,
+};
+
+const structuredData = jsonLd(
+  creativeWork(project.client),
+  breadcrumbList([{ name: 'Home', path: '/' }, { name: 'Projects', path: '/projects' }, { name: project.client }])
+);
+---
+
+<PageLayout metadata={metadata} active="projects" structuredData={structuredData}>
+  <section class="vgl-container" style="padding-block: clamp(40px, 6vw, 72px) clamp(52px, 7vw, 88px)">
+    <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 18px">
+      <span class="vgl-tag vgl-tag-accent">{project.projectType}</span>
+      <span class="vgl-tag vgl-tag-neutral">{project.location}</span>
+      <span class="vgl-tag vgl-tag-tech">{project.technology}</span>
+    </div>
+    <SectionHeading as="h1" title={project.client} sub={project.summary} />
+    <div style="display: flex; gap: 14px; flex-wrap: wrap; margin-top: 26px">
+      {
+        project.liveUrl && (
+          <a class="vgl-btn vgl-btn-primary" href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+            {project.liveLabel}
+          </a>
+        )
+      }
+      <WhatsAppCta message={project.waMessage} label="I want something like this" iconSize={18} />
+    </div>
+  </section>
+</PageLayout>

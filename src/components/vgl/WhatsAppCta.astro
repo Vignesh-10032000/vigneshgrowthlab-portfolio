@@ -1,0 +1,21 @@
+---
+import { Icon } from 'astro-icon/components';
+
+import { waLink, DEFAULT_WA_MESSAGE } from '~/utils/whatsapp';
+
+export interface Props {
+  /** Prefilled WhatsApp message for this context. */
+  message?: string;
+  /** Button label. */
+  label: string;
+  iconSize?: number;
+  class?: string;
+}
+
+const { message = DEFAULT_WA_MESSAGE, label, iconSize = 17, class: className = '' } = Astro.props;
+---
+
+<a class:list={['vgl-btn', 'vgl-btn-wa', className]} href={waLink(message)} target="_blank" rel="noopener noreferrer">
+  <Icon name="ph:whatsapp-logo" style={`font-size: ${iconSize}px`} aria-hidden="true" />
+  {label}
+</a>

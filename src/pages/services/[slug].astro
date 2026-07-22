@@ -1,0 +1,46 @@
+---
+/** Service detail — Phase 1 shell. Phase 3 implements the full template. */
+import PageLayout from '~/layouts/PageLayout.astro';
+import SectionHeading from '~/components/vgl/SectionHeading.astro';
+import WhatsAppCta from '~/components/vgl/WhatsAppCta.astro';
+
+import { SERVICES } from '~/data/vgl/services';
+import type { Service } from '~/data/vgl/services';
+import { jsonLd, serviceSchema, breadcrumbList } from '~/utils/structured-data';
+
+export function getStaticPaths() {
+  return SERVICES.map((service) => ({ params: { slug: service.slug }, props: { service } }));
+}
+
+interface Props {
+  service: Service;
+}
+
+const { service } = Astro.props;
+
+const metadata = {
+  title: service.seoTitle,
+  description: service.seoDescription,
+};
+
+const structuredData = jsonLd(
+  serviceSchema(service.serviceName),
+  breadcrumbList([{ name: 'Home', path: '/' }, { name: 'Services', path: '/services' }, { name: service.serviceName }])
+);
+---
+
+<PageLayout metadata={metadata} active="services" structuredData={structuredData}>
+  <section class="vgl-container" style="padding-block: clamp(40px, 6vw, 72px) clamp(52px, 7vw, 88px)">
+    <SectionHeading kicker="Service" as="h1" title={service.serviceName} sub={service.heroStatement} />
+    <div style="display: flex; gap: 14px; flex-wrap: wrap; align-items: center; margin-top: 28px">
+      <WhatsAppCta message={service.waMessage} label="Get a free quote" />
+      {
+        service.startingPrice && (
+          <span class="vgl-tag vgl-tag-accent" style="font-feature-settings: 'tnum' 1">
+            {service.startingPrice}
+          </span>
+        )
+      }
+    </div>
+  </section>
+</PageLayout>

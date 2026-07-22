@@ -1,30 +1,34 @@
 site:
-  name: AstroWind
-  site: 'https://astrowind.vercel.app'
+  name: Vignesh Growth Lab
+  # ⚠ LAUNCH CHECKLIST: replace with the real production domain before launch.
+  # This is the single source for every canonical, Open Graph, Twitter and
+  # JSON-LD absolute URL ("siteUrl"). `.example` is an RFC 2606 reserved TLD —
+  # it cannot be mistaken for a live domain.
+  site: 'https://vignesh-growth-lab.example'
   base: '/'
   trailingSlash: false
 
-  googleSiteVerificationId: orcPxI47GSa-cRvY11tUe6iGg2IO_RPvnA1q95iEM3M
-
-# Default SEO metadata
+# Default SEO metadata — every route overrides title/description with its own
+# values from the content matrices; these are safety-net defaults only.
 metadata:
   title:
-    default: AstroWind
-    template: '%s — AstroWind'
-  description: "\U0001F680 Suitable for Startups, Small Business, Sass Websites, Professional Portfolios, Marketing Websites, Landing Pages & Blogs."
+    default: Vignesh Growth Lab — Websites, POS & WhatsApp Automation in Tamil Nadu
+    template: '%s'
+  description: 'Pollachi-based MSME building fast websites, custom software, retail POS and WhatsApp AI automation for Tamil Nadu businesses. 15+ projects delivered.'
   robots:
     index: true
     follow: true
   openGraph:
-    site_name: AstroWind
+    site_name: Vignesh Growth Lab
     images:
-      - url: '~/assets/images/default.png'
+      # ⚠ INTERIM ASSET: brand card generated from the real VGL logo.
+      # Replace src/assets/images/og-cover.png with the real Open Graph cover
+      # before launch (see "Assets Required Before Launch").
+      - url: '~/assets/images/og-cover.png'
         width: 1200
         height: 628
     type: website
   twitter:
-    handle: '@arthelokyo'
-    site: '@arthelokyo'
     cardType: summary_large_image
 
 i18n:
@@ -33,35 +37,15 @@ i18n:
 
 apps:
   blog:
-    isEnabled: true
-    postsPerPage: 6
-
+    isEnabled: false
     post:
-      isEnabled: true
-      permalink: '/%slug%' # Variables: %slug%, %year%, %month%, %day%, %hour%, %minute%, %second%, %category%
-      robots:
-        index: true
-
+      isEnabled: false
     list:
-      isEnabled: true
-      pathname: 'blog' # Blog main path, you can change this to "articles" (/articles)
-      robots:
-        index: true
-
+      isEnabled: false
     category:
-      isEnabled: true
-      pathname: 'category' # Category main path /category/some-category, you can change this to "group" (/group/some-category)
-      robots:
-        index: true
-
+      isEnabled: false
     tag:
-      isEnabled: true
-      pathname: 'tag' # Tag main path /tag/some-tag, you can change this to "topics" (/topics/some-category)
-      robots:
-        index: false
-
-    isRelatedPostsEnabled: true
-    relatedPostsCount: 4
+      isEnabled: false
 
 analytics:
   vendors:
@@ -69,4 +53,4 @@ analytics:
       id: null # or "G-XXXXXXXXXX"
 
 ui:
-  theme: 'system' # Values: "system" | "light" | "dark" | "light:only" | "dark:only"
+  theme: 'dark:only'

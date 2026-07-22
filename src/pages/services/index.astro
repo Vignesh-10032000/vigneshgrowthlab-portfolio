@@ -1,0 +1,46 @@
+---
+/** Services overview — Phase 1 shell. Phase 3 implements the full page. */
+import PageLayout from '~/layouts/PageLayout.astro';
+import SectionHeading from '~/components/vgl/SectionHeading.astro';
+
+import { SERVICES } from '~/data/vgl/services';
+import { jsonLd, collectionPage } from '~/utils/structured-data';
+
+const metadata = {
+  title: 'Services — Websites, Custom Software, POS & WhatsApp AI | Vignesh Growth Lab',
+  description:
+    'Website development, custom software, retail POS and WhatsApp AI automation for Tamil Nadu businesses. Fixed pricing, ~2 week delivery, 100% ownership.',
+};
+
+const structuredData = jsonLd(
+  collectionPage(
+    'Services — Vignesh Growth Lab',
+    SERVICES.map((s) => ({ name: s.serviceName, path: s.pageRoute }))
+  )
+);
+---
+
+<PageLayout metadata={metadata} active="services" structuredData={structuredData}>
+  <section class="vgl-container" style="padding-block: clamp(48px, 7vw, 88px)">
+    <SectionHeading
+      kicker="Services"
+      as="h1"
+      title="Four ways we grow<br />Tamil Nadu businesses."
+      sub="Websites, custom software, retail POS and WhatsApp AI automation — fixed pricing, average delivery around 2 weeks, and you own everything on handover."
+    />
+    <ul style="list-style: none; margin: 36px 0 0; padding: 0; display: flex; flex-direction: column; gap: 12px">
+      {
+        SERVICES.map((service) => (
+          <li>
+            <a
+              href={service.pageRoute}
+              style="color: var(--color-vgl-accent-300); text-decoration: none; font-size: 16px"
+            >
+              {service.serviceName} →
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</PageLayout>

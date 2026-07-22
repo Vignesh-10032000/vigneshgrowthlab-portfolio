@@ -1,0 +1,62 @@
+---
+export interface Props {
+  /** Uppercase kicker text with the 44px accent dash. */
+  kicker?: string;
+  /** Section heading (h1 on page heroes, h2 elsewhere). */
+  title: string;
+  as?: 'h1' | 'h2';
+  /** Supporting copy under the heading. */
+  sub?: string;
+  /** Cyan kicker — reserved for technology sections. */
+  cyan?: boolean;
+  class?: string;
+}
+
+const { kicker, title, as: Tag = 'h2', sub, cyan = false, class: className = '' } = Astro.props;
+---
+
+<div class:list={[className]}>
+  {
+    kicker && (
+      <p class="vgl-kicker" class:list={[{ 'vgl-kicker-cyan': cyan }]}>
+        {kicker}
+      </p>
+    )
+  }
+  <Tag class:list={['vgl-section-title', { 'vgl-section-title-h1': Tag === 'h1' }]} set:html={title} />
+  {sub && <p class="vgl-section-sub">{sub}</p>}
+</div>
+
+<style>
+  .vgl-kicker {
+    margin: 0 0 14px;
+  }
+
+  .vgl-kicker-cyan {
+    color: var(--color-vgl-cyan);
+  }
+
+  .vgl-section-title {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: clamp(26px, 3vw, 38px);
+    line-height: 1.15;
+    letter-spacing: -0.012em;
+    margin: 0;
+  }
+
+  .vgl-section-title-h1 {
+    font-size: clamp(32px, 4.4vw, 56px);
+    line-height: 1.1;
+    letter-spacing: -0.014em;
+    margin-left: -0.04em;
+  }
+
+  .vgl-section-sub {
+    margin: 12px 0 0;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--color-vgl-neutral-300);
+    max-width: 58ch;
+  }
+</style>
