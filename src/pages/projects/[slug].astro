@@ -177,7 +177,14 @@ const facts = [
         <p class="vgl-kicker">In action</p>
         <h2 class="vgl-video-heading">{project.videoHeading}</h2>
         <figure class="vgl-card vgl-video-figure">
-          <video controls playsinline preload="metadata" src={project.videoSrc} aria-label={project.videoLabel}>
+          <video
+            controls
+            playsinline
+            preload="metadata"
+            src={project.videoSrc}
+            poster={project.videoPoster || undefined}
+            aria-label={project.videoLabel}
+          >
             {project.videoCaptionsFile && (
               <track kind="captions" src={project.videoCaptionsFile} srclang="en" label="English" />
             )}

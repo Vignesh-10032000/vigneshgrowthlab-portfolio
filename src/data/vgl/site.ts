@@ -33,7 +33,7 @@ export const DOCUMENTS = {
   msmeCertificate: '/documents/udyam-certificate.pdf',
 } as const;
 
-/** Reserved media paths — files do not exist yet (see Assets Required Before Launch). */
+/** Client-testimonial media (compressed from the founder-supplied original). */
 export const RESERVED_MEDIA = {
   clientTestimonialVideo: '/videos/client-testimonial.mp4',
   clientTestimonialPoster: '/images/client-testimonial-poster.webp',

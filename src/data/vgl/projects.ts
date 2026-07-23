@@ -259,7 +259,7 @@ export const PROJECTS: Project[] = [
     ],
     gallerySlots: 4,
     videoSrc: '/videos/n8n-workflow.mp4',
-    videoPoster: '',
+    videoPoster: '/images/n8n-workflow-poster.webp',
     videoHeading: 'Workflow demonstration',
     videoLabel: 'Screen recording of the n8n WhatsApp lead-routing workflow running',
     videoTranscript: '',

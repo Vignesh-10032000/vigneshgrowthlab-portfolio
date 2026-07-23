@@ -33,6 +33,7 @@ import {
   CONTACT,
   SOCIALS,
   DOCUMENTS,
+  RESERVED_MEDIA,
 } from '~/data/vgl/site';
 import { jsonLd, localBusiness, faqPage } from '~/utils/structured-data';
 
@@ -87,7 +88,7 @@ const serviceCardCopy: Record<string, { copy: string; tags: string[] }> = {
     <div class="vgl-clients-grid">
       <TestimonialCard
         variant="video"
-        placeholderName="Rani Sarees & Boutique"
+        videoSrc={RESERVED_MEDIA.clientTestimonialVideo}
         videoLabel="Video testimonial from the owner of Rani Sarees and Boutique, Pollachi"
         caption="The owner of Rani Sarees & Boutique on working with Vignesh Growth Lab."
         captionMeta="Video testimonial · Rani Sarees & Boutique, Pollachi"
