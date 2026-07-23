@@ -3,3 +3,5 @@ node_modules
 .github
 .changeset
 design-reference
+# Local session artifacts (untracked)
+VGL_CONTINUATION_MASTER_PROMPT.md

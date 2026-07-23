@@ -1,7 +1,9 @@
 /**
  * Service route → content matrix.
  * Ported verbatim from design-reference/.../project/service-routes.js.
- * Icons are Iconify names in the Phosphor (`ph:`) set.
+ * Icons are Iconify names in the Phosphor (`ph:`) set — except the WordPress
+ * logo, which @iconify-json/ph does not ship (the design's Phosphor web font
+ * has it); `tabler:brand-wordpress` renders the same glyph.
  * Canonical/OG URLs are derived at render time from the configured site URL —
  * never stored here.
  */
@@ -58,7 +60,7 @@ export const SERVICES: Service[] = [
     quickProof: 'NextGen Toys recorded its first online sale within 72 hours of launch.',
     features: [
       {
-        icon: 'ph:wordpress-logo',
+        icon: 'tabler:brand-wordpress',
         title: 'WordPress or custom build',
         copy: 'The right platform for your budget — never a bloated template.',
       },
