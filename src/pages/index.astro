@@ -145,7 +145,20 @@ const serviceCardCopy: Record<string, { copy: string; tags: string[] }> = {
     <article class="vgl-card vgl-lift vgl-featured">
       <div class="vgl-featured-media">
         <DeviceMockup tilt="right" featured>
-          <ImageFrame label={nextgen.cardImageAlt} />
+          {
+            nextgen.cardImage ? (
+              <img
+                src={nextgen.cardImage}
+                alt={nextgen.cardImageAlt}
+                width="1280"
+                height="800"
+                loading="lazy"
+                style="display: block; width: 100%; height: auto; aspect-ratio: 16/10; object-fit: cover"
+              />
+            ) : (
+              <ImageFrame label={nextgen.cardImageAlt} />
+            )
+          }
         </DeviceMockup>
         <ResultBadge text={nextgen.resultBadge} floating class="vgl-featured-badge" />
       </div>

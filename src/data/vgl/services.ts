@@ -103,7 +103,7 @@ export const SERVICES: Service[] = [
     },
     ctaHeading: 'Ready to get your business online?',
     waMessage: "Hi Vignesh, I'm interested in website development.",
-    heroImage: '',
+    heroImage: '/images/project-nextgen.webp',
     heroImageAlt: 'Website development project preview',
   },
   {
@@ -163,7 +163,7 @@ export const SERVICES: Service[] = [
     },
     ctaHeading: 'Have a workflow no template can handle?',
     waMessage: "Hi Vignesh, I'm interested in custom development.",
-    heroImage: '',
+    heroImage: '/images/project-rani.webp',
     heroImageAlt: 'Custom development project preview',
   },
   {
@@ -227,7 +227,7 @@ export const SERVICES: Service[] = [
     },
     ctaHeading: 'Ready to speed up your counter?',
     waMessage: "Hi Vignesh, I'm interested in retail POS software.",
-    heroImage: '',
+    heroImage: '/images/project-pos.webp',
     heroImageAlt: 'Retail POS dashboard preview',
   },
   {
@@ -287,7 +287,7 @@ export const SERVICES: Service[] = [
     },
     ctaHeading: 'Losing enquiries in your WhatsApp inbox?',
     waMessage: "Hi Vignesh, I'm interested in WhatsApp AI automation.",
-    heroImage: '',
+    heroImage: '/images/project-ai-automation.webp',
     heroImageAlt: 'WhatsApp automation workflow preview',
   },
 ];
