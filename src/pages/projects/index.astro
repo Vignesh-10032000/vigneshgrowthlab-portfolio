@@ -1,9 +1,13 @@
 ---
-/** Projects overview — Phase 1 shell. Phase 4 implements the full page. */
+/** Projects overview — follows Projects.dc.html exactly. */
 import PageLayout from '~/layouts/PageLayout.astro';
 import SectionHeading from '~/components/vgl/SectionHeading.astro';
+import ProjectCard from '~/components/vgl/ProjectCard.astro';
+import SectionGlowPanel from '~/components/vgl/SectionGlowPanel.astro';
+import RevealMotion from '~/components/vgl/RevealMotion.astro';
 
 import { PROJECTS } from '~/data/vgl/projects';
+import { MORE_PROJECTS } from '~/data/vgl/site';
 import { jsonLd, collectionPage } from '~/utils/structured-data';
 
 const metadata = {
@@ -18,29 +22,129 @@ const structuredData = jsonLd(
     PROJECTS.map((p) => ({ name: p.client, path: p.pageRoute }))
   )
 );
+
+/** Result shown as a trend-up line on this page (Projects.dc.html card style). */
+const resultLines: Record<string, string> = {
+  'nextgen-toys': 'First online sale within 72 hours',
+  'rani-sarees': '3× online reach',
+  'vgl-pos': 'Passed a 250 concurrent user load test',
+  'ai-whatsapp-automation': 'Routes 100+ leads daily',
+};
 ---
 
 <PageLayout metadata={metadata} active="projects" structuredData={structuredData}>
-  <section class="vgl-container" style="padding-block: clamp(48px, 7vw, 88px)">
+  <section class="vgl-container vgl-hero-sec">
     <SectionHeading
       kicker="Projects"
       as="h1"
       title="Projects built around<br />measurable business outcomes."
       sub="15+ projects delivered across Tamil Nadu — stores, boutiques, POS systems and AI automations. Here are the ones with stories worth telling."
     />
-    <ul style="list-style: none; margin: 36px 0 0; padding: 0; display: flex; flex-direction: column; gap: 12px">
+  </section>
+
+  <section class="vgl-container vgl-list-sec" aria-label="Case studies">
+    <div class="vgl-projects-grid">
       {
-        PROJECTS.map((project) => (
-          <li>
-            <a
-              href={project.pageRoute}
-              style="color: var(--color-vgl-accent-300); text-decoration: none; font-size: 16px"
-            >
-              {project.client} →
-            </a>
-          </li>
+        PROJECTS.map((project, i) => (
+          <ProjectCard project={project} tilt={i % 2 === 0 ? 'left' : 'right'} resultLine={resultLines[project.slug]} />
         ))
       }
-    </ul>
+    </div>
+
+    <h2 class="vgl-more-heading">More delivered work</h2>
+    <div class="vgl-more-grid">
+      {
+        MORE_PROJECTS.map((item) => (
+          <article class="vgl-more-card">
+            <div class="vgl-more-tags">
+              <span class="vgl-tag vgl-tag-neutral">{item.type}</span>
+              <span class="vgl-tag vgl-tag-neutral">{item.location}</span>
+            </div>
+            <h3>{item.name}</h3>
+            <p>{item.copy}</p>
+          </article>
+        ))
+      }
+    </div>
   </section>
+
+  <section class="vgl-container vgl-sec vgl-sec-last">
+    <SectionGlowPanel
+      heading="Have a similar project in mind?"
+      sub="Talk directly with Vignesh — free 30-minute call, proposal in 24 hours."
+      ctaLabel="Start on WhatsApp"
+      ctaMessage="Hi Vignesh, I have a project in mind."
+    />
+  </section>
+
+  <RevealMotion />
 </PageLayout>
+
+<style>
+  .vgl-hero-sec {
+    padding-top: clamp(48px, 7vw, 88px);
+  }
+
+  .vgl-list-sec {
+    padding-top: clamp(44px, 6vw, 64px);
+  }
+
+  .vgl-sec {
+    padding-top: clamp(48px, 6.5vw, 80px);
+    scroll-margin-top: 84px;
+  }
+
+  .vgl-sec-last {
+    padding-bottom: clamp(52px, 7vw, 88px);
+  }
+
+  .vgl-projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: 18px;
+  }
+
+  .vgl-more-heading {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 18px;
+    margin: 44px 0 0;
+    color: var(--color-vgl-neutral-200);
+  }
+
+  .vgl-more-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    gap: 14px;
+    margin-top: 16px;
+  }
+
+  .vgl-more-card {
+    padding: 20px 22px;
+    border: 1px solid var(--color-vgl-neutral-700);
+    border-radius: var(--radius-vgl-md);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .vgl-more-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .vgl-more-card h3 {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 16.5px;
+    margin: 0;
+  }
+
+  .vgl-more-card p {
+    margin: 0;
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--color-vgl-neutral-300);
+  }
+</style>

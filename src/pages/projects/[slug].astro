@@ -1,8 +1,16 @@
 ---
-/** Case study — Phase 1 shell. Phase 4 implements the full template. */
+/**
+ * Case study — follows Case Study Template.dc.html exactly.
+ * Conditional blocks render in fixed order and collapse entirely when their
+ * data is empty: hero media stays a placeholder, gallery, video, transcript,
+ * captions track, quote and live URL all depend on matrix fields.
+ */
+import { Icon } from 'astro-icon/components';
+
 import PageLayout from '~/layouts/PageLayout.astro';
-import SectionHeading from '~/components/vgl/SectionHeading.astro';
 import WhatsAppCta from '~/components/vgl/WhatsAppCta.astro';
+import ImageFrame from '~/components/vgl/ImageFrame.astro';
+import RevealMotion from '~/components/vgl/RevealMotion.astro';
 
 import { PROJECTS } from '~/data/vgl/projects';
 import type { Project } from '~/data/vgl/projects';
@@ -27,25 +35,573 @@ const structuredData = jsonLd(
   creativeWork(project.client),
   breadcrumbList([{ name: 'Home', path: '/' }, { name: 'Projects', path: '/projects' }, { name: project.client }])
 );
+
+const facts = [
+  { label: 'Client', value: project.client },
+  { label: 'Location', value: project.location },
+  { label: 'Project type', value: project.projectType },
+  { label: 'Built with', value: project.technology },
+];
 ---
 
 <PageLayout metadata={metadata} active="projects" structuredData={structuredData}>
-  <section class="vgl-container" style="padding-block: clamp(40px, 6vw, 72px) clamp(52px, 7vw, 88px)">
-    <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 18px">
+  <section class="vgl-container vgl-hero-sec">
+    <nav aria-label="Breadcrumb" class="vgl-breadcrumb">
+      <a href="/">Home</a>
+      <Icon name="ph:caret-right" style="font-size: 11px" aria-hidden="true" />
+      <a href="/projects">Projects</a>
+      <Icon name="ph:caret-right" style="font-size: 11px" aria-hidden="true" />
+      <span aria-current="page">{project.client}</span>
+    </nav>
+    <div class="vgl-hero-tags">
       <span class="vgl-tag vgl-tag-accent">{project.projectType}</span>
       <span class="vgl-tag vgl-tag-neutral">{project.location}</span>
       <span class="vgl-tag vgl-tag-tech">{project.technology}</span>
     </div>
-    <SectionHeading as="h1" title={project.client} sub={project.summary} />
-    <div style="display: flex; gap: 14px; flex-wrap: wrap; margin-top: 26px">
+    <h1 class="vgl-case-title">{project.client}</h1>
+    <p class="vgl-case-summary">{project.summary}</p>
+    <div class="vgl-hero-ctas">
       {
         project.liveUrl && (
-          <a class="vgl-btn vgl-btn-primary" href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+          <a
+            class="vgl-btn vgl-btn-primary vgl-hero-btn"
+            href={project.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             {project.liveLabel}
+            <Icon name="ph:arrow-up-right" style="font-size: 16px" aria-hidden="true" />
           </a>
         )
       }
-      <WhatsAppCta message={project.waMessage} label="I want something like this" iconSize={18} />
+      <WhatsAppCta message={project.waMessage} label="I want something like this" iconSize={18} class="vgl-hero-wa" />
+    </div>
+    <div class="vgl-hero-media">
+      {
+        project.heroImage ? (
+          <img src={project.heroImage} alt={project.heroImageAlt} width="1680" height="720" loading="eager" />
+        ) : (
+          <ImageFrame label={project.client} ratio="21/9" />
+        )
+      }
     </div>
   </section>
+
+  <section class="vgl-container vgl-facts-sec" aria-label="Project facts">
+    <div class="vgl-facts-grid">
+      {
+        facts.map((fact) => (
+          <div class="vgl-fact-card">
+            <p class="vgl-fact-label">{fact.label}</p>
+            <p class="vgl-fact-value">{fact.value}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="vgl-container vgl-brief-sec">
+    <div class="vgl-brief-grid">
+      <div>
+        <p class="vgl-kicker">{project.challengeKicker}</p>
+        <h2 class="vgl-brief-title">{project.challengeTitle}</h2>
+        <p class="vgl-brief-copy">{project.challenge}</p>
+      </div>
+      <div>
+        <p class="vgl-kicker vgl-kicker-cyan">What we built</p>
+        <h2 class="vgl-brief-title">{project.solutionTitle}</h2>
+        <p class="vgl-brief-copy">{project.solution}</p>
+        <ul class="vgl-delivered">
+          {
+            project.delivered.map((item) => (
+              <li>
+                <Icon
+                  name="ph:check"
+                  style="color: var(--color-vgl-cyan); font-size: 14px; position: relative; top: 1px"
+                  aria-hidden="true"
+                />
+                {item}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="vgl-results-band" aria-label="Results" data-stats>
+    <div class="vgl-container">
+      <h2 class="vgl-results-title">Results</h2>
+      <div class="vgl-results-grid">
+        {
+          project.results.map((result) => (
+            <div>
+              <p class="vgl-num" style="font-feature-settings: 'tnum' 1">
+                {result.value}
+              </p>
+              <p class="vgl-result-label">{result.label}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {
+    project.quote && (
+      <section class="vgl-container vgl-sec">
+        <div class="vgl-quote-grid">
+          <figure class="vgl-quote-figure">
+            <blockquote>“{project.quote}”</blockquote>
+            <figcaption>— {project.quoteAuthor}</figcaption>
+          </figure>
+          {project.testimonialImage && (
+            <div class="vgl-quote-media">
+              <img
+                src={project.testimonialImage}
+                alt={project.testimonialImageAlt}
+                width="628"
+                height="786"
+                loading="lazy"
+              />
+            </div>
+          )}
+        </div>
+      </section>
+    )
+  }
+
+  {
+    project.videoSrc && (
+      <section class="vgl-container vgl-sec">
+        <p class="vgl-kicker">In action</p>
+        <h2 class="vgl-video-heading">{project.videoHeading}</h2>
+        <figure class="vgl-card vgl-video-figure">
+          <video controls playsinline preload="metadata" src={project.videoSrc} aria-label={project.videoLabel}>
+            {project.videoCaptionsFile && (
+              <track kind="captions" src={project.videoCaptionsFile} srclang="en" label="English" />
+            )}
+          </video>
+          <figcaption>{project.videoLabel}</figcaption>
+        </figure>
+        {project.videoTranscript && (
+          <details class="vgl-transcript">
+            <summary>Read the transcript</summary>
+            <p>{project.videoTranscript}</p>
+          </details>
+        )}
+      </section>
+    )
+  }
+
+  {
+    project.galleryImages.length > 0 && (
+      <section class="vgl-container vgl-sec">
+        <p class="vgl-kicker">Gallery</p>
+        <h2 class="vgl-gallery-heading">Inside the build</h2>
+        <div class="vgl-gallery-grid">
+          {project.galleryImages.map((src, i) => (
+            <figure class="vgl-gallery-item">
+              <img src={src} alt={project.galleryCaptions[i]} width="1200" height="900" loading="lazy" />
+              <figcaption>{project.galleryCaptions[i]}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+    )
+  }
+
+  <section class="vgl-container vgl-cta-sec">
+    <div class="vgl-case-cta">
+      <div class="vgl-case-cta-copy">
+        <h2>Want results like this?</h2>
+        <p>Free 30-minute strategy call. Custom proposal in 24 hours.</p>
+      </div>
+      <div class="vgl-case-cta-btns">
+        <WhatsAppCta message={project.waMessage} label="Talk to Vignesh" iconSize={18} class="vgl-hero-wa" />
+        <a href={project.relatedServiceRoute} class="vgl-btn vgl-btn-ghost vgl-hero-ghost">About this service</a>
+        <a href="/projects" class="vgl-btn vgl-btn-ghost vgl-hero-ghost">All projects</a>
+      </div>
+    </div>
+  </section>
+
+  <RevealMotion />
 </PageLayout>
+
+<style>
+  .vgl-hero-sec {
+    padding-top: clamp(40px, 6vw, 72px);
+  }
+
+  .vgl-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--color-vgl-neutral-400);
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+
+  .vgl-breadcrumb a {
+    color: var(--color-vgl-neutral-400);
+    text-decoration: none;
+    padding: 4px 0;
+  }
+
+  .vgl-breadcrumb a:hover {
+    color: var(--color-vgl-accent);
+  }
+
+  .vgl-breadcrumb span[aria-current] {
+    color: var(--color-vgl-neutral-200);
+  }
+
+  .vgl-hero-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+
+  .vgl-case-title {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: clamp(34px, 4.6vw, 60px);
+    line-height: 1.08;
+    letter-spacing: -0.014em;
+    margin: 0;
+    margin-left: -0.04em;
+  }
+
+  .vgl-case-summary {
+    font-size: 16.5px;
+    line-height: 1.65;
+    color: var(--color-vgl-neutral-200);
+    margin: 18px 0 0;
+    max-width: 58ch;
+  }
+
+  .vgl-hero-ctas {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 26px;
+  }
+
+  .vgl-hero-btn,
+  .vgl-hero-ghost,
+  .vgl-hero-ctas :global(.vgl-hero-wa) {
+    min-height: 46px;
+    padding-inline: 20px;
+  }
+
+  .vgl-hero-media {
+    margin-top: clamp(28px, 4vw, 44px);
+    min-height: 200px;
+    border-radius: var(--radius-vgl-lg);
+    overflow: hidden;
+  }
+
+  .vgl-hero-media img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 21/9;
+    object-fit: cover;
+    display: block;
+  }
+
+  .vgl-facts-sec {
+    padding-top: clamp(36px, 5vw, 52px);
+  }
+
+  .vgl-facts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr));
+    gap: 14px;
+  }
+
+  .vgl-fact-card {
+    padding: 18px 20px;
+    border: 1px solid var(--color-vgl-neutral-700);
+    border-radius: var(--radius-vgl-md);
+  }
+
+  .vgl-fact-label {
+    margin: 0;
+    font-size: 11.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-vgl-neutral-400);
+  }
+
+  .vgl-fact-value {
+    margin: 8px 0 0;
+    font-size: 15px;
+    font-family: var(--font-heading);
+    font-weight: 500;
+  }
+
+  .vgl-brief-sec {
+    padding-top: clamp(44px, 6vw, 72px);
+  }
+
+  .vgl-brief-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: 32px clamp(28px, 4vw, 64px);
+  }
+
+  .vgl-kicker {
+    margin: 0 0 14px;
+  }
+
+  .vgl-kicker-cyan {
+    color: var(--color-vgl-cyan);
+  }
+
+  .vgl-brief-title {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: clamp(22px, 2.6vw, 30px);
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .vgl-brief-copy {
+    margin: 16px 0 0;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--color-vgl-neutral-300);
+    max-width: 52ch;
+  }
+
+  .vgl-delivered {
+    margin: 16px 0 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 52ch;
+  }
+
+  .vgl-delivered li {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-vgl-neutral-300);
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+  }
+
+  /* Results band — full-bleed section colour + glow, counters via RevealMotion */
+  .vgl-results-band {
+    margin-top: clamp(44px, 6vw, 72px);
+    padding: clamp(40px, 5vw, 52px) 0;
+    background:
+      radial-gradient(
+        800px 380px at 85% -40%,
+        color-mix(in srgb, var(--color-vgl-section-glow) 70%, transparent),
+        transparent 64%
+      ),
+      var(--color-vgl-section);
+  }
+
+  .vgl-results-title {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: clamp(20px, 2.2vw, 26px);
+    margin: 0 0 32px;
+  }
+
+  .vgl-results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+    gap: 32px 28px;
+  }
+
+  .vgl-num {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: clamp(30px, 3.2vw, 44px);
+    margin: 0;
+  }
+
+  .vgl-result-label {
+    margin: 10px 0 0;
+    font-size: 12.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--color-vgl-text) 64%, transparent);
+  }
+
+  .vgl-sec {
+    padding-top: clamp(52px, 7vw, 88px);
+    scroll-margin-top: 84px;
+  }
+
+  .vgl-quote-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: 36px clamp(28px, 4vw, 64px);
+    align-items: center;
+  }
+
+  .vgl-quote-figure {
+    margin: 0;
+  }
+
+  .vgl-quote-figure blockquote {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: clamp(21px, 2.4vw, 28px);
+    line-height: 1.45;
+    letter-spacing: -0.01em;
+    max-width: 36ch;
+    margin: 0;
+    text-indent: -0.474em;
+  }
+
+  .vgl-quote-figure figcaption {
+    font-size: 15px;
+    color: var(--color-vgl-neutral-400);
+    margin: 24px 0 0;
+  }
+
+  .vgl-quote-media {
+    display: flex;
+    justify-content: center;
+  }
+
+  .vgl-quote-media img {
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+    border-radius: 12px;
+    border: 1px solid var(--color-vgl-neutral-700);
+    display: block;
+  }
+
+  .vgl-video-heading {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: clamp(24px, 2.8vw, 34px);
+    line-height: 1.15;
+    margin: 0 0 28px;
+  }
+
+  .vgl-video-figure {
+    margin: 0;
+  }
+
+  .vgl-video-figure video {
+    width: 100%;
+    aspect-ratio: 16/9;
+    display: block;
+    background: var(--color-vgl-neutral-900);
+    border-radius: var(--radius-vgl-md) var(--radius-vgl-md) 0 0;
+    object-fit: contain;
+  }
+
+  .vgl-video-figure figcaption {
+    padding: 16px 22px;
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--color-vgl-neutral-300);
+  }
+
+  .vgl-transcript {
+    margin-top: 14px;
+    border: 1px solid var(--color-vgl-neutral-700);
+    border-radius: var(--radius-vgl-md);
+    padding: 14px 18px;
+  }
+
+  .vgl-transcript summary {
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--color-vgl-neutral-200);
+  }
+
+  .vgl-transcript p {
+    margin: 12px 0 0;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--color-vgl-neutral-300);
+    white-space: pre-wrap;
+  }
+
+  .vgl-gallery-heading {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: clamp(24px, 2.8vw, 34px);
+    line-height: 1.15;
+    margin: 0 0 32px;
+  }
+
+  .vgl-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    gap: 14px;
+  }
+
+  .vgl-gallery-item {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .vgl-gallery-item img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 1px solid var(--color-vgl-neutral-700);
+    display: block;
+  }
+
+  .vgl-gallery-item figcaption {
+    font-size: 12.5px;
+    color: var(--color-vgl-neutral-400);
+  }
+
+  .vgl-cta-sec {
+    padding-block: clamp(52px, 7vw, 88px);
+  }
+
+  .vgl-case-cta {
+    border-top: 1px solid var(--color-vgl-divider);
+    padding-top: 44px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .vgl-case-cta-copy {
+    max-width: 52ch;
+  }
+
+  .vgl-case-cta-copy h2 {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: clamp(22px, 2.6vw, 30px);
+    margin: 0;
+  }
+
+  .vgl-case-cta-copy p {
+    margin: 10px 0 0;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--color-vgl-neutral-300);
+  }
+
+  .vgl-case-cta-btns {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+</style>

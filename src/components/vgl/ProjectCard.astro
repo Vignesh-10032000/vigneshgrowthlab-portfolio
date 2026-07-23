@@ -17,9 +17,17 @@ export interface Props {
   caseCtaLabel?: string;
   /** Shorter context-specific card copy; defaults to the matrix summary. */
   cardCopy?: string;
+  /** Result as a trend-up line in the body (Projects page style) instead of the floating badge. */
+  resultLine?: string;
 }
 
-const { project, tilt = 'left', caseCtaLabel = 'Case study', cardCopy = Astro.props.project.summary } = Astro.props;
+const {
+  project,
+  tilt = 'left',
+  caseCtaLabel = 'Case study',
+  cardCopy = Astro.props.project.summary,
+  resultLine,
+} = Astro.props;
 const isVideoPoster = project.slug === 'ai-whatsapp-automation';
 ---
 
@@ -69,7 +77,7 @@ const isVideoPoster = project.slug === 'ai-whatsapp-automation';
         </DeviceMockup>
       )
     }
-    <ResultBadge text={project.resultBadge} green={isVideoPoster} floating />
+    {!resultLine && <ResultBadge text={project.resultBadge} green={isVideoPoster} floating />}
   </div>
   <div class="vgl-project-body">
     <div class="vgl-project-tags">
@@ -92,6 +100,14 @@ const isVideoPoster = project.slug === 'ai-whatsapp-automation';
     </div>
     <h3>{project.client}</h3>
     <p>{cardCopy}</p>
+    {
+      resultLine && (
+        <p class="vgl-project-result">
+          <Icon name="ph:trend-up" style="font-size: 16px" aria-hidden="true" />
+          {resultLine}
+        </p>
+      )
+    }
     <div class="vgl-project-ctas">
       {
         isVideoPoster ? (
@@ -182,6 +198,15 @@ const isVideoPoster = project.slug === 'ai-whatsapp-automation';
     font-size: 14px;
     line-height: 1.6;
     color: var(--color-vgl-neutral-300);
+  }
+
+  .vgl-project-result {
+    margin: 0;
+    font-size: 14px;
+    color: var(--color-vgl-accent-200);
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 
   .vgl-project-ctas {
