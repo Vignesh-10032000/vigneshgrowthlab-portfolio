@@ -202,6 +202,26 @@ const facts = [
   }
 
   {
+    project.workflowCards.length > 0 && (
+      <section class="vgl-container vgl-sec">
+        <p class="vgl-kicker">Under the hood</p>
+        <h2 class="vgl-gallery-heading">The workflows, and what they do</h2>
+        <div class="vgl-workflow-grid">
+          {project.workflowCards.map((card) => (
+            <figure class="vgl-card vgl-workflow-card">
+              <img src={card.src} alt={card.alt} width="1400" height="672" loading="lazy" />
+              <figcaption>
+                <h3>{card.title}</h3>
+                <p>{card.blurb}</p>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+    )
+  }
+
+  {
     project.galleryImages.length > 0 && (
       <section class="vgl-container vgl-sec">
         <p class="vgl-kicker">Gallery</p>
@@ -545,6 +565,47 @@ const facts = [
     font-size: clamp(24px, 2.8vw, 34px);
     line-height: 1.15;
     margin: 0 0 32px;
+  }
+
+  .vgl-workflow-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    gap: 18px;
+  }
+
+  .vgl-workflow-card {
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .vgl-workflow-card img {
+    width: 100%;
+    aspect-ratio: 1400/672;
+    object-fit: cover;
+    display: block;
+    background: var(--color-vgl-neutral-900);
+    border-bottom: 1px solid var(--color-vgl-neutral-800);
+  }
+
+  .vgl-workflow-card figcaption {
+    padding: 20px 22px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .vgl-workflow-card h3 {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 17px;
+    margin: 0;
+  }
+
+  .vgl-workflow-card figcaption p {
+    margin: 0;
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--color-vgl-neutral-300);
   }
 
   .vgl-gallery-grid {

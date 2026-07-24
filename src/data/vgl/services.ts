@@ -172,13 +172,13 @@ export const SERVICES: Service[] = [
     pageRoute: '/services/retail-pos-solutions',
     seoTitle: 'Retail POS Software for Tamil Nadu Stores — Vignesh Growth Lab',
     seoDescription:
-      'Custom billing software with inventory, reports, customer management and thermal receipt printing. Flask-based, load-tested to 250 concurrent users.',
+      'Custom billing software with inventory, reports, bilingual English–Tamil UI and WhatsApp digital receipts. Flask-based, load-tested to 600 concurrent clients under 300ms.',
     heroStatement:
       'Custom billing software with inventory, reports, customer management and thermal receipt printing — running on your hardware, with your data.',
     outcome: 'Billing, stock and reports in one place — owned by you, not rented.',
     whoItIsFor:
       'Retail stores that want billing, stock and reports in one place — on their own hardware, with their own data.',
-    quickProof: 'VGL POS passed a 250-concurrent-user load test.',
+    quickProof: 'VGL POS load-tested to 600 concurrent clients at under 300ms.',
     features: [
       {
         icon: 'ph:receipt',
@@ -221,7 +221,7 @@ export const SERVICES: Service[] = [
       type: 'Retail POS',
       location: 'Tamil Nadu',
       copy: 'Custom retail POS with real-time stock and sales tracking.',
-      result: 'Passed a 250 concurrent user load test',
+      result: 'Load-tested to 600 concurrent clients at <300ms',
       caseRoute: '/projects/vgl-pos',
       liveUrl: 'https://web-production-9375fc.up.railway.app',
     },

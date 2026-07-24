@@ -32,15 +32,15 @@ import { waLink } from '~/utils/whatsapp';
         >
           <Icon name="ph:github-logo" style="font-size: 18px" aria-hidden="true" />
         </a>
-        {/* Real Instagram URL not yet supplied — disabled "coming soon" state per design */}
-        <span
-          role="img"
-          aria-label="Instagram profile coming soon"
-          title="Instagram profile coming soon"
-          class="vgl-social-btn vgl-social-disabled"
+        <a
+          href={footerSocials.instagram}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram"
+          class="vgl-social-btn"
         >
           <Icon name="ph:instagram-logo" style="font-size: 18px" aria-hidden="true" />
-        </span>
+        </a>
       </div>
     </div>
 
@@ -158,12 +158,6 @@ import { waLink } from '~/utils/whatsapp';
 
   .vgl-social-btn:hover {
     background: color-mix(in srgb, var(--color-vgl-accent) 10%, transparent);
-  }
-
-  .vgl-social-disabled {
-    opacity: 0.45;
-    cursor: default;
-    pointer-events: none;
   }
 
   .vgl-footer-heading {

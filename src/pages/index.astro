@@ -49,7 +49,8 @@ const gridProjects = ['rani-sarees', 'vgl-pos', 'ai-whatsapp-automation'].map((s
 // Homepage card copy is the design's shorter variant, not the full matrix summary
 const homeCardCopy: Record<string, string> = {
   'rani-sarees': 'Custom-coded site with pre-filled WhatsApp order buttons on every product, GA4 and local schema.',
-  'vgl-pos': 'Custom retail POS with real-time stock and sales tracking — load-tested to 250 concurrent users.',
+  'vgl-pos':
+    'Bilingual (English ↔ Tamil) retail POS with real-time stock and WhatsApp digital receipts — load-tested to 600 concurrent clients.',
   'ai-whatsapp-automation':
     'Lead routing that auto-classifies enquiries straight to Google Sheets and WhatsApp — 100+ leads daily.',
 };
@@ -201,6 +202,12 @@ const serviceCardCopy: Record<string, { copy: string; tags: string[] }> = {
             </div>
             <h3>{item.name}</h3>
             <p>{item.copy}</p>
+            {item.liveUrl && (
+              <a class="vgl-more-live" href={item.liveUrl} target="_blank" rel="noopener noreferrer">
+                Live site
+                <Icon name="ph:arrow-up-right" style="font-size: 13px" aria-hidden="true" />
+              </a>
+            )}
           </article>
         ))
       }
@@ -528,6 +535,21 @@ const serviceCardCopy: Record<string, { copy: string; tags: string[] }> = {
     font-size: 13.5px;
     line-height: 1.6;
     color: var(--color-vgl-neutral-300);
+  }
+
+  .vgl-more-live {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: auto;
+    padding-top: 4px;
+    font-size: 13px;
+    color: var(--color-vgl-accent-300);
+    text-decoration: none;
+  }
+
+  .vgl-more-live:hover {
+    color: var(--color-vgl-accent-200);
   }
 
   /* Founder */

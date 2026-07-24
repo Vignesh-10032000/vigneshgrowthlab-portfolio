@@ -11,6 +11,14 @@ export interface ProjectResult {
   label: string;
 }
 
+/** "Smart card" for a workflow screenshot — image plus a plain-language explainer. */
+export interface WorkflowCard {
+  src: string;
+  alt: string;
+  title: string;
+  blurb: string;
+}
+
 export interface Project {
   slug: string;
   client: string;
@@ -40,6 +48,8 @@ export interface Project {
   galleryCaptions: string[];
   /** Number of reserved gallery slots when real images are pending (gallery hidden until supplied). */
   gallerySlots: number;
+  /** Annotated workflow screenshots (AI automation only); empty collapses the section. */
+  workflowCards: WorkflowCard[];
   videoSrc: string;
   videoPoster: string;
   videoHeading: string;
@@ -94,6 +104,7 @@ export const PROJECTS: Project[] = [
     galleryImages: [],
     galleryCaptions: [],
     gallerySlots: 0,
+    workflowCards: [],
     videoSrc: '',
     videoPoster: '',
     videoHeading: '',
@@ -147,6 +158,7 @@ export const PROJECTS: Project[] = [
     galleryImages: [],
     galleryCaptions: [],
     gallerySlots: 0,
+    workflowCards: [],
     videoSrc: '',
     videoPoster: '',
     videoHeading: '',
@@ -167,38 +179,41 @@ export const PROJECTS: Project[] = [
     slug: 'vgl-pos',
     client: 'VGL POS Software',
     pageRoute: '/projects/vgl-pos',
-    seoTitle: 'VGL POS case study — 250 concurrent users | Vignesh Growth Lab',
+    seoTitle: 'VGL POS case study — bilingual billing, 600 concurrent users | Vignesh Growth Lab',
     seoDescription:
-      'Flask-based custom retail POS for Tamil Nadu stores: real-time stock and sales tracking, load-tested to 250 concurrent users. Live demo available.',
+      'Flask-based bilingual (English ↔ Tamil) retail POS for Tamil Nadu grocery and apparel stores: inventory, WhatsApp digital receipts and EOD day-close, load-tested to 600 concurrent clients under 300ms. Live demo available.',
     location: 'Tamil Nadu',
     projectType: 'Retail POS',
     technology: 'Flask',
     summary:
-      'A custom retail POS for Tamil Nadu stores — real-time stock and sales tracking, built with Flask. It passed a 250 concurrent user load test.',
+      'A bilingual (English ↔ Tamil) retail POS for Tamil Nadu grocery stores and apparel showrooms — billing, inventory and sales reporting in one fast screen, with automated WhatsApp digital receipts. Load-tested to 600 concurrent clients at under 300ms average response.',
     challengeKicker: 'Project goal',
     challengeTitle: 'Billing that keeps up with the counter',
     challenge:
-      'Retail counters need billing, stock and sales visibility in one fast screen — without depending on rented software.',
-    solutionTitle: 'A Flask POS built for load',
+      'Busy grocery and apparel counters need billing, inventory and sales visibility in one fast screen — in both Tamil and English — without depending on rented software.',
+    solutionTitle: 'A bilingual Flask POS built for load',
     solution:
-      'A Flask-based POS with real-time stock and sales tracking, validated with a 250 concurrent user load test.',
+      'A Flask-based POS with a fully bilingual interface (English ↔ Tamil across the UI and printed receipts), real-time inventory and sales tracking, automated WhatsApp digital receipts, and an end-of-day Day-Close summary that splits takings by Cash, UPI and Card. Load-tested to 600 concurrent clients while holding average response times under 300ms.',
     delivered: [
-      'Real-time stock and sales tracking',
-      'Flask-based custom build',
-      '250 concurrent user load test passed',
+      '100% bilingual interface — English ↔ Tamil across the UI and receipts',
+      'Automated WhatsApp digital receipts sent to customers',
+      'EOD Day-Close summary split by Cash, UPI and Card',
+      'Real-time inventory and sales reporting',
+      'Load-tested to 600 concurrent clients at under 300ms',
     ],
     results: [
-      { value: '250+', label: 'Concurrent users handled' },
-      { value: 'Real-time', label: 'Stock and sales tracking' },
-      { value: 'Live', label: 'Demo available online' },
+      { value: '600', label: 'Concurrent clients load-tested' },
+      { value: '<300ms', label: 'Average response time' },
+      { value: 'Bilingual', label: 'English ↔ Tamil UI and receipts' },
     ],
     cardImage: '/images/project-pos.webp',
-    cardImageAlt: 'VGL POS dashboard screenshot',
+    cardImageAlt: 'VGL POS bilingual dashboard screenshot',
     heroImage: '/images/project-pos.webp',
-    heroImageAlt: 'VGL POS dashboard, full-width view',
+    heroImageAlt: 'VGL POS bilingual dashboard, full-width view',
     galleryImages: [],
     galleryCaptions: [],
     gallerySlots: 0,
+    workflowCards: [],
     videoSrc: '',
     videoPoster: '',
     videoHeading: '',
@@ -213,7 +228,7 @@ export const PROJECTS: Project[] = [
     liveLabel: 'Open live demo',
     relatedServiceRoute: '/services/retail-pos-solutions',
     waMessage: 'Hi Vignesh, I saw the VGL POS case study.',
-    resultBadge: '250+ concurrent users',
+    resultBadge: '600 concurrent clients',
   },
   {
     slug: 'ai-whatsapp-automation',
@@ -233,31 +248,43 @@ export const PROJECTS: Project[] = [
       'Classify incoming enquiries and deliver each one to the right place — without a person sorting them by hand.',
     solutionTitle: 'n8n + Gemini doing the sorting',
     solution:
-      'An n8n workflow with Gemini AI classification: each incoming lead is categorised and routed to Google Sheets for logging and to WhatsApp for immediate follow-up.',
+      'An end-to-end n8n workflow with Gemini AI: each incoming WhatsApp enquiry is understood, answered in under 5 seconds, and logged straight into Google Sheets as a CRM record — 24/7, with zero human input. A second engine scrapes and scores new business leads and routes them into tiered outreach automatically.',
     delivered: [
-      'AI classification of incoming leads',
-      'Automatic logging to Google Sheets',
-      'Instant routing to WhatsApp',
+      'AI replies to every enquiry in under 5 seconds, 24/7',
+      'Gemini AI parses and classifies each conversation',
+      'Every lead logged straight into Google Sheets (CRM)',
+      'Instant routing to WhatsApp for follow-up',
     ],
     results: [
       { value: '100+', label: 'Leads routed daily' },
-      { value: '2', label: 'Destinations: Sheets + WhatsApp' },
-      { value: 'Auto', label: 'Classification via Gemini AI' },
+      { value: '<5s', label: 'AI reply, any time of day' },
+      { value: '24/7', label: 'Automated — zero human input' },
     ],
     cardImage: '/images/project-ai-automation.webp',
     cardImageAlt: 'n8n workflow overview',
     heroImage: '/images/project-ai-automation.webp',
     heroImageAlt: 'n8n WhatsApp automation workflow, full-width view',
-    // Real screenshots pending → gallery stays hidden; production paths will be
-    // /images/workflow/n8n-workflow-1..4.webp when supplied.
+    // The generic gallery stays unused; the two real workflows render as
+    // annotated "smart cards" via workflowCards below.
     galleryImages: [],
-    galleryCaptions: [
-      'n8n workflow — full canvas overview',
-      'n8n workflow — lead classification nodes',
-      'n8n workflow — Google Sheets logging step',
-      'n8n workflow — WhatsApp routing step',
+    galleryCaptions: [],
+    gallerySlots: 0,
+    workflowCards: [
+      {
+        src: '/images/workflow/whatsapp-ai-flow.webp',
+        alt: 'n8n workflow: WhatsApp trigger, Gemini AI reply, Google Sheets logging and WhatsApp send',
+        title: 'WhatsApp reply & CRM logging',
+        blurb:
+          'A WhatsApp message triggers the flow, Gemini drafts the reply, the enquiry is appended to a Google Sheet as a CRM record, and the answer is sent back — in under 5 seconds, with no human in the loop.',
+      },
+      {
+        src: '/images/workflow/lead-acquisition-engine.webp',
+        alt: 'n8n workflow: daily cron scraping Google Maps leads, scoring them and routing to tiered outreach',
+        title: 'Lead acquisition & scoring engine',
+        blurb:
+          'A daily job pulls and formats business leads from Google Maps, scores each one, checks whether they already have a website, then routes them into tiered WhatsApp and email outreach automatically.',
+      },
     ],
-    gallerySlots: 4,
     videoSrc: '/videos/n8n-workflow.mp4',
     videoPoster: '/images/n8n-workflow-poster.webp',
     videoHeading: 'Workflow demonstration',

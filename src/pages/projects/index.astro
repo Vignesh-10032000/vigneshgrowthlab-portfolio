@@ -6,6 +6,8 @@ import ProjectCard from '~/components/vgl/ProjectCard.astro';
 import SectionGlowPanel from '~/components/vgl/SectionGlowPanel.astro';
 import RevealMotion from '~/components/vgl/RevealMotion.astro';
 
+import { Icon } from 'astro-icon/components';
+
 import { PROJECTS } from '~/data/vgl/projects';
 import { MORE_PROJECTS } from '~/data/vgl/site';
 import { jsonLd, collectionPage } from '~/utils/structured-data';
@@ -27,7 +29,7 @@ const structuredData = jsonLd(
 const resultLines: Record<string, string> = {
   'nextgen-toys': 'First online sale within 72 hours',
   'rani-sarees': '3× online reach',
-  'vgl-pos': 'Passed a 250 concurrent user load test',
+  'vgl-pos': 'Load-tested to 600 concurrent clients at <300ms',
   'ai-whatsapp-automation': 'Routes 100+ leads daily',
 };
 ---
@@ -62,6 +64,12 @@ const resultLines: Record<string, string> = {
             </div>
             <h3>{item.name}</h3>
             <p>{item.copy}</p>
+            {item.liveUrl && (
+              <a class="vgl-more-live" href={item.liveUrl} target="_blank" rel="noopener noreferrer">
+                Live site
+                <Icon name="ph:arrow-up-right" style="font-size: 13px" aria-hidden="true" />
+              </a>
+            )}
           </article>
         ))
       }
@@ -146,5 +154,20 @@ const resultLines: Record<string, string> = {
     font-size: 13.5px;
     line-height: 1.6;
     color: var(--color-vgl-neutral-300);
+  }
+
+  .vgl-more-live {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: auto;
+    padding-top: 4px;
+    font-size: 13px;
+    color: var(--color-vgl-accent-300);
+    text-decoration: none;
+  }
+
+  .vgl-more-live:hover {
+    color: var(--color-vgl-accent-200);
   }
 </style>

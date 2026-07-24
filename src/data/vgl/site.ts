@@ -24,8 +24,7 @@ export const BRAND = {
 export const SOCIALS = {
   linkedin: 'https://www.linkedin.com/in/vignesh-prabhu-m-06b173253',
   github: 'https://github.com/Vignesh-10032000',
-  /** Real Instagram URL not yet supplied — footer icon stays disabled ("coming soon"). */
-  instagram: null,
+  instagram: 'https://www.instagram.com/vigneshgrowthlab/',
 } as const;
 
 export const DOCUMENTS = {
@@ -53,7 +52,7 @@ export const STATS = [
   { value: '100%', label: 'Client satisfaction' },
   { value: '72 hrs', label: 'To first online sale' },
   { value: '2 wks', label: 'Average delivery' },
-  { value: '250+', label: 'Concurrent users handled' },
+  { value: '600+', label: 'Concurrent users handled' },
 ] as const;
 
 export const STATS_FOOTNOTE = 'Direct founder support — no middle-men, direct WhatsApp access to Vignesh.';
@@ -228,18 +227,34 @@ export const FOUNDER = {
   alumniOf: 'Dr. Mahalingam College of Engineering & Technology',
 } as const;
 
-/** Additional delivered work shown without case studies (Projects page + homepage). */
+/** Additional delivered work shown without full case studies (Projects page + homepage). */
 export const MORE_PROJECTS = [
   {
     name: 'Masala Mill Store',
     type: 'E-Commerce Store',
     location: 'Tamil Nadu',
-    copy: 'Full catalog live, actively taking orders.',
+    copy: 'Bilingual spice-brand store with weight-based product variants, pre-filled WhatsApp order buttons and a tested UPI gateway. Full catalogue live and taking orders.',
+    liveUrl: '',
+  },
+  {
+    name: 'Day To Day Gifts',
+    type: 'E-Commerce Store',
+    location: 'Tamil Nadu',
+    copy: 'Online gifting store — live and taking orders.',
+    liveUrl: 'https://daytodaygifts.netlify.app/',
+  },
+  {
+    name: 'Meat & Eat',
+    type: 'E-Commerce Store',
+    location: 'Tamil Nadu',
+    copy: 'Online meat store — live and taking orders.',
+    liveUrl: 'https://meatandeatd.netlify.app/',
   },
   {
     name: 'Albatross Gym',
     type: 'Landing Page',
     location: 'Coimbatore',
-    copy: 'High-converting local lead generation page.',
+    copy: 'Mobile-first local lead-generation page with Formspree forms and WhatsApp CTAs — shipped with a custom domain and 3-month priority support.',
+    liveUrl: 'https://soft-figolla-562f2b.netlify.app/',
   },
 ] as const;
