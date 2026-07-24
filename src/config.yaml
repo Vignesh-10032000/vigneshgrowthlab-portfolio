@@ -20,12 +20,12 @@ metadata:
   openGraph:
     site_name: Vignesh Growth Lab
     images:
-      # ⚠ INTERIM ASSET: brand card generated from the real VGL logo.
-      # Replace src/assets/images/og-cover.png with the real Open Graph cover
-      # before launch (see "Assets Required Before Launch").
+      # Brand share card (1200×630): logo lockup + "Build. Automate. Grow." +
+      # service chips + domain, on the dark violet theme. Source design in
+      # design history; regenerate at the same size if the brand changes.
       - url: '~/assets/images/og-cover.png'
         width: 1200
-        height: 628
+        height: 626
     type: website
   twitter:
     cardType: summary_large_image
