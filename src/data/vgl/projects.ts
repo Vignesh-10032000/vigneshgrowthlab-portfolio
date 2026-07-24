@@ -284,11 +284,19 @@ export const PROJECTS: Project[] = [
         blurb:
           'A daily job pulls and formats business leads from Google Maps, scores each one, checks whether they already have a website, then routes them into tiered WhatsApp and email outreach automatically.',
       },
+      {
+        src: '/images/workflow/booking-notifications.webp',
+        alt: 'n8n workflow: restaurant booking webhook, validation and storage, instant notification and a sorted daily summary',
+        title: 'Restaurant booking notifications',
+        blurb:
+          'A booking hits a webhook, gets validated and stored, and an instant confirmation goes out — while a scheduled morning job compiles every booking into a sorted daily summary for the front desk.',
+      },
     ],
     videoSrc: '/videos/n8n-workflow.mp4',
     videoPoster: '/images/n8n-workflow-poster.webp',
     videoHeading: 'Workflow demonstration',
-    videoLabel: 'Screen recording of the n8n WhatsApp lead-routing workflow running',
+    videoLabel:
+      'Vignesh walks through the AI WhatsApp automation — how enquiries are captured, answered by Gemini AI and logged automatically.',
     videoTranscript: '',
     videoCaptionsFile: '',
     quote: '',
