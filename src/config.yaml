@@ -3,7 +3,7 @@ site:
   # Single source for every canonical, Open Graph, Twitter and JSON-LD absolute
   # URL ("siteUrl"). Interim Netlify domain — swap for the custom domain if one
   # is registered later.
- site: 'https://vigneshgrowthlab.dev'
+  site: 'https://vigneshgrowthlab.dev'
   base: '/'
   trailingSlash: false
 # Default SEO metadata — every route overrides title/description with its own
