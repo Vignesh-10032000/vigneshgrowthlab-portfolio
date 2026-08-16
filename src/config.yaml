@@ -6,7 +6,6 @@ site:
  site: 'https://vigneshgrowthlab.dev'
   base: '/'
   trailingSlash: false
-
 # Default SEO metadata — every route overrides title/description with its own
 # values from the content matrices; these are safety-net defaults only.
 metadata:
