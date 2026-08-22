@@ -85,7 +85,7 @@ export const SERVICE_ROUTES = {
       name: 'VGL POS Software', type: 'Retail POS', location: 'Tamil Nadu',
       copy: 'Custom retail POS with real-time stock and sales tracking.',
       result: 'Passed a 250 concurrent user load test',
-      caseRoute: '/projects/vgl-pos', liveUrl: 'https://web-production-9375fc.up.railway.app'
+      caseRoute: '/projects/vgl-pos', liveUrl: 'https://pos-project-li2v.onrender.com/'
     },
     ctaHeading: 'Ready to speed up your counter?',
     waMessage: "Hi Vignesh, I'm interested in retail POS software.",

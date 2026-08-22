@@ -62,7 +62,7 @@ Below is the complete dataset to be included in the new portfolio. You must inte
 *   **Rani Sarees & Boutique:** Business Website (Pollachi). Custom-coded HTML/JS/CSS. Features pre-filled WhatsApp order buttons on every product, Summer 20% OFF announcement bar, GA4, and JSON-LD local schema. Resulted in 3x online reach.
     *   **Live Link:** https://ranisareesandbotique.com/
 *   **VGL POS Software:** Custom Retail POS (Tamil Nadu). Real-time stock & sales tracking. Passed a 250 concurrent user load test. Built with Flask.
-    *   **Live Link:** https://web-production-9375fc.up.railway.app
+    *   **Live Link:** https://pos-project-li2v.onrender.com/
 *   **AI WhatsApp Automations:** Lead routing system using n8n + Gemini AI. Auto-classifies and routes 100+ leads daily directly to Google Sheets and WhatsApp.
     *   **Video Placement:** Embed `n8nworkflowautomation.mp4` inside this project's modal or detail card so users can watch the AI in action.
         ![n8n Workflow Automation Video](C:/Users/L E N O V O/.gemini/antigravity/brain/3aa1eee6-9623-408a-af7f-f2a9932584d5/n8nworkflowautomation.mp4)

@@ -223,7 +223,7 @@ export const SERVICES: Service[] = [
       copy: 'Custom retail POS with real-time stock and sales tracking.',
       result: 'Load-tested to 600 concurrent clients at <300ms',
       caseRoute: '/projects/vgl-pos',
-      liveUrl: 'https://web-production-9375fc.up.railway.app',
+      liveUrl: 'https://pos-project-li2v.onrender.com/',
     },
     ctaHeading: 'Ready to speed up your counter?',
     waMessage: "Hi Vignesh, I'm interested in retail POS software.",

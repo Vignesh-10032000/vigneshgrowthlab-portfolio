@@ -224,7 +224,7 @@ export const PROJECTS: Project[] = [
     quoteAuthor: '',
     testimonialImage: '',
     testimonialImageAlt: '',
-    liveUrl: 'https://web-production-9375fc.up.railway.app',
+    liveUrl: 'https://pos-project-li2v.onrender.com/',
     liveLabel: 'Open live demo',
     relatedServiceRoute: '/services/retail-pos-solutions',
     waMessage: 'Hi Vignesh, I saw the VGL POS case study.',

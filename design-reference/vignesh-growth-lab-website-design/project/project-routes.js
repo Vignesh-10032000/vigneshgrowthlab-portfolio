@@ -91,7 +91,7 @@ export const PROJECT_ROUTES = {
     galleryImages: [], galleryCaptions: [], gallerySlots: 0,
     videoSrc: '', videoPoster: '', videoHeading: '', videoLabel: '', videoTranscript: '', videoCaptionsFile: '',
     quote: '', quoteAuthor: '', testimonialImage: '', testimonialImageAlt: '',
-    liveUrl: 'https://web-production-9375fc.up.railway.app', liveLabel: 'Open live demo',
+    liveUrl: 'https://pos-project-li2v.onrender.com/', liveLabel: 'Open live demo',
     relatedServiceRoute: '/services/retail-pos-solutions',
     waMessage: 'Hi Vignesh, I saw the VGL POS case study.'
   },
