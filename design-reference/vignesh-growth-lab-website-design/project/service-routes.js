@@ -1,0 +1,124 @@
+// VGL service route→content matrix. Each key is the production route slug under /services/.
+// siteUrl is configured at deploy time; {{siteUrl}} markers are implementation placeholders.
+export const SERVICE_ROUTES = {
+  'website-development': {
+    serviceName: 'Website Development',
+    pageRoute: '/services/website-development',
+    seoTitle: 'Website Development in Tamil Nadu — Vignesh Growth Lab',
+    seoDescription: 'Fast, SEO-ready business and e-commerce websites for Tamil Nadu businesses. WordPress or custom builds, GA4, ~2 week average delivery, 100% ownership.',
+    canonicalUrl: '{{siteUrl}}/services/website-development',
+    heroStatement: 'Fast, SEO-ready business and e-commerce websites that show up on Google, load quickly on mobile, and turn visitors into WhatsApp enquiries.',
+    outcome: 'More enquiries from Google and social — without paying monthly platform fees.',
+    whoItIsFor: 'Boutiques, retail stores and local brands that need to be found — and ordered from — online.',
+    quickProof: 'NextGen Toys recorded its first online sale within 72 hours of launch.',
+    features: [
+      { icon: 'ph ph-wordpress-logo', title: 'WordPress or custom build', copy: 'The right platform for your budget — never a bloated template.' },
+      { icon: 'ph ph-shopping-cart', title: 'E-commerce ready', copy: 'Product catalogue, orders and payments when you need them.' },
+      { icon: 'ph ph-device-mobile', title: 'Responsive UI', copy: 'Designed mobile-first — most of your customers are on phones.' },
+      { icon: 'ph ph-magnifying-glass', title: 'SEO ready', copy: 'Semantic markup, local schema and clean URLs from day one.' },
+      { icon: 'ph ph-lightning', title: 'Fast loading', copy: 'Optimised for Core Web Vitals — speed is a ranking factor.' },
+      { icon: 'ph ph-chart-line-up', title: 'Google Analytics', copy: 'GA4 wired in so you can see exactly where enquiries come from.' }
+    ],
+    technologies: ['WordPress', 'E-Commerce', 'Responsive UI', 'SEO Ready', 'Fast Loading', 'Google Analytics'],
+    startingPrice: 'Starting at ₹8,000',
+    related: {
+      name: 'NextGen Toys', type: 'E-Commerce Store', location: 'Coimbatore',
+      copy: 'WordPress store with a full RC-car and drone catalogue and 650+ Google Reviews embedded.',
+      result: 'First online sale within 72 hours of launch',
+      caseRoute: '/projects/nextgen-toys', liveUrl: 'https://nextgentoys.in/'
+    },
+    ctaHeading: 'Ready to get your business online?',
+    waMessage: "Hi Vignesh, I'm interested in website development.",
+    heroImage: '', heroImageAlt: 'Website development project preview'
+  },
+  'custom-development': {
+    serviceName: 'Custom Development',
+    pageRoute: '/services/custom-development',
+    seoTitle: 'Custom Web Application Development — Vignesh Growth Lab',
+    seoDescription: 'Hand-coded web applications and API integrations for Tamil Nadu businesses. HTML, CSS, JavaScript and GitHub-managed code — built exactly for your workflow.',
+    canonicalUrl: '{{siteUrl}}/services/custom-development',
+    heroStatement: "Hand-coded web applications and API integrations when a template won't cut it — built exactly for your workflow.",
+    outcome: 'Software shaped around how your business already works.',
+    whoItIsFor: "Businesses with a specific flow — like WhatsApp ordering on every product — that platforms can't do.",
+    quickProof: 'Rani Sarees & Boutique achieved 3× online reach.',
+    features: [
+      { icon: 'ph ph-file-html', title: 'HTML, CSS & JavaScript', copy: 'Lightweight hand-coded pages — no plugin bloat, no page builders.' },
+      { icon: 'ph ph-app-window', title: 'Web applications', copy: 'Interactive tools and flows built around your exact process.' },
+      { icon: 'ph ph-plugs-connected', title: 'API integrations', copy: 'Connect your site to WhatsApp, payments, sheets and more.' },
+      { icon: 'ph ph-github-logo', title: 'GitHub-managed code', copy: 'Versioned, documented code you fully own and can hand to anyone.' },
+      { icon: 'ph ph-whatsapp-logo', title: 'WhatsApp-first features', copy: 'Pre-filled order buttons and enquiry flows on any element.' },
+      { icon: 'ph ph-chart-line-up', title: 'Analytics & schema', copy: 'GA4 and JSON-LD local schema wired in from the start.' }
+    ],
+    technologies: ['HTML', 'CSS', 'JavaScript', 'Web Applications', 'API Integrations', 'GitHub'],
+    startingPrice: '',
+    related: {
+      name: 'Rani Sarees & Boutique', type: 'Business Website', location: 'Pollachi',
+      copy: 'Custom-coded HTML/JS/CSS site with pre-filled WhatsApp order buttons on every product, GA4 and local JSON-LD schema.',
+      result: '3× online reach',
+      caseRoute: '/projects/rani-sarees', liveUrl: 'https://ranisareesandbotique.com/'
+    },
+    ctaHeading: 'Have a workflow no template can handle?',
+    waMessage: "Hi Vignesh, I'm interested in custom development.",
+    heroImage: '', heroImageAlt: 'Custom development project preview'
+  },
+  'retail-pos-solutions': {
+    serviceName: 'Retail POS Solutions',
+    pageRoute: '/services/retail-pos-solutions',
+    seoTitle: 'Retail POS Software for Tamil Nadu Stores — Vignesh Growth Lab',
+    seoDescription: 'Custom billing software with inventory, reports, customer management and thermal receipt printing. Flask-based, load-tested to 250 concurrent users.',
+    canonicalUrl: '{{siteUrl}}/services/retail-pos-solutions',
+    heroStatement: 'Custom billing software with inventory, reports, customer management and thermal receipt printing — running on your hardware, with your data.',
+    outcome: 'Billing, stock and reports in one place — owned by you, not rented.',
+    whoItIsFor: 'Retail stores that want billing, stock and reports in one place — on their own hardware, with their own data.',
+    quickProof: 'VGL POS passed a 250-concurrent-user load test.',
+    features: [
+      { icon: 'ph ph-receipt', title: 'Custom billing (Flask)', copy: 'A billing screen shaped around how your counter actually works.' },
+      { icon: 'ph ph-package', title: 'Inventory management', copy: 'Real-time stock levels that update with every sale.' },
+      { icon: 'ph ph-chart-bar', title: 'Reports', copy: 'Daily, weekly and monthly sales views at a glance.' },
+      { icon: 'ph ph-users', title: 'Customer management', copy: 'Track repeat customers and their purchase history.' },
+      { icon: 'ph ph-hard-drives', title: 'Local database', copy: 'Your data stays on your machine — works even when the internet is down.' },
+      { icon: 'ph ph-printer', title: 'Thermal receipt integration', copy: 'Prints to standard thermal receipt printers out of the box.' }
+    ],
+    technologies: ['Custom Billing (Flask)', 'Inventory', 'Reports', 'Customer Management', 'Local Database', 'Thermal Receipts'],
+    startingPrice: '',
+    related: {
+      name: 'VGL POS Software', type: 'Retail POS', location: 'Tamil Nadu',
+      copy: 'Custom retail POS with real-time stock and sales tracking.',
+      result: 'Passed a 250 concurrent user load test',
+      caseRoute: '/projects/vgl-pos', liveUrl: 'https://pos-project-li2v.onrender.com/'
+    },
+    ctaHeading: 'Ready to speed up your counter?',
+    waMessage: "Hi Vignesh, I'm interested in retail POS software.",
+    heroImage: '', heroImageAlt: 'Retail POS dashboard preview'
+  },
+  'whatsapp-ai-automation': {
+    serviceName: 'WhatsApp AI Automation',
+    pageRoute: '/services/whatsapp-ai-automation',
+    seoTitle: 'WhatsApp AI Automation & Chatbots — Vignesh Growth Lab',
+    seoDescription: 'AI chatbots, lead capture and follow-up workflows on n8n with Gemini/GPT. Route 100+ leads daily to Google Sheets and WhatsApp automatically.',
+    canonicalUrl: '{{siteUrl}}/services/whatsapp-ai-automation',
+    heroStatement: 'AI chatbots and workflows that capture leads, follow up automatically and route every enquiry where it belongs.',
+    outcome: 'Reduce missed leads with automatic capture and routing.',
+    whoItIsFor: 'Gyms, boutiques and stores handling a steady stream of WhatsApp enquiries — including after hours.',
+    quickProof: 'The workflow routes 100+ leads daily to Google Sheets and WhatsApp.',
+    features: [
+      { icon: 'ph ph-robot', title: 'AI chatbots', copy: 'Gemini / GPT-powered replies that understand real customer questions.' },
+      { icon: 'ph ph-funnel', title: 'Lead capture', copy: 'Every enquiry logged automatically — nothing lives only in a chat.' },
+      { icon: 'ph ph-flow-arrow', title: 'Automation workflows', copy: 'n8n flows that classify and route each lead where it belongs.' },
+      { icon: 'ph ph-arrow-u-up-right', title: 'Follow-up systems', copy: 'Automatic follow-ups so warm leads are not forgotten.' },
+      { icon: 'ph ph-google-logo', title: 'Google Sheets logging', copy: 'A live sheet of every lead, its category and its status.' },
+      { icon: 'ph ph-whatsapp-logo', title: 'WhatsApp delivery', copy: 'Qualified leads land directly on your phone, pre-classified.' }
+    ],
+    technologies: ['AI Chatbots', 'Lead Capture', 'Workflows', 'Follow-Up Systems', 'Gemini / GPT AI', 'n8n Engine'],
+    startingPrice: '',
+    related: {
+      name: 'AI WhatsApp Automations', type: 'AI Automation', location: 'Tamil Nadu',
+      copy: 'Lead routing system on n8n + Gemini AI — auto-classifies and routes enquiries to Google Sheets and WhatsApp.',
+      result: 'Routes 100+ leads daily',
+      caseRoute: '/projects/ai-whatsapp-automation', liveUrl: ''
+    },
+    ctaHeading: 'Losing enquiries in your WhatsApp inbox?',
+    waMessage: "Hi Vignesh, I'm interested in WhatsApp AI automation.",
+    heroImage: '', heroImageAlt: 'WhatsApp automation workflow preview'
+  }
+};

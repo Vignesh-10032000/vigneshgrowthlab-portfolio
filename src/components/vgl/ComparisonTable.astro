@@ -1,0 +1,186 @@
+---
+import { Icon } from 'astro-icon/components';
+
+import { COMPARISON_ROWS, COMPARISON_FOOTNOTE, COMPARISON_CAPTION } from '~/data/vgl/site';
+
+/**
+ * Honest comparison — real <table> with caption/scope + visible Yes/No on
+ * desktop; the same data as stacked per-criterion cards at ≤760px.
+ */
+
+const yesNo = (value: string) => value === 'Yes' || value === 'No';
+---
+
+<div class="vgl-compare-table">
+  <table>
+    <caption>{COMPARISON_CAPTION}</caption>
+    <thead>
+      <tr>
+        <th scope="col">Criteria</th>
+        <th scope="col" class="vgl-compare-vgl-head">Vignesh Growth Lab</th>
+        <th scope="col">DIY (Wix / Shopify)</th>
+        <th scope="col">Big Agency</th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        COMPARISON_ROWS.map((row) => (
+          <tr>
+            <th scope="row">{row.criteria}</th>
+            {[row.vgl, row.diy, row.agency].map((value, i) => (
+              <td class:list={[{ 'vgl-compare-vgl-cell': i === 0 }]} style="font-feature-settings: 'tnum' 1">
+                {row.boolean && yesNo(value) ? (
+                  <span class:list={['vgl-compare-bool', value === 'Yes' ? 'vgl-compare-yes' : 'vgl-compare-no']}>
+                    <Icon
+                      name={value === 'Yes' ? 'ph:check-circle' : 'ph:x-circle'}
+                      style="font-size: 18px"
+                      aria-hidden="true"
+                    />
+                    {value}
+                  </span>
+                ) : (
+                  value
+                )}
+              </td>
+            ))}
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>
+
+<div class="vgl-compare-cards">
+  {
+    COMPARISON_ROWS.map((row) => (
+      <div class="vgl-compare-card">
+        <p class="vgl-compare-card-label">{row.criteria}</p>
+        <p class="vgl-compare-card-vgl" style="font-feature-settings: 'tnum' 1">
+          <strong>VGL:</strong> {row.vgl}
+        </p>
+        <p class="vgl-compare-card-rest" style="font-feature-settings: 'tnum' 1">
+          DIY: {row.diy} · Big agency: {row.agency}
+        </p>
+      </div>
+    ))
+  }
+</div>
+
+<p class="vgl-compare-foot">{COMPARISON_FOOTNOTE}</p>
+
+<style>
+  .vgl-compare-table {
+    margin-top: 36px;
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  caption {
+    text-align: left;
+    font-size: 13px;
+    color: var(--color-vgl-neutral-400);
+    padding-bottom: 12px;
+  }
+
+  thead th {
+    text-align: left;
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 13.5px;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--color-vgl-neutral-600);
+  }
+
+  .vgl-compare-vgl-head {
+    background: color-mix(in srgb, var(--color-vgl-accent-900) 55%, transparent);
+    color: var(--color-vgl-accent-200);
+  }
+
+  tbody th {
+    text-align: left;
+    font-weight: 400;
+    color: var(--color-vgl-neutral-300);
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--color-vgl-neutral-800);
+  }
+
+  tbody td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--color-vgl-neutral-800);
+  }
+
+  .vgl-compare-vgl-cell {
+    background: color-mix(in srgb, var(--color-vgl-accent-900) 35%, transparent);
+  }
+
+  .vgl-compare-bool {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .vgl-compare-yes {
+    color: var(--color-vgl-wa-text);
+  }
+
+  .vgl-compare-no {
+    color: var(--color-vgl-neutral-400);
+  }
+
+  .vgl-compare-cards {
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 32px;
+  }
+
+  .vgl-compare-card {
+    border: 1px solid var(--color-vgl-neutral-700);
+    border-radius: var(--radius-vgl-md);
+    padding: 16px 18px;
+  }
+
+  .vgl-compare-card-label {
+    margin: 0 0 10px;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-vgl-neutral-400);
+  }
+
+  .vgl-compare-card-vgl {
+    margin: 0;
+    font-size: 14.5px;
+    color: var(--color-vgl-accent-200);
+  }
+
+  .vgl-compare-card-vgl > strong {
+    font-weight: 500;
+  }
+
+  .vgl-compare-card-rest {
+    margin: 6px 0 0;
+    font-size: 13.5px;
+    color: var(--color-vgl-neutral-300);
+  }
+
+  .vgl-compare-foot {
+    margin: 14px 0 0;
+    font-size: 13px;
+    color: var(--color-vgl-neutral-400);
+  }
+
+  @media (max-width: 760px) {
+    .vgl-compare-table {
+      display: none;
+    }
+    .vgl-compare-cards {
+      display: flex;
+    }
+  }
+</style>

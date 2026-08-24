@@ -1,0 +1,68 @@
+---
+import WhatsAppCta from '~/components/vgl/WhatsAppCta.astro';
+
+/**
+ * Glow CTA panel — radial section-glow over the section band colour.
+ * Recurs on /services, /services/[slug], /projects and /projects/[slug].
+ */
+export interface Props {
+  heading: string;
+  sub: string;
+  ctaLabel: string;
+  /** Prefilled WhatsApp message for this context. */
+  ctaMessage?: string;
+  class?: string;
+}
+
+const { heading, sub, ctaLabel, ctaMessage, class: className = '' } = Astro.props;
+---
+
+<div class:list={['vgl-glow-panel', className]}>
+  <div class="vgl-glow-copy">
+    <h2>{heading}</h2>
+    <p>{sub}</p>
+  </div>
+  <WhatsAppCta label={ctaLabel} message={ctaMessage} iconSize={19} class="vgl-glow-btn" />
+</div>
+
+<style>
+  .vgl-glow-panel {
+    padding: clamp(28px, 4vw, 48px);
+    border-radius: var(--radius-vgl-lg);
+    background:
+      radial-gradient(
+        700px 340px at 85% -30%,
+        color-mix(in srgb, var(--color-vgl-section-glow) 70%, transparent),
+        transparent 64%
+      ),
+      var(--color-vgl-section);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .vgl-glow-copy {
+    max-width: 56ch;
+  }
+
+  .vgl-glow-copy h2 {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: clamp(22px, 2.6vw, 30px);
+    margin: 0;
+  }
+
+  .vgl-glow-copy p {
+    margin: 10px 0 0;
+    font-size: 15px;
+    line-height: 1.65;
+    color: color-mix(in srgb, var(--color-vgl-text) 78%, transparent);
+  }
+
+  .vgl-glow-panel :global(.vgl-glow-btn) {
+    min-height: 46px;
+    padding-inline: 22px;
+  }
+</style>

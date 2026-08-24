@@ -1,0 +1,58 @@
+---
+import { Icon } from 'astro-icon/components';
+
+import { waLink } from '~/utils/whatsapp';
+---
+
+<a
+  href={waLink()}
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Chat with Vignesh on WhatsApp"
+  class="vgl-float-wa"
+>
+  <Icon name="ph:whatsapp-logo-fill" style="font-size: 30px; color: #0b1410" aria-hidden="true" />
+</a>
+
+<style>
+  .vgl-float-wa {
+    position: fixed;
+    bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+    right: calc(20px + env(safe-area-inset-right, 0px));
+    z-index: 100;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: var(--color-vgl-wa);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 28px rgba(37, 211, 102, 0.35);
+    text-decoration: none;
+    transition: transform 0.2s ease;
+  }
+
+  .vgl-float-wa:hover {
+    transform: scale(1.06);
+  }
+
+  .vgl-float-wa::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px solid var(--color-vgl-wa);
+    animation: vgl-pulse 2.4s ease-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .vgl-float-wa::before {
+      animation: none;
+    }
+    .vgl-float-wa,
+    .vgl-float-wa:hover {
+      transition: none;
+      transform: none;
+    }
+  }
+</style>

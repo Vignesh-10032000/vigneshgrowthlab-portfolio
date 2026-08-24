@@ -1,0 +1,340 @@
+@import 'tailwindcss';
+
+@variant dark (&:where(.dark, .dark *));
+
+@custom-variant intersect (&:not([no-intersect]));
+
+/*
+ * VGL / Nocturne design tokens.
+ * Source of truth: the Nocturne styles.css and "VGL Design System.dc.html"
+ * in design-reference. Exposed through the `vgl-` namespace so Tailwind
+ * utilities (bg-vgl-bg, text-vgl-accent-200, border-vgl-neutral-700,
+ * rounded-vgl-md, shadow-vgl-lg) and plain var() references both work.
+ */
+@theme {
+  --color-primary: var(--aw-color-primary);
+  --color-secondary: var(--aw-color-secondary);
+  --color-accent: var(--aw-color-accent);
+  --color-default: var(--aw-color-text-default);
+  --color-muted: var(--aw-color-text-muted);
+
+  /* Ground & core */
+  --color-vgl-bg: #161826;
+  --color-vgl-surface: #232532;
+  --color-vgl-text: #e9e9ed;
+  --color-vgl-accent: #9184d9;
+  --color-vgl-divider: color-mix(in srgb, #e9e9ed 16%, transparent);
+
+  /* Neutral ramp */
+  --color-vgl-neutral-100: #f3f5fe;
+  --color-vgl-neutral-200: #e4e7f5;
+  --color-vgl-neutral-300: #cfd3e5;
+  --color-vgl-neutral-400: #b2b6ca;
+  --color-vgl-neutral-500: #9397ab;
+  --color-vgl-neutral-600: #75798c;
+  --color-vgl-neutral-700: #595d6c;
+  --color-vgl-neutral-800: #3f424d;
+  --color-vgl-neutral-900: #292b31;
+
+  /* Accent (violet) ramp */
+  --color-vgl-accent-100: #f5f4ff;
+  --color-vgl-accent-200: #e7e5fe;
+  --color-vgl-accent-300: #d2cefd;
+  --color-vgl-accent-400: #b5abfc;
+  --color-vgl-accent-500: #968ae0;
+  --color-vgl-accent-600: #796cbf;
+  --color-vgl-accent-700: #5d5294;
+  --color-vgl-accent-800: #423a6a;
+  --color-vgl-accent-900: #2b2741;
+
+  /* Section bands (stats / results / CTA panels — one per page) */
+  --color-vgl-section: #262a60;
+  --color-vgl-section-glow: #353b80;
+  --color-vgl-section-ghost: #4c5397;
+
+  /* Single-job accents: cyan = technology, green = WhatsApp only */
+  --color-vgl-cyan: #7fd4e0;
+  --color-vgl-wa: #25d366;
+  --color-vgl-wa-text: #3ddc74;
+  --color-vgl-error: #f0a3a3;
+
+  /* Radii */
+  --radius-vgl-sm: 4px;
+  --radius-vgl-md: 8px;
+  --radius-vgl-lg: 14px;
+
+  /* Elevation — hairline ring + ambient darkness, never stacked heavy shadows */
+  --shadow-vgl-sm: 0 0 0 1px #3f424d;
+  --shadow-vgl-md: 0 0 0 1px #595d6c, 0 6px 18px rgba(0, 0, 0, 0.55);
+  --shadow-vgl-lg: 0 0 0 1px #9397ab, 0 16px 40px rgba(0, 0, 0, 0.65);
+
+  --font-sans:
+    'var(--aw-font-sans, ui-sans-serif)', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-serif: 'var(--aw-font-serif, ui-serif)', ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+  --font-heading: 'var(--aw-font-heading, ui-sans-serif)', ui-sans-serif, system-ui, sans-serif;
+}
+
+@utility bg-page {
+  background-color: var(--aw-color-bg-page);
+}
+
+@utility text-muted {
+  color: var(--aw-color-text-muted);
+}
+
+/* ————— VGL base ————— */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--color-vgl-text);
+  text-wrap: pretty;
+  /* Soft violet bloom top-right over the dark ground — shared by every page */
+  background:
+    radial-gradient(
+      1100px 640px at 80% -140px,
+      color-mix(in srgb, var(--color-vgl-accent-900) 70%, transparent),
+      transparent 60%
+    ),
+    var(--color-vgl-bg);
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-vgl-accent) 30%, transparent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-vgl-accent);
+  outline-offset: 2px;
+}
+
+/* ————— VGL component primitives (Nocturne) ————— */
+
+@utility vgl-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--color-vgl-text);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-vgl-md);
+  padding: 10px 16px;
+  min-height: 44px;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+@utility vgl-btn-primary {
+  color: var(--color-vgl-accent);
+  border-color: var(--color-vgl-accent);
+  &:hover {
+    background: color-mix(in srgb, var(--color-vgl-accent) 12%, transparent);
+    color: var(--color-vgl-accent);
+  }
+  &:active {
+    background: color-mix(in srgb, var(--color-vgl-accent) 22%, transparent);
+  }
+  &:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+}
+
+@utility vgl-btn-ghost {
+  color: var(--color-vgl-accent-300);
+  &:hover {
+    background: color-mix(in srgb, var(--color-vgl-accent) 10%, transparent);
+    color: var(--color-vgl-accent-200);
+  }
+}
+
+/* WhatsApp variant — the ONLY place green appears */
+@utility vgl-btn-wa {
+  border-color: var(--color-vgl-wa);
+  color: var(--color-vgl-wa-text);
+  &:hover {
+    background: rgba(37, 211, 102, 0.1);
+    color: var(--color-vgl-wa-text);
+  }
+}
+
+@utility vgl-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-vgl-surface);
+  border-radius: var(--radius-vgl-md);
+}
+
+@utility vgl-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  padding: 3px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+@utility vgl-tag-accent {
+  background: var(--color-vgl-accent-800);
+  color: var(--color-vgl-accent-100);
+}
+
+@utility vgl-tag-neutral {
+  background: var(--color-vgl-neutral-800);
+  color: var(--color-vgl-neutral-100);
+}
+
+/* Tech chip — cyan is reserved for technology */
+@utility vgl-tag-tech {
+  border: 1px solid color-mix(in srgb, var(--color-vgl-cyan) 40%, transparent);
+  color: var(--color-vgl-cyan);
+}
+
+@utility vgl-container {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: clamp(20px, 5vw, 72px);
+}
+
+@utility vgl-kicker {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-vgl-accent);
+  &::before {
+    content: '';
+    width: 44px;
+    height: 1px;
+    background: currentColor;
+  }
+}
+
+/* Fading rule — 1px, transparent over 48px at each end */
+@utility vgl-rule {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--color-vgl-divider) 48px calc(100% - 48px), transparent);
+}
+
+@utility vgl-input {
+  width: 100%;
+  min-height: 44px;
+  padding: 8px 12px;
+  font-size: 14px;
+  color: var(--color-vgl-text);
+  caret-color: var(--color-vgl-accent);
+  background: var(--color-vgl-surface);
+  border: 1px solid var(--color-vgl-divider);
+  border-radius: var(--radius-vgl-md);
+  &:hover {
+    border-color: color-mix(in srgb, var(--color-vgl-text) 45%, transparent);
+  }
+  &:focus-visible {
+    border-color: var(--color-vgl-accent);
+  }
+}
+
+/* ————— VGL motion (spec: Hero Explorations 1f) ————— */
+
+/* Scroll reveal: fade-rise 550ms, applied via IntersectionObserver */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.55s cubic-bezier(0.2, 0.7, 0.3, 1),
+    transform 0.55s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+.vgl-in {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Decorative float loop — hero/visual layers only */
+.vgl-float {
+  animation: vgl-float 8s ease-in-out infinite;
+}
+
+@keyframes vgl-float {
+  0%,
+  100% {
+    transform: translateY(-5px);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+}
+
+/* Card hover lift */
+.vgl-lift {
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+.vgl-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-vgl-lg);
+}
+
+/* CTA arrow nudge */
+.vgl-cta .vgl-arrow {
+  transition: transform 0.2s ease;
+}
+
+.vgl-cta:hover .vgl-arrow {
+  transform: translateX(3px);
+}
+
+/* Floating WhatsApp pulse ring */
+@keyframes vgl-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  70% {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .vgl-float {
+    animation: none !important;
+  }
+  .vgl-lift,
+  .vgl-lift:hover {
+    transform: none;
+    transition: none;
+  }
+  .vgl-cta .vgl-arrow {
+    transition: none;
+  }
+}

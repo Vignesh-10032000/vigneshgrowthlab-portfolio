@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/nocturne-5d41d6fe-ed19-4b00-91a0-08ad62f95b6b/styles.css">
+  <script src="_ds/nocturne-5d41d6fe-ed19-4b00-91a0-08ad62f95b6b/_ds_bundle.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+  <style>
+    body{margin:0;background:var(--color-bg);}
+    a{color:var(--color-accent-300);} a:hover{color:var(--color-accent-200);}
+    header a[aria-current="page"]{color:var(--color-accent) !important;}
+    #vgl-mobile-menu{animation:vglMenuIn .22s ease}
+    @keyframes vglMenuIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+    @media (prefers-reduced-motion: reduce){#vgl-mobile-menu{animation:none}}
+  </style>
+</helmet>
+<header style="background:color-mix(in srgb, var(--color-bg) 86%, transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--color-divider)">
+  <a href="#main-content" style="position:absolute;left:-9999px;top:0;z-index:200;background:var(--color-bg);color:var(--color-accent-200);padding:12px 18px;border:1px solid var(--color-accent);border-radius:var(--radius-md);font-size:14px;text-decoration:none" style-focus="left:12px;top:12px">Skip to content</a>
+  <div style="max-width:1200px;margin:0 auto;padding:0 clamp(16px,4vw,40px);display:flex;align-items:center;gap:24px;height:64px">
+    <a href="Home.dc.html" data-route="/" aria-label="Vignesh Growth Lab — home" style="display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--color-text)">
+      <img src="assets/vgl-logo-mark.svg" alt="" width="32" height="32" style="border-radius:8px;display:block">
+      <span style="display:flex;flex-direction:column;line-height:1.15">
+        <span style="font-family:var(--font-heading);font-weight:500;font-size:15.5px;letter-spacing:-0.01em;white-space:nowrap">Vignesh Growth Lab</span>
+        <span style="font-size:9px;letter-spacing:0.22em;color:var(--color-neutral-400);text-transform:uppercase">Build. Automate. Grow.</span>
+      </span>
+    </a>
+    <sc-if value="{{ desktop }}" hint-placeholder-val="{{ true }}">
+      <nav aria-label="Primary" style="display:flex;align-items:center;gap:clamp(12px,1.6vw,22px);margin-left:auto">
+        <a href="About.dc.html" data-route="/about" aria-current="{{ curAbout }}" style="color:var(--color-neutral-200);font-size:14px;text-decoration:none;white-space:nowrap;padding:8px 2px" style-hover="color:var(--color-accent)">About</a>
+        <a href="Services.dc.html" data-route="/services" aria-current="{{ curServices }}" style="color:var(--color-neutral-200);font-size:14px;text-decoration:none;white-space:nowrap;padding:8px 2px" style-hover="color:var(--color-accent)">Services</a>
+        <a href="Home.dc.html#clients" data-route="/#clients" style="color:var(--color-neutral-200);font-size:14px;text-decoration:none;white-space:nowrap;padding:8px 2px" style-hover="color:var(--color-accent)">Clients</a>
+        <a href="Projects.dc.html" data-route="/projects" aria-current="{{ curProjects }}" style="color:var(--color-neutral-200);font-size:14px;text-decoration:none;white-space:nowrap;padding:8px 2px" style-hover="color:var(--color-accent)">Projects</a>
+        <a href="Home.dc.html#why-vgl" data-route="/#why-vgl" style="color:var(--color-neutral-200);font-size:14px;text-decoration:none;white-space:nowrap;padding:8px 2px" style-hover="color:var(--color-accent)">Why VGL</a>
+        <a href="documents/vgl-resume.pdf" data-route="/documents/vgl-resume.pdf" target="_blank" rel="noopener noreferrer" style="color:var(--color-neutral-200);font-size:14px;text-decoration:none;white-space:nowrap;padding:8px 2px" style-hover="color:var(--color-accent)">Resume</a>
+        <a class="btn" href="{{ waLink }}" target="_blank" rel="noopener noreferrer" style="border:1px solid #25D366;color:#3ddc74;text-decoration:none;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;min-height:40px" style-hover="background:rgba(37,211,102,0.1)"><i class="ph ph-whatsapp-logo" style="font-size:17px" aria-hidden="true"></i>WhatsApp Us</a>
+      </nav>
+    </sc-if>
+    <sc-if value="{{ mobile }}" hint-placeholder-val="{{ false }}">
+      <button type="button" class="btn btn-icon" onClick="{{ toggle }}" aria-label="{{ menuLabel }}" aria-expanded="{{ open }}" aria-controls="vgl-mobile-menu" data-nav-toggle style="margin-left:auto;min-width:44px;min-height:44px"><i class="{{ menuIcon }}" style="font-size:20px" aria-hidden="true"></i></button>
+    </sc-if>
+  </div>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <nav id="vgl-mobile-menu" aria-label="Primary" style="display:flex;flex-direction:column;gap:2px;padding:10px clamp(16px,4vw,40px) 20px;border-top:1px solid var(--color-divider);max-height:calc(100dvh - 64px);overflow-y:auto">
+      <a href="About.dc.html" data-route="/about" aria-current="{{ curAbout }}" onClick="{{ close }}" style="color:var(--color-text);font-size:16px;text-decoration:none;padding:13px 4px;border-bottom:1px solid var(--color-neutral-800)">About</a>
+      <a href="Services.dc.html" data-route="/services" aria-current="{{ curServices }}" onClick="{{ close }}" style="color:var(--color-text);font-size:16px;text-decoration:none;padding:13px 4px;border-bottom:1px solid var(--color-neutral-800)">Services</a>
+      <a href="Home.dc.html#clients" data-route="/#clients" onClick="{{ close }}" style="color:var(--color-text);font-size:16px;text-decoration:none;padding:13px 4px;border-bottom:1px solid var(--color-neutral-800)">Clients</a>
+      <a href="Projects.dc.html" data-route="/projects" aria-current="{{ curProjects }}" onClick="{{ close }}" style="color:var(--color-text);font-size:16px;text-decoration:none;padding:13px 4px;border-bottom:1px solid var(--color-neutral-800)">Projects</a>
+      <a href="Home.dc.html#why-vgl" data-route="/#why-vgl" onClick="{{ close }}" style="color:var(--color-text);font-size:16px;text-decoration:none;padding:13px 4px;border-bottom:1px solid var(--color-neutral-800)">Why VGL</a>
+      <a href="documents/vgl-resume.pdf" data-route="/documents/vgl-resume.pdf" target="_blank" rel="noopener noreferrer" onClick="{{ close }}" style="color:var(--color-text);font-size:16px;text-decoration:none;padding:13px 4px;border-bottom:1px solid var(--color-neutral-800)">Resume</a>
+      <a class="btn" href="{{ waLink }}" target="_blank" rel="noopener noreferrer" style="border:1px solid #25D366;color:#3ddc74;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;margin-top:14px;min-height:46px"><i class="ph ph-whatsapp-logo" style="font-size:18px" aria-hidden="true"></i>WhatsApp Us</a>
+    </nav>
+  </sc-if>
+</header>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:64},&quot;active&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;&quot;,&quot;about&quot;,&quot;services&quot;,&quot;projects&quot;,&quot;contact&quot;],&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;State&quot;},&quot;whatsappNumber&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;918220034139&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contact&quot;}}">
+class Component extends DCLogic {
+  state = { open: false, mobile: false };
+  componentDidMount() {
+    this.mq = window.matchMedia('(max-width: 900px)');
+    this.onMq = () => this.setMenu(false, { mobile: this.mq.matches });
+    this.mq.addEventListener('change', this.onMq);
+    this.onKey = (e) => {
+      if (e.key === 'Escape' && this.state.open) { this.setMenu(false); this.focusToggle(); }
+    };
+    window.addEventListener('keydown', this.onKey);
+    this.setState({ mobile: this.mq.matches });
+  }
+  componentWillUnmount() {
+    if (this.mq) this.mq.removeEventListener('change', this.onMq);
+    window.removeEventListener('keydown', this.onKey);
+    document.body.style.overflow = '';
+  }
+  focusToggle() { const b = document.querySelector('[data-nav-toggle]'); if (b) b.focus(); }
+  setMenu(open, extra) {
+    this.setState(Object.assign({ open }, extra || {}), () => {
+      document.body.style.overflow = (this.state.mobile && this.state.open) ? 'hidden' : '';
+      if (this.state.open) {
+        setTimeout(() => { const first = document.querySelector('#vgl-mobile-menu a'); if (first) first.focus(); }, 60);
+      }
+    });
+  }
+  renderVals() {
+    const num = this.props.whatsappNumber ?? '918220034139';
+    const active = this.props.active ?? '';
+    const open = this.state.open;
+    return {
+      desktop: !this.state.mobile,
+      mobile: this.state.mobile,
+      open,
+      menuOpen: this.state.mobile && open,
+      menuLabel: open ? 'Close menu' : 'Open menu',
+      menuIcon: open ? 'ph ph-x' : 'ph ph-list',
+      toggle: () => this.setMenu(!open),
+      close: () => { this.setMenu(false); this.focusToggle(); },
+      curAbout: active === 'about' ? 'page' : undefined,
+      curServices: active === 'services' ? 'page' : undefined,
+      curProjects: active === 'projects' ? 'page' : undefined,
+      waLink: 'https://wa.me/' + num + '?text=' + encodeURIComponent("Hi Vignesh, I'd like to discuss a project.")
+    };
+  }
+}
+</script>
+</body>
+</html>

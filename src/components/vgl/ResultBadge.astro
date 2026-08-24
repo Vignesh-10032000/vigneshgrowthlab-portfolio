@@ -1,0 +1,53 @@
+---
+import { Icon } from 'astro-icon/components';
+
+export interface Props {
+  text: string;
+  /** Green WhatsApp/AI styling instead of the default violet. */
+  green?: boolean;
+  /** Absolutely positioned over a mockup (bottom-right). */
+  floating?: boolean;
+  class?: string;
+}
+
+const { text, green = false, floating = false, class: className = '' } = Astro.props;
+---
+
+<span
+  class:list={[
+    'vgl-result-badge',
+    { 'vgl-result-badge-green': green, 'vgl-result-badge-floating': floating },
+    className,
+  ]}
+>
+  <Icon name="ph:trend-up" style="font-size: 13px" aria-hidden="true" />
+  {text}
+</span>
+
+<style>
+  .vgl-result-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 11px;
+    border-radius: 999px;
+    border: 1px solid var(--color-vgl-accent-700);
+    background: color-mix(in srgb, var(--color-vgl-accent-900) 85%, var(--color-vgl-bg));
+    box-shadow: var(--shadow-vgl-md);
+    font-size: 11.5px;
+    color: var(--color-vgl-accent-200);
+    white-space: nowrap;
+  }
+
+  .vgl-result-badge-green {
+    border-color: color-mix(in srgb, var(--color-vgl-wa) 45%, var(--color-vgl-neutral-600));
+    background: color-mix(in srgb, var(--color-vgl-wa) 16%, var(--color-vgl-bg));
+    color: var(--color-vgl-wa-text);
+  }
+
+  .vgl-result-badge-floating {
+    position: absolute;
+    right: 6px;
+    bottom: 6px;
+  }
+</style>

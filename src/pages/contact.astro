@@ -1,0 +1,243 @@
+---
+/**
+ * Contact — follows Contact.dc.html exactly.
+ * Desktop (>820px — a DISTINCT breakpoint from the nav's 900px): 1fr 1fr grid,
+ * left column stacks WhatsApp card → info list → "What happens next" while the
+ * form spans all three rows on the right. Mobile: single column in source
+ * order WhatsApp card → form → info → next-steps.
+ */
+import { Icon } from 'astro-icon/components';
+
+import PageLayout from '~/layouts/PageLayout.astro';
+import SectionHeading from '~/components/vgl/SectionHeading.astro';
+import WhatsAppCta from '~/components/vgl/WhatsAppCta.astro';
+import ContactForm from '~/components/vgl/ContactForm.astro';
+import RevealMotion from '~/components/vgl/RevealMotion.astro';
+
+import { CONTACT } from '~/data/vgl/site';
+import { jsonLd, contactPage } from '~/utils/structured-data';
+
+const metadata = {
+  title: 'Contact — Talk to Vignesh | Vignesh Growth Lab, Pollachi',
+  description:
+    'Contact Vignesh Growth Lab: WhatsApp +91 82200 34139, vigneshgrowthlab@gmail.com, Pollachi, Tamil Nadu. Vignesh personally replies within 24 hours.',
+};
+
+const nextSteps = [
+  { number: '01', copy: 'Free 30-min strategy call — honest advice, no sales pitch' },
+  { number: '02', copy: 'Custom proposal in 24 hours — fixed price, no hidden costs' },
+  { number: '03', copy: 'Build starts within 1 week — average delivery ≈ 2 weeks' },
+  { number: '04', copy: 'You own everything — code, hosting and data' },
+];
+---
+
+<PageLayout metadata={metadata} active="contact" structuredData={jsonLd(contactPage())}>
+  <section class="vgl-container vgl-contact-sec">
+    <SectionHeading
+      kicker="Contact"
+      as="h1"
+      title="Let's Discuss Your Project"
+      sub="Fill this in 60 seconds. Vignesh personally replies within 24 hours."
+    />
+
+    <div class="vgl-contact-grid">
+      <div class="vgl-card vgl-wa-card">
+        <h2>
+          <Icon name="ph:whatsapp-logo" style="font-size: 22px; color: var(--color-vgl-wa-text)" aria-hidden="true" />
+          Fastest: WhatsApp
+        </h2>
+        <p>Most clients start here. Message Vignesh directly — no forms, no waiting.</p>
+        <WhatsAppCta label="Chat on WhatsApp" iconSize={18} class="vgl-wa-card-btn" />
+      </div>
+
+      <div class="vgl-form-cell">
+        <ContactForm heading="Send an enquiry" intro="Vignesh personally replies within 24 hours." />
+      </div>
+
+      <div class="vgl-info-list">
+        <a href={CONTACT.phoneHref}>
+          <Icon name="ph:phone" style="font-size: 17px; color: var(--color-vgl-accent)" aria-hidden="true" />
+          {CONTACT.phoneDisplay}
+        </a>
+        <a href={`mailto:${CONTACT.email}`} style="word-break: break-all">
+          <Icon name="ph:envelope-simple" style="font-size: 17px; color: var(--color-vgl-accent)" aria-hidden="true" />
+          {CONTACT.email}
+        </a>
+        <span>
+          <Icon name="ph:map-pin" style="font-size: 17px; color: var(--color-vgl-accent)" aria-hidden="true" />
+          {CONTACT.location}
+        </span>
+        <span class="vgl-info-muted">
+          <Icon name="ph:clock" style="font-size: 17px; color: var(--color-vgl-accent)" aria-hidden="true" />
+          Vignesh personally replies within 24 hours
+        </span>
+      </div>
+
+      <div class="vgl-next-box">
+        <p class="vgl-next-label">What happens next</p>
+        <ol>
+          {
+            nextSteps.map((step) => (
+              <li>
+                <span class="vgl-next-num" style="font-feature-settings: 'tnum' 1">
+                  {step.number}
+                </span>
+                {step.copy}
+              </li>
+            ))
+          }
+        </ol>
+        <p class="vgl-next-footnote">
+          Questions first? <a href="/#clients">See client proof</a> or <a href="/#faq">read the FAQ</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <RevealMotion />
+</PageLayout>
+
+<style>
+  .vgl-contact-sec {
+    padding-block: clamp(44px, 6vw, 80px) clamp(52px, 7vw, 88px);
+  }
+
+  .vgl-contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px clamp(32px, 5vw, 88px);
+    align-items: start;
+    margin-top: 44px;
+  }
+
+  /* Desktop: left column stacks A/C/D, form spans the right column */
+  @media (min-width: 821px) {
+    .vgl-contact-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .vgl-wa-card {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .vgl-form-cell {
+      grid-column: 2;
+      grid-row: 1 / span 3;
+    }
+
+    .vgl-info-list {
+      grid-column: 1;
+      grid-row: 2;
+    }
+
+    .vgl-next-box {
+      grid-column: 1;
+      grid-row: 3;
+    }
+  }
+
+  .vgl-wa-card {
+    padding: 24px;
+    border: 1px solid color-mix(in srgb, var(--color-vgl-wa) 35%, var(--color-vgl-neutral-700));
+    gap: 12px;
+  }
+
+  .vgl-wa-card h2 {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 18px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .vgl-wa-card p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--color-vgl-neutral-300);
+  }
+
+  .vgl-wa-card :global(.vgl-wa-card-btn) {
+    min-height: 46px;
+    padding-inline: 20px;
+    align-self: flex-start;
+  }
+
+  .vgl-info-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    font-size: 14.5px;
+  }
+
+  .vgl-info-list > a,
+  .vgl-info-list > span {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--color-vgl-neutral-200);
+    text-decoration: none;
+  }
+
+  .vgl-info-list > a:hover {
+    color: var(--color-vgl-accent-200);
+  }
+
+  .vgl-info-list > .vgl-info-muted {
+    color: var(--color-vgl-neutral-300);
+  }
+
+  .vgl-next-box {
+    border: 1px solid var(--color-vgl-neutral-700);
+    border-radius: var(--radius-vgl-md);
+    padding: 20px 22px;
+  }
+
+  .vgl-next-label {
+    margin: 0 0 14px;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-vgl-neutral-400);
+  }
+
+  .vgl-next-box ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-vgl-neutral-300);
+  }
+
+  .vgl-next-box li {
+    display: flex;
+    gap: 10px;
+  }
+
+  .vgl-next-num {
+    color: var(--color-vgl-accent);
+    font-family: var(--font-heading);
+    font-weight: 500;
+  }
+
+  .vgl-next-footnote {
+    margin: 14px 0 0;
+    font-size: 13px;
+    color: var(--color-vgl-neutral-400);
+  }
+
+  .vgl-next-footnote a {
+    color: var(--color-vgl-accent-300);
+  }
+
+  .vgl-next-footnote a:hover {
+    color: var(--color-vgl-accent-200);
+  }
+</style>

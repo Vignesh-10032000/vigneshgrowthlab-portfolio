@@ -1,0 +1,242 @@
+---
+import { Icon } from 'astro-icon/components';
+
+import { footerExploreLinks, footerContact, footerSocials, footerBrand } from '~/navigation';
+import { waLink } from '~/utils/whatsapp';
+---
+
+<footer class="vgl-footer">
+  <div class="vgl-footer-grid">
+    <div class="vgl-footer-brand">
+      <a href="/" class="vgl-footer-logo">
+        <img src="/brand/vgl-logo-mark.svg" alt="" width="28" height="28" style="border-radius: 7px" />
+        <span>{footerBrand.name}</span>
+      </a>
+      <p>Websites, custom software, retail POS and WhatsApp AI automation for Tamil Nadu businesses.</p>
+      <div class="vgl-footer-socials">
+        <a
+          href={footerSocials.linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="LinkedIn"
+          class="vgl-social-btn"
+        >
+          <Icon name="ph:linkedin-logo" style="font-size: 18px" aria-hidden="true" />
+        </a>
+        <a
+          href={footerSocials.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub"
+          class="vgl-social-btn"
+        >
+          <Icon name="ph:github-logo" style="font-size: 18px" aria-hidden="true" />
+        </a>
+        <a
+          href={footerSocials.instagram}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram"
+          class="vgl-social-btn"
+        >
+          <Icon name="ph:instagram-logo" style="font-size: 18px" aria-hidden="true" />
+        </a>
+      </div>
+    </div>
+
+    <nav aria-label="Footer" class="vgl-footer-explore">
+      <span class="vgl-footer-heading">Explore</span>
+      {
+        footerExploreLinks.map((link) => (
+          <a
+            href={link.href}
+            target={link.external ? '_blank' : undefined}
+            rel={link.external ? 'noopener noreferrer' : undefined}
+          >
+            {link.text}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="vgl-footer-contact">
+      <span class="vgl-footer-heading">Contact</span>
+      <a href={waLink()} target="_blank" rel="noopener noreferrer" class="vgl-footer-wa">
+        <Icon name="ph:whatsapp-logo" style="font-size: 16px; color: var(--color-vgl-wa-text)" aria-hidden="true" />
+        {footerContact.whatsappDisplay}
+      </a>
+      <a href={footerContact.phoneHref}>
+        <Icon name="ph:phone" style="font-size: 16px; color: var(--color-vgl-accent)" aria-hidden="true" />
+        {footerContact.phoneDisplay}
+      </a>
+      <a href={`mailto:${footerContact.email}`} style="word-break: break-all">
+        <Icon name="ph:envelope-simple" style="font-size: 16px; color: var(--color-vgl-accent)" aria-hidden="true" />
+        {footerContact.email}
+      </a>
+      <span class="vgl-footer-location">
+        <Icon name="ph:map-pin" style="font-size: 16px; color: var(--color-vgl-accent)" aria-hidden="true" />
+        {footerContact.location}
+      </span>
+      <a
+        href={footerContact.msmeCertificate}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="vgl-btn vgl-btn-ghost vgl-footer-msme"
+      >
+        <Icon name="ph:seal-check" style="font-size: 16px" aria-hidden="true" />
+        View MSME Certificate
+      </a>
+    </div>
+  </div>
+
+  <div class="vgl-footer-bottom">
+    <div class="vgl-footer-bottom-inner">
+      <span>🏛️ MSME Registered</span>
+      <span style="font-feature-settings: 'tnum' 1">{footerBrand.msmeId}</span>
+      <span>📍 {footerContact.location}</span>
+      <span class="vgl-footer-copyright">{footerBrand.copyright}</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .vgl-footer {
+    border-top: 1px solid var(--color-vgl-divider);
+    background: color-mix(in srgb, var(--color-vgl-neutral-900) 55%, var(--color-vgl-bg));
+  }
+
+  .vgl-footer-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 56px clamp(20px, 5vw, 72px) 28px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+    gap: 40px clamp(24px, 4vw, 64px);
+  }
+
+  .vgl-footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .vgl-footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--color-vgl-text);
+    text-decoration: none;
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 16px;
+  }
+
+  .vgl-footer-brand > p {
+    margin: 0;
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--color-vgl-neutral-300);
+    max-width: 34ch;
+  }
+
+  .vgl-footer-socials {
+    display: flex;
+    gap: 10px;
+  }
+
+  .vgl-social-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+    border-radius: var(--radius-vgl-md);
+    color: var(--color-vgl-text);
+    text-decoration: none;
+  }
+
+  .vgl-social-btn:hover {
+    background: color-mix(in srgb, var(--color-vgl-accent) 10%, transparent);
+  }
+
+  .vgl-footer-heading {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-vgl-neutral-400);
+    margin-bottom: 4px;
+  }
+
+  .vgl-footer-explore {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .vgl-footer-explore > a {
+    font-size: 14px;
+    color: var(--color-vgl-neutral-200);
+    padding: 3px 0;
+    text-decoration: none;
+  }
+
+  .vgl-footer-explore > a:hover {
+    color: var(--color-vgl-accent);
+  }
+
+  .vgl-footer-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .vgl-footer-contact > a,
+  .vgl-footer-location {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--color-vgl-neutral-200);
+    text-decoration: none;
+  }
+
+  .vgl-footer-contact > a:hover {
+    color: var(--color-vgl-accent-200);
+  }
+
+  .vgl-footer-wa:hover {
+    color: var(--color-vgl-wa-text) !important;
+  }
+
+  .vgl-footer-msme {
+    align-self: flex-start;
+    margin-top: 4px;
+  }
+
+  .vgl-footer-bottom {
+    border-top: 1px solid var(--color-vgl-neutral-800);
+  }
+
+  .vgl-footer-bottom-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 18px clamp(20px, 5vw, 72px);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 24px;
+    align-items: center;
+    font-size: 12.5px;
+    color: var(--color-vgl-neutral-400);
+  }
+
+  .vgl-footer-copyright {
+    margin-left: auto;
+  }
+
+  @media (max-width: 640px) {
+    .vgl-footer-copyright {
+      margin-left: 0;
+    }
+  }
+</style>

@@ -1,0 +1,63 @@
+---
+import { Icon } from 'astro-icon/components';
+
+/**
+ * Placeholder frame for real screenshots that have not been supplied yet
+ * (see "Assets Required Before Launch"). Swaps for a real <img> once the
+ * asset exists — never ships a fake screenshot.
+ */
+export interface Props {
+  /** Business/project name shown inside the frame. */
+  label: string;
+  /** aspect-ratio CSS value, e.g. "16/10". */
+  ratio?: string;
+  class?: string;
+}
+
+const { label, ratio = '16/10', class: className = '' } = Astro.props;
+---
+
+<div
+  class:list={['vgl-image-frame', className]}
+  role="img"
+  aria-label={`${label} — preview image coming soon`}
+  style={`aspect-ratio: ${ratio}`}
+>
+  <Icon name="ph:image" style="font-size: 22px; color: var(--color-vgl-neutral-500)" aria-hidden="true" />
+  <span class="vgl-image-frame-label">{label}</span>
+  <span class="vgl-image-frame-note">Preview coming soon</span>
+</div>
+
+<style>
+  .vgl-image-frame {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+    background:
+      radial-gradient(
+        300px 160px at 78% 0%,
+        color-mix(in srgb, var(--color-vgl-accent-900) 60%, transparent),
+        transparent 70%
+      ),
+      color-mix(in srgb, var(--color-vgl-neutral-900) 80%, var(--color-vgl-bg));
+  }
+
+  .vgl-image-frame-label {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 13.5px;
+    color: var(--color-vgl-text);
+    text-align: center;
+  }
+
+  .vgl-image-frame-note {
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-vgl-neutral-400);
+  }
+</style>

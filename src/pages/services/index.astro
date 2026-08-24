@@ -1,0 +1,241 @@
+---
+/** Services overview — follows Services.dc.html exactly. */
+import { Icon } from 'astro-icon/components';
+
+import PageLayout from '~/layouts/PageLayout.astro';
+import SectionHeading from '~/components/vgl/SectionHeading.astro';
+import ProcessSteps from '~/components/vgl/ProcessSteps.astro';
+import SectionGlowPanel from '~/components/vgl/SectionGlowPanel.astro';
+import RevealMotion from '~/components/vgl/RevealMotion.astro';
+
+import { SERVICES } from '~/data/vgl/services';
+import { PROCESS_STEPS_COMPACT } from '~/data/vgl/site';
+import { jsonLd, collectionPage } from '~/utils/structured-data';
+
+const metadata = {
+  title: 'Services — Websites, Custom Software, POS & WhatsApp AI | Vignesh Growth Lab',
+  description:
+    'Website development, custom software, retail POS and WhatsApp AI automation for Tamil Nadu businesses. Fixed pricing, ~2 week delivery, 100% ownership.',
+};
+
+const structuredData = jsonLd(
+  collectionPage(
+    'Services — Vignesh Growth Lab',
+    SERVICES.map((s) => ({ name: s.serviceName, path: s.pageRoute }))
+  )
+);
+
+/** Overview-only copy from Services.dc.html — the detail matrices live in ~/data/vgl/services. */
+const OVERVIEW: Record<
+  string,
+  { icon: string; whatsapp?: boolean; copy: string; tags: string[]; whoFor: string; proof: string }
+> = {
+  'website-development': {
+    icon: 'ph:browser',
+    copy: 'Fast, SEO-ready business and e-commerce websites that show up on Google and convert visitors into WhatsApp enquiries.',
+    tags: ['WordPress', 'E-Commerce', 'SEO Ready', 'Google Analytics'],
+    whoFor: 'Boutiques, retail stores and local brands that need to be found — and ordered from — online.',
+    proof: 'NextGen Toys: first online sale within 72 hours',
+  },
+  'custom-development': {
+    icon: 'ph:code',
+    copy: "Hand-coded web applications and API integrations when a template won't cut it — built exactly for your workflow.",
+    tags: ['HTML', 'CSS', 'JavaScript', 'API Integrations', 'GitHub'],
+    whoFor: "Businesses with a specific flow — like WhatsApp ordering on every product — that platforms can't do.",
+    proof: 'Rani Sarees & Boutique: 3× online reach',
+  },
+  'retail-pos-solutions': {
+    icon: 'ph:storefront',
+    copy: 'Custom billing software with inventory, reports, customer management and thermal receipt printing.',
+    tags: ['Flask', 'Inventory', 'Reports', 'Thermal Receipts'],
+    whoFor:
+      'Retail stores that want billing, stock and reports in one place — on their own hardware, with their own data.',
+    proof: 'VGL POS: load-tested to 600 concurrent clients',
+  },
+  'whatsapp-ai-automation': {
+    icon: 'ph:whatsapp-logo',
+    whatsapp: true,
+    copy: 'AI chatbots and workflows that capture leads, follow up automatically and route every enquiry where it belongs.',
+    tags: ['n8n Engine', 'Gemini / GPT AI', 'Lead Capture', 'Follow-Up Systems'],
+    whoFor: 'Gyms, boutiques and stores drowning in WhatsApp enquiries — or losing them after hours.',
+    proof: 'Routes 100+ leads daily to Sheets and WhatsApp',
+  },
+};
+---
+
+<PageLayout metadata={metadata} active="services" structuredData={structuredData}>
+  <section class="vgl-container vgl-hero-sec">
+    <SectionHeading
+      kicker="Services"
+      as="h1"
+      title="Four ways we grow<br />Tamil Nadu businesses."
+      sub="Websites, custom software, retail POS and WhatsApp AI automation — fixed pricing, average delivery around 2 weeks, and you own everything on handover."
+    />
+  </section>
+
+  <section class="vgl-container vgl-list-sec" aria-label="Service list">
+    {
+      SERVICES.map((service, i) => {
+        const o = OVERVIEW[service.slug];
+        return (
+          <article class="vgl-service-row">
+            <div>
+              <p class="vgl-row-num" style="font-feature-settings: 'tnum' 1">
+                {String(i + 1).padStart(2, '0')}
+              </p>
+              <h2 class="vgl-row-title">
+                <Icon
+                  name={o.icon}
+                  style={`font-size: 24px; color: ${o.whatsapp ? 'var(--color-vgl-wa-text)' : 'var(--color-vgl-cyan)'}`}
+                  aria-hidden="true"
+                />
+                {service.serviceName}
+              </h2>
+              <p class="vgl-row-copy">{o.copy}</p>
+              <div class="vgl-row-tags">
+                {o.tags.map((tag) => (
+                  <span class="vgl-tag vgl-tag-neutral">{tag}</span>
+                ))}
+              </div>
+            </div>
+            <div class="vgl-row-aside">
+              <p class="vgl-row-label">Who it's for</p>
+              <p class="vgl-row-who">{o.whoFor}</p>
+              <p class="vgl-row-proof">
+                <Icon name="ph:trend-up" style="font-size: 16px" aria-hidden="true" />
+                {o.proof}
+              </p>
+              <div class="vgl-row-ctas">
+                <a href={service.pageRoute} class="vgl-btn vgl-btn-primary">
+                  Explore service
+                </a>
+                <a href={service.related.caseRoute} class="vgl-btn vgl-btn-ghost">
+                  See the proof
+                </a>
+              </div>
+            </div>
+          </article>
+        );
+      })
+    }
+  </section>
+
+  <section class="vgl-container vgl-sec">
+    <SectionHeading kicker="Our Process" title="Same process, every service" />
+    <ProcessSteps steps={PROCESS_STEPS_COMPACT} />
+  </section>
+
+  <section class="vgl-container vgl-sec vgl-sec-last">
+    <SectionGlowPanel
+      heading="Not sure what your business needs?"
+      sub="Book a free 30-minute strategy call — honest advice, no sales pitch."
+      ctaLabel="Book a free call"
+      ctaMessage="Hi Vignesh, I'd like a free strategy call."
+    />
+  </section>
+
+  <RevealMotion />
+</PageLayout>
+
+<style>
+  .vgl-hero-sec {
+    padding-top: clamp(48px, 7vw, 88px);
+  }
+
+  .vgl-list-sec {
+    padding-top: clamp(44px, 6vw, 64px);
+  }
+
+  .vgl-sec {
+    padding-top: clamp(48px, 6.5vw, 80px);
+    scroll-margin-top: 84px;
+  }
+
+  .vgl-sec-last {
+    padding-bottom: clamp(52px, 7vw, 88px);
+  }
+
+  .vgl-service-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: 20px clamp(24px, 4vw, 64px);
+    padding: 34px 0;
+    border-top: 1px solid var(--color-vgl-neutral-700);
+  }
+
+  .vgl-service-row:last-child {
+    border-bottom: 1px solid var(--color-vgl-neutral-700);
+  }
+
+  .vgl-row-num {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--color-vgl-accent);
+    margin: 0 0 12px;
+  }
+
+  .vgl-row-title {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: clamp(21px, 2.4vw, 26px);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .vgl-row-copy {
+    margin: 14px 0 0;
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--color-vgl-neutral-300);
+    max-width: 48ch;
+  }
+
+  .vgl-row-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 14px;
+  }
+
+  .vgl-row-aside {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .vgl-row-label {
+    margin: 0;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-vgl-neutral-400);
+  }
+
+  .vgl-row-who {
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--color-vgl-neutral-200);
+    max-width: 44ch;
+  }
+
+  .vgl-row-proof {
+    margin: 6px 0 0;
+    font-size: 14px;
+    color: var(--color-vgl-accent-200);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .vgl-row-ctas {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: auto;
+    padding-top: 8px;
+  }
+</style>

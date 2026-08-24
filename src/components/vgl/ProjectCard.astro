@@ -1,0 +1,219 @@
+---
+import { Icon } from 'astro-icon/components';
+
+import DeviceMockup from '~/components/vgl/DeviceMockup.astro';
+import ImageFrame from '~/components/vgl/ImageFrame.astro';
+import ResultBadge from '~/components/vgl/ResultBadge.astro';
+import type { Project } from '~/data/vgl/projects';
+
+/**
+ * Featured-project card (design 1e): angled browser mockup + floating result
+ * badge + tags + CTAs. The AI automation variant swaps the mockup for a
+ * poster link with a play overlay (never embeds the video on the homepage).
+ */
+export interface Props {
+  project: Project;
+  tilt?: 'left' | 'right';
+  caseCtaLabel?: string;
+  /** Shorter context-specific card copy; defaults to the matrix summary. */
+  cardCopy?: string;
+  /** Result as a trend-up line in the body (Projects page style) instead of the floating badge. */
+  resultLine?: string;
+}
+
+const {
+  project,
+  tilt = 'left',
+  caseCtaLabel = 'Case study',
+  cardCopy = Astro.props.project.summary,
+  resultLine,
+} = Astro.props;
+const isVideoPoster = project.slug === 'ai-whatsapp-automation';
+---
+
+<article class="vgl-card vgl-lift vgl-project-card">
+  <div class="vgl-project-media">
+    {
+      isVideoPoster ? (
+        <a
+          href={project.pageRoute}
+          aria-label={`Watch the n8n workflow demonstration in the ${project.client} case study`}
+          class="vgl-project-poster-link"
+        >
+          <DeviceMockup tilt={tilt}>
+            {project.cardImage ? (
+              <img
+                src={project.cardImage}
+                alt={project.cardImageAlt}
+                width="1280"
+                height="800"
+                loading="lazy"
+                style="display: block; width: 100%; height: auto; aspect-ratio: 16/10; object-fit: cover"
+              />
+            ) : (
+              <ImageFrame label={project.cardImageAlt} />
+            )}
+          </DeviceMockup>
+          <span class="vgl-project-play" aria-hidden="true">
+            <span>
+              <Icon name="ph:play-fill" style="font-size: 19px; color: var(--color-vgl-text); margin-left: 2px" />
+            </span>
+          </span>
+        </a>
+      ) : (
+        <DeviceMockup tilt={tilt}>
+          {project.cardImage ? (
+            <img
+              src={project.cardImage}
+              alt={project.cardImageAlt}
+              width="1280"
+              height="800"
+              loading="lazy"
+              style="display: block; width: 100%; height: auto; aspect-ratio: 16/10; object-fit: cover"
+            />
+          ) : (
+            <ImageFrame label={project.cardImageAlt} />
+          )}
+        </DeviceMockup>
+      )
+    }
+    {!resultLine && <ResultBadge text={project.resultBadge} green={isVideoPoster} floating />}
+  </div>
+  <div class="vgl-project-body">
+    <div class="vgl-project-tags">
+      {
+        isVideoPoster ? (
+          <span
+            class="vgl-tag"
+            style="color: var(--color-vgl-wa-text); background: color-mix(in srgb, var(--color-vgl-wa) 14%, transparent)"
+          >
+            {project.projectType}
+          </span>
+        ) : (
+          <>
+            <span class="vgl-tag vgl-tag-accent">{project.projectType}</span>
+            <span class="vgl-tag vgl-tag-neutral">{project.location.split(',')[0]}</span>
+          </>
+        )
+      }
+      <span class="vgl-tag vgl-tag-tech">{project.technology}</span>
+    </div>
+    <h3>{project.client}</h3>
+    <p>{cardCopy}</p>
+    {
+      resultLine && (
+        <p class="vgl-project-result">
+          <Icon name="ph:trend-up" style="font-size: 16px" aria-hidden="true" />
+          {resultLine}
+        </p>
+      )
+    }
+    <div class="vgl-project-ctas">
+      {
+        isVideoPoster ? (
+          <a href={project.pageRoute} class="vgl-btn vgl-btn-primary">
+            <Icon name="ph:play" style="font-size: 15px" aria-hidden="true" />
+            Watch the workflow
+          </a>
+        ) : (
+          <>
+            <a href={project.pageRoute} class="vgl-btn vgl-btn-primary">
+              {caseCtaLabel}
+            </a>
+            {project.liveUrl && (
+              <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" class="vgl-btn vgl-btn-ghost">
+                {project.liveLabel === 'Open live demo' ? 'Live demo' : 'Live site'}
+                <Icon name="ph:arrow-up-right" style="font-size: 15px" aria-hidden="true" />
+              </a>
+            )}
+          </>
+        )
+      }
+    </div>
+  </div>
+</article>
+
+<style>
+  .vgl-project-card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .vgl-project-media {
+    position: relative;
+    padding: 14px 14px 0;
+  }
+
+  .vgl-project-poster-link {
+    position: relative;
+    display: block;
+    text-decoration: none;
+  }
+
+  .vgl-project-play {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
+
+  .vgl-project-play > span {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: color-mix(in srgb, var(--color-vgl-bg) 50%, transparent);
+    backdrop-filter: blur(10px);
+    border: 1px solid color-mix(in srgb, var(--color-vgl-text) 22%, transparent);
+  }
+
+  .vgl-project-body {
+    padding: 20px 22px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+  }
+
+  .vgl-project-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .vgl-project-body h3 {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 19px;
+    margin: 0;
+  }
+
+  .vgl-project-body > p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-vgl-neutral-300);
+  }
+
+  .vgl-project-result {
+    margin: 0;
+    font-size: 14px;
+    color: var(--color-vgl-accent-200);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .vgl-project-ctas {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: auto;
+    padding-top: 8px;
+  }
+</style>

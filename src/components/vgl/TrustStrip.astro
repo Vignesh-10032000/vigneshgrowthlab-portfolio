@@ -1,0 +1,86 @@
+---
+import { Icon } from 'astro-icon/components';
+
+import { TRUST_ITEMS, DOCUMENTS } from '~/data/vgl/site';
+---
+
+<div class="vgl-trust-strip">
+  {
+    TRUST_ITEMS.map((item) =>
+      'badge' in item && item.badge ? (
+        <span class="vgl-trust-badge" style="font-feature-settings: 'tnum' 1">
+          {item.label}
+        </span>
+      ) : (
+        <span class="vgl-trust-item">
+          {item.icon && (
+            <Icon
+              name={item.icon}
+              style={`color: ${'whatsapp' in item && item.whatsapp ? 'var(--color-vgl-wa-text)' : 'var(--color-vgl-accent)'}; font-size: 17px`}
+              aria-hidden="true"
+            />
+          )}
+          {item.label}
+        </span>
+      )
+    )
+  }
+  <a
+    href={DOCUMENTS.msmeCertificate}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="vgl-btn vgl-btn-ghost vgl-trust-cert"
+  >
+    <Icon name="ph:file-pdf" style="font-size: 16px" aria-hidden="true" />
+    View MSME Certificate
+  </a>
+</div>
+
+<style>
+  .vgl-trust-strip {
+    border: 1px solid var(--color-vgl-neutral-700);
+    border-radius: var(--radius-vgl-md);
+    padding: 16px clamp(16px, 2.5vw, 26px);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px clamp(18px, 2.5vw, 32px);
+    align-items: center;
+    font-size: 13.5px;
+    color: var(--color-vgl-neutral-200);
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--color-vgl-neutral-800) 30%, transparent), transparent),
+      color-mix(in srgb, var(--color-vgl-neutral-900) 40%, transparent);
+    box-shadow:
+      inset 0 1px 0 color-mix(in srgb, var(--color-vgl-text) 7%, transparent),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.35);
+  }
+
+  .vgl-trust-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .vgl-trust-badge {
+    display: flex;
+    align-items: center;
+    padding: 4px 10px;
+    border: 1px solid var(--color-vgl-neutral-700);
+    border-radius: 6px;
+    background: color-mix(in srgb, black 20%, transparent);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.45);
+    letter-spacing: 0.05em;
+    font-size: 12.5px;
+  }
+
+  .vgl-trust-cert {
+    margin-left: auto;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 700px) {
+    .vgl-trust-cert {
+      margin-left: 0;
+    }
+  }
+</style>

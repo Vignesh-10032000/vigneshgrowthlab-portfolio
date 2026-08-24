@@ -1,0 +1,26 @@
+---
+import PageLayout from '~/layouts/PageLayout.astro';
+
+const metadata = {
+  title: 'Page not found — Vignesh Growth Lab',
+  robots: { index: false, follow: false },
+};
+---
+
+<PageLayout metadata={metadata}>
+  <section
+    class="vgl-container"
+    style="padding-block: clamp(64px, 10vw, 128px); display: flex; flex-direction: column; align-items: flex-start; gap: 18px"
+  >
+    <p class="vgl-kicker">Error 404</p>
+    <h1
+      style="font-family: var(--font-heading); font-weight: 500; font-size: clamp(32px, 4.4vw, 56px); line-height: 1.1; letter-spacing: -0.014em; margin: 0"
+    >
+      This page doesn't exist.
+    </h1>
+    <p style="font-size: 15.5px; line-height: 1.65; color: var(--color-vgl-neutral-300); max-width: 54ch; margin: 0">
+      The link may be out of date. Head back to the homepage, or message Vignesh directly on WhatsApp.
+    </p>
+    <a class="vgl-btn vgl-btn-primary" href="/" style="margin-top: 10px">Back to homepage</a>
+  </section>
+</PageLayout>

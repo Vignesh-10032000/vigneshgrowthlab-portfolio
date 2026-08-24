@@ -1,0 +1,184 @@
+---
+import { Icon } from 'astro-icon/components';
+
+import { RESERVED_MEDIA } from '~/data/vgl/site';
+
+/**
+ * Client-testimonial card — two variants:
+ * - "video": Rani Sarees video testimonial. The real file does not exist yet
+ *   (see Assets Required Before Launch); until /videos/client-testimonial.mp4
+ *   is supplied, the approved poster-style fallback renders with "Video will
+ *   be added before launch". Never a broken player, never fake content.
+ * - "image": NextGen Toys written WhatsApp review screenshot.
+ */
+export interface Props {
+  variant: 'video' | 'image';
+  caption: string;
+  captionMeta: string;
+  /** video variant */
+  videoSrc?: string;
+  videoPoster?: string;
+  videoLabel?: string;
+  placeholderName?: string;
+  /** image variant */
+  imageSrc?: string;
+  imageAlt?: string;
+  imageWidth?: number;
+  imageHeight?: number;
+}
+
+const {
+  variant,
+  caption,
+  captionMeta,
+  videoSrc = '',
+  videoPoster = RESERVED_MEDIA.clientTestimonialPoster,
+  videoLabel = '',
+  placeholderName = '',
+  imageSrc = '',
+  imageAlt = '',
+  imageWidth = 627,
+  imageHeight = 786,
+} = Astro.props;
+---
+
+<figure class="vgl-card vgl-testimonial">
+  {
+    variant === 'video' &&
+      (videoSrc ? (
+        <video
+          controls
+          playsinline
+          preload="metadata"
+          src={videoSrc}
+          poster={videoPoster}
+          aria-label={videoLabel}
+          class="vgl-testimonial-video"
+        />
+      ) : (
+        <div
+          role="img"
+          aria-label={`Video testimonial from ${placeholderName} — video will be added before launch`}
+          class="vgl-testimonial-placeholder"
+        >
+          <span class="vgl-testimonial-play" aria-hidden="true">
+            <Icon name="ph:play-fill" style="font-size: 22px; color: var(--color-vgl-text); margin-left: 3px" />
+          </span>
+          <span class="vgl-testimonial-name">{placeholderName}</span>
+          <span class="vgl-testimonial-note">Video will be added before launch</span>
+        </div>
+      ))
+  }
+  {
+    variant === 'image' && (
+      <div class="vgl-testimonial-image-wrap">
+        <img
+          src={imageSrc}
+          alt={imageAlt}
+          width={imageWidth}
+          height={imageHeight}
+          loading="lazy"
+          class="vgl-testimonial-image"
+        />
+      </div>
+    )
+  }
+  <figcaption>
+    <p class="vgl-testimonial-caption">{caption}</p>
+    <p class="vgl-testimonial-meta">{captionMeta}</p>
+  </figcaption>
+</figure>
+
+<style>
+  .vgl-testimonial {
+    margin: 0;
+  }
+
+  .vgl-testimonial-video {
+    width: 100%;
+    aspect-ratio: 16/9;
+    display: block;
+    background: var(--color-vgl-neutral-900);
+    border-radius: var(--radius-vgl-md) var(--radius-vgl-md) 0 0;
+    object-fit: cover;
+  }
+
+  .vgl-testimonial-placeholder {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background:
+      radial-gradient(
+        420px 240px at 78% 0%,
+        color-mix(in srgb, var(--color-vgl-accent-900) 60%, transparent),
+        transparent 70%
+      ),
+      color-mix(in srgb, var(--color-vgl-neutral-900) 80%, var(--color-vgl-bg));
+    border-radius: var(--radius-vgl-md) var(--radius-vgl-md) 0 0;
+    border-bottom: 1px solid var(--color-vgl-neutral-800);
+  }
+
+  .vgl-testimonial-play {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: color-mix(in srgb, var(--color-vgl-bg) 45%, transparent);
+    backdrop-filter: blur(10px);
+    border: 1px solid color-mix(in srgb, var(--color-vgl-text) 22%, transparent);
+  }
+
+  .vgl-testimonial-name {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 15.5px;
+    color: var(--color-vgl-text);
+  }
+
+  .vgl-testimonial-note {
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-vgl-neutral-400);
+  }
+
+  .vgl-testimonial-image-wrap {
+    padding: 22px 22px 0;
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(180deg, color-mix(in srgb, var(--color-vgl-accent-900) 35%, transparent), transparent);
+    border-radius: var(--radius-vgl-md) var(--radius-vgl-md) 0 0;
+  }
+
+  .vgl-testimonial-image {
+    width: 100%;
+    max-width: 340px;
+    height: auto;
+    border-radius: 12px;
+    border: 1px solid var(--color-vgl-neutral-700);
+    display: block;
+  }
+
+  figcaption {
+    padding: 18px 22px 22px;
+  }
+
+  .vgl-testimonial-caption {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .vgl-testimonial-meta {
+    margin: 8px 0 0;
+    font-size: 12.5px;
+    color: var(--color-vgl-neutral-400);
+  }
+</style>

@@ -1,0 +1,173 @@
+---
+/** Projects overview — follows Projects.dc.html exactly. */
+import PageLayout from '~/layouts/PageLayout.astro';
+import SectionHeading from '~/components/vgl/SectionHeading.astro';
+import ProjectCard from '~/components/vgl/ProjectCard.astro';
+import SectionGlowPanel from '~/components/vgl/SectionGlowPanel.astro';
+import RevealMotion from '~/components/vgl/RevealMotion.astro';
+
+import { Icon } from 'astro-icon/components';
+
+import { PROJECTS } from '~/data/vgl/projects';
+import { MORE_PROJECTS } from '~/data/vgl/site';
+import { jsonLd, collectionPage } from '~/utils/structured-data';
+
+const metadata = {
+  title: 'Projects — Real results for Tamil Nadu businesses | Vignesh Growth Lab',
+  description:
+    '15+ projects delivered across Tamil Nadu — e-commerce stores, business websites, retail POS and AI WhatsApp automation, with measurable results.',
+};
+
+const structuredData = jsonLd(
+  collectionPage(
+    'Projects — Vignesh Growth Lab',
+    PROJECTS.map((p) => ({ name: p.client, path: p.pageRoute }))
+  )
+);
+
+/** Result shown as a trend-up line on this page (Projects.dc.html card style). */
+const resultLines: Record<string, string> = {
+  'nextgen-toys': 'First online sale within 72 hours',
+  'rani-sarees': '3× online reach',
+  'vgl-pos': 'Load-tested to 600 concurrent clients at <300ms',
+  'ai-whatsapp-automation': 'Routes 100+ leads daily',
+};
+---
+
+<PageLayout metadata={metadata} active="projects" structuredData={structuredData}>
+  <section class="vgl-container vgl-hero-sec">
+    <SectionHeading
+      kicker="Projects"
+      as="h1"
+      title="Projects built around<br />measurable business outcomes."
+      sub="15+ projects delivered across Tamil Nadu — stores, boutiques, POS systems and AI automations. Here are the ones with stories worth telling."
+    />
+  </section>
+
+  <section class="vgl-container vgl-list-sec" aria-label="Case studies">
+    <div class="vgl-projects-grid">
+      {
+        PROJECTS.map((project, i) => (
+          <ProjectCard project={project} tilt={i % 2 === 0 ? 'left' : 'right'} resultLine={resultLines[project.slug]} />
+        ))
+      }
+    </div>
+
+    <h2 class="vgl-more-heading">More delivered work</h2>
+    <div class="vgl-more-grid">
+      {
+        MORE_PROJECTS.map((item) => (
+          <article class="vgl-more-card">
+            <div class="vgl-more-tags">
+              <span class="vgl-tag vgl-tag-neutral">{item.type}</span>
+              <span class="vgl-tag vgl-tag-neutral">{item.location}</span>
+            </div>
+            <h3>{item.name}</h3>
+            <p>{item.copy}</p>
+            {item.liveUrl && (
+              <a class="vgl-more-live" href={item.liveUrl} target="_blank" rel="noopener noreferrer">
+                Live site
+                <Icon name="ph:arrow-up-right" style="font-size: 13px" aria-hidden="true" />
+              </a>
+            )}
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="vgl-container vgl-sec vgl-sec-last">
+    <SectionGlowPanel
+      heading="Have a similar project in mind?"
+      sub="Talk directly with Vignesh — free 30-minute call, proposal in 24 hours."
+      ctaLabel="Start on WhatsApp"
+      ctaMessage="Hi Vignesh, I have a project in mind."
+    />
+  </section>
+
+  <RevealMotion />
+</PageLayout>
+
+<style>
+  .vgl-hero-sec {
+    padding-top: clamp(48px, 7vw, 88px);
+  }
+
+  .vgl-list-sec {
+    padding-top: clamp(44px, 6vw, 64px);
+  }
+
+  .vgl-sec {
+    padding-top: clamp(48px, 6.5vw, 80px);
+    scroll-margin-top: 84px;
+  }
+
+  .vgl-sec-last {
+    padding-bottom: clamp(52px, 7vw, 88px);
+  }
+
+  .vgl-projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: 18px;
+  }
+
+  .vgl-more-heading {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 18px;
+    margin: 44px 0 0;
+    color: var(--color-vgl-neutral-200);
+  }
+
+  .vgl-more-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    gap: 14px;
+    margin-top: 16px;
+  }
+
+  .vgl-more-card {
+    padding: 20px 22px;
+    border: 1px solid var(--color-vgl-neutral-700);
+    border-radius: var(--radius-vgl-md);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .vgl-more-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .vgl-more-card h3 {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 16.5px;
+    margin: 0;
+  }
+
+  .vgl-more-card p {
+    margin: 0;
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--color-vgl-neutral-300);
+  }
+
+  .vgl-more-live {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: auto;
+    padding-top: 4px;
+    font-size: 13px;
+    color: var(--color-vgl-accent-300);
+    text-decoration: none;
+  }
+
+  .vgl-more-live:hover {
+    color: var(--color-vgl-accent-200);
+  }
+</style>

@@ -1,0 +1,289 @@
+---
+import { Icon } from 'astro-icon/components';
+
+import { headerLinks } from '~/navigation';
+import { BRAND } from '~/data/vgl/site';
+import { waLink } from '~/utils/whatsapp';
+
+export interface Props {
+  /** Which nav item is the current page (sets aria-current="page"). */
+  active?: 'about' | 'services' | 'projects' | 'contact' | '';
+}
+
+const { active = '' } = Astro.props;
+---
+
+<header class="vgl-header">
+  <a href="#main-content" class="vgl-skip-link">Skip to content</a>
+
+  <div class="vgl-header-bar">
+    <a href="/" aria-label="Vignesh Growth Lab — home" class="vgl-brand">
+      <img src="/brand/vgl-logo-mark.svg" alt="" width="32" height="32" style="border-radius: 8px" />
+      <span class="vgl-brand-text">
+        <span class="vgl-brand-name">{BRAND.name}</span>
+        <span class="vgl-brand-tagline">{BRAND.tagline}</span>
+      </span>
+    </a>
+
+    <nav aria-label="Primary" class="vgl-nav-desktop">
+      {
+        headerLinks.map((link) => (
+          <a
+            href={link.href}
+            aria-current={link.activeKey && link.activeKey === active ? 'page' : undefined}
+            target={link.external ? '_blank' : undefined}
+            rel={link.external ? 'noopener noreferrer' : undefined}
+          >
+            {link.text}
+          </a>
+        ))
+      }
+      <a class="vgl-btn vgl-btn-wa vgl-nav-wa" href={waLink()} target="_blank" rel="noopener noreferrer">
+        <Icon name="ph:whatsapp-logo" style="font-size: 17px" aria-hidden="true" />
+        WhatsApp Us
+      </a>
+    </nav>
+
+    <button
+      type="button"
+      class="vgl-btn vgl-nav-toggle"
+      data-nav-toggle
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="vgl-mobile-menu"
+    >
+      <Icon name="ph:list" class="vgl-icon-open" style="font-size: 20px" aria-hidden="true" />
+      <Icon name="ph:x" class="vgl-icon-close" style="font-size: 20px" aria-hidden="true" />
+    </button>
+  </div>
+
+  <nav id="vgl-mobile-menu" aria-label="Primary" class="vgl-nav-mobile" hidden>
+    {
+      headerLinks.map((link) => (
+        <a
+          href={link.href}
+          aria-current={link.activeKey && link.activeKey === active ? 'page' : undefined}
+          target={link.external ? '_blank' : undefined}
+          rel={link.external ? 'noopener noreferrer' : undefined}
+          data-nav-close
+        >
+          {link.text}
+        </a>
+      ))
+    }
+    <a class="vgl-btn vgl-btn-wa vgl-nav-mobile-wa" href={waLink()} target="_blank" rel="noopener noreferrer">
+      <Icon name="ph:whatsapp-logo" style="font-size: 18px" aria-hidden="true" />
+      WhatsApp Us
+    </a>
+  </nav>
+</header>
+
+<style>
+  .vgl-header {
+    position: sticky;
+    top: 0;
+    z-index: 90;
+    background: color-mix(in srgb, var(--color-vgl-bg) 86%, transparent);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--color-vgl-divider);
+  }
+
+  .vgl-skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    z-index: 200;
+    background: var(--color-vgl-bg);
+    color: var(--color-vgl-accent-200);
+    padding: 12px 18px;
+    border: 1px solid var(--color-vgl-accent);
+    border-radius: var(--radius-vgl-md);
+    font-size: 14px;
+    text-decoration: none;
+  }
+
+  .vgl-skip-link:focus {
+    left: 12px;
+    top: 12px;
+  }
+
+  .vgl-header-bar {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 clamp(16px, 4vw, 40px);
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    height: 64px;
+  }
+
+  .vgl-brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    color: var(--color-vgl-text);
+    text-decoration: none;
+  }
+
+  .vgl-brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+  }
+
+  .vgl-brand-name {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 15.5px;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+  }
+
+  .vgl-brand-tagline {
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-vgl-neutral-400);
+  }
+
+  .vgl-nav-desktop {
+    display: flex;
+    align-items: center;
+    gap: clamp(12px, 1.6vw, 22px);
+    margin-left: auto;
+  }
+
+  .vgl-nav-desktop > a:not(.vgl-nav-wa) {
+    color: var(--color-vgl-neutral-200);
+    font-size: 14px;
+    padding: 8px 2px;
+    white-space: nowrap;
+    text-decoration: none;
+  }
+
+  .vgl-nav-desktop > a:not(.vgl-nav-wa):hover {
+    color: var(--color-vgl-accent);
+  }
+
+  header a[aria-current='page'] {
+    color: var(--color-vgl-accent) !important;
+  }
+
+  .vgl-nav-wa {
+    min-height: 40px;
+  }
+
+  .vgl-nav-toggle {
+    display: none;
+    margin-left: auto;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0;
+    border: none;
+    color: var(--color-vgl-text);
+  }
+
+  .vgl-nav-toggle[aria-expanded='false'] :global(.vgl-icon-close) {
+    display: none;
+  }
+
+  .vgl-nav-toggle[aria-expanded='true'] :global(.vgl-icon-open) {
+    display: none;
+  }
+
+  .vgl-nav-mobile {
+    display: none;
+    flex-direction: column;
+    gap: 2px;
+    padding: 10px clamp(16px, 4vw, 40px) 20px;
+    border-top: 1px solid var(--color-vgl-divider);
+    max-height: calc(100dvh - 64px);
+    overflow-y: auto;
+    animation: vgl-menu-in 0.22s ease;
+  }
+
+  .vgl-nav-mobile:not([hidden]) {
+    display: flex;
+  }
+
+  .vgl-nav-mobile > a:not(.vgl-nav-mobile-wa) {
+    color: var(--color-vgl-text);
+    font-size: 16px;
+    padding: 13px 4px;
+    border-bottom: 1px solid var(--color-vgl-neutral-800);
+    text-decoration: none;
+  }
+
+  .vgl-nav-mobile-wa {
+    justify-content: center;
+    margin-top: 14px;
+    min-height: 46px;
+  }
+
+  @keyframes vgl-menu-in {
+    from {
+      opacity: 0;
+      transform: translateY(-6px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .vgl-nav-mobile {
+      animation: none;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .vgl-nav-desktop {
+      display: none;
+    }
+    .vgl-nav-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+</style>
+
+<script>
+  const header = document.querySelector<HTMLElement>('.vgl-header');
+  const toggle = header?.querySelector<HTMLButtonElement>('[data-nav-toggle]');
+  const menu = header?.querySelector<HTMLElement>('#vgl-mobile-menu');
+  const mq = window.matchMedia('(max-width: 900px)');
+
+  const setMenu = (open: boolean) => {
+    if (!toggle || !menu) return;
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    menu.hidden = !open;
+    document.body.style.overflow = mq.matches && open ? 'hidden' : '';
+    if (open) {
+      window.setTimeout(() => menu.querySelector<HTMLAnchorElement>('a')?.focus(), 60);
+    }
+  };
+
+  const isOpen = () => toggle?.getAttribute('aria-expanded') === 'true';
+
+  toggle?.addEventListener('click', () => setMenu(!isOpen()));
+
+  menu?.querySelectorAll('[data-nav-close]').forEach((link) =>
+    link.addEventListener('click', () => {
+      setMenu(false);
+      toggle?.focus();
+    })
+  );
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isOpen()) {
+      setMenu(false);
+      toggle?.focus();
+    }
+  });
+
+  mq.addEventListener('change', () => setMenu(false));
+</script>

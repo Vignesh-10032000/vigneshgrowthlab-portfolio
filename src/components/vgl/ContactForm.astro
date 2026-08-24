@@ -1,0 +1,250 @@
+---
+import { waLink } from '~/utils/whatsapp';
+
+/**
+ * Formspree enquiry form (endpoint meeyzjgw).
+ * Preserved behaviours: AJAX via @formspree/ajax CDN + native POST fallback,
+ * plain data-fs-field hooks, per-field data-fs-error, global #vgl-form-error,
+ * data-fs-success, disabled "Sending…" submit state, focus first invalid
+ * field, focus success/error after settle via MutationObserver — no fixed
+ * reset timers.
+ */
+export interface Props {
+  heading: string;
+  intro: string;
+  /** Show the "📱 Prefer WhatsApp? →" alternative line. */
+  whatsappAlt?: boolean;
+}
+
+const { heading, intro, whatsappAlt = false } = Astro.props;
+---
+
+<div class="vgl-card vgl-form-card">
+  <h3>{heading}</h3>
+  <p class="vgl-form-intro">{intro}</p>
+  {
+    whatsappAlt && (
+      <p class="vgl-form-alt">
+        <a href={waLink()} target="_blank" rel="noopener noreferrer">
+          📱 Prefer WhatsApp? →
+        </a>
+      </p>
+    )
+  }
+  <form id="vgl-contact-form" action="https://formspree.io/f/meeyzjgw" method="POST">
+    <div class="vgl-field">
+      <label for="cf-name">Name</label>
+      <input
+        class="vgl-input"
+        id="cf-name"
+        name="name"
+        type="text"
+        placeholder="Your name"
+        data-fs-field
+        required
+        autocomplete="name"
+      />
+      <p data-fs-error="name" class="vgl-field-error"></p>
+    </div>
+    <div class="vgl-field">
+      <label for="cf-biz">Business type</label>
+      <input
+        class="vgl-input"
+        id="cf-biz"
+        name="business_type"
+        type="text"
+        placeholder="e.g. Boutique, gym, retail store"
+        data-fs-field
+        required
+      />
+      <p data-fs-error="business_type" class="vgl-field-error"></p>
+    </div>
+    <div class="vgl-field">
+      <label for="cf-wa">WhatsApp number</label>
+      <input
+        class="vgl-input"
+        id="cf-wa"
+        name="whatsapp"
+        type="tel"
+        inputmode="tel"
+        placeholder="+91 98765 43210"
+        data-fs-field
+        required
+        pattern="[+]?[0-9\s()-]{10,16}"
+        title="Enter a valid phone number (10–16 digits)"
+        autocomplete="tel"
+      />
+      <p data-fs-error="whatsapp" class="vgl-field-error"></p>
+    </div>
+    <div class="vgl-field">
+      <label for="cf-service">Service needed</label>
+      <select class="vgl-input" id="cf-service" name="service" data-fs-field required style="appearance: auto">
+        <option value="" selected disabled>Choose a service</option>
+        <option>Website Development</option>
+        <option>Custom Development</option>
+        <option>Retail POS Solutions</option>
+        <option>WhatsApp AI Automation</option>
+        <option>Not sure yet — advise me</option>
+      </select>
+      <p data-fs-error="service" class="vgl-field-error"></p>
+    </div>
+    <div class="vgl-field">
+      <label for="cf-budget">Budget range</label>
+      <select class="vgl-input" id="cf-budget" name="budget" data-fs-field required style="appearance: auto">
+        <option value="" selected disabled>Choose a budget range</option>
+        <option>₹8,000 – ₹15,000</option>
+        <option>₹15,000 – ₹30,000</option>
+        <option>₹30,000 – ₹60,000</option>
+        <option>₹60,000+</option>
+        <option>Not sure yet</option>
+      </select>
+      <p data-fs-error="budget" class="vgl-field-error"></p>
+    </div>
+    <div id="vgl-form-error" data-fs-error role="alert" class="vgl-form-error"></div>
+    <button type="submit" class="vgl-btn vgl-btn-primary vgl-form-submit" data-fs-submit-btn>Send enquiry</button>
+    <div data-fs-success role="status" class="vgl-form-success" style="display: none">
+      ✅ Sent! Vignesh will reply on WhatsApp within 24 hours.
+    </div>
+  </form>
+</div>
+
+<script src="https://unpkg.com/@formspree/ajax@1" defer is:inline></script>
+<script is:inline>
+  window.formspree =
+    window.formspree ||
+    function () {
+      (formspree.q = formspree.q || []).push(arguments);
+    };
+</script>
+<script is:inline>
+  (function () {
+    var init = function () {
+      var form = document.getElementById('vgl-contact-form');
+      if (!form) {
+        setTimeout(init, 300);
+        return;
+      }
+      // Reset selects to their disabled placeholder (bfcache/back-nav)
+      form.querySelectorAll('select').forEach(function (s) {
+        s.value = '';
+      });
+      window.formspree('initForm', { formElement: '#vgl-contact-form', formId: 'meeyzjgw' });
+
+      var btn = form.querySelector('[data-fs-submit-btn]');
+      var success = form.querySelector('[data-fs-success]');
+      var err = form.querySelector('#vgl-form-error');
+      var label = btn ? btn.textContent : '';
+
+      form.addEventListener('submit', function () {
+        if (!form.checkValidity()) {
+          var inv = form.querySelector(':invalid');
+          if (inv) inv.focus();
+          return;
+        }
+        // Duplicate-submission protection
+        if (btn && !btn.disabled) {
+          btn.disabled = true;
+          btn.textContent = 'Sending…';
+        }
+      });
+
+      var settle = function (el) {
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = label;
+        }
+        if (el) {
+          el.setAttribute('tabindex', '-1');
+          el.focus();
+        }
+      };
+
+      // Re-enable ONLY when Formspree reports success or failure — no timers.
+      new MutationObserver(function () {
+        if (!btn || !btn.disabled) return;
+        if (success && getComputedStyle(success).display !== 'none') settle(success);
+        else if (err && err.textContent.trim()) settle(err);
+      }).observe(form, { subtree: true, childList: true, attributes: true, characterData: true });
+    };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+    else init();
+  })();
+</script>
+
+<style>
+  .vgl-form-card {
+    padding: clamp(24px, 3vw, 34px);
+    box-shadow: var(--shadow-vgl-md);
+  }
+
+  .vgl-form-card h3 {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 22px;
+    margin: 0;
+  }
+
+  .vgl-form-intro {
+    margin: 8px 0 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-vgl-neutral-300);
+  }
+
+  .vgl-form-alt {
+    margin: 10px 0 0;
+    font-size: 14px;
+  }
+
+  .vgl-form-alt a {
+    color: var(--color-vgl-wa-text);
+    text-decoration: none;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 22px;
+  }
+
+  .vgl-field > label {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 5px;
+    color: color-mix(in srgb, var(--color-vgl-text) 70%, transparent);
+  }
+
+  .vgl-field-error {
+    margin: 4px 0 0;
+    font-size: 12.5px;
+    color: var(--color-vgl-error);
+  }
+
+  .vgl-field-error:empty {
+    display: none;
+  }
+
+  .vgl-form-error {
+    font-size: 13px;
+    color: var(--color-vgl-error);
+  }
+
+  .vgl-form-error:empty {
+    display: none;
+  }
+
+  .vgl-form-submit {
+    min-height: 46px;
+    font-size: 15px;
+  }
+
+  .vgl-form-success {
+    padding: 14px 16px;
+    border: 1px solid var(--color-vgl-accent-700);
+    border-radius: var(--radius-vgl-md);
+    background: color-mix(in srgb, var(--color-vgl-accent-900) 50%, transparent);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+</style>

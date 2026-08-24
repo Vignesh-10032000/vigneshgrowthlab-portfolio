@@ -1,0 +1,434 @@
+---
+/** Service detail — follows Service Template.dc.html exactly. */
+import { Icon } from 'astro-icon/components';
+
+import PageLayout from '~/layouts/PageLayout.astro';
+import SectionHeading from '~/components/vgl/SectionHeading.astro';
+import WhatsAppCta from '~/components/vgl/WhatsAppCta.astro';
+import ImageFrame from '~/components/vgl/ImageFrame.astro';
+import ProcessSteps from '~/components/vgl/ProcessSteps.astro';
+import SectionGlowPanel from '~/components/vgl/SectionGlowPanel.astro';
+import RevealMotion from '~/components/vgl/RevealMotion.astro';
+
+import { SERVICES } from '~/data/vgl/services';
+import type { Service } from '~/data/vgl/services';
+import { getProject } from '~/data/vgl/projects';
+import { PROCESS_STEPS_COMPACT } from '~/data/vgl/site';
+import { jsonLd, serviceSchema, breadcrumbList } from '~/utils/structured-data';
+
+export function getStaticPaths() {
+  return SERVICES.map((service) => ({ params: { slug: service.slug }, props: { service } }));
+}
+
+interface Props {
+  service: Service;
+}
+
+const { service } = Astro.props;
+const related = service.related;
+const relatedProject = getProject(related.caseRoute.split('/').pop() ?? '');
+
+const metadata = {
+  title: service.seoTitle,
+  description: service.seoDescription,
+};
+
+const structuredData = jsonLd(
+  serviceSchema(service.serviceName),
+  breadcrumbList([{ name: 'Home', path: '/' }, { name: 'Services', path: '/services' }, { name: service.serviceName }])
+);
+---
+
+<PageLayout metadata={metadata} active="services" structuredData={structuredData}>
+  <section class="vgl-container vgl-hero-sec">
+    <nav aria-label="Breadcrumb" class="vgl-breadcrumb">
+      <a href="/">Home</a>
+      <Icon name="ph:caret-right" style="font-size: 11px" aria-hidden="true" />
+      <a href="/services">Services</a>
+      <Icon name="ph:caret-right" style="font-size: 11px" aria-hidden="true" />
+      <span aria-current="page">{service.serviceName}</span>
+    </nav>
+    <div class="vgl-hero-grid">
+      <div>
+        <SectionHeading kicker="Service" as="h1" title={service.serviceName} sub={service.heroStatement} />
+        <p class="vgl-outcome">
+          <Icon
+            name="ph:target"
+            style="color: var(--color-vgl-cyan); font-size: 16px; position: relative; top: 2px"
+            aria-hidden="true"
+          />
+          <span><strong>Outcome:</strong> {service.outcome}</span>
+        </p>
+        <div class="vgl-hero-ctas">
+          <WhatsAppCta message={service.waMessage} label="Get a free quote" iconSize={18} class="vgl-hero-wa" />
+          <a href="#included" class="vgl-btn vgl-btn-ghost vgl-hero-ghost">What's included</a>
+          {
+            service.startingPrice && (
+              <span class="vgl-tag vgl-tag-accent" style="font-feature-settings: 'tnum' 1">
+                {service.startingPrice}
+              </span>
+            )
+          }
+        </div>
+      </div>
+      <div class="vgl-hero-media">
+        {
+          service.heroImage ? (
+            <img src={service.heroImage} alt={service.heroImageAlt} width="1040" height="715" loading="eager" />
+          ) : (
+            <ImageFrame label={service.serviceName} ratio="16/11" />
+          )
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="vgl-container vgl-proof-sec" aria-label="Proof">
+    <div class="vgl-proof-strip">
+      <span class="vgl-proof-main">
+        <Icon name="ph:trend-up" style="font-size: 17px" aria-hidden="true" />
+        {service.quickProof}
+      </span>
+      <span class="vgl-proof-item">
+        <Icon name="ph:seal-check" style="font-size: 16px; color: var(--color-vgl-accent)" aria-hidden="true" />
+        MSME Registered
+      </span>
+      <span class="vgl-proof-item">
+        <Icon name="ph:whatsapp-logo" style="font-size: 16px; color: var(--color-vgl-wa-text)" aria-hidden="true" />
+        Direct founder support
+      </span>
+    </div>
+  </section>
+
+  <section class="vgl-container vgl-sec">
+    <SectionHeading kicker="Who it's for" title="Built for businesses like yours" sub={service.whoItIsFor} />
+  </section>
+
+  <section id="included" class="vgl-container vgl-sec">
+    <SectionHeading kicker="What's included" title="Everything this service ships with" />
+    <div class="vgl-features-grid">
+      {
+        service.features.map((feature) => (
+          <div class="vgl-card vgl-feature-card">
+            <Icon name={feature.icon} style="font-size: 22px; color: var(--color-vgl-cyan)" aria-hidden="true" />
+            <span class="vgl-feature-title">{feature.title}</span>
+            <span class="vgl-feature-copy">{feature.copy}</span>
+          </div>
+        ))
+      }
+    </div>
+    <div class="vgl-tech-row">
+      <span class="vgl-tech-label">Technologies</span>
+      <div class="vgl-tech-chips">
+        {service.technologies.map((tech) => <span class="vgl-tag vgl-tag-tech">{tech}</span>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="vgl-container vgl-sec">
+    <SectionHeading kicker="Proof" title="A project built with this service" class="vgl-related-heading" />
+    <div class="vgl-card vgl-related-card">
+      <div class="vgl-related-media">
+        {
+          relatedProject?.cardImage ? (
+            <img
+              src={relatedProject.cardImage}
+              alt={relatedProject.cardImageAlt}
+              width="1680"
+              height="1050"
+              loading="lazy"
+            />
+          ) : (
+            <ImageFrame label={related.name} ratio="auto" />
+          )
+        }
+      </div>
+      <div class="vgl-related-body">
+        <div class="vgl-related-tags">
+          <span class="vgl-tag vgl-tag-accent">{related.type}</span>
+          <span class="vgl-tag vgl-tag-neutral">{related.location}</span>
+        </div>
+        <h3>{related.name}</h3>
+        <p class="vgl-related-copy">{related.copy}</p>
+        <p class="vgl-related-result">
+          <Icon name="ph:trend-up" style="font-size: 16px" aria-hidden="true" />
+          {related.result}
+        </p>
+        <div class="vgl-related-ctas">
+          <a href={related.caseRoute} class="vgl-btn vgl-btn-primary">Read the case study</a>
+          {
+            related.liveUrl && (
+              <a href={related.liveUrl} target="_blank" rel="noopener noreferrer" class="vgl-btn vgl-btn-ghost">
+                Live site
+                <Icon name="ph:arrow-up-right" style="font-size: 15px" aria-hidden="true" />
+              </a>
+            )
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="vgl-container vgl-sec">
+    <SectionHeading kicker="Our Process" title="What happens after you contact us" />
+    <ProcessSteps steps={PROCESS_STEPS_COMPACT} />
+  </section>
+
+  <section class="vgl-container vgl-sec vgl-sec-last">
+    <SectionGlowPanel
+      heading={service.ctaHeading}
+      sub="First call is free. Custom proposal within 24 hours."
+      ctaLabel="Talk to Vignesh on WhatsApp"
+      ctaMessage={service.waMessage}
+    />
+  </section>
+
+  <RevealMotion />
+</PageLayout>
+
+<style>
+  .vgl-hero-sec {
+    padding-top: clamp(40px, 6vw, 72px);
+  }
+
+  .vgl-proof-sec {
+    padding-top: clamp(36px, 5vw, 52px);
+  }
+
+  .vgl-sec {
+    padding-top: clamp(52px, 7vw, 88px);
+    scroll-margin-top: 84px;
+  }
+
+  .vgl-sec-last {
+    padding-bottom: clamp(52px, 7vw, 88px);
+  }
+
+  .vgl-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--color-vgl-neutral-400);
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+
+  .vgl-breadcrumb a {
+    color: var(--color-vgl-neutral-400);
+    text-decoration: none;
+    padding: 4px 0;
+  }
+
+  .vgl-breadcrumb a:hover {
+    color: var(--color-vgl-accent);
+  }
+
+  .vgl-breadcrumb span[aria-current] {
+    color: var(--color-vgl-neutral-200);
+  }
+
+  .vgl-hero-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: 40px clamp(28px, 5vw, 80px);
+    align-items: center;
+  }
+
+  .vgl-outcome {
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--color-vgl-neutral-300);
+    margin: 12px 0 0;
+    max-width: 54ch;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+
+  .vgl-outcome strong {
+    font-weight: 500;
+    color: var(--color-vgl-neutral-200);
+  }
+
+  .vgl-hero-ctas {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 26px;
+  }
+
+  .vgl-hero-ctas :global(.vgl-hero-wa) {
+    min-height: 46px;
+    padding-inline: 20px;
+  }
+
+  .vgl-hero-ghost {
+    min-height: 46px;
+    padding-inline: 20px;
+  }
+
+  .vgl-hero-media {
+    max-width: 520px;
+    width: 100%;
+    justify-self: center;
+    border-radius: var(--radius-vgl-lg);
+    overflow: hidden;
+  }
+
+  .vgl-hero-media img {
+    width: 100%;
+    aspect-ratio: 16/11;
+    object-fit: cover;
+    object-position: top;
+    display: block;
+  }
+
+  .vgl-proof-strip {
+    border: 1px solid var(--color-vgl-neutral-700);
+    border-radius: var(--radius-vgl-md);
+    padding: 16px clamp(16px, 2.5vw, 24px);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px clamp(18px, 2.5vw, 32px);
+    align-items: center;
+    background: color-mix(in srgb, var(--color-vgl-neutral-900) 40%, transparent);
+  }
+
+  .vgl-proof-main {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 14px;
+    color: var(--color-vgl-accent-200);
+  }
+
+  .vgl-proof-item {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 13.5px;
+    color: var(--color-vgl-neutral-300);
+  }
+
+  .vgl-features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+    gap: 16px;
+    margin-top: 32px;
+  }
+
+  .vgl-feature-card {
+    padding: 22px;
+    gap: 10px;
+  }
+
+  .vgl-feature-title {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 16px;
+  }
+
+  .vgl-feature-copy {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--color-vgl-neutral-300);
+  }
+
+  .vgl-tech-row {
+    margin-top: 24px;
+    padding: 18px 22px;
+    border: 1px solid var(--color-vgl-neutral-700);
+    border-radius: var(--radius-vgl-md);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 20px;
+    align-items: center;
+  }
+
+  .vgl-tech-label {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-vgl-neutral-400);
+  }
+
+  .vgl-tech-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+  }
+
+  :global(.vgl-related-heading) {
+    margin-bottom: 32px;
+  }
+
+  .vgl-related-card {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    overflow: hidden;
+    align-items: stretch;
+  }
+
+  .vgl-related-media {
+    min-height: 240px;
+    display: flex;
+  }
+
+  .vgl-related-media > :global(*) {
+    flex: 1;
+  }
+
+  .vgl-related-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    display: block;
+  }
+
+  .vgl-related-body {
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .vgl-related-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .vgl-related-body h3 {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 22px;
+    margin: 0;
+  }
+
+  .vgl-related-copy {
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--color-vgl-neutral-300);
+  }
+
+  .vgl-related-result {
+    margin: 0;
+    font-size: 14.5px;
+    color: var(--color-vgl-accent-200);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .vgl-related-ctas {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: auto;
+    padding-top: 12px;
+  }
+</style>

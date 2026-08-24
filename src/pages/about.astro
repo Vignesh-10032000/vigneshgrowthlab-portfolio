@@ -1,0 +1,346 @@
+---
+/** About — follows About.dc.html exactly. */
+import { Icon } from 'astro-icon/components';
+
+import PageLayout from '~/layouts/PageLayout.astro';
+import SectionHeading from '~/components/vgl/SectionHeading.astro';
+import WhatsAppCta from '~/components/vgl/WhatsAppCta.astro';
+import RevealMotion from '~/components/vgl/RevealMotion.astro';
+
+import { BRAND, CREDENTIALS, DOCUMENTS, FOUNDER, SOCIALS } from '~/data/vgl/site';
+import { jsonLd, aboutPage } from '~/utils/structured-data';
+
+const metadata = {
+  title: 'About Vignesh Prabhu — Vignesh Growth Lab, Pollachi',
+  description:
+    'Vignesh Prabhu — AI Automation and Business Process Automation Specialist (MCA). MSME-registered business in Pollachi, Tamil Nadu. Direct founder support on every project.',
+};
+
+const principles = [
+  {
+    icon: 'ph:whatsapp-logo',
+    whatsapp: true,
+    title: 'Direct founder access',
+    copy: 'No middle-men, no account managers. You message Vignesh, Vignesh replies.',
+  },
+  {
+    icon: 'ph:key',
+    title: 'You own everything',
+    copy: 'Full code, hosting credentials and domain access transferred on delivery. No monthly lock-in.',
+  },
+  {
+    icon: 'ph:receipt',
+    title: 'Honest, fixed pricing',
+    copy: '50% advance, 50% on delivery after you approve everything. No invoice surprises.',
+  },
+  {
+    icon: 'ph:map-pin',
+    title: 'Local and registered',
+    copy: 'A Pollachi-based MSME registered business — not an anonymous marketplace profile.',
+  },
+];
+---
+
+<PageLayout metadata={metadata} active="about" structuredData={jsonLd(aboutPage())}>
+  <section class="vgl-container vgl-hero-sec">
+    <div class="vgl-about-grid">
+      <div>
+        <SectionHeading kicker="About" as="h1" title="One founder.<br />Every project." />
+        <p class="vgl-about-lead">
+          Vignesh Growth Lab is a Pollachi-based, MSME-registered business run by Vignesh Prabhu — AI Automation and
+          Business Process Automation Specialist with an MCA from Dr. Mahalingam College of Engineering &amp;
+          Technology.
+        </p>
+        <p class="vgl-about-body">
+          Focused on delivering scalable AI workflows, digital transformation solutions, and client-focused web
+          applications — 15+ projects delivered across Tamil Nadu, with the founder on WhatsApp for every one of them.
+        </p>
+        <div class="vgl-about-ctas">
+          <a class="vgl-btn vgl-btn-primary" href={DOCUMENTS.resume} target="_blank" rel="noopener noreferrer">
+            <Icon name="ph:read-cv-logo" style="font-size: 17px" aria-hidden="true" />
+            View Resume
+          </a>
+          <a class="vgl-btn vgl-btn-ghost" href={SOCIALS.linkedin} target="_blank" rel="noopener noreferrer">
+            <Icon name="ph:linkedin-logo" style="font-size: 17px" aria-hidden="true" />
+            LinkedIn
+          </a>
+          <a class="vgl-btn vgl-btn-ghost" href={SOCIALS.github} target="_blank" rel="noopener noreferrer">
+            <Icon name="ph:github-logo" style="font-size: 17px" aria-hidden="true" />
+            GitHub
+          </a>
+        </div>
+      </div>
+      <div class="vgl-about-photo">
+        <img
+          src={FOUNDER.photo}
+          alt={FOUNDER.photoAlt}
+          width={FOUNDER.photoWidth}
+          height={FOUNDER.photoHeight}
+          loading="eager"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="vgl-container vgl-sec">
+    <SectionHeading kicker="How we work" title="Principles we don't bend" />
+    <div class="vgl-principles-grid">
+      {
+        principles.map((principle) => (
+          <div class="vgl-principle-card">
+            <Icon
+              name={principle.icon}
+              style={`font-size: 22px; color: ${principle.whatsapp ? 'var(--color-vgl-wa-text)' : 'var(--color-vgl-accent)'}`}
+              aria-hidden="true"
+            />
+            <h3>{principle.title}</h3>
+            <p>{principle.copy}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="vgl-container vgl-sec">
+    <SectionHeading kicker="Credentials" title="Verified, not claimed" />
+    <div class="vgl-cred-grid">
+      {
+        CREDENTIALS.map((cred) => (
+          <a
+            href={cred.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class:list={['vgl-cred-card', { 'vgl-cred-highlight': cred.highlight }]}
+          >
+            <Icon
+              name={cred.icon}
+              style={`font-size: 20px; color: ${cred.highlight ? 'var(--color-vgl-accent)' : 'var(--color-vgl-cyan)'}`}
+              aria-hidden="true"
+            />
+            <span class="vgl-cred-title">{cred.title}</span>
+            <span class="vgl-cred-link">
+              {cred.linkLabel}
+              <Icon name="ph:arrow-up-right" style="font-size: 12px" aria-hidden="true" />
+            </span>
+          </a>
+        ))
+      }
+    </div>
+    <div class="vgl-msme-strip">
+      <span class="vgl-msme-item">
+        <Icon name="ph:seal-check" style="color: var(--color-vgl-accent); font-size: 16px" aria-hidden="true" />
+        MSME Registered
+      </span>
+      <span style="font-feature-settings: 'tnum' 1">{BRAND.msmeId}</span>
+      <span>Government of India · Udyam Registration</span>
+    </div>
+  </section>
+
+  <section class="vgl-container vgl-cta-sec">
+    <div class="vgl-about-cta">
+      <div class="vgl-about-cta-copy">
+        <h2>Talk to Vignesh directly</h2>
+        <p>Free 30-minute strategy call — honest advice, no sales pitch.</p>
+      </div>
+      <div class="vgl-about-cta-btns">
+        <WhatsAppCta label="WhatsApp Vignesh" iconSize={18} class="vgl-about-btn" />
+        <a href="/contact" class="vgl-btn vgl-btn-ghost vgl-about-btn">Contact page</a>
+      </div>
+    </div>
+  </section>
+
+  <RevealMotion />
+</PageLayout>
+
+<style>
+  .vgl-hero-sec {
+    padding-top: clamp(48px, 7vw, 88px);
+  }
+
+  .vgl-sec {
+    padding-top: clamp(52px, 7vw, 88px);
+    scroll-margin-top: 84px;
+  }
+
+  .vgl-about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: 40px clamp(28px, 5vw, 80px);
+    align-items: center;
+  }
+
+  .vgl-about-lead {
+    font-size: 16.5px;
+    line-height: 1.7;
+    color: var(--color-vgl-neutral-200);
+    margin: 20px 0 0;
+    max-width: 54ch;
+  }
+
+  .vgl-about-body {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--color-vgl-neutral-300);
+    margin: 14px 0 0;
+    max-width: 54ch;
+  }
+
+  .vgl-about-ctas {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 24px;
+  }
+
+  .vgl-about-photo {
+    max-width: 420px;
+    width: 100%;
+    justify-self: center;
+    mix-blend-mode: lighten;
+  }
+
+  .vgl-about-photo img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--radius-vgl-lg);
+  }
+
+  .vgl-principles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+    gap: 14px;
+    margin-top: 32px;
+  }
+
+  .vgl-principle-card {
+    padding: 24px;
+    border: 1px solid var(--color-vgl-neutral-700);
+    border-radius: var(--radius-vgl-md);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .vgl-principle-card h3 {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 16.5px;
+    margin: 0;
+  }
+
+  .vgl-principle-card p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--color-vgl-neutral-300);
+  }
+
+  .vgl-cred-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+    gap: 12px;
+    margin-top: 32px;
+  }
+
+  .vgl-cred-card {
+    padding: 18px 20px;
+    border: 1px solid var(--color-vgl-neutral-700);
+    border-radius: var(--radius-vgl-md);
+    text-decoration: none;
+    color: var(--color-vgl-text);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: border-color 0.2s ease;
+  }
+
+  .vgl-cred-card:hover {
+    border-color: var(--color-vgl-accent-700);
+  }
+
+  .vgl-cred-highlight {
+    border-color: var(--color-vgl-accent-700);
+  }
+
+  .vgl-cred-highlight:hover {
+    border-color: var(--color-vgl-accent);
+  }
+
+  .vgl-cred-title {
+    font-size: 14.5px;
+    font-family: var(--font-heading);
+    font-weight: 500;
+  }
+
+  .vgl-cred-link {
+    font-size: 12px;
+    color: var(--color-vgl-neutral-400);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .vgl-msme-strip {
+    margin-top: 24px;
+    padding: 16px 20px;
+    border: 1px solid var(--color-vgl-neutral-700);
+    border-radius: var(--radius-vgl-md);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 24px;
+    align-items: center;
+    font-size: 13.5px;
+    color: var(--color-vgl-neutral-300);
+  }
+
+  .vgl-msme-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .vgl-cta-sec {
+    padding-block: clamp(52px, 7vw, 88px);
+  }
+
+  .vgl-about-cta {
+    border-top: 1px solid var(--color-vgl-divider);
+    padding-top: 44px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .vgl-about-cta-copy {
+    max-width: 52ch;
+  }
+
+  .vgl-about-cta-copy h2 {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: clamp(22px, 2.6vw, 30px);
+    margin: 0;
+  }
+
+  .vgl-about-cta-copy p {
+    margin: 10px 0 0;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--color-vgl-neutral-300);
+  }
+
+  .vgl-about-cta-btns {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .vgl-about-cta-btns :global(.vgl-about-btn),
+  .vgl-about-btn {
+    min-height: 46px;
+    padding-inline: 20px;
+  }
+</style>
