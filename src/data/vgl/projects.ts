@@ -460,3 +460,5 @@ export const PROJECTS: Project[] = [
 ];
 
 export const getProject = (slug: string): Project | undefined => PROJECTS.find((p) => p.slug === slug);
+
+
