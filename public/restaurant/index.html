@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trattoria Bella Napoli — Authentic Italian Woodfired Kitchen & Wine Bar</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Cormorant Garamond & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            italian: {
+              red: '#c93b2b',
+              redHover: '#b02f20',
+              gold: '#d4af37',
+              goldLight: '#f3e5ab',
+              green: '#2d6a4f',
+              dark: '#121214',
+              charcoal: '#1a1a1e',
+              card: '#222228',
+              border: '#32323a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Custom Luxury Shadows & Blur */
+    .glass-nav {
+      background: rgba(18, 18, 20, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    .hero-glow {
+      background: radial-gradient(circle at 50% 40%, rgba(201, 59, 43, 0.22) 0%, rgba(18, 18, 20, 0) 70%);
+    }
+    /* Scrollbars */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #121214; }
+    ::-webkit-scrollbar-thumb { background: #32323a; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #c93b2b; }
+  </style>
+</head>
+<body class="bg-italian-dark text-slate-200 font-sans antialiased selection:bg-italian-red selection:text-white relative">
+
+  <!-- TOP AGENCY NOTICE BANNER (For Client Pitching) -->
+  <div class="bg-gradient-to-r from-italian-red via-purple-900 to-indigo-900 text-white text-xs py-2 px-4 text-center font-medium sticky top-0 z-50 shadow-md flex items-center justify-center gap-2">
+    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+    <span><strong>Interactive Restaurant Concept Demo</strong> created by <strong>Vignesh Growth Lab</strong></span>
+    <span class="hidden sm:inline">• 0% Commission Direct WhatsApp Ordering & Table Reservations</span>
+    <a href="https://vigneshgrowthlab.dev/" target="_blank" class="ml-2 underline font-bold hover:text-italian-goldLight transition">Visit Portfolio ↗</a>
+  </div>
+
+  <!-- NAVIGATION BAR -->
+  <header class="sticky top-8 z-40 border-b border-italian-border/60 glass-nav transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="#" class="flex items-center space-x-3 group">
+        <div class="w-11 h-11 rounded-full bg-gradient-to-tr from-italian-red to-italian-gold flex items-center justify-center shadow-lg shadow-italian-red/30 group-hover:scale-105 transition">
+          <span class="text-xl">🍕</span>
+        </div>
+        <div>
+          <span class="font-serif text-2xl font-bold tracking-wider text-white block leading-tight">BELLA NAPOLI</span>
+          <span class="text-[10px] tracking-[0.25em] text-italian-gold uppercase font-semibold">Trattoria & Pizzeria</span>
+        </div>
+      </a>
+
+      <!-- Nav Links -->
+      <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-300">
+        <a href="#menu" class="hover:text-white transition">Menu</a>
+        <a href="#story" class="hover:text-white transition">The Naples Story</a>
+        <a href="#reviews" class="hover:text-white transition">Guest Reviews</a>
+        <a href="#location" class="hover:text-white transition">Visit Us</a>
+      </nav>
+
+      <!-- Action Buttons -->
+      <div class="flex items-center space-x-3">
+        <button onclick="openReservationModal()" class="hidden sm:flex items-center gap-2 px-4 py-2 text-xs font-bold rounded-full border border-italian-gold/40 text-italian-gold hover:bg-italian-gold/10 transition">
+          <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
+          <span>Reserve Table</span>
+        </button>
+
+        <button onclick="openCartDrawer()" id="nav-cart-btn" class="relative px-4 py-2 bg-italian-red hover:bg-italian-redHover text-white text-xs font-bold rounded-full flex items-center gap-2 shadow-lg shadow-italian-red/30 transition">
+          <i data-lucide="shopping-bag" class="w-3.5 h-3.5"></i>
+          <span>Order Direct</span>
+          <span id="cart-badge-count" class="hidden bg-white text-italian-red text-[10px] font-extrabold px-1.5 py-0.2 rounded-full">0</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="relative min-h-[85vh] flex items-center justify-center hero-glow overflow-hidden px-4 py-20">
+    <div class="max-w-4xl mx-auto text-center space-y-6 relative z-10">
+      
+      <!-- Italian Flag Pill -->
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-italian-charcoal border border-italian-border text-xs font-medium text-slate-300 shadow-inner">
+        <span class="flex items-center space-x-1">
+          <span class="w-2 h-3.5 bg-green-600 rounded-xs"></span>
+          <span class="w-2 h-3.5 bg-white rounded-xs"></span>
+          <span class="w-2 h-3.5 bg-red-600 rounded-xs"></span>
+        </span>
+        <span class="tracking-wide">Authentic Neapolitan Tradition • Handcrafted Daily</span>
+      </div>
+
+      <h1 class="font-serif text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.1]">
+        Artisanal Woodfired Pizza & <br class="hidden sm:inline">
+        <span class="italic font-normal text-italian-gold">Handmade Pasta</span> in India
+      </h1>
+
+      <p class="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+        48-hour slow fermented sourdough dough, imported San Marzano D.O.P tomatoes, and fresh Fior di Latte mozzarella fired in our 450°C stone oven.
+      </p>
+
+      <!-- Action CTAs -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+        <a href="#menu" class="w-full sm:w-auto px-8 py-4 bg-italian-red hover:bg-italian-redHover text-white font-bold rounded-full flex items-center justify-center gap-2 shadow-xl shadow-italian-red/40 hover:scale-105 transition transform">
+          <i data-lucide="utensils" class="w-4 h-4"></i>
+          <span>Explore The Menu</span>
+        </a>
+
+        <button onclick="openReservationModal()" class="w-full sm:w-auto px-8 py-4 bg-italian-charcoal border border-italian-gold/40 hover:border-italian-gold text-italian-gold font-bold rounded-full flex items-center justify-center gap-2 hover:bg-italian-gold/10 transition">
+          <i data-lucide="calendar-check" class="w-4 h-4"></i>
+          <span>Book a Dining Table</span>
+        </button>
+      </div>
+
+      <!-- Social Proof Highlight -->
+      <div class="pt-10 flex flex-wrap items-center justify-center gap-6 sm:gap-12 text-slate-400 text-xs font-semibold uppercase tracking-wider">
+        <div class="flex items-center gap-2">
+          <span class="text-italian-gold text-base">★ ★ ★ ★ ★</span>
+          <span>4.8 on Google (850+ Reviews)</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <i data-lucide="flame" class="w-4 h-4 text-italian-red"></i>
+          <span>Woodfired Stone Oven</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <i data-lucide="shield-check" class="w-4 h-4 text-emerald-400"></i>
+          <span>0% Commission Direct Ordering</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- VALUE STRIP: WHY ORDER DIRECT? -->
+  <section class="bg-italian-charcoal border-y border-italian-border py-4 px-4">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center shrink-0">
+          <i data-lucide="percent" class="w-4 h-4"></i>
+        </div>
+        <div>
+          <span class="text-sm font-bold text-white block">Support Local: 0% Delivery Surcharge</span>
+          <span class="text-xs text-slate-400">When you order directly through our website, you get fresh hot kitchen priority and 100% of your bill supports our chefs.</span>
+        </div>
+      </div>
+      <button onclick="openCartDrawer()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-lg shrink-0 transition">
+        Start Direct Order ↗
+      </button>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE MENU SECTION -->
+  <section id="menu" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <div class="text-center space-y-3 mb-12">
+      <span class="text-xs font-bold tracking-[0.2em] text-italian-gold uppercase">Artisanal Specialties</span>
+      <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white">Our Signature Menu</h2>
+      <p class="text-slate-400 text-sm max-w-lg mx-auto">Crafted with authentic Italian heirloom recipes and fresh local ingredients.</p>
+      
+      <!-- Category Tabs -->
+      <div class="flex flex-wrap items-center justify-center gap-2 pt-6">
+        <button onclick="filterCategory('all')" class="cat-btn active px-5 py-2 text-xs font-bold rounded-full bg-italian-red text-white transition">All Items</button>
+        <button onclick="filterCategory('pizza')" class="cat-btn px-5 py-2 text-xs font-bold rounded-full bg-italian-charcoal text-slate-300 border border-italian-border hover:border-italian-gold transition">🍕 Woodfired Pizzas</button>
+        <button onclick="filterCategory('pasta')" class="cat-btn px-5 py-2 text-xs font-bold rounded-full bg-italian-charcoal text-slate-300 border border-italian-border hover:border-italian-gold transition">🍝 Handmade Pastas</button>
+        <button onclick="filterCategory('antipasti')" class="cat-btn px-5 py-2 text-xs font-bold rounded-full bg-italian-charcoal text-slate-300 border border-italian-border hover:border-italian-gold transition">🥗 Antipasti & Sides</button>
+        <button onclick="filterCategory('dessert')" class="cat-btn px-5 py-2 text-xs font-bold rounded-full bg-italian-charcoal text-slate-300 border border-italian-border hover:border-italian-gold transition">☕ Desserts & Beverages</button>
+      </div>
+    </div>
+
+    <!-- Menu Items Grid -->
+    <div id="menu-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Items dynamically injected via JS -->
+    </div>
+  </section>
+
+  <!-- THE STORY & WOODFIRED CRAFT -->
+  <section id="story" class="bg-italian-charcoal border-y border-italian-border py-20 px-4">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div class="space-y-6">
+        <span class="text-xs font-bold tracking-[0.2em] text-italian-gold uppercase">Authenticity In Every Bite</span>
+        <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white leading-tight">
+          Bringing The Heart Of <br><span class="italic text-italian-gold">Naples To Your Table</span>
+        </h2>
+        <p class="text-slate-300 text-sm leading-relaxed">
+          Founded with a passion for traditional Italian culinary arts, our trattoria brings genuine regional recipes alive. Our dough rests for a minimum of 48 hours to develop its signature airy crust, blistered leopard spotting, and delicate digestibility.
+        </p>
+        <div class="grid grid-cols-2 gap-4 pt-2">
+          <div class="p-4 bg-italian-card border border-italian-border rounded-xl">
+            <span class="text-2xl font-serif font-bold text-italian-gold block">48 Hours</span>
+            <span class="text-xs text-slate-400">Natural Sourdough Cold Fermentation</span>
+          </div>
+          <div class="p-4 bg-italian-card border border-italian-border rounded-xl">
+            <span class="text-2xl font-serif font-bold text-italian-red block">450° C</span>
+            <span class="text-xs text-slate-400">Handcrafted Stone Woodfired Oven</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Visual Card -->
+      <div class="relative rounded-2xl overflow-hidden border border-italian-border bg-italian-card p-8 space-y-4 shadow-2xl">
+        <div class="flex items-center space-x-3 pb-4 border-b border-italian-border">
+          <div class="w-12 h-12 rounded-full bg-italian-red/20 text-italian-red flex items-center justify-center font-serif text-xl font-bold">BN</div>
+          <div>
+            <h4 class="font-bold text-white text-base">Chef Marco & Kitchen Team</h4>
+            <span class="text-xs text-slate-400">Master Pizzaiolo & Head Chef</span>
+          </div>
+        </div>
+        <p class="text-xs text-slate-300 italic">
+          "We never compromise on our core ingredients. From cold-pressed extra virgin olive oil to imported D.O.P Pecorino Romano, we ensure each plate honors genuine Italian soul."
+        </p>
+        <div class="pt-2 flex items-center justify-between text-xs text-italian-gold font-semibold">
+          <span>Dine-In • Takeaway • Private Catering</span>
+          <span>Open Daily: 12 PM - 11 PM</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GUEST REVIEWS -->
+  <section id="reviews" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <div class="text-center space-y-3 mb-12">
+      <span class="text-xs font-bold tracking-[0.2em] text-italian-gold uppercase">Real Guest Experiences</span>
+      <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white">Loved by Food Enthusiasts</h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="bg-italian-card border border-italian-border p-6 rounded-2xl space-y-4">
+        <div class="text-italian-gold text-sm">★ ★ ★ ★ ★</div>
+        <p class="text-xs text-slate-300 leading-relaxed">
+          "Hands down the best Truffle Tagliatelle and Burrata Pizza in town! The crust is light, crispy, and bursting with flavor. Booking via their direct site was seamless."
+        </p>
+        <div class="pt-2 border-t border-italian-border text-xs">
+          <span class="font-bold text-white block">Priya Sharma</span>
+          <span class="text-slate-400">Google Verified Diner</span>
+        </div>
+      </div>
+
+      <div class="bg-italian-card border border-italian-border p-6 rounded-2xl space-y-4">
+        <div class="text-italian-gold text-sm">★ ★ ★ ★ ★</div>
+        <p class="text-xs text-slate-300 leading-relaxed">
+          "The direct WhatsApp ordering feature was super fast! Ordered a party bundle for my family and got it piping hot in 30 mins with zero extra app fees."
+        </p>
+        <div class="pt-2 border-t border-italian-border text-xs">
+          <span class="font-bold text-white block">Rohan Mehta</span>
+          <span class="text-slate-400">Bangalore Food Critic</span>
+        </div>
+      </div>
+
+      <div class="bg-italian-card border border-italian-border p-6 rounded-2xl space-y-4">
+        <div class="text-italian-gold text-sm">★ ★ ★ ★ ★</div>
+        <p class="text-xs text-slate-300 leading-relaxed">
+          "Authentic Italian vibe. The Tiramisu melts in your mouth and the Aperol Spritz is refreshing. Highly recommend reserving a table for weekends."
+        </p>
+        <div class="pt-2 border-t border-italian-border text-xs">
+          <span class="font-bold text-white block">Ananya Sen</span>
+          <span class="text-slate-400">Local Guide Level 7</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCATION & VISIT US -->
+  <section id="location" class="bg-italian-charcoal border-t border-italian-border py-20 px-4">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div class="space-y-4 lg:col-span-1">
+        <span class="text-xs font-bold tracking-[0.2em] text-italian-gold uppercase">Find & Contact Us</span>
+        <h3 class="font-serif text-3xl font-bold text-white">Visit Our Trattoria</h3>
+        <p class="text-xs text-slate-300 leading-relaxed">
+          Located in the heart of the culinary district. Valet parking available.
+        </p>
+        <div class="space-y-3 text-xs pt-2">
+          <div class="flex items-start gap-2.5">
+            <i data-lucide="map-pin" class="w-4 h-4 text-italian-red shrink-0 mt-0.5"></i>
+            <span>45/2 Olive Grove Avenue, Indiranagar / Bandra, India</span>
+          </div>
+          <div class="flex items-center gap-2.5">
+            <i data-lucide="phone" class="w-4 h-4 text-italian-gold shrink-0"></i>
+            <span>+91 8220034139 (Manager / Bookings)</span>
+          </div>
+          <div class="flex items-center gap-2.5">
+            <i data-lucide="clock" class="w-4 h-4 text-slate-400 shrink-0"></i>
+            <span>Lunch: 12:00 PM – 3:30 PM | Dinner: 7:00 PM – 11:30 PM</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Action Reservation Card -->
+      <div class="lg:col-span-2 bg-italian-card border border-italian-border rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div class="space-y-2 text-center sm:text-left">
+          <h4 class="text-xl font-bold text-white">Planning a Birthday, Anniversary, or Dinner?</h4>
+          <p class="text-xs text-slate-300 max-w-md">Lock in your preferred dining booth or outdoor garden seating with instant confirmation.</p>
+        </div>
+        <button onclick="openReservationModal()" class="w-full sm:w-auto px-6 py-3.5 bg-italian-red hover:bg-italian-redHover text-white font-bold rounded-xl text-xs uppercase tracking-wider shrink-0 shadow-lg shadow-italian-red/30 transition">
+          Book Table Now ↗
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-italian-dark border-t border-italian-border py-8 px-4 text-center text-xs text-slate-400 space-y-3">
+    <p>© 2026 Trattoria Bella Napoli. All rights reserved.</p>
+    <div class="p-3 max-w-md mx-auto rounded-xl bg-italian-card/60 border border-italian-border text-[11px] text-slate-300">
+      <span>🚀 Website architecture, 0% fee ordering system & branding engineered by </span>
+      <a href="https://vigneshgrowthlab.dev/" target="_blank" class="text-italian-gold font-bold underline hover:text-white">Vignesh Growth Lab</a>
+      <span class="block text-slate-400 mt-1">Contact for custom restaurant websites: +91 8220034139</span>
+    </div>
+  </footer>
+
+  <!-- ==================== SLIDE-OVER CART DRAWER (0% COMMISSION DIRECT CHECKOUT) ==================== -->
+  <div id="cart-drawer-backdrop" onclick="closeCartDrawer()" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-50 transition-opacity"></div>
+  <aside id="cart-drawer" class="fixed right-0 top-0 bottom-0 w-full max-w-md bg-italian-charcoal border-l border-italian-border z-50 p-6 flex flex-col justify-between transform translate-x-full transition-transform duration-300 shadow-2xl">
+    <div>
+      <div class="flex items-center justify-between pb-4 border-b border-italian-border">
+        <div class="flex items-center gap-2">
+          <i data-lucide="shopping-bag" class="w-5 h-5 text-italian-red"></i>
+          <h3 class="font-serif text-xl font-bold text-white">Your Direct Kitchen Order</h3>
+        </div>
+        <button onclick="closeCartDrawer()" class="p-1.5 rounded-lg hover:bg-italian-card text-slate-400 hover:text-white transition">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div class="p-2.5 my-3 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-xs text-emerald-300 flex items-center gap-2">
+        <i data-lucide="check-circle" class="w-4 h-4 shrink-0"></i>
+        <span>Direct Order Discount: ₹0 Swiggy/Zomato platform markup</span>
+      </div>
+
+      <!-- Items List -->
+      <div id="cart-items-list" class="space-y-3 max-h-[45vh] overflow-y-auto pr-1 my-4">
+        <!-- Injected via JS -->
+      </div>
+    </div>
+
+    <!-- Bottom Checkout Details -->
+    <div class="border-t border-italian-border pt-4 space-y-4">
+      <div class="space-y-1.5 text-xs">
+        <div class="flex justify-between text-slate-400">
+          <span>Subtotal</span>
+          <span id="cart-subtotal" class="font-mono">₹0</span>
+        </div>
+        <div class="flex justify-between text-slate-400">
+          <span>Platform Delivery Surcharge</span>
+          <span class="text-emerald-400 font-bold">₹0 (Free)</span>
+        </div>
+        <div class="flex justify-between text-sm font-bold text-white pt-2 border-t border-italian-border">
+          <span>Estimated Total</span>
+          <span id="cart-total" class="text-italian-gold font-mono text-base">₹0</span>
+        </div>
+      </div>
+
+      <div class="space-y-2">
+        <label class="block text-[11px] font-semibold text-slate-300 uppercase">Delivery Address / Table #</label>
+        <input type="text" id="order-address-input" placeholder="e.g. Table 4 OR 12B Indiranagar 2nd Stage" class="w-full bg-italian-card border border-italian-border rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-italian-red">
+      </div>
+
+      <button onclick="submitOrderWhatsApp()" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/30 transition">
+        <i data-lucide="send" class="w-4 h-4"></i>
+        <span>Send Order to WhatsApp (0% Fee)</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ==================== TABLE RESERVATION MODAL ==================== -->
+  <div id="res-modal-backdrop" onclick="closeReservationModal()" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div onclick="event.stopPropagation()" class="bg-italian-charcoal border border-italian-border rounded-2xl max-w-lg w-full p-6 sm:p-8 space-y-6 shadow-2xl relative">
+      <button onclick="closeReservationModal()" class="absolute top-4 right-4 p-1 rounded-lg text-slate-400 hover:text-white transition">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="text-center space-y-1">
+        <span class="text-xs font-bold text-italian-gold uppercase tracking-wider">Instant Confirmation</span>
+        <h3 class="font-serif text-2xl sm:text-3xl font-bold text-white">Reserve Your Table</h3>
+        <p class="text-xs text-slate-400">Join us for an unforgettable authentic Italian dining experience.</p>
+      </div>
+
+      <form id="res-form" onsubmit="handleReservationSubmit(event)" class="space-y-4 text-xs">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block font-semibold text-slate-300 mb-1">Your Full Name</label>
+            <input type="text" id="res-name" required placeholder="e.g. Rahul Verma" class="w-full bg-italian-card border border-italian-border rounded-xl px-3 py-2.5 text-white focus:ring-1 focus:ring-italian-red focus:outline-none">
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-300 mb-1">WhatsApp / Mobile Number</label>
+            <input type="tel" id="res-phone" required placeholder="+91 98765 43210" class="w-full bg-italian-card border border-italian-border rounded-xl px-3 py-2.5 text-white focus:ring-1 focus:ring-italian-red focus:outline-none">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div>
+            <label class="block font-semibold text-slate-300 mb-1">Date</label>
+            <input type="date" id="res-date" required class="w-full bg-italian-card border border-italian-border rounded-xl px-3 py-2.5 text-white focus:ring-1 focus:ring-italian-red focus:outline-none">
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-300 mb-1">Time Slot</label>
+            <select id="res-time" class="w-full bg-italian-card border border-italian-border rounded-xl px-3 py-2.5 text-white focus:ring-1 focus:ring-italian-red focus:outline-none">
+              <option value="12:30 PM">12:30 PM (Lunch)</option>
+              <option value="01:30 PM">01:30 PM (Lunch)</option>
+              <option value="07:30 PM" selected>07:30 PM (Dinner)</option>
+              <option value="08:30 PM">08:30 PM (Dinner)</option>
+              <option value="09:30 PM">09:30 PM (Dinner)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-300 mb-1">Guests</label>
+            <select id="res-guests" class="w-full bg-italian-card border border-italian-border rounded-xl px-3 py-2.5 text-white focus:ring-1 focus:ring-italian-red focus:outline-none">
+              <option value="2 Guests">2 Guests (Table)</option>
+              <option value="4 Guests" selected>4 Guests (Booth)</option>
+              <option value="6 Guests">6 Guests (Party)</option>
+              <option value="8+ Guests">8+ Guests (Celebration)</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-semibold text-slate-300 mb-1">Special Occasion / Dietary Notes</label>
+          <input type="text" id="res-notes" placeholder="e.g. Birthday celebration, Jain/Vegan preferences" class="w-full bg-italian-card border border-italian-border rounded-xl px-3 py-2.5 text-white focus:ring-1 focus:ring-italian-red focus:outline-none">
+        </div>
+
+        <button type="submit" class="w-full py-3.5 bg-italian-red hover:bg-italian-redHover text-white font-bold rounded-xl text-xs uppercase tracking-wider shadow-lg shadow-italian-red/30 transition">
+          Confirm Table Booking
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- SCRIPT LOGIC -->
+  <script>
+    // Menu Data
+    const MENU_ITEMS = [
+      {
+        id: 1,
+        name: "Margherita D.O.P Tradizionale",
+        category: "pizza",
+        price: 540,
+        badge: "🌱 Classic Veg",
+        desc: "San Marzano tomatoes, Fior di Latte mozzarella, fresh sweet basil, and cold-pressed olive oil.",
+        emoji: "🍕"
+      },
+      {
+        id: 2,
+        name: "Tartufo e Funghi Selvatici",
+        category: "pizza",
+        price: 680,
+        badge: "👨‍🍳 Chef's Pick",
+        desc: "Wild foraged mushrooms, black truffle tapenade, smoked provolone, and micro arugula.",
+        emoji: "🍄"
+      },
+      {
+        id: 3,
+        name: "Diavola Piccante Woodfired",
+        category: "pizza",
+        price: 690,
+        badge: "🌶️ Spicy",
+        desc: "Spicy Calabrian salami, chili oil infusion, roasted bell peppers, and fresh mozzarella.",
+        emoji: "🔥"
+      },
+      {
+        id: 4,
+        name: "Handmade Tagliatelle al Tartufo",
+        category: "pasta",
+        price: 620,
+        badge: "⭐ House Favorite",
+        desc: "Hand-rolled egg ribbon pasta, Parmigiano Reggiano 24-month aged emulsion, black truffle butter.",
+        emoji: "🍝"
+      },
+      {
+        id: 5,
+        name: "Rigatoni alla Vodka Rustica",
+        category: "pasta",
+        price: 580,
+        badge: "🌱 Veg / Non-Veg",
+        desc: "Slow-simmered velvety tomato-cream reduction, chili flake burst, and fresh basil chiffonade.",
+        emoji: "🍲"
+      },
+      {
+        id: 6,
+        name: "Burrata Pugliese con Pesto",
+        category: "antipasti",
+        price: 490,
+        badge: "🌱 Fresh Daily",
+        desc: "Whole creamy artisanal burrata ball, heirloom cherry tomatoes, basil-pine nut pesto, and garlic crostini.",
+        emoji: "🥗"
+      },
+      {
+        id: 7,
+        name: "Tiramisù Tradizionale al Mascarpone",
+        category: "dessert",
+        price: 360,
+        badge: "☕ Must Try",
+        desc: "Savoiardi ladyfingers soaked in espresso liqueur, whipped mascarpone cream, and Dutch dark cocoa.",
+        emoji: "🍰"
+      },
+      {
+        id: 8,
+        name: "Classic Aperol Spritz Classico",
+        category: "dessert",
+        price: 450,
+        badge: "🍷 Aperitivo",
+        desc: "Italian Aperol, crisp Prosecco, soda splash, and fresh orange wheel.",
+        emoji: "🍹"
+      }
+    ];
+
+    let cart = [];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderMenu(MENU_ITEMS);
+      if (window.lucide) lucide.createIcons();
+      // Set today's date as default in reservation
+      const dateInput = document.getElementById('res-date');
+      if (dateInput) dateInput.value = new Date().toISOString().split('T')[0];
+    });
+
+    // Render Menu Cards
+    function renderMenu(items) {
+      const grid = document.getElementById('menu-grid');
+      if (!grid) return;
+      grid.innerHTML = '';
+
+      items.forEach(item => {
+        const card = document.createElement('div');
+        card.className = "bg-italian-card border border-italian-border hover:border-italian-gold/50 rounded-2xl p-6 flex flex-col justify-between space-y-4 transition shadow-lg";
+
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-italian-charcoal text-slate-300 border border-italian-border">
+                ${item.badge}
+              </span>
+              <span class="text-2xl">${item.emoji}</span>
+            </div>
+            <h3 class="font-serif text-xl font-bold text-white">${item.name}</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">${item.desc}</p>
+          </div>
+
+          <div class="pt-4 border-t border-italian-border flex items-center justify-between">
+            <span class="font-mono text-base font-bold text-italian-gold">₹${item.price}</span>
+            <button onclick="addToCart(${item.id})" class="px-4 py-2 bg-italian-red hover:bg-italian-redHover text-white text-xs font-bold rounded-xl flex items-center gap-1.5 shadow-md shadow-italian-red/20 transition">
+              <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+              <span>Add to Order</span>
+            </button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+
+      if (window.lucide) lucide.createIcons();
+    }
+
+    // Filter Categories
+    function filterCategory(cat) {
+      document.querySelectorAll('.cat-btn').forEach(btn => {
+        btn.classList.remove('bg-italian-red', 'text-white');
+        btn.classList.add('bg-italian-charcoal', 'text-slate-300');
+      });
+      event.target.classList.add('bg-italian-red', 'text-white');
+      event.target.classList.remove('bg-italian-charcoal', 'text-slate-300');
+
+      if (cat === 'all') {
+        renderMenu(MENU_ITEMS);
+      } else {
+        const filtered = MENU_ITEMS.filter(i => i.category === cat);
+        renderMenu(filtered);
+      }
+    }
+
+    // Add to Cart
+    function addToCart(itemId) {
+      const item = MENU_ITEMS.find(i => i.id === itemId);
+      if (!item) return;
+
+      const existing = cart.find(c => c.id === itemId);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ ...item, qty: 1 });
+      }
+
+      updateCartUI();
+      openCartDrawer();
+    }
+
+    // Update Cart UI
+    function updateCartUI() {
+      const list = document.getElementById('cart-items-list');
+      const badge = document.getElementById('cart-badge-count');
+      const subtotalEl = document.getElementById('cart-subtotal');
+      const totalEl = document.getElementById('cart-total');
+
+      const totalQty = cart.reduce((acc, curr) => acc + curr.qty, 0);
+      const totalAmount = cart.reduce((acc, curr) => acc + (curr.price * curr.qty), 0);
+
+      if (totalQty > 0) {
+        badge.innerText = totalQty;
+        badge.classList.remove('hidden');
+      } else {
+        badge.classList.add('hidden');
+      }
+
+      subtotalEl.innerText = `₹${totalAmount}`;
+      totalEl.innerText = `₹${totalAmount}`;
+
+      if (cart.length === 0) {
+        list.innerHTML = `<p class="text-center text-xs text-slate-500 py-8">Your direct order is empty. Add your favorite pizzas and pastas!</p>`;
+        return;
+      }
+
+      list.innerHTML = '';
+      cart.forEach(item => {
+        const row = document.createElement('div');
+        row.className = "flex items-center justify-between p-3 bg-italian-card border border-italian-border rounded-xl text-xs";
+        row.innerHTML = `
+          <div>
+            <span class="font-bold text-white block">${item.name}</span>
+            <span class="text-slate-400 font-mono">₹${item.price} × ${item.qty} = ₹${item.price * item.qty}</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="changeQty(${item.id}, -1)" class="w-6 h-6 rounded bg-italian-charcoal text-slate-300 font-bold hover:bg-italian-red hover:text-white">-</button>
+            <span class="font-bold text-white px-1">${item.qty}</span>
+            <button onclick="changeQty(${item.id}, 1)" class="w-6 h-6 rounded bg-italian-charcoal text-slate-300 font-bold hover:bg-italian-red hover:text-white">+</button>
+          </div>
+        `;
+        list.appendChild(row);
+      });
+    }
+
+    function changeQty(itemId, delta) {
+      const idx = cart.findIndex(c => c.id === itemId);
+      if (idx !== -1) {
+        cart[idx].qty += delta;
+        if (cart[idx].qty <= 0) cart.splice(idx, 1);
+      }
+      updateCartUI();
+    }
+
+    function openCartDrawer() {
+      document.getElementById('cart-drawer').classList.remove('translate-x-full');
+      document.getElementById('cart-drawer-backdrop').classList.remove('hidden');
+    }
+
+    function closeCartDrawer() {
+      document.getElementById('cart-drawer').classList.add('translate-x-full');
+      document.getElementById('cart-drawer-backdrop').classList.add('hidden');
+    }
+
+    // Submit Order via WhatsApp (Direct to Vignesh Growth Lab / Restaurant WhatsApp)
+    function submitOrderWhatsApp() {
+      if (cart.length === 0) {
+        alert("Please add at least one item to your order.");
+        return;
+      }
+      const address = document.getElementById('order-address-input').value.trim() || "Dine-In / Delivery";
+      const total = cart.reduce((acc, curr) => acc + (curr.price * curr.qty), 0);
+
+      let msg = `*NEW DIRECT RESTAURANT ORDER (0% Commission)* 🍕\n`;
+      msg += `📍 *Destination:* ${address}\n\n`;
+      msg += `*Ordered Items:*\n`;
+      cart.forEach(i => {
+        msg += `• ${i.name} (Qty: ${i.qty}) - ₹${i.price * i.qty}\n`;
+      });
+      msg += `\n*Total Bill Amount:* ₹${total}\n`;
+      msg += `(Order placed via Bella Napoli Direct Web Portal)`;
+
+      const waUrl = `https://wa.me/918220034139?text=${encodeURIComponent(msg)}`;
+      window.open(waUrl, '_blank');
+      
+      confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+    }
+
+    // Reservation Modal Logic
+    function openReservationModal() {
+      document.getElementById('res-modal-backdrop').classList.remove('hidden');
+    }
+
+    function closeReservationModal() {
+      document.getElementById('res-modal-backdrop').classList.add('hidden');
+    }
+
+    function handleReservationSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('res-name').value;
+      const phone = document.getElementById('res-phone').value;
+      const date = document.getElementById('res-date').value;
+      const time = document.getElementById('res-time').value;
+      const guests = document.getElementById('res-guests').value;
+      const notes = document.getElementById('res-notes').value || "None";
+
+      let msg = `*NEW TABLE RESERVATION REQUEST* 🍽️\n`;
+      msg += `• *Guest Name:* ${name}\n`;
+      msg += `• *Phone:* ${phone}\n`;
+      msg += `• *Date & Time:* ${date} at ${time}\n`;
+      msg += `• *Party Size:* ${guests}\n`;
+      msg += `• *Notes:* ${notes}\n\n`;
+      msg += `Please confirm my table reservation!`;
+
+      const waUrl = `https://wa.me/918220034139?text=${encodeURIComponent(msg)}`;
+      window.open(waUrl, '_blank');
+
+      closeReservationModal();
+      confetti({ particleCount: 150, spread: 80, origin: { y: 0.5 } });
+      alert(`Thank you, ${name}! Your table reservation request has been transmitted directly to our reservations team.`);
+    }
+  </script>
+</body>
+</html>
