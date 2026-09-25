@@ -2,6 +2,13 @@
   publish = "dist"
   command = "npm run build"
 
+# Force 301 permanent redirect from Netlify subdomain to primary custom domain
+[[redirects]]
+  from = "https://vigneshgrowthlab.netlify.app/*"
+  to = "https://vigneshgrowthlab.dev/:splat"
+  status = 301
+  force = true
+
 # SPA routing redirect rule
 [[redirects]]
   from = "/*"
