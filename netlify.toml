@@ -9,6 +9,19 @@
   status = 301
   force = true
 
+# ─── WhatsApp business card short link ───────────────────────────────────────
+# To change the destination later, update the `to` value in these two rules.
+[[redirects]]
+  from   = "/hi"
+  to     = "https://wa.me/918220034139?text=Hi%20Vignesh%20Growth%20Lab%2C%20I%20got%20your%20card%20and%20I%27m%20interested%20in%20a%20website%2Fsoftware%20for%20my%20business."
+  status = 302
+
+[[redirects]]
+  from   = "/hi/"
+  to     = "https://wa.me/918220034139?text=Hi%20Vignesh%20Growth%20Lab%2C%20I%20got%20your%20card%20and%20I%27m%20interested%20in%20a%20website%2Fsoftware%20for%20my%20business."
+  status = 302
+# ─────────────────────────────────────────────────────────────────────────────
+
 # SPA routing redirect rule
 [[redirects]]
   from = "/*"
