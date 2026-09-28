@@ -44,7 +44,7 @@ export const SEO_DEFAULTS = {
   keywords:
     'Vignesh Growth Lab, Vignesh Prabhu, VGL, Website Development Tamil Nadu, Retail POS, WhatsApp AI Automation, Pollachi, MSME',
   author: 'Vignesh Prabhu - Vignesh Growth Lab',
-  ogImage: '/brand/vgl-logo.svg',
+  ogImage: 'https://vigneshgrowthlab.dev/brand/vgl-logo.png',
 };
 
 export const FOUNDER = {

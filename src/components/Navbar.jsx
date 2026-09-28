@@ -30,8 +30,9 @@ const Navbar = () => {
         <a href="#home" className="flex items-center gap-3 group">
           <div className="relative w-10 h-10 rounded-xl overflow-hidden border border-[#4B72E8]/60 p-0.5 bg-black transition-transform duration-300 group-hover:scale-105 shadow-[0_0_15px_rgba(75,114,232,0.4)]">
             <img
-              src="/brand/vgl-logo-mark.svg"
-              alt={`${BRAND.name} Logo`}
+              src="/brand/vgl-logo-mark.png"
+              srcSet="/brand/vgl-logo-mark.png 1x, /brand/vgl-logo-mark@2x.png 2x"
+              alt="Vignesh Growth Lab"
               className="w-full h-full object-contain"
             />
           </div>
