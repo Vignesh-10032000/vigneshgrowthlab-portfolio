@@ -115,7 +115,7 @@ _Sent via ${BRAND.name} Web Portal_`;
   };
 
   return (
-    <section id="contact" className="py-28 bg-[#050505] relative z-10 select-none">
+    <section id="contact" className="py-28 bg-[#050505] relative z-10 select-none overflow-x-clip">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
         <div className="flex flex-col items-start space-y-4 mb-16" data-aos="fade-up">
@@ -213,10 +213,11 @@ _Sent via ${BRAND.name} Web Portal_`;
               
               <div className="grid sm:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label className="text-xs font-mono font-bold uppercase tracking-wider text-white block">
+                  <label htmlFor="contact-name" className="text-xs font-mono font-bold uppercase tracking-wider text-white block">
                     Your Name <span className="text-[#4B72E8]">*</span>
                   </label>
                   <input
+                    id="contact-name"
                     type="text"
                     name="name"
                     value={formData.name}
@@ -234,10 +235,11 @@ _Sent via ${BRAND.name} Web Portal_`;
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-xs font-mono font-bold uppercase tracking-wider text-white block">
+                  <label htmlFor="contact-whatsapp" className="text-xs font-mono font-bold uppercase tracking-wider text-white block">
                     WhatsApp Number <span className="text-[#4B72E8]">*</span>
                   </label>
                   <input
+                    id="contact-whatsapp"
                     type="text"
                     name="whatsapp"
                     value={formData.whatsapp}
@@ -257,10 +259,11 @@ _Sent via ${BRAND.name} Web Portal_`;
 
               <div className="grid sm:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label className="text-xs font-mono font-bold uppercase tracking-wider text-white block">
+                  <label htmlFor="contact-email" className="text-xs font-mono font-bold uppercase tracking-wider text-white block">
                     Email Address <span className="text-[#4B72E8]">*</span>
                   </label>
                   <input
+                    id="contact-email"
                     type="email"
                     name="email"
                     value={formData.email}
@@ -278,10 +281,11 @@ _Sent via ${BRAND.name} Web Portal_`;
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-xs font-mono font-bold uppercase tracking-wider text-white block">
+                  <label htmlFor="contact-business" className="text-xs font-mono font-bold uppercase tracking-wider text-white block">
                     Business / Brand Name <span className="text-white/40 text-[10px]">(Optional)</span>
                   </label>
                   <input
+                    id="contact-business"
                     type="text"
                     name="businessName"
                     value={formData.businessName}
@@ -300,10 +304,12 @@ _Sent via ${BRAND.name} Web Portal_`;
                   {BUDGET_OPTIONS.map((opt) => {
                     const selected = formData.budget === opt.id;
                     return (
-                      <div
+                      <button
                         key={opt.id}
-                        onClick={() => setFormData({ ...formData, budget: opt.id })}
-                        className={`cursor-pointer rounded-2xl p-4 border transition-all duration-300 relative flex flex-col justify-between ${
+                        type="button"
+                        aria-pressed={selected}
+                        onClick={() => setFormData((prev) => ({ ...prev, budget: opt.id }))}
+                        className={`cursor-pointer text-left rounded-2xl p-4 border transition-all duration-300 relative flex flex-col justify-between ${
                           selected
                             ? 'bg-[#1c1c1c] border-[#4B72E8] shadow-[0_0_20px_rgba(75,114,232,0.3)] ring-1 ring-[#4B72E8]'
                             : 'bg-[#050505] border-white/10 hover:border-white/20'
@@ -327,7 +333,7 @@ _Sent via ${BRAND.name} Web Portal_`;
                         <p className="text-xs text-white/60 font-light leading-tight">
                           {opt.desc}
                         </p>
-                      </div>
+                      </button>
                     );
                   })}
                 </div>
@@ -344,7 +350,8 @@ _Sent via ${BRAND.name} Web Portal_`;
                       <button
                         key={type}
                         type="button"
-                        onClick={() => setFormData({ ...formData, websiteType: type })}
+                        aria-pressed={selected}
+                        onClick={() => setFormData((prev) => ({ ...prev, websiteType: type }))}
                         className={`py-3.5 px-5 rounded-xl border text-xs font-mono font-bold tracking-wider uppercase transition-all flex items-center justify-between ${
                           selected
                             ? 'bg-[#4B72E8]/10 border-[#4B72E8] text-[#4B72E8]'
@@ -372,6 +379,7 @@ _Sent via ${BRAND.name} Web Portal_`;
                       <button
                         key={service}
                         type="button"
+                        aria-pressed={selected}
                         onClick={() => toggleService(service)}
                         className={`px-3.5 py-2 rounded-xl text-xs font-mono border transition-all flex items-center gap-2 ${
                           selected
@@ -388,10 +396,11 @@ _Sent via ${BRAND.name} Web Portal_`;
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs font-mono font-bold uppercase tracking-wider text-white block">
+                <label htmlFor="contact-description" className="text-xs font-mono font-bold uppercase tracking-wider text-white block">
                   Project Description & Requirements
                 </label>
                 <textarea
+                  id="contact-description"
                   name="description"
                   rows="4"
                   value={formData.description}
