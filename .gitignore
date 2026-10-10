@@ -30,6 +30,11 @@ dist-ssr
 .env.*
 !.env.example
 
+# Playwright
+test-results/
+playwright-report/
+tests/*-snapshots/
+
 # Reference extraction folders
 Netflix_portfolio-main/
 portnewstich-main/
