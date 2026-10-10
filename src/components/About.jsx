@@ -18,7 +18,7 @@ import {
   ScrollText,
 } from 'lucide-react';
 import AnimatedCard from './AnimatedCard';
-import profileImg from '../assets/profile.jpg';
+import profileImg from '../assets/profile.webp';
 import {
   ABOUT,
   BRAND,

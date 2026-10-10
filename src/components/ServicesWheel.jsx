@@ -4,10 +4,10 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SERVICES_WHEEL } from '../data/portfolioData';
 import { waLink } from '../utils/whatsapp';
 
-import redImg    from '../assets/service/red.jpeg';
-import purpleImg from '../assets/service/purple.jpeg';
-import orangeImg from '../assets/service/orange.jpeg';
-import greenImg  from '../assets/service/green.jpeg';
+import redImg    from '../assets/service/red.webp';
+import purpleImg from '../assets/service/purple.webp';
+import orangeImg from '../assets/service/orange.webp';
+import greenImg  from '../assets/service/green.webp';
 
 gsap.registerPlugin(ScrollTrigger);
 

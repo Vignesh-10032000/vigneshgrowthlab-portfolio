@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Play, MessageCircle } from 'lucide-react';
-import profileImg from '../assets/profile.jpg';
+import profileImg from '../assets/profile.webp';
 import { HERO, BRAND, SOCIALS, CONTACT } from '../data/portfolioData';
 import { waLink } from '../utils/whatsapp';
 
