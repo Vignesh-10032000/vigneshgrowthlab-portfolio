@@ -1,16 +1,42 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ExternalLink, CheckCircle2, Globe, Layers, Play } from 'lucide-react';
 import { waLink } from '../utils/whatsapp';
 
 const ProjectModal = ({ project, onClose }) => {
+  const closeButtonRef = useRef(null);
+  const onCloseRef = useRef(onClose);
+  onCloseRef.current = onClose;
+
+  useEffect(() => {
+    if (!project) return undefined;
+    const previouslyFocused = document.activeElement;
+    closeButtonRef.current?.focus({ preventScroll: true });
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') onCloseRef.current();
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      if (previouslyFocused instanceof HTMLElement) previouslyFocused.focus({ preventScroll: true });
+    };
+  }, [project]);
+
   if (!project) return null;
 
   const hasUrl = project.url && project.url !== '#';
+  const titleId = `project-modal-title-${project.id}`;
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6 overflow-y-auto select-none">
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+        data-lenis-prevent
+        className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6 overflow-y-auto overscroll-contain select-none"
+      >
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -24,9 +50,10 @@ const ProjectModal = ({ project, onClose }) => {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
           transition={{ duration: 0.3 }}
-          className="relative z-50 w-full max-w-4xl max-h-[90vh] overflow-y-auto glass-card bg-[#141414] border-[#4B72E8]/40 rounded-3xl p-6 sm:p-10 shadow-[0_40px_100px_rgba(0,0,0,0.95)] my-auto text-white"
+          className="relative z-50 w-full max-w-4xl max-h-[90vh] overflow-y-auto overscroll-contain glass-card bg-[#141414] border-[#4B72E8]/40 rounded-3xl p-6 sm:p-10 shadow-[0_40px_100px_rgba(0,0,0,0.95)] my-auto text-white"
         >
           <button
+            ref={closeButtonRef}
             onClick={onClose}
             className="absolute top-6 right-6 p-2.5 rounded-full bg-black/60 border border-white/20 text-white hover:text-[#4B72E8] hover:bg-black transition-all z-20"
             aria-label="Close modal"
@@ -46,7 +73,7 @@ const ProjectModal = ({ project, onClose }) => {
                 <span className="text-[10px] font-mono border border-white/30 px-1.5 py-0.5 text-white/70">{project.location}</span>
               )}
             </div>
-            <h2 className="text-3xl sm:text-5xl font-black font-heading text-white mb-2">
+            <h2 id={titleId} className="text-3xl sm:text-5xl font-black font-heading text-white mb-2">
               {project.title}
             </h2>
             <p className="text-xs sm:text-sm text-white/60 font-mono">
