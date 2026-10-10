@@ -35,7 +35,9 @@ function App() {
     AOS.init({
       duration: 800,
       once: true,
-      easing: 'ease-out-cubic'
+      easing: 'ease-out-cubic',
+      // Check element visibility on every scroll frame (offsets are re-measured only on layout change below).
+      throttleDelay: 0,
     });
 
     const lenis = new Lenis({
@@ -48,18 +50,27 @@ function App() {
 
     lenis.on('scroll', () => {
       ScrollTrigger.update();
-      AOS.refresh();
     });
 
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
+    let aosRefreshFrame = 0;
+    const layoutObserver = new ResizeObserver(() => {
+      cancelAnimationFrame(aosRefreshFrame);
+      aosRefreshFrame = requestAnimationFrame(() => AOS.refresh());
     });
+    layoutObserver.observe(document.body);
+
+    const tick = (time) => {
+      lenis.raf(time * 1000);
+    };
+    gsap.ticker.add(tick);
 
     gsap.ticker.lagSmoothing(0);
 
     return () => {
+      layoutObserver.disconnect();
+      cancelAnimationFrame(aosRefreshFrame);
+      gsap.ticker.remove(tick);
       lenis.destroy();
-      gsap.ticker.remove(lenis.raf);
     };
   }, []);
 
