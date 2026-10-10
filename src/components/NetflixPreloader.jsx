@@ -5,11 +5,13 @@ import { BRAND } from '../data/portfolioData';
 const NetflixPreloader = ({ onComplete }) => {
   const preloaderRef = useRef(null);
   const contentRef = useRef(null);
+  const onCompleteRef = useRef(onComplete);
+  onCompleteRef.current = onComplete;
 
   useEffect(() => {
     const tl = gsap.timeline({
       onComplete: () => {
-        if (onComplete) onComplete();
+        if (onCompleteRef.current) onCompleteRef.current();
       }
     });
 
@@ -32,7 +34,11 @@ const NetflixPreloader = ({ onComplete }) => {
         duration: 0.5,
         ease: "power2.inOut"
       });
-  }, [onComplete]);
+
+    return () => {
+      tl.kill();
+    };
+  }, []);
 
   return (
     <div
