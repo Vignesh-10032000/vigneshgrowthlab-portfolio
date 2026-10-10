@@ -1,9 +1,45 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { SKILLS_TECH, SKILLS_DELIVERABLES } from '../data/portfolioData';
+
+const MARQUEE_COPIES = 3;
+const LEGACY_DURATION_S = 22;
+
+// Shift each row by exactly one set of cards so the loop is seamless, keeping the
+// on-screen speed of the original "-50% of the row in 22s" animation.
+const syncMarquee = (row) => {
+  const setSize = row.children.length / MARQUEE_COPIES;
+  const first = row.children[0];
+  const nextSet = row.children[setSize];
+  if (!first || !nextSet) return;
+  const period = nextSet.offsetLeft - first.offsetLeft;
+  const legacyDistance = row.offsetWidth / 2;
+  if (period <= 0 || legacyDistance <= 0) return;
+  row.style.setProperty('--marquee-shift', `-${period}px`);
+  row.style.setProperty('--marquee-duration', `${(LEGACY_DURATION_S * period) / legacyDistance}s`);
+  row.style.animation = 'none';
+  void row.offsetWidth;
+  row.style.animation = '';
+};
 
 const Skills = () => {
   const techCardsRow1 = SKILLS_TECH;
   const deliverablesRow2 = SKILLS_DELIVERABLES;
+  const rowRefs = useRef([]);
+
+  useEffect(() => {
+    const rows = rowRefs.current.filter(Boolean);
+    const widths = new Map();
+    const observer = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const width = Math.round(entry.contentRect.width);
+        if (widths.get(entry.target) === width) continue;
+        widths.set(entry.target, width);
+        syncMarquee(entry.target);
+      }
+    });
+    rows.forEach((row) => observer.observe(row));
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section id="skills" className="py-28 bg-[#050505] relative z-10 select-none overflow-hidden border-t border-white/10">
@@ -45,7 +81,7 @@ const Skills = () => {
             <div className="marquee-fade-left"></div>
             <div className="marquee-row-clip">
               <div className="py-2">
-                <div className="marquee-inner flex transform-gpu min-w-[200%] gap-5 px-4">
+                <div ref={(el) => (rowRefs.current[0] = el)} className="marquee-inner flex transform-gpu min-w-[200%] gap-5 px-4">
                   {[...techCardsRow1, ...techCardsRow1, ...techCardsRow1].map((card, idx) => (
                     <div
                       key={`tech-${idx}`}
@@ -81,7 +117,7 @@ const Skills = () => {
             <div className="marquee-fade-left"></div>
             <div className="marquee-row-clip">
               <div className="py-2">
-                <div className="marquee-inner marquee-reverse flex transform-gpu min-w-[200%] gap-4 sm:gap-5 px-4">
+                <div ref={(el) => (rowRefs.current[1] = el)} className="marquee-inner marquee-reverse flex transform-gpu min-w-[200%] gap-4 sm:gap-5 px-4">
                   {[...deliverablesRow2, ...deliverablesRow2, ...deliverablesRow2].map((item, idx) => (
                     <div
                       key={`deliv-${idx}`}
