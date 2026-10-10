@@ -103,7 +103,8 @@ const Navbar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="lg:hidden fixed inset-x-4 top-20 z-50 glass-nav p-6 rounded-2xl border border-[#4B72E8]/30 bg-[#050505]/95 shadow-2xl backdrop-blur-2xl flex flex-col gap-4"
+            data-lenis-prevent
+            className="lg:hidden fixed inset-x-4 top-20 z-50 max-h-[calc(100dvh-6rem)] overflow-y-auto overscroll-contain glass-nav p-6 rounded-2xl border border-[#4B72E8]/30 bg-[#050505]/95 shadow-2xl backdrop-blur-2xl flex flex-col gap-4"
           >
             <div className="flex flex-col gap-3">
               {navLinks.map((link) => (
