@@ -318,7 +318,7 @@ export const PROJECTS_DATA = [
     title: 'VGL POS Software',
     category: 'Retail POS',
     platform: 'Flask',
-    url: 'https://pos-project-li2v.onrender.com/',
+    url: 'https://billing.vigneshgrowthlab.dev/login',
     shortDesc:
       'A bilingual (English ↔ Tamil) retail POS for Tamil Nadu grocery stores and apparel showrooms — billing, inventory and sales reporting with automated WhatsApp digital receipts. Load-tested to 600 concurrent clients at under 300ms.',
     image: '/images/project-pos.webp',
