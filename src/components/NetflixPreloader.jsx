@@ -43,17 +43,19 @@ const NetflixPreloader = ({ onComplete }) => {
   return (
     <div
       ref={preloaderRef}
+      data-site-preloader
+      aria-hidden="true"
       className="fixed inset-0 z-[99999] bg-[#050505] flex items-center justify-center select-none overflow-hidden"
     >
       <div ref={contentRef} className="flex flex-col items-center gap-4">
         <div className="w-3 h-3 rounded-full bg-[#4B72E8] animate-ping shadow-[0_0_20px_#4B72E8]"></div>
 
         <div className="text-center">
-          <h1 
+          <div
             className="text-3xl md:text-5xl font-black uppercase tracking-[0.2em] text-white font-netflix drop-shadow-[0_0_30px_rgba(75,114,232,0.8)]"
           >
             VIGNESH <span className="text-[#4B72E8]">GROWTH LAB</span>
-          </h1>
+          </div>
           <p className="text-[10px] font-mono uppercase tracking-[0.4em] text-white/50 mt-1">
             {BRAND.tagline} // {BRAND.short}
           </p>

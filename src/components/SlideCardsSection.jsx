@@ -37,8 +37,8 @@ const SlideCardsSection = () => {
         <div className="flex flex-col items-start space-y-4" data-aos="fade-right">
           <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded bg-black/80 backdrop-blur-2xl border border-[#4B72E8]/40 text-xs font-mono uppercase tracking-widest text-white shadow-2xl">
             <span className="w-2 h-2 rounded-full bg-[#4B72E8] animate-ping"></span>
-            <span className="text-[#4B72E8] font-bold">EPISODE 07</span>
-            <span className="text-white/40">|</span>
+            <span className="text-brand-readable font-bold">EPISODE 07</span>
+            <span aria-hidden="true" className="text-readable-muted">|</span>
             <span>CLIENT PROOF & CASE RESULTS</span>
           </div>
 
@@ -60,7 +60,7 @@ const SlideCardsSection = () => {
             disabled={!canScrollLeft}
             className={`w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-300 ${
               canScrollLeft
-                ? 'bg-[#141414] border-white/20 text-white hover:bg-[#4B72E8] hover:border-[#4B72E8] hover:shadow-[0_0_20px_rgba(75,114,232,0.6)] cursor-pointer'
+                ? 'bg-[#141414] border-control-edge text-white hover:bg-[#4B72E8] hover:border-[#4B72E8] hover:shadow-[0_0_20px_rgba(75,114,232,0.6)] cursor-pointer'
                 : 'bg-black/40 border-white/10 text-white/20 cursor-not-allowed'
             }`}
             aria-label="Previous slide"
@@ -73,7 +73,7 @@ const SlideCardsSection = () => {
             disabled={!canScrollRight}
             className={`w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-300 ${
               canScrollRight
-                ? 'bg-[#141414] border-white/20 text-white hover:bg-[#4B72E8] hover:border-[#4B72E8] hover:shadow-[0_0_20px_rgba(75,114,232,0.6)] cursor-pointer'
+                ? 'bg-[#141414] border-control-edge text-white hover:bg-[#4B72E8] hover:border-[#4B72E8] hover:shadow-[0_0_20px_rgba(75,114,232,0.6)] cursor-pointer'
                 : 'bg-black/40 border-white/10 text-white/20 cursor-not-allowed'
             }`}
             aria-label="Next slide"
@@ -109,7 +109,9 @@ const SlideCardsSection = () => {
                 <img
                   src={proof.imageSrc}
                   alt={proof.imageAlt}
-                  className="w-full max-w-md mx-auto rounded-xl border border-white/10 object-contain max-h-[520px]"
+                  width={proof.imageWidth}
+                  height={proof.imageHeight}
+                  className="w-full h-auto max-w-md mx-auto rounded-xl border border-white/10 object-contain max-h-[520px]"
                   loading="lazy"
                 />
               </div>
@@ -118,7 +120,7 @@ const SlideCardsSection = () => {
               <p className="text-sm sm:text-base text-white/90 font-light leading-relaxed">
                 {proof.caption}
               </p>
-              <p className="mt-2 text-xs font-mono text-[#4B72E8] uppercase tracking-wider">
+              <p className="mt-2 text-xs font-mono text-brand-readable uppercase tracking-wider">
                 {proof.captionMeta}
               </p>
             </figcaption>
@@ -128,6 +130,9 @@ const SlideCardsSection = () => {
 
       <div
         ref={sliderRef}
+        tabIndex={0}
+        role="region"
+        aria-label="Client testimonials"
         onScroll={checkScroll}
         className="flex items-stretch gap-6 px-4 sm:px-8 max-w-7xl mx-auto overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar py-4 touch-pan-x"
         data-aos="fade-up"
@@ -144,14 +149,16 @@ const SlideCardsSection = () => {
                   <img
                     src={card.avatar}
                     alt={card.name}
+                    loading="lazy"
+                    decoding="async"
                     className="w-12 h-12 rounded-full object-cover border-2 border-[#4B72E8]/40 shadow-lg"
                   />
                   <div>
-                    <h4 className="font-bold text-base font-heading text-white group-hover:text-[#4B72E8] transition-colors">
+                    <h3 className="font-bold text-base font-heading text-white group-hover:text-brand-readable transition-colors">
                       {card.name}
-                    </h4>
+                    </h3>
                     <p className="text-xs font-mono text-white/60">
-                      {card.role} &bull; <span className="text-[#4B72E8] font-semibold">{card.client}</span>
+                      {card.role} &bull; <span className="text-brand-readable font-semibold">{card.client}</span>
                     </p>
                   </div>
                 </div>

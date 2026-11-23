@@ -7,6 +7,7 @@ import {
   CONTACT_SERVICE_OPTIONS,
 } from '../data/portfolioData';
 import { waLink } from '../utils/whatsapp';
+import { emitConversion } from '../utils/conversions';
 
 const BUDGET_OPTIONS = [
   {
@@ -107,6 +108,7 @@ ${formData.description.trim() || 'No additional details provided.'}
 _Sent via ${BRAND.name} Web Portal_`;
 
     const whatsappUrl = waLink(rawMessage);
+    emitConversion('enquiry_whatsapp_handoff');
 
     setTimeout(() => {
       setIsSubmitting(false);
@@ -121,8 +123,8 @@ _Sent via ${BRAND.name} Web Portal_`;
         <div className="flex flex-col items-start space-y-4 mb-16" data-aos="fade-up">
           <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded bg-black/80 backdrop-blur-2xl border border-[#4B72E8]/40 text-xs font-mono uppercase tracking-widest text-white shadow-2xl">
             <span className="w-2 h-2 rounded-full bg-[#4B72E8] animate-ping"></span>
-            <span className="text-[#4B72E8] font-bold">FINALE</span>
-            <span className="text-white/40">|</span>
+            <span className="text-brand-readable font-bold">FINALE</span>
+            <span aria-hidden="true" className="text-readable-muted">|</span>
             <span>START YOUR PROJECT TODAY</span>
           </div>
 
@@ -148,7 +150,7 @@ _Sent via ${BRAND.name} Web Portal_`;
             className="lg:col-span-4 flex flex-col gap-6"
           >
             <div className="glass-card p-8 rounded-3xl border-white/10 bg-[#141414]/90 shadow-2xl">
-              <h3 className="text-xs font-mono font-bold uppercase tracking-widest text-[#4B72E8] mb-6">
+              <h3 className="text-xs font-mono font-bold uppercase tracking-widest text-brand-readable mb-6">
                 Direct Contact Channels
               </h3>
               
@@ -163,18 +165,18 @@ _Sent via ${BRAND.name} Web Portal_`;
                     <Phone className="w-5 h-5" />
                   </div>
                   <div>
-                    <span className="text-[10px] font-mono text-white/50 uppercase block font-bold">WhatsApp / Direct Line</span>
+                    <span className="text-[10px] font-mono text-readable-muted uppercase block font-bold">WhatsApp / Direct Line</span>
                     <span className="text-base font-black text-white group-hover:text-emerald-400 transition-colors">{CONTACT.phoneDisplay}</span>
                   </div>
                 </a>
 
                 <a href={`mailto:${CONTACT.email}`} className="flex items-center gap-4 group">
-                  <div className="p-3 rounded-xl bg-[#4B72E8]/10 border border-[#4B72E8]/30 text-[#4B72E8]">
+                  <div className="p-3 rounded-xl bg-[#4B72E8]/10 border border-[#4B72E8]/30 text-brand-readable">
                     <Mail className="w-5 h-5" />
                   </div>
                   <div>
-                    <span className="text-[10px] font-mono text-white/50 uppercase block font-bold">Official Email</span>
-                    <span className="text-sm font-bold text-white group-hover:text-[#4B72E8] break-all">{CONTACT.email}</span>
+                    <span className="text-[10px] font-mono text-readable-muted uppercase block font-bold">Official Email</span>
+                    <span className="text-sm font-bold text-white group-hover:text-brand-readable break-all">{CONTACT.email}</span>
                   </div>
                 </a>
 
@@ -183,7 +185,7 @@ _Sent via ${BRAND.name} Web Portal_`;
                     <MapPin className="w-5 h-5" />
                   </div>
                   <div>
-                    <span className="text-[10px] font-mono text-white/50 uppercase block font-bold">Location</span>
+                    <span className="text-[10px] font-mono text-readable-muted uppercase block font-bold">Location</span>
                     <span className="text-sm font-bold text-white">{CONTACT.location}</span>
                   </div>
                 </div>
@@ -191,7 +193,7 @@ _Sent via ${BRAND.name} Web Portal_`;
             </div>
 
             <div className="glass-card p-6 rounded-2xl border-white/10 bg-[#141414]/80 flex items-start gap-4 shadow-xl">
-              <div className="p-2.5 rounded-xl bg-[#4B72E8]/10 text-[#4B72E8] border border-[#4B72E8]/20">
+              <div className="p-2.5 rounded-xl bg-[#4B72E8]/10 text-brand-readable border border-[#4B72E8]/20">
                 <Sparkles className="w-5 h-5" />
               </div>
               <div>
@@ -214,7 +216,7 @@ _Sent via ${BRAND.name} Web Portal_`;
               <div className="grid sm:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label htmlFor="contact-name" className="text-xs font-mono font-bold uppercase tracking-wider text-white block">
-                    Your Name <span className="text-[#4B72E8]">*</span>
+                    Your Name <span className="text-brand-readable">*</span>
                   </label>
                   <input
                     id="contact-name"
@@ -224,8 +226,8 @@ _Sent via ${BRAND.name} Web Portal_`;
                     onChange={handleInputChange}
                     placeholder="e.g. John Doe"
                     className={`w-full bg-[#050505] border ${
-                      errors.name ? 'border-red-500' : 'border-white/10 focus:border-[#4B72E8]'
-                    } rounded-xl px-4 py-3.5 text-sm text-white outline-none transition-colors placeholder:text-white/30 font-mono`}
+                      errors.name ? 'border-red-500' : 'border-control-edge focus:border-brand-readable'
+                    } rounded-xl px-4 py-3.5 text-sm text-white transition-colors placeholder:text-readable-muted font-mono`}
                   />
                   {errors.name && (
                     <span className="text-xs text-red-400 font-mono flex items-center gap-1">
@@ -236,7 +238,7 @@ _Sent via ${BRAND.name} Web Portal_`;
 
                 <div className="space-y-2">
                   <label htmlFor="contact-whatsapp" className="text-xs font-mono font-bold uppercase tracking-wider text-white block">
-                    WhatsApp Number <span className="text-[#4B72E8]">*</span>
+                    WhatsApp Number <span className="text-brand-readable">*</span>
                   </label>
                   <input
                     id="contact-whatsapp"
@@ -246,8 +248,8 @@ _Sent via ${BRAND.name} Web Portal_`;
                     onChange={handleInputChange}
                     placeholder="e.g. +91 9876543210"
                     className={`w-full bg-[#050505] border ${
-                      errors.whatsapp ? 'border-red-500' : 'border-white/10 focus:border-[#4B72E8]'
-                    } rounded-xl px-4 py-3.5 text-sm text-white outline-none transition-colors placeholder:text-white/30 font-mono`}
+                      errors.whatsapp ? 'border-red-500' : 'border-control-edge focus:border-brand-readable'
+                    } rounded-xl px-4 py-3.5 text-sm text-white transition-colors placeholder:text-readable-muted font-mono`}
                   />
                   {errors.whatsapp && (
                     <span className="text-xs text-red-400 font-mono flex items-center gap-1">
@@ -260,7 +262,7 @@ _Sent via ${BRAND.name} Web Portal_`;
               <div className="grid sm:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label htmlFor="contact-email" className="text-xs font-mono font-bold uppercase tracking-wider text-white block">
-                    Email Address <span className="text-[#4B72E8]">*</span>
+                    Email Address <span className="text-brand-readable">*</span>
                   </label>
                   <input
                     id="contact-email"
@@ -270,8 +272,8 @@ _Sent via ${BRAND.name} Web Portal_`;
                     onChange={handleInputChange}
                     placeholder="e.g. john@brand.com"
                     className={`w-full bg-[#050505] border ${
-                      errors.email ? 'border-red-500' : 'border-white/10 focus:border-[#4B72E8]'
-                    } rounded-xl px-4 py-3.5 text-sm text-white outline-none transition-colors placeholder:text-white/30 font-mono`}
+                      errors.email ? 'border-red-500' : 'border-control-edge focus:border-brand-readable'
+                    } rounded-xl px-4 py-3.5 text-sm text-white transition-colors placeholder:text-readable-muted font-mono`}
                   />
                   {errors.email && (
                     <span className="text-xs text-red-400 font-mono flex items-center gap-1">
@@ -282,7 +284,7 @@ _Sent via ${BRAND.name} Web Portal_`;
 
                 <div className="space-y-2">
                   <label htmlFor="contact-business" className="text-xs font-mono font-bold uppercase tracking-wider text-white block">
-                    Business / Brand Name <span className="text-white/40 text-[10px]">(Optional)</span>
+                    Business / Brand Name <span className="text-readable-muted text-[10px]">(Optional)</span>
                   </label>
                   <input
                     id="contact-business"
@@ -291,14 +293,14 @@ _Sent via ${BRAND.name} Web Portal_`;
                     value={formData.businessName}
                     onChange={handleInputChange}
                     placeholder="e.g. ABC Store"
-                    className="w-full bg-[#050505] border border-white/10 focus:border-[#4B72E8] rounded-xl px-4 py-3.5 text-sm text-white outline-none transition-colors placeholder:text-white/30 font-mono"
+                    className="w-full bg-[#050505] border border-control-edge focus:border-brand-readable rounded-xl px-4 py-3.5 text-sm text-white transition-colors placeholder:text-readable-muted font-mono"
                   />
                 </div>
               </div>
 
               <div className="space-y-3">
                 <label className="text-xs font-mono font-bold uppercase tracking-wider text-white block">
-                  Select Project Budget Range <span className="text-[#4B72E8]">*</span>
+                  Select Project Budget Range <span className="text-brand-readable">*</span>
                 </label>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   {BUDGET_OPTIONS.map((opt) => {
@@ -311,21 +313,21 @@ _Sent via ${BRAND.name} Web Portal_`;
                         onClick={() => setFormData((prev) => ({ ...prev, budget: opt.id }))}
                         className={`cursor-pointer text-left rounded-2xl p-4 border transition-all duration-300 relative flex flex-col justify-between ${
                           selected
-                            ? 'bg-[#1c1c1c] border-[#4B72E8] shadow-[0_0_20px_rgba(75,114,232,0.3)] ring-1 ring-[#4B72E8]'
-                            : 'bg-[#050505] border-white/10 hover:border-white/20'
+                            ? 'bg-[#1c1c1c] border-brand-readable shadow-[0_0_20px_rgba(75,114,232,0.3)] ring-1 ring-brand-readable'
+                            : 'bg-[#050505] border-control-edge hover:border-brand-readable'
                         }`}
                       >
                         {opt.badge && (
-                          <span className="absolute -top-2.5 right-4 px-2.5 py-0.5 rounded-full text-[9px] font-mono font-extrabold uppercase bg-[#4B72E8] text-white shadow-md">
+                          <span className="absolute -top-2.5 right-4 px-2.5 py-0.5 rounded-full text-[9px] font-mono font-extrabold uppercase bg-brand-action text-white shadow-md">
                             {opt.badge}
                           </span>
                         )}
 
                         <div className="flex items-center justify-between mb-2">
-                          <span className={`text-base font-bold font-heading ${selected ? 'text-[#4B72E8]' : 'text-white'}`}>
+                          <span className={`text-base font-bold font-heading ${selected ? 'text-brand-readable' : 'text-white'}`}>
                             {opt.title}
                           </span>
-                          <div className={`w-4 h-4 rounded-full border flex items-center justify-center ${selected ? 'border-[#4B72E8] bg-[#4B72E8]' : 'border-white/20'}`}>
+                          <div className={`w-4 h-4 rounded-full border flex items-center justify-center ${selected ? 'border-brand-readable bg-brand-action' : 'border-control-edge'}`}>
                             {selected && <Check className="w-3 h-3 text-white stroke-[3]" />}
                           </div>
                         </div>
@@ -341,7 +343,7 @@ _Sent via ${BRAND.name} Web Portal_`;
 
               <div className="space-y-3">
                 <label className="text-xs font-mono font-bold uppercase tracking-wider text-white block">
-                  Project Type <span className="text-[#4B72E8]">*</span>
+                  Project Type <span className="text-brand-readable">*</span>
                 </label>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {['Business Website', 'E-commerce Website', 'Retail POS', 'WhatsApp AI Automation'].map((type) => {
@@ -354,12 +356,12 @@ _Sent via ${BRAND.name} Web Portal_`;
                         onClick={() => setFormData((prev) => ({ ...prev, websiteType: type }))}
                         className={`py-3.5 px-5 rounded-xl border text-xs font-mono font-bold tracking-wider uppercase transition-all flex items-center justify-between ${
                           selected
-                            ? 'bg-[#4B72E8]/10 border-[#4B72E8] text-[#4B72E8]'
-                            : 'bg-[#050505] border-white/10 text-white hover:border-white/20'
+                            ? 'bg-[#4B72E8]/10 border-brand-readable text-brand-readable'
+                            : 'bg-[#050505] border-control-edge text-white hover:border-brand-readable'
                         }`}
                       >
                         <span>{type}</span>
-                        <div className={`w-4 h-4 rounded-full border flex items-center justify-center ${selected ? 'border-[#4B72E8] bg-[#4B72E8]' : 'border-white/20'}`}>
+                        <div className={`w-4 h-4 rounded-full border flex items-center justify-center ${selected ? 'border-brand-readable bg-brand-action' : 'border-control-edge'}`}>
                           {selected && <Check className="w-3 h-3 text-white stroke-[3]" />}
                         </div>
                       </button>
@@ -370,7 +372,7 @@ _Sent via ${BRAND.name} Web Portal_`;
 
               <div className="space-y-3">
                 <label className="text-xs font-mono font-bold uppercase tracking-wider text-white block">
-                  Services Required <span className="text-white/40 text-[10px]">(Select all that apply)</span>
+                  Services Required <span className="text-readable-muted text-[10px]">(Select all that apply)</span>
                 </label>
                 <div className="flex flex-wrap gap-2">
                   {SERVICE_OPTIONS.map((service) => {
@@ -383,8 +385,8 @@ _Sent via ${BRAND.name} Web Portal_`;
                         onClick={() => toggleService(service)}
                         className={`px-3.5 py-2 rounded-xl text-xs font-mono border transition-all flex items-center gap-2 ${
                           selected
-                            ? 'bg-[#4B72E8] border-[#4B72E8] text-white shadow-md font-bold'
-                            : 'bg-[#050505] border-white/10 text-white/70 hover:text-white hover:border-white/20'
+                            ? 'bg-brand-action border-brand-readable text-white shadow-md font-bold'
+                            : 'bg-[#050505] border-control-edge text-white/70 hover:text-white hover:border-brand-readable'
                         }`}
                       >
                         {selected && <Check className="w-3.5 h-3.5 stroke-[3]" />}
@@ -406,7 +408,7 @@ _Sent via ${BRAND.name} Web Portal_`;
                   value={formData.description}
                   onChange={handleInputChange}
                   placeholder="Tell Vignesh about your business goals, timelines, or reference websites..."
-                  className="w-full bg-[#050505] border border-white/10 focus:border-[#4B72E8] rounded-xl p-4 text-sm text-white outline-none transition-colors placeholder:text-white/30 font-mono resize-none"
+                  className="w-full bg-[#050505] border border-control-edge focus:border-brand-readable rounded-xl p-4 text-sm text-white transition-colors placeholder:text-readable-muted font-mono resize-none"
                 />
               </div>
 

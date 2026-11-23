@@ -12,7 +12,7 @@ const BoolCell = ({ value }) => {
   return (
     <span
       className={`inline-flex items-center gap-1.5 ${
-        isYes ? 'text-emerald-400' : 'text-white/45'
+        isYes ? 'text-emerald-400' : 'text-readable-muted'
       }`}
     >
       {isYes ? (
@@ -42,8 +42,8 @@ const ComparisonTable = () => {
         <div className="flex flex-col items-start space-y-4 mb-12" data-aos="fade-up">
           <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded bg-black/80 backdrop-blur-2xl border border-[#4B72E8]/40 text-xs font-mono uppercase tracking-widest text-white shadow-2xl">
             <span className="w-2 h-2 rounded-full bg-[#4B72E8] animate-ping" />
-            <span className="text-[#4B72E8] font-bold">{COMPARISON_META.kicker.toUpperCase()}</span>
-            <span className="text-white/40">|</span>
+            <span className="text-brand-readable font-bold">{COMPARISON_META.kicker.toUpperCase()}</span>
+            <span aria-hidden="true" className="text-readable-muted">|</span>
             <span>HONEST COMPARISON</span>
           </div>
 
@@ -118,23 +118,23 @@ const ComparisonTable = () => {
               key={row.criteria}
               className="rounded-xl border border-white/10 bg-[#141414]/80 p-4"
             >
-              <p className="text-[11px] uppercase tracking-wider text-white/45 mb-2.5">
+              <p className="text-[11px] uppercase tracking-wider text-readable-muted mb-2.5">
                 {row.criteria}
               </p>
               <p className="text-sm text-blue-200 mb-1.5">
-                <strong className="font-semibold text-[#4B72E8]">VGL:</strong>{' '}
+                <strong className="font-semibold text-brand-readable">VGL:</strong>{' '}
                 <CellValue row={row} value={row.vgl} />
               </p>
               <p className="text-sm text-white/65">
                 DIY: <CellValue row={row} value={row.diy} />
-                <span className="text-white/30"> · </span>
+                <span aria-hidden="true" className="text-readable-muted"> · </span>
                 Big agency: <CellValue row={row} value={row.agency} />
               </p>
             </div>
           ))}
         </div>
 
-        <p className="mt-4 text-xs sm:text-sm text-white/45 leading-relaxed">
+        <p className="mt-4 text-xs sm:text-sm text-readable-muted leading-relaxed">
           {COMPARISON_FOOTNOTE}
         </p>
       </div>

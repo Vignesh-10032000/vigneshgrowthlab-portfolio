@@ -45,7 +45,7 @@ const Footer = () => {
               </a>
               <a
                 href={`mailto:${CONTACT.email}`}
-                className="p-2.5 rounded-lg bg-white/5 border border-white/10 text-white hover:text-[#4B72E8] hover:border-[#4B72E8]/40 transition-all"
+                className="p-2.5 rounded-lg bg-white/5 border border-white/10 text-white hover:text-brand-readable hover:border-[#4B72E8]/40 transition-all"
                 aria-label="Email"
               >
                 <Mail className="w-4 h-4" />
@@ -55,7 +55,7 @@ const Footer = () => {
                 target="_blank"
                 rel="noreferrer"
                 className="p-2.5 rounded-lg bg-white/5 border border-white/10 text-white hover:text-blue-400 hover:border-blue-500/40 transition-all text-xs font-mono"
-                aria-label="LinkedIn"
+                aria-label="in (LinkedIn)"
               >
                 in
               </a>
@@ -64,7 +64,7 @@ const Footer = () => {
                 target="_blank"
                 rel="noreferrer"
                 className="p-2.5 rounded-lg bg-white/5 border border-white/10 text-white hover:text-white hover:border-white/40 transition-all text-xs font-mono"
-                aria-label="GitHub"
+                aria-label="GH (GitHub)"
               >
                 GH
               </a>
@@ -72,43 +72,43 @@ const Footer = () => {
           </div>
 
           <div className="space-y-3">
-            <h4 className="text-xs font-mono font-bold uppercase tracking-widest text-[#4B72E8]">
+            <h2 className="text-xs font-mono font-bold uppercase tracking-widest text-brand-readable">
               Quick Navigation
-            </h4>
+            </h2>
             <ul className="space-y-2 text-xs font-mono">
-              <li><a href="#home" className="hover:text-[#4B72E8] transition-colors">Home</a></li>
-              <li><a href="#about" className="hover:text-[#4B72E8] transition-colors">About</a></li>
-              <li><a href="#services" className="hover:text-[#4B72E8] transition-colors">Services</a></li>
-              <li><a href="#work" className="hover:text-[#4B72E8] transition-colors">Projects</a></li>
-              <li><a href="#skills" className="hover:text-[#4B72E8] transition-colors">Skills</a></li>
-              <li><a href="#process" className="hover:text-[#4B72E8] transition-colors">Process</a></li>
-              <li><a href="#contact" className="hover:text-[#4B72E8] transition-colors">Contact</a></li>
-              <li><a href={DOCUMENTS.resume} target="_blank" rel="noreferrer" className="hover:text-[#4B72E8] transition-colors">Resume</a></li>
+              <li><a href="#home" className="hover:text-brand-readable transition-colors">Home</a></li>
+              <li><a href="#about" className="hover:text-brand-readable transition-colors">About</a></li>
+              <li><a href="#services" className="hover:text-brand-readable transition-colors">Services</a></li>
+              <li><a href="#work" className="hover:text-brand-readable transition-colors">Projects</a></li>
+              <li><a href="#skills" className="hover:text-brand-readable transition-colors">Skills</a></li>
+              <li><a href="#process" className="hover:text-brand-readable transition-colors">Process</a></li>
+              <li><a href="#contact" className="hover:text-brand-readable transition-colors">Contact</a></li>
+              <li><a href={DOCUMENTS.resume} target="_blank" rel="noreferrer" className="hover:text-brand-readable transition-colors">Resume</a></li>
             </ul>
           </div>
 
           <div className="space-y-3">
-            <h4 className="text-xs font-mono font-bold uppercase tracking-widest text-[#4B72E8]">
+            <h2 className="text-xs font-mono font-bold uppercase tracking-widest text-brand-readable">
               Services
-            </h4>
+            </h2>
             <ul className="space-y-2 text-xs font-mono">
               {SERVICES_DATA.map((s) => (
                 <li key={s.id}>
-                  <a href="#services" className="hover:text-[#4B72E8] transition-colors">{s.title}</a>
+                  <a href="#services" className="hover:text-brand-readable transition-colors">{s.title}</a>
                 </li>
               ))}
             </ul>
           </div>
 
           <div className="space-y-3">
-            <h4 className="text-xs font-mono font-bold uppercase tracking-widest text-[#4B72E8]">
+            <h2 className="text-xs font-mono font-bold uppercase tracking-widest text-brand-readable">
               Direct Contact
-            </h4>
+            </h2>
             <div className="space-y-2 text-xs font-mono">
-              <a href={CONTACT.phoneHref} className="text-white font-bold flex items-center gap-1.5 hover:text-[#4B72E8]">
-                <Phone className="w-3.5 h-3.5 text-[#4B72E8]" /> {CONTACT.phoneDisplay}
+              <a href={CONTACT.phoneHref} className="text-white font-bold flex items-center gap-1.5 hover:text-brand-readable">
+                <Phone className="w-3.5 h-3.5 text-brand-readable" /> {CONTACT.phoneDisplay}
               </a>
-              <a href={`mailto:${CONTACT.email}`} className="text-white/70 hover:text-[#4B72E8] block break-all">
+              <a href={`mailto:${CONTACT.email}`} className="text-white/70 hover:text-brand-readable block break-all">
                 {CONTACT.email}
               </a>
               <p className="text-white/50">{CONTACT.location}</p>
@@ -116,7 +116,7 @@ const Footer = () => {
                 href={DOCUMENTS.msmeCertificate}
                 target="_blank"
                 rel="noreferrer"
-                className="text-white/50 hover:text-[#4B72E8] block"
+                className="text-white/50 hover:text-brand-readable block"
               >
                 MSME {BRAND.msmeId}
               </a>
@@ -128,12 +128,12 @@ const Footer = () => {
 
         </div>
 
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-white/40">
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-readable-muted">
           <p>{BRAND.copyright}</p>
 
           <button
             onClick={scrollToTop}
-            className="p-2.5 rounded-lg bg-white/5 border border-white/10 text-white hover:text-[#4B72E8] hover:border-[#4B72E8]/40 transition-all flex items-center gap-2"
+            className="p-2.5 rounded-lg bg-white/5 border border-white/10 text-white hover:text-brand-readable hover:border-[#4B72E8]/40 transition-all flex items-center gap-2"
           >
             Back to top <ArrowUp className="w-3.5 h-3.5" />
           </button>

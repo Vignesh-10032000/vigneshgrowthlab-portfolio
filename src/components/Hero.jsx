@@ -120,12 +120,10 @@ const Hero = () => {
       className="relative w-full min-h-screen bg-[#050505] overflow-hidden flex flex-col justify-between pt-28 pb-16 select-none bg-grid-pattern"
     >
       <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-black/90 to-[#050505] z-0">
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden opacity-[0.07]">
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden opacity-[0.07]" aria-hidden="true">
           <div className="flex whitespace-nowrap animate-marquee">
             {[...developerRoles, ...developerRoles].map((role, idx) => (
-              <span key={idx} className="text-[12vw] font-black font-netflix text-[#4B72E8] mx-8 uppercase tracking-tighter">
-                {role} &bull;
-              </span>
+              <span key={idx} data-decoration={role + " •"} className="text-[12vw] font-black font-netflix text-[#4B72E8] mx-8 uppercase tracking-tighter" />
             ))}
           </div>
         </div>
@@ -141,14 +139,14 @@ const Hero = () => {
 
       <div ref={contentRef} className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-8 h-full flex flex-col justify-between my-auto">
         
-        <div className="hero-anim-item flex items-center justify-between w-full mb-6" data-aos="fade-down">
+        <div className="hero-anim-item flex items-center justify-between w-full mb-6">
           <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded bg-black/80 backdrop-blur-2xl border border-[#4B72E8]/40 text-xs font-mono uppercase tracking-widest text-white shadow-2xl">
             <span className="w-2 h-2 rounded-full bg-[#4B72E8] animate-ping"></span>
-            <span className="text-[#4B72E8] font-bold tracking-wider">{HERO.badge}</span>
-            <span className="text-white/40">|</span>
+            <span className="text-brand-readable font-bold tracking-wider">{HERO.badge}</span>
+            <span aria-hidden="true" className="text-readable-muted">|</span>
             <span className="text-white/80">{HERO.badgeRight}</span>
           </div>
-          <div className="hidden md:flex items-center gap-2 text-xs font-mono text-white/50 tracking-wider">
+          <div className="hidden md:flex items-center gap-2 text-xs font-mono text-readable-muted tracking-wider">
             <span className="px-2.5 py-1 border border-white/20 rounded bg-black/40 text-emerald-400">{HERO.availability}</span>
             <span className="px-2.5 py-1 border border-white/20 rounded bg-black/40">{HERO.deliveredBadge}</span>
           </div>
@@ -158,46 +156,46 @@ const Hero = () => {
           
           <div ref={textRef} className="lg:col-span-7 flex flex-col items-start space-y-5 text-left will-change-transform">
             
-            <div className="hero-anim-item flex items-center gap-3" data-aos="fade-right">
-              <span className="px-3 py-1 bg-[#4B72E8] text-white font-black text-xs rounded tracking-widest shadow-[0_0_20px_rgba(75,114,232,0.8)] animate-pulse">{HERO.topPercentLabel}</span>
+            <div className="hero-anim-item flex items-center gap-3">
+              <span className="px-3 py-1 bg-brand-action text-white font-black text-xs rounded tracking-widest hero-badge-glow">{HERO.topPercentLabel}</span>
               <span className="text-white/80 text-xs font-mono tracking-widest uppercase">{HERO.topPercentSub}</span>
             </div>
 
-            <div className="hero-anim-item flex flex-col w-full" data-aos="fade-up">
+            <div className="hero-anim-item flex flex-col w-full">
               <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-none">
-                {HERO.greeting} <span className="gold-gradient-text">{HERO.name}</span>
+                VIGNESH <span className="gold-gradient-text">GROWTH LAB</span>
               </h1>
               
-              <div className="leading-[0.9] pb-1 overflow-hidden h-[11vw] sm:h-[4.2rem] lg:h-[4.8rem] relative mt-1">
+              <div aria-hidden="true" className="leading-[0.9] pb-1 overflow-hidden h-[11vw] sm:h-[4.2rem] lg:h-[4.8rem] relative mt-1">
                 <div className="animate-text-roll flex flex-col">
                   {rollingTexts.map((text, idx) => (
-                    <h1
+                    <div
                       key={idx}
                       className="text-[8vw] sm:text-5xl lg:text-6xl font-black uppercase tracking-tighter text-transparent [-webkit-text-stroke:2px_#4B72E8] m-0 p-0 leading-[0.9] drop-shadow-[0_0_20px_rgba(75,114,232,0.6)]"
                     >
                       {text}
-                    </h1>
+                    </div>
                   ))}
                 </div>
               </div>
             </div>
 
-            <div className="hero-anim-item flex flex-wrap items-center gap-2 text-xs font-mono text-[#4B72E8] font-bold" data-aos="fade-up" data-aos-delay="100">
+            <div className="hero-anim-item flex flex-wrap items-center gap-2 text-xs font-mono text-brand-readable font-bold">
               {HERO.chips.map((chip, i) => (
                 <React.Fragment key={chip}>
-                  {i > 0 && <span className="text-white/40">•</span>}
-                  <span className={i === 0 ? "px-2.5 py-1 bg-[#4B72E8]/10 border border-[#4B72E8]/30 rounded text-[#4B72E8]" : "text-white/90"}>
+                  {i > 0 && <span aria-hidden="true" className="text-readable-muted">•</span>}
+                  <span className={i === 0 ? "px-2.5 py-1 bg-[#4B72E8]/10 border border-[#4B72E8]/30 rounded text-brand-readable" : "text-white/90"}>
                     {chip}
                   </span>
                 </React.Fragment>
               ))}
             </div>
 
-            <p className="hero-anim-item text-base sm:text-lg text-white/80 font-light leading-relaxed max-w-xl" data-aos="fade-up" data-aos-delay="150">
-              Founder of <strong className="text-white font-semibold">{BRAND.name}</strong>. {HERO.intro.replace(`Founder of ${BRAND.name}. `, '')}
+            <p className="hero-anim-item text-base sm:text-lg text-white/80 font-light leading-relaxed max-w-xl">
+              I’m <strong className="text-white font-semibold">{BRAND.founder}</strong>. {HERO.intro}
             </p>
 
-            <div className="hero-anim-item flex flex-wrap items-center gap-3 pt-2" data-aos="fade-up" data-aos-delay="200">
+            <div className="hero-anim-item flex flex-wrap items-center gap-3 pt-2">
               <a
                 href={waLink("Hi Vignesh, I'd like to discuss a project.")}
                 target="_blank"
@@ -215,7 +213,7 @@ const Hero = () => {
               </a>
             </div>
 
-            <div className="hero-anim-item flex items-center gap-3 pt-3" data-aos="fade-up" data-aos-delay="250">
+            <div className="hero-anim-item flex items-center gap-3 pt-3">
               <a
                 href={waLink()}
                 target="_blank"
@@ -223,7 +221,7 @@ const Hero = () => {
                 className="w-11 h-11 rounded-full bg-[#141414] border border-white/15 flex items-center justify-center transition-all duration-300 hover:bg-[#25D366] hover:border-[#25D366] hover:shadow-[0_0_20px_rgba(37,211,102,0.6)] group"
                 aria-label="WhatsApp"
               >
-                <MessageCircle className="w-5 h-5 text-white transition-colors" />
+                <MessageCircle className="w-5 h-5 text-white group-hover:text-[#0b1410]" />
               </a>
 
               <a
@@ -240,7 +238,7 @@ const Hero = () => {
                 href={SOCIALS.instagram}
                 target="_blank"
                 rel="noreferrer"
-                className="w-11 h-11 rounded-full bg-[#141414] border border-white/15 flex items-center justify-center transition-all duration-300 hover:bg-gradient-to-tr hover:from-yellow-500 hover:via-rose-500 hover:to-purple-500 hover:border-transparent hover:shadow-[0_0_20px_rgba(236,72,153,0.6)] group"
+                className="w-11 h-11 rounded-full bg-[#141414] border border-white/15 flex items-center justify-center transition-all duration-300 hover:bg-gradient-to-tr hover:from-yellow-700 hover:via-rose-600 hover:to-purple-600 hover:border-transparent hover:shadow-[0_0_20px_rgba(236,72,153,0.6)] group"
                 aria-label="Instagram"
               >
                 <svg className="w-5 h-5 text-white transition-colors" fill="currentColor" viewBox="0 0 24 24">
@@ -277,7 +275,7 @@ const Hero = () => {
                   className="absolute inset-[-50%] w-[200%] h-[200%] bg-gradient-to-tr from-transparent via-white/10 to-transparent pointer-events-none transform-gpu z-40"
                 ></div>
 
-                <div className="absolute top-6 left-6 z-30 px-3 py-1 bg-[#4B72E8] text-white font-mono text-[10px] font-bold tracking-widest rounded shadow-xl">
+                <div className="absolute top-6 left-6 z-30 px-3 py-1 bg-brand-action text-white font-mono text-[10px] font-bold tracking-widest rounded shadow-xl">
                   {HERO.cardBadge}
                 </div>
 
@@ -285,14 +283,16 @@ const Hero = () => {
                   <img
                     src={profileImg}
                     alt={`${BRAND.founder}, founder of ${BRAND.name}`}
+                    width={1122}
+                    height={1402}
                     className="w-full h-full object-cover object-top filter brightness-105 contrast-110 group-hover:scale-[1.03] transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
                   
                   <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-white">
                     <div>
-                      <h3 className="font-bold text-lg font-heading">{BRAND.founder}</h3>
-                      <p className="text-xs text-[#4B72E8] font-mono font-bold uppercase">{HERO.cardRole}</p>
+                      <p className="font-bold text-lg font-heading">{BRAND.founder}</p>
+                      <p className="text-xs text-brand-readable font-mono font-bold uppercase">{HERO.cardRole}</p>
                     </div>
                     <div className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-black/80 border border-white/20 text-[10px] text-emerald-400 font-mono">
                       <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" /> Active Now
@@ -303,11 +303,11 @@ const Hero = () => {
                 <div className="grid grid-cols-2 gap-3 pt-1">
                   <div className="p-3 rounded-xl bg-black/60 border border-white/10 flex flex-col">
                     <span className="text-xl font-black text-white font-heading">{HERO.cardStat1.value}</span>
-                    <span className="text-[10px] font-mono text-white/50 uppercase tracking-wider">{HERO.cardStat1.label}</span>
+                    <span className="text-[10px] font-mono text-readable-muted uppercase tracking-wider">{HERO.cardStat1.label}</span>
                   </div>
                   <div className="p-3 rounded-xl bg-black/60 border border-white/10 flex flex-col">
-                    <span className="text-xl font-black text-[#4B72E8] font-heading">{HERO.cardStat2.value}</span>
-                    <span className="text-[10px] font-mono text-white/50 uppercase tracking-wider">{HERO.cardStat2.label}</span>
+                    <span className="text-xl font-black text-brand-readable font-heading">{HERO.cardStat2.value}</span>
+                    <span className="text-[10px] font-mono text-readable-muted uppercase tracking-wider">{HERO.cardStat2.label}</span>
                   </div>
                 </div>
 

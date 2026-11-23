@@ -13,8 +13,13 @@ const median = (arr) => {
 test.skip(!process.env.PERF, 'set PERF=1 to run performance measurements');
 
 async function newMeasuredPage(browser, projectUse) {
-  const { defaultBrowserType, ...ctxOptions } = projectUse;
+  const ctxOptions = { ...projectUse };
+  delete ctxOptions.defaultBrowserType;
   const context = await browser.newContext(ctxOptions);
+  if (process.env.PERF_OFFLINE_FONTS === '1') {
+    await context.route('https://fonts.googleapis.com/**', route =>
+      route.fulfill({ contentType: 'text/css', body: '' }));
+  }
   const page = await context.newPage();
   const cdp = await context.newCDPSession(page);
   return { context, page, cdp };
@@ -31,15 +36,25 @@ async function measureLoad(browser, projectUse, baseURL) {
     );
   });
 
-  await page.addInitScript(() => {
-    window.__vitals = { lcp: 0, cls: 0 };
+  await page.addInitScript((selector) => {
+    window.__vitals = { lcp: 0, cls: 0, preloaderCleared: null };
+    let foundPreloader = false;
+    const observer = new MutationObserver(() => {
+      if (document.querySelector(selector)) {
+        foundPreloader = true;
+      } else if (foundPreloader) {
+        window.__vitals.preloaderCleared = performance.now();
+        observer.disconnect();
+      }
+    });
+    observer.observe(document, { childList: true, subtree: true });
     new PerformanceObserver((list) => {
       for (const e of list.getEntries()) window.__vitals.lcp = e.startTime;
     }).observe({ type: 'largest-contentful-paint', buffered: true });
     new PerformanceObserver((list) => {
       for (const e of list.getEntries()) if (!e.hadRecentInput) window.__vitals.cls += e.value;
     }).observe({ type: 'layout-shift', buffered: true });
-  });
+  }, PRELOADER);
 
   await page.goto(baseURL, { waitUntil: 'load', timeout: 180_000 });
   await page.locator(PRELOADER).waitFor({ state: 'detached', timeout: 60_000 });
@@ -55,6 +70,7 @@ async function measureLoad(browser, projectUse, baseURL) {
       loadEvent: nav.loadEventEnd,
       lcp: window.__vitals.lcp,
       cls: window.__vitals.cls,
+      preloaderCleared: window.__vitals.preloaderCleared,
     };
   });
 
@@ -125,7 +141,7 @@ test('load metrics (local network, 4x CPU throttle)', async ({ browser, baseURL 
   test.setTimeout(900_000);
   const runs = [];
   for (let i = 0; i < RUNS; i++) runs.push(await measureLoad(browser, testInfo.project.use, baseURL));
-  const keys = ['ttfb', 'fcp', 'lcp', 'cls', 'domContentLoaded', 'loadEvent', 'totalBytes', 'imageBytesBeforeScroll', 'requests'];
+  const keys = ['ttfb', 'fcp', 'lcp', 'cls', 'preloaderCleared', 'domContentLoaded', 'loadEvent', 'totalBytes', 'imageBytesBeforeScroll', 'requests'];
   const summary = Object.fromEntries(keys.map((k) => [k, median(runs.map((r) => r[k]))]));
   const out = path.join('audit', LABEL, `load-${testInfo.project.name}.json`);
   fs.mkdirSync(path.dirname(out), { recursive: true });

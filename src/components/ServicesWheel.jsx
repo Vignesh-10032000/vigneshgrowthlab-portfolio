@@ -25,6 +25,7 @@ const servicesData = SERVICES_WHEEL.map((s) => ({
 
 const ServicesWheel = () => {
   const sectionRef = useRef(null);
+  const triggerRef = useRef(null);
   const cardsRef   = useRef([]);
   const bgRefs     = useRef([]);
   const textRefs   = useRef([]);
@@ -46,8 +47,11 @@ const ServicesWheel = () => {
           const radius      = isDesktop ? 1800 : 680;
           const angleSpread = isDesktop ? 18   : 22;
 
-          const updateCards = (p) => {
-            const activeIndex = Math.round(p);
+          const updateCards = (progress) => {
+            const activeIndex = Math.round(progress);
+            // Device scroll offsets are rounded to whole pixels. Center a card
+            // exactly when it is within the rounding error of its stop.
+            const p = Math.abs(progress - activeIndex) < 0.001 ? activeIndex : progress;
             setActiveIdx(Math.max(0, Math.min(activeIndex, servicesData.length - 1)));
 
             cardsRef.current.forEach((card, i) => {
@@ -79,7 +83,7 @@ const ServicesWheel = () => {
 
           updateCards(0);
 
-          ScrollTrigger.create({
+          const trigger = ScrollTrigger.create({
             trigger: sectionRef.current,
             start:   'top top',
             end:     '+=500%',
@@ -89,6 +93,8 @@ const ServicesWheel = () => {
               updateCards(self.progress * (servicesData.length - 1));
             },
           });
+          triggerRef.current = trigger;
+          return () => { triggerRef.current = null; };
         }
       );
     }, sectionRef);
@@ -96,9 +102,26 @@ const ServicesWheel = () => {
     return () => ctx.revert();
   }, []);
 
+  const revealFocusedService = (event, index) => {
+    const link = event.currentTarget;
+    if (!link.matches(":focus-visible")) return;
+
+    // Let the browser finish scrolling the newly focused link into view first.
+    requestAnimationFrame(() => {
+      const trigger = triggerRef.current;
+      if (!trigger || document.activeElement !== link) return;
+
+      const progress = index / (servicesData.length - 1);
+      const top = Math.round(trigger.start + (trigger.end - trigger.start) * progress);
+      window.scrollTo({ top, behavior: "instant" });
+      ScrollTrigger.update();
+    });
+  };
+
   return (
     <section
       id="services"
+      aria-labelledby="services-heading"
       ref={sectionRef}
       className="relative z-20 w-full h-screen bg-[#050505] text-white overflow-hidden flex items-center justify-center [perspective:1000px]"
     >
@@ -113,7 +136,9 @@ const ServicesWheel = () => {
 
       <div className="absolute inset-0 flex items-start pt-16 md:items-center justify-center z-0 pointer-events-none overflow-hidden">
         {servicesData.map((s, i) => (
-          <h1
+          <div
+            aria-hidden="true"
+            data-decoration="SERVICES"
             key={`txt-${i}`}
             ref={el => (textRefs.current[i] = el)}
             className="absolute text-[18vw] font-black uppercase text-transparent leading-none tracking-tighter mix-blend-overlay whitespace-nowrap font-netflix"
@@ -121,61 +146,67 @@ const ServicesWheel = () => {
               WebkitTextStroke: `2px rgba(255,255,255,0.35)`,
               opacity: 0,
             }}
-          >
-            SERVICES
-          </h1>
+          />
         ))}
       </div>
 
       <div className="absolute top-24 sm:top-24 left-4 sm:left-8 z-30 pointer-events-none" data-aos="fade-down">
         <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded bg-black/80 backdrop-blur-2xl border border-[#4B72E8]/40 text-[10px] sm:text-xs font-mono uppercase tracking-widest text-white shadow-2xl">
           <span className="w-2 h-2 rounded-full bg-[#4B72E8] animate-ping"></span>
-          <span className="text-[#4B72E8] font-bold">EPISODE 02</span>
-          <span className="text-white/40">|</span>
+          <span className="text-brand-readable font-bold">EPISODE 02</span>
+          <span aria-hidden="true" className="text-readable-muted">|</span>
           <span className="hidden sm:inline">VGL SERVICES — </span>
           <span>SCROLL TO EXPLORE</span>
         </div>
       </div>
 
-      <div className="relative w-full h-full flex items-center justify-center z-10 [transform-style:preserve-3d]">
+      <h2 id="services-heading" className="sr-only">Business software, websites and automation services</h2>
+      <div data-service-list className="relative w-full h-full flex items-center justify-center z-10 [transform-style:preserve-3d]">
         {servicesData.map((s, i) => (
           <div
             key={`card-${i}`}
+            id={`service-${s.slug}`}
+            data-service-card
             ref={el => (cardsRef.current[i] = el)}
             className="absolute w-[86vw] sm:w-[80vw] md:w-[420px] h-[400px] sm:h-[450px] md:h-[540px] rounded-[24px] sm:rounded-[28px] overflow-hidden bg-white border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.5)] group will-change-transform"
           >
             <div className="w-full h-full relative overflow-hidden bg-zinc-900">
               <img
                 src={s.img}
-                alt={s.title}
+                alt=""
+                width={1060}
+                height={1484}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 filter brightness-90"
               />
 
-              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent flex flex-col justify-between p-5 sm:p-7 md:p-8">
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/40 flex flex-col justify-between p-5 sm:p-7 md:p-8">
                 
                 <div className="flex items-center justify-between">
                   <span
                     className="text-[10px] sm:text-[11px] font-mono font-black uppercase tracking-widest px-2.5 sm:px-3 py-1 rounded-full text-white shadow-md border border-white/20 backdrop-blur-md"
-                    style={{ backgroundColor: s.bgColor }}
+                    style={{ backgroundColor: `color-mix(in srgb, ${s.bgColor} 72%, black)` }}
                   >
                     {s.tag}
                   </span>
-                  <span className="text-2xl sm:text-3xl font-black font-netflix text-white/50">0{i + 1}</span>
+                  <span className="text-2xl sm:text-3xl font-black font-netflix text-white">0{i + 1}</span>
                 </div>
 
                 <div>
                   <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-white leading-tight tracking-tight mb-2 group-hover:text-amber-400 transition-colors drop-shadow-md">
                     {s.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-white/85 leading-relaxed font-light mb-4 sm:mb-5 max-w-sm drop-shadow line-clamp-3 sm:line-clamp-none">
+                  <p className="text-xs sm:text-sm text-white/90 leading-relaxed font-light mb-4 sm:mb-5 max-w-sm drop-shadow line-clamp-3 sm:line-clamp-none">
                     {s.desc}
                   </p>
 
                   <a
                     href={waLink(`Hi Vignesh, I'm interested in ${s.title}.`)}
+                    onFocus={(event) => revealFocusedService(event, i)}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl bg-white text-black text-[11px] sm:text-xs font-mono uppercase font-bold tracking-widest hover:bg-[#4B72E8] hover:text-white transition-all duration-300 shadow-xl active:scale-95"
+                    className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl bg-white text-black text-[11px] sm:text-xs font-mono uppercase font-bold tracking-widest hover:bg-brand-action hover:text-white transition-all duration-300 shadow-xl active:scale-95"
                   >
                     Start Project
                     <svg className="w-3.5 sm:w-4 h-3.5 sm:h-4" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
@@ -197,13 +228,13 @@ const ServicesWheel = () => {
         ref={hintRef}
         className="md:hidden absolute bottom-8 left-0 w-full flex flex-col items-center gap-2 z-30 pointer-events-none"
       >
-        <div className="flex flex-col items-center gap-1 animate-bounce">
-          <span className="text-white/70 text-[11px] tracking-[0.2em] uppercase font-semibold">Scroll</span>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" strokeWidth="2.5" strokeLinecap="round">
+        <div className="flex flex-col items-center gap-1 animate-bounce rounded-xl bg-black/80 px-3 py-1.5 text-white">
+          <span className="text-[11px] tracking-[0.2em] uppercase font-semibold">Scroll</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true">
             <path d="M12 5v14M5 12l7 7 7-7"/>
           </svg>
         </div>
-        <div className="flex gap-1.5 mt-1">
+        <div aria-hidden="true" className="flex gap-1.5 mt-1 rounded-full bg-black/80 px-2 py-1">
           {servicesData.map((_, i) => (
             <div
               key={`dot-${i}`}
@@ -211,14 +242,14 @@ const ServicesWheel = () => {
               style={{
                 width: i === activeIdx ? '20px' : '6px',
                 height: '6px',
-                background: i === activeIdx ? '#4B72E8' : 'rgba(255,255,255,0.3)'
+                background: i === activeIdx ? '#779BFF' : '#A1A1AA'
               }}
             />
           ))}
         </div>
       </div>
 
-      <div className="hidden md:flex absolute right-8 top-1/2 -translate-y-1/2 z-30 flex-col gap-3 pointer-events-none">
+      <div aria-hidden="true" className="hidden md:flex absolute right-8 top-1/2 -translate-y-1/2 z-30 flex-col gap-3 pointer-events-none rounded-full bg-black/80 p-2">
         {servicesData.map((_, i) => (
           <div
             key={`pip-${i}`}
@@ -226,7 +257,7 @@ const ServicesWheel = () => {
             style={{
               width: '6px',
               height: i === activeIdx ? '28px' : '6px',
-              background: i === activeIdx ? '#4B72E8' : 'rgba(255,255,255,0.25)'
+              background: i === activeIdx ? '#779BFF' : '#A1A1AA'
             }}
           />
         ))}

@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node scripts/prerender.mjs",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test:e2e": "playwright test tests/regression.spec.js"
+    "test:e2e": "playwright test tests/regression.spec.js tests/seo.spec.js",
+    "test:a11y": "playwright test tests/accessibility.spec.js --project=desktop-chromium --project=mobile-android --project=mobile-iphone"
   },
   "dependencies": {
     "aos": "^2.3.4",
@@ -22,12 +23,16 @@
     "tailwind-merge": "^3.0.1"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.64.0",
     "@tailwindcss/vite": "^4.0.7",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.20",
+    "axe-core": "4.14.1",
+    "eslint": "^10.15.0",
+    "globals": "^16.5.0",
     "postcss": "^8.5.2",
     "tailwindcss": "^4.0.7",
     "vite": "^6.1.0"

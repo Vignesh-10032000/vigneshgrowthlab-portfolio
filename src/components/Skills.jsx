@@ -50,8 +50,8 @@ const Skills = () => {
         <div className="flex flex-col items-start space-y-4" data-aos="fade-up">
           <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded bg-black/80 backdrop-blur-2xl border border-[#4B72E8]/40 text-xs font-mono uppercase tracking-widest text-white shadow-2xl">
             <span className="w-2 h-2 rounded-full bg-[#4B72E8] animate-ping"></span>
-            <span className="text-[#4B72E8] font-bold">EPISODE 04</span>
-            <span className="text-white/40">|</span>
+            <span className="text-brand-readable font-bold">EPISODE 04</span>
+            <span aria-hidden="true" className="text-readable-muted">|</span>
             <span>TECHNICAL CAPABILITY & STACK</span>
           </div>
 
@@ -72,7 +72,7 @@ const Skills = () => {
 
         <div>
           <div className="flex items-center justify-between px-6 sm:px-12 max-w-7xl mx-auto mb-3">
-            <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#4B72E8] flex items-center gap-2">
+            <span className="text-xs font-mono font-bold tracking-widest uppercase text-brand-readable flex items-center gap-2">
               ⚡ Core Technologies
             </span>
           </div>
@@ -88,15 +88,15 @@ const Skills = () => {
                       className="skill-marquee-card w-[190px] sm:w-[230px] md:w-[260px] p-4 sm:p-5 shrink-0 cursor-pointer flex flex-col justify-between"
                     >
                       <div className="flex items-center justify-between mb-3">
-                        <span className="text-[9px] sm:text-[10px] font-mono font-bold uppercase tracking-wider text-[#4B72E8] bg-[#4B72E8]/10 px-2 sm:px-2.5 py-0.5 rounded border border-[#4B72E8]/20">
+                        <span className="text-[9px] sm:text-[10px] font-mono font-bold uppercase tracking-wider text-brand-readable bg-[#4B72E8]/10 px-2 sm:px-2.5 py-0.5 rounded border border-[#4B72E8]/20">
                           {card.category}
                         </span>
                         <span className="text-[9px] sm:text-[10px] font-mono text-emerald-400 font-bold border border-emerald-500/30 px-1.5 py-0.5 rounded bg-emerald-500/10">
                           {card.level}
                         </span>
                       </div>
-                      <h4 className="text-base sm:text-lg font-black font-heading text-white mb-1">{card.name}</h4>
-                      <p className="text-[10px] sm:text-[11px] font-mono text-white/50">Production Ready</p>
+                      <p className="text-base sm:text-lg font-black font-heading text-white mb-1">{card.name}</p>
+                      <p className="text-[10px] sm:text-[11px] font-mono text-readable-muted">Production Ready</p>
                     </div>
                   ))}
                 </div>
@@ -126,7 +126,7 @@ const Skills = () => {
                       <span className="text-[9px] sm:text-[10px] font-mono font-bold uppercase tracking-widest text-amber-400 mb-1.5 sm:mb-2 block">
                         // FEATURE 0{ (idx % deliverablesRow2.length) + 1 }
                       </span>
-                      <h4 className="text-sm sm:text-base font-black font-heading text-white mb-1">{item.title}</h4>
+                      <p className="text-sm sm:text-base font-black font-heading text-white mb-1">{item.title}</p>
                       <p className="text-[11px] sm:text-xs font-mono text-white/60">{item.desc}</p>
                     </div>
                   ))}

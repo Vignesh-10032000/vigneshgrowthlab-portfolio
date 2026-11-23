@@ -28,9 +28,7 @@ const Portfolio = () => {
     <section id="work" className="bg-[#050505] relative font-sans text-white w-full py-28 select-none border-t border-white/10">
       
       <div className="absolute top-12 left-0 w-full flex items-start justify-center pointer-events-none z-0 overflow-hidden opacity-[0.03]">
-        <h1 className="text-[18vw] font-black font-netflix text-white tracking-tighter leading-none whitespace-nowrap uppercase">
-          CLIENT WORK
-        </h1>
+        <div aria-hidden="true" data-decoration="CLIENT WORK" className="text-[18vw] font-black font-netflix text-white tracking-tighter leading-none whitespace-nowrap uppercase" />
       </div>
 
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] bg-[#4B72E8]/15 rounded-full blur-[180px] pointer-events-none z-0" />
@@ -40,8 +38,8 @@ const Portfolio = () => {
         <div className="flex flex-col items-start space-y-4 mb-12" data-aos="fade-up">
           <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded bg-black/80 backdrop-blur-2xl border border-[#4B72E8]/40 text-xs font-mono uppercase tracking-widest text-white shadow-2xl">
             <span className="w-2 h-2 rounded-full bg-[#4B72E8] animate-ping"></span>
-            <span className="text-[#4B72E8] font-bold">EPISODE 03</span>
-            <span className="text-white/40">|</span>
+            <span className="text-brand-readable font-bold">EPISODE 03</span>
+            <span aria-hidden="true" className="text-readable-muted">|</span>
             <span>VERIFIED CLIENT CASE STUDIES</span>
           </div>
 
@@ -67,15 +65,16 @@ const Portfolio = () => {
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-mono tracking-wider transition-all duration-300 flex items-center gap-2 shrink-0 cursor-pointer ${
+                aria-pressed={activeCategory === cat}
+                className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-mono tracking-wider transition-all duration-300 flex items-center gap-2 shrink-0 cursor-pointer border focus-visible:outline-offset-[-3px] ${
                   activeCategory === cat
-                    ? 'bg-[#4B72E8] text-white shadow-[0_0_20px_rgba(75,114,232,0.6)] font-bold scale-105'
-                    : 'bg-[#141414] border border-white/10 text-white/70 hover:text-white hover:border-white/30'
+                    ? 'bg-brand-action border-brand-readable text-white shadow-[0_0_20px_rgba(75,114,232,0.6)] font-bold scale-105'
+                    : 'bg-[#141414] border-control-edge text-white/70 hover:text-white hover:border-brand-readable'
                 }`}
               >
                 <span>{cat}</span>
                 <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${
-                  activeCategory === cat ? 'bg-black/30 text-white' : 'bg-white/10 text-white/50'
+                  activeCategory === cat ? 'bg-black/30 text-white' : 'bg-white/10 text-readable-muted'
                 }`}>
                   {count}
                 </span>
@@ -119,20 +118,20 @@ const Portfolio = () => {
                     </div>
 
                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 bg-black/40 backdrop-blur-xs">
-                      <span className="px-4 py-2 rounded-full bg-[#4B72E8] text-white font-mono text-xs uppercase tracking-widest font-bold shadow-[0_0_20px_rgba(75,114,232,0.8)] flex items-center gap-1.5 transform scale-90 group-hover:scale-100 transition-transform">
+                      <span className="px-4 py-2 rounded-full bg-brand-action text-white font-mono text-xs uppercase tracking-widest font-bold shadow-[0_0_20px_rgba(75,114,232,0.8)] flex items-center gap-1.5 transform scale-90 group-hover:scale-100 transition-transform">
                         <Eye className="w-3.5 h-3.5" /> View Details
                       </span>
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between text-[11px] font-mono text-[#4B72E8] font-bold uppercase tracking-wider mb-2">
+                  <div className="flex items-center justify-between text-[11px] font-mono text-brand-readable font-bold uppercase tracking-wider mb-2">
                     <span>{project.category}</span>
-                    <span className="text-white/40">{project.platform}</span>
+                    <span className="text-readable-muted">{project.platform}</span>
                   </div>
 
                   <h3 
                     onClick={() => setSelectedProject(project)}
-                    className="text-xl font-black font-heading text-white mb-2.5 group-hover:text-[#4B72E8] transition-colors leading-tight"
+                    className="text-xl font-black font-heading text-white mb-2.5 group-hover:text-brand-readable transition-colors leading-tight"
                   >
                     {project.title}
                   </h3>
@@ -162,7 +161,7 @@ const Portfolio = () => {
                         target="_blank"
                         rel="noreferrer"
                         onClick={(e) => e.stopPropagation()}
-                        className="w-8 h-8 rounded-full bg-white/5 hover:bg-[#4B72E8] text-white flex items-center justify-center transition-all duration-300 border border-white/10 hover:border-[#4B72E8] shadow-md"
+                        className="w-8 h-8 rounded-full bg-white/5 hover:bg-brand-action text-white flex items-center justify-center transition-all duration-300 border border-control-edge hover:border-brand-readable shadow-md"
                         aria-label={`Visit live site for ${project.title}`}
                       >
                         <ExternalLink className="w-3.5 h-3.5" />
@@ -170,7 +169,7 @@ const Portfolio = () => {
                     )}
                     <button
                       onClick={() => setSelectedProject(project)}
-                      className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/20 text-white flex items-center justify-center transition-all duration-300 border border-white/10"
+                      className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/20 text-white flex items-center justify-center transition-all duration-300 border border-control-edge"
                       aria-label={`Open details modal for ${project.title}`}
                     >
                       <ArrowUpRight className="w-4 h-4" />
@@ -186,7 +185,7 @@ const Portfolio = () => {
         <div className="mt-20 pt-16 border-t border-white/10" data-aos="fade-up">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#4B72E8]/10 border border-[#4B72E8]/30 text-[11px] font-mono uppercase tracking-widest text-[#4B72E8] mb-3 shadow-lg">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#4B72E8]/10 border border-[#4B72E8]/30 text-[11px] font-mono uppercase tracking-widest text-brand-readable mb-3 shadow-lg">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#4B72E8] animate-ping"></span>
                 <span>ADDITIONAL PRODUCTION BUILDS</span>
               </div>
@@ -200,7 +199,7 @@ const Portfolio = () => {
                 Regional e-commerce stores, custom retail catalogues, and local high-converting landing pages.
               </p>
             </div>
-            <div className="text-xs font-mono text-white/40 uppercase tracking-widest shrink-0">
+            <div className="text-xs font-mono text-readable-muted uppercase tracking-widest shrink-0">
               04 Live Deployments
             </div>
           </div>
@@ -219,32 +218,30 @@ const Portfolio = () => {
                   href={cardHref}
                   target="_blank"
                   rel="noreferrer"
-                  className="group relative flex flex-col justify-between p-6 rounded-2xl bg-gradient-to-b from-[#141414] via-[#101010] to-[#0a0a0a] border border-white/10 hover:border-[#4B72E8]/60 focus:border-[#4B72E8]/80 focus:outline-none focus:ring-2 focus:ring-[#4B72E8]/50 transition-all duration-300 ease-out cursor-pointer transform hover:-translate-y-2.5 hover:scale-[1.025] hover:shadow-[0_20px_45px_rgba(75,114,232,0.25)] will-change-transform overflow-hidden"
+                  className="group relative flex flex-col justify-between p-6 rounded-2xl bg-gradient-to-b from-[#141414] via-[#101010] to-[#0a0a0a] border border-white/10 hover:border-[#4B72E8]/60 transition-all duration-300 ease-out cursor-pointer transform hover:-translate-y-2.5 hover:scale-[1.025] hover:shadow-[0_20px_45px_rgba(75,114,232,0.25)] will-change-transform overflow-hidden"
                 >
                   {/* Top glowing ambient line */}
                   <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#4B72E8]/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
                   {/* Lower background subtle watermark */}
-                  <span className="absolute bottom-16 right-4 text-white/[0.02] font-mono text-6xl font-black group-hover:text-[#4B72E8]/[0.08] transition-colors pointer-events-none select-none">
-                    0{idx + 1}
-                  </span>
+                  <span aria-hidden="true" data-decoration={`0${idx + 1}`} className="absolute bottom-16 right-4 text-white/[0.02] font-mono text-6xl font-black group-hover:text-[#4B72E8]/[0.08] transition-colors pointer-events-none select-none" />
 
                   <div>
                     {/* Header: Icon + Index + Category + Location */}
                     <div className="flex items-start justify-between gap-3 mb-5">
-                      <div className="w-11 h-11 rounded-xl bg-[#4B72E8]/10 text-[#4B72E8] border border-[#4B72E8]/20 flex items-center justify-center group-hover:bg-[#4B72E8] group-hover:text-white group-hover:border-[#4B72E8] group-hover:shadow-[0_0_20px_rgba(75,114,232,0.5)] group-hover:scale-110 transition-all duration-300 shrink-0">
+                      <div className="w-11 h-11 rounded-xl bg-[#4B72E8]/10 text-brand-readable border border-[#4B72E8]/20 flex items-center justify-center group-hover:bg-[#4B72E8] group-hover:text-white group-hover:border-[#4B72E8] group-hover:shadow-[0_0_20px_rgba(75,114,232,0.5)] group-hover:scale-110 transition-all duration-300 shrink-0">
                         <IconComponent className="w-5 h-5 transition-transform duration-300 group-hover:rotate-6" />
                       </div>
                       <div className="flex flex-col items-end text-right">
                         <div className="flex items-center gap-1.5 mb-1">
-                          <span className="text-[9px] font-mono font-bold uppercase tracking-wider text-white/50 bg-white/5 px-2 py-0.5 rounded border border-white/10 group-hover:border-[#4B72E8]/40 group-hover:text-[#4B72E8] group-hover:bg-[#4B72E8]/10 transition-colors">
+                          <span className="text-[9px] font-mono font-bold uppercase tracking-wider text-readable-muted bg-white/5 px-2 py-0.5 rounded border border-white/10 group-hover:border-[#4B72E8]/40 group-hover:text-brand-readable group-hover:bg-[#4B72E8]/10 transition-colors">
                             #0{idx + 1}
                           </span>
-                          <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#4B72E8] group-hover:text-blue-300 transition-colors">
+                          <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-brand-readable group-hover:text-blue-300 transition-colors">
                             {p.type}
                           </span>
                         </div>
-                        <span className="text-[10px] font-mono text-white/40 flex items-center gap-1">
+                        <span className="text-[10px] font-mono text-readable-muted flex items-center gap-1">
                           <MapPin className="w-2.5 h-2.5 text-[#4B72E8]/80" />
                           {p.location}
                         </span>
@@ -252,9 +249,9 @@ const Portfolio = () => {
                     </div>
 
                     {/* Title */}
-                    <h4 className="text-lg font-black font-heading text-white group-hover:text-[#4B72E8] transition-colors leading-snug mb-2 flex items-center justify-between">
+                    <h4 className="text-lg font-black font-heading text-white group-hover:text-brand-readable transition-colors leading-snug mb-2 flex items-center justify-between">
                       <span>{p.name}</span>
-                      <ArrowUpRight className="w-4 h-4 text-white/20 group-hover:text-[#4B72E8] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
+                      <ArrowUpRight className="w-4 h-4 text-white/20 group-hover:text-brand-readable group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
                     </h4>
 
                     {/* Copy */}
@@ -268,7 +265,7 @@ const Portfolio = () => {
                         {p.tags.map((tag, tIdx) => (
                           <span
                             key={tIdx}
-                            className="text-[10px] font-mono text-white/50 bg-white/5 px-2 py-0.5 rounded border border-white/10 group-hover:border-[#4B72E8]/30 group-hover:text-white/80 transition-colors"
+                            className="text-[10px] font-mono text-readable-muted bg-white/5 px-2 py-0.5 rounded border border-white/10 group-hover:border-[#4B72E8]/30 group-hover:text-white/80 transition-colors"
                           >
                             {tag}
                           </span>
@@ -280,7 +277,7 @@ const Portfolio = () => {
                   {/* Action link button */}
                   <div className="pt-4 border-t border-white/10 mt-auto">
                     {hasLiveUrl ? (
-                      <div className="w-full flex items-center justify-between px-3 py-2 rounded-xl bg-white/5 group-hover:bg-[#4B72E8] border border-white/10 group-hover:border-[#4B72E8] text-xs font-mono font-bold text-white transition-all duration-300 shadow-sm">
+                      <div className="w-full flex items-center justify-between px-3 py-2 rounded-xl bg-white/5 group-hover:bg-brand-action border border-white/10 group-hover:border-[#4B72E8] text-xs font-mono font-bold text-white transition-all duration-300 shadow-sm">
                         <span className="flex items-center gap-2">
                           <span className="relative flex h-2 w-2">
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -293,7 +290,7 @@ const Portfolio = () => {
                         <ExternalLink className="w-3.5 h-3.5 text-white/50 group-hover:text-white transition-colors" />
                       </div>
                     ) : (
-                      <div className="w-full flex items-center justify-between px-3 py-2 rounded-xl bg-[#4B72E8]/10 group-hover:bg-[#4B72E8] border border-[#4B72E8]/30 group-hover:border-[#4B72E8] text-xs font-mono font-bold text-white transition-all duration-300 shadow-sm">
+                      <div className="w-full flex items-center justify-between px-3 py-2 rounded-xl bg-[#4B72E8]/10 group-hover:bg-brand-action border border-[#4B72E8]/30 group-hover:border-[#4B72E8] text-xs font-mono font-bold text-white transition-all duration-300 shadow-sm">
                         <span className="flex items-center gap-2">
                           <span className="relative flex h-2 w-2">
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>

@@ -6,7 +6,7 @@ import { waLink } from '../utils/whatsapp';
 
 const ContactCTA = () => {
   return (
-    <section className="py-20 bg-[#050505] relative z-10 overflow-hidden select-none">
+    <section id="contact-cta" className="py-20 bg-[#050505] relative z-10 overflow-hidden select-none">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
         <div className="relative glass-card p-10 sm:p-16 rounded-3xl border-[#4B72E8]/30 bg-gradient-to-r from-[#141414] via-[#050505] to-[#141414] overflow-hidden text-center shadow-2xl">
@@ -18,7 +18,7 @@ const ContactCTA = () => {
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono uppercase tracking-widest text-[#4B72E8] bg-[#4B72E8]/10 border border-[#4B72E8]/30 mb-6"
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono uppercase tracking-widest text-brand-readable bg-[#4B72E8]/10 border border-[#4B72E8]/30 mb-6"
             >
               <Sparkles className="w-3.5 h-3.5" /> READY TO BUILD. AUTOMATE. GROW.?
             </motion.div>
@@ -62,7 +62,7 @@ const ContactCTA = () => {
               </a>
             </motion.div>
 
-            <p className="mt-6 text-xs font-mono text-white/40">
+            <p className="mt-6 text-xs font-mono text-readable-muted">
               {BRAND.name} · {CONTACT.location}
             </p>
 
