@@ -13,8 +13,8 @@ const WhyWorkWithMe = () => {
         <div className="flex flex-col items-start space-y-4 mb-16" data-aos="fade-up">
           <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded bg-black/80 backdrop-blur-2xl border border-[#4B72E8]/40 text-xs font-mono uppercase tracking-widest text-white shadow-2xl">
             <span className="w-2 h-2 rounded-full bg-[#4B72E8] animate-ping"></span>
-            <span className="text-[#4B72E8] font-bold">EPISODE 06</span>
-            <span className="text-white/40">|</span>
+            <span className="text-brand-readable font-bold">EPISODE 06</span>
+            <span aria-hidden="true" className="text-readable-muted">|</span>
             <span>WHY CHOOSE VIGNESH GROWTH LAB</span>
           </div>
 
@@ -40,10 +40,10 @@ const WhyWorkWithMe = () => {
                 data-aos-delay={idx * 80}
               >
                 <AnimatedCard className="h-full">
-                  <div className="p-3 rounded-xl bg-[#4B72E8]/10 text-[#4B72E8] border border-[#4B72E8]/20 mb-5 group-hover:scale-110 group-hover:bg-[#4B72E8] group-hover:text-white transition-all duration-300 w-fit">
+                  <div className="p-3 rounded-xl bg-[#4B72E8]/10 text-brand-readable border border-[#4B72E8]/20 mb-5 group-hover:scale-110 group-hover:bg-[#4B72E8] group-hover:text-white transition-all duration-300 w-fit">
                     <Icon className="w-6 h-6" />
                   </div>
-                  <h3 className="text-xl font-black font-heading text-white mb-2 group-hover:text-[#4B72E8] transition-colors">
+                  <h3 className="text-xl font-black font-heading text-white mb-2 group-hover:text-brand-readable transition-colors">
                     {item.title}
                   </h3>
                   <p className="text-xs sm:text-sm text-white/70 font-light leading-relaxed">

@@ -5,7 +5,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
-import SEO from './components/SEO';
 import NetflixPreloader from './components/NetflixPreloader';
 import CustomCursor from './components/CustomCursor';
 import Navbar from './components/Navbar';
@@ -24,12 +23,17 @@ import ContactForm from './components/ContactForm';
 import ContactCTA from './components/ContactCTA';
 import Footer from './components/Footer';
 import FloatingWhatsApp from './components/FloatingWhatsApp';
-import { SEO_DEFAULTS } from './data/portfolioData';
+import { trackContactLink } from './utils/conversions';
 
 gsap.registerPlugin(ScrollTrigger);
 
 function App() {
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    document.addEventListener('click', trackContactLink);
+    return () => document.removeEventListener('click', trackContactLink);
+  }, []);
 
   useEffect(() => {
     AOS.init({
@@ -75,13 +79,9 @@ function App() {
   }, []);
 
   return (
-    <div className="bg-[#050505] text-white min-h-screen relative font-sans selection:bg-[#4B72E8] selection:text-white">
+    <div className="bg-[#050505] text-white min-h-screen relative font-sans selection:bg-brand-action selection:text-white">
       {loading && <NetflixPreloader onComplete={() => setLoading(false)} />}
 
-      <SEO
-        title={SEO_DEFAULTS.title}
-        description={SEO_DEFAULTS.description}
-      />
       <CustomCursor />
       <Navbar />
       <main>

@@ -1,12 +1,19 @@
 @import "tailwindcss";
 
+@theme {
+  --color-brand-readable: #779BFF;
+  --color-brand-action: #3B60D4;
+  --color-readable-muted: #A1A1AA;
+  --color-control-edge: #757580;
+}
+
 @layer base {
   :root {
     --bg-primary: #050505;
     --bg-secondary: #0B0B0B;
     --bg-card: #141414;
     --text-primary: #FFFFFF;
-    --text-muted: #A1A1AA;
+    --text-muted: var(--color-readable-muted);
     --netflix-red: #4B72E8;
     --netflix-red-glow: rgba(75, 114, 232, 0.4);
     --gold-primary: #38BDF8;
@@ -29,6 +36,10 @@
     overflow: hidden;
   }
 
+  html {
+    scroll-padding-top: 5.75rem;
+  }
+
   body {
     background-color: #050505;
     color: #FFFFFF;
@@ -40,9 +51,32 @@
     font-family: 'Space Grotesk', sans-serif;
   }
 
+  :where(a[href], button, input, textarea, [tabindex]):focus-visible {
+    outline: 2px solid #BFDBFE;
+    outline-offset: 3px;
+    box-shadow: 0 0 0 3px #050505;
+  }
+
   .font-netflix {
     font-family: 'Bebas Neue', 'Impact', sans-serif;
   }
+}
+
+[data-decoration]::before {
+  content: attr(data-decoration);
+}
+
+@keyframes hero-badge-glow {
+  50% { box-shadow: 0 0 12px rgba(75, 114, 232, 0.35); }
+}
+
+.hero-badge-glow {
+  box-shadow: 0 0 20px rgba(75, 114, 232, 0.8);
+  animation: hero-badge-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-badge-glow { animation: none; }
 }
 
 /* Custom Netflix & Portnewstich Glass Utilities */
@@ -80,7 +114,7 @@
 }
 
 .netflix-red-btn {
-  background: linear-gradient(135deg, #4B72E8 0%, #2563EB 100%);
+  background: linear-gradient(135deg, var(--color-brand-action) 0%, #2563EB 100%);
   color: #FFFFFF;
   font-weight: 700;
   transition: all 0.3s ease;
@@ -154,13 +188,13 @@
 .marquee-fade-left {
   left: 0;
   width: 90px;
-  background: linear-gradient(to right, #050505, transparent);
+  background: linear-gradient(to right, rgb(5 5 5 / 20%), transparent);
 }
 
 .marquee-fade-right {
   right: 0;
   width: 90px;
-  background: linear-gradient(to left, #050505, transparent);
+  background: linear-gradient(to left, rgb(5 5 5 / 20%), transparent);
 }
 
 @media (min-width: 768px) {
@@ -195,7 +229,7 @@
   background: #050505;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1F1F1F;
+  background: var(--color-control-edge);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {

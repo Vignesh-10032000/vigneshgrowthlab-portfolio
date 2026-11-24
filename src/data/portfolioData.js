@@ -8,7 +8,7 @@ export const CONTACT = {
   phoneDisplay: '+91 82200 34139',
   phoneHref: 'tel:+918220034139',
   email: 'vigneshgrowthlab@gmail.com',
-  location: 'Pollachi, Tamil Nadu',
+  location: 'Pollachi, Coimbatore district, Tamil Nadu',
 };
 
 export const BRAND = {
@@ -37,16 +37,6 @@ export const RESERVED_MEDIA = {
   clientTestimonialPoster: '/images/client-testimonial-poster.webp',
 };
 
-export const SEO_DEFAULTS = {
-  title: 'Vignesh Growth Lab — Websites, POS & WhatsApp Automation in Tamil Nadu',
-  description:
-    'Pollachi-based MSME building fast websites, custom software, retail POS and WhatsApp AI automation for Tamil Nadu businesses. 15+ projects delivered.',
-  keywords:
-    'Vignesh Growth Lab, Vignesh Prabhu, VGL, Website Development Tamil Nadu, Retail POS, WhatsApp AI Automation, Pollachi, MSME',
-  author: 'Vignesh Prabhu - Vignesh Growth Lab',
-  ogImage: 'https://vigneshgrowthlab.dev/brand/vgl-logo.png',
-};
-
 export const FOUNDER = {
   name: 'Vignesh Prabhu',
   photo: '/images/vignesh.webp',
@@ -65,8 +55,6 @@ export const HERO = {
   deliveredBadge: '15+ DELIVERED',
   topPercentLabel: 'MSME',
   topPercentSub: 'Pollachi, Tamil Nadu · Build. Automate. Grow.',
-  greeting: "HELLO, I'M",
-  name: 'VIGNESH',
   rollingTexts: [
     'AI AUTOMATION SPECIALIST',
     'WEBSITE DEVELOPER',
@@ -82,7 +70,7 @@ export const HERO = {
   ],
   chips: ['15+ Projects Delivered', 'Websites', 'POS', 'WhatsApp AI'],
   intro:
-    'Founder of Vignesh Growth Lab. I build fast, conversion-focused websites, custom software, retail POS systems and WhatsApp AI workflows for Tamil Nadu businesses. Average delivery around 2 weeks — and you own 100% of it.',
+    'From Pollachi, I build billing software, ERP and CRM systems, websites, Android apps and WhatsApp automation for businesses across India.',
   ctaPrimary: 'Talk on WhatsApp',
   ctaSecondary: 'View Our Work',
   cardBadge: 'FOUNDER',
@@ -142,29 +130,33 @@ export const ABOUT = {
 /** Services for ServicesWheel — 4 VGL services (+ reuse colors). */
 export const SERVICES_WHEEL = [
   {
+    slug: 'website-development',
     title: 'Website Development',
-    desc: 'Fast, SEO-ready business and e-commerce websites that show up on Google, load quickly on mobile, and turn visitors into WhatsApp enquiries. Starting at ₹8,000.',
+    desc: 'Mobile-friendly business websites, landing pages and e-commerce stores with clear paths to WhatsApp enquiries. Starting at ₹8,000.',
     tag: 'Websites',
     bgColor: '#4B72E8',
     imageKey: 'blue',
   },
   {
+    slug: 'custom-software',
     title: 'Custom Development',
-    desc: "Hand-coded web applications and API integrations when a template won't cut it — built exactly for your workflow. HTML, CSS, JavaScript and GitHub-managed code.",
+    desc: 'Custom software for MSMEs, including ERP for operations, CRM for sales, Android apps and API integrations.',
     tag: 'Custom',
     bgColor: '#7C3AED',
     imageKey: 'purple',
   },
   {
+    slug: 'pos-billing',
     title: 'Retail POS Solutions',
-    desc: 'Custom billing software with inventory, reports, bilingual English–Tamil UI and WhatsApp digital receipts. Load-tested to 600 concurrent clients under 300ms.',
+    desc: 'Billing software for retailers and restaurants with inventory, reporting, an English–Tamil interface and WhatsApp digital receipts.',
     tag: 'POS',
     bgColor: '#EA580C',
     imageKey: 'orange',
   },
   {
+    slug: 'whatsapp-automation',
     title: 'WhatsApp AI Automation',
-    desc: 'AI chatbots and workflows that capture leads, follow up automatically and route every enquiry — 100+ leads daily to Google Sheets and WhatsApp.',
+    desc: 'WhatsApp and Instagram automation for lead capture, follow-ups and enquiry routing, with AI workflows and Google Sheets integrations.',
     tag: 'Automation',
     bgColor: '#16A34A',
     imageKey: 'green',
@@ -607,6 +599,8 @@ export const CLIENT_PROOF = [
     variant: 'image',
     client: 'NextGen Toys',
     imageSrc: '/images/nextgen-testimonial.webp',
+    imageWidth: 627,
+    imageHeight: 786,
     imageAlt: 'WhatsApp review from Team NextGen Toys recommending Vignesh Growth Lab for website development',
     caption: '“Communication was smooth throughout the project, and the final website matched our expectations.”',
     captionMeta: 'Written review · Team NextGen Toys, Coimbatore',

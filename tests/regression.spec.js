@@ -16,13 +16,14 @@ const SERVICE_CARDS = '#services div[class*="md:w-[420px]"]';
 const SECTION_IDS = ['home', 'about', 'services', 'work', 'skills', 'process', 'compare', 'faq', 'contact'];
 
 test.describe('load & runtime', () => {
-  test('preloader completes and hero renders', async ({ page }) => {
-    await page.goto('/');
-    await expect(page.locator(PRELOADER)).toBeVisible();
+  test('preloader completes and hero renders', async ({ page, request }) => {
+    const initial = await request.get('/');
+    expect(await initial.text()).toContain('data-site-preloader');
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
     await page.locator(PRELOADER).waitFor({ state: 'detached', timeout: 20_000 });
     await expect(page.locator('#home h1').first()).toBeVisible();
-    const heroImgOk = await page.locator('#home img').first().evaluate((img) => img.complete && img.naturalWidth > 0);
-    expect(heroImgOk).toBe(true);
+    await expect.poll(() => page.locator('#home img').first()
+      .evaluate((img) => img.complete && img.naturalWidth > 0)).toBe(true);
   });
 
   test('no runtime errors, failed requests or 4xx/5xx during a full scroll', async ({ page, baseURL }) => {
@@ -88,12 +89,28 @@ test.describe('layout', () => {
 
 test.describe('navigation', () => {
   test('nav links scroll to their sections', async ({ page }, testInfo) => {
+    if (isNarrow(testInfo) && testInfo.project.use.defaultBrowserType === 'webkit') {
+      // Four menu transitions and native input can exceed the default on emulated WebKit.
+      test.setTimeout(120_000);
+    }
     await gotoHome(page);
     const targets = ['about', 'work', 'faq', 'contact'];
     for (const id of targets) {
       if (isNarrow(testInfo)) {
         await page.getByRole('button', { name: 'Toggle menu' }).click();
-        await page.locator(`header div.fixed a[href="#${id}"]`).first().click({ timeout: 8000 });
+        const menu = page.locator('header div.fixed.inset-x-4');
+        await expect(menu).toHaveCSS('opacity', '1');
+        const point = await menu.locator(`a[href="#${id}"]`).first().evaluate((link) => {
+          link.scrollIntoView({ block: 'center', inline: 'nearest', behavior: 'instant' });
+          const rect = link.getBoundingClientRect();
+          const x = rect.left + rect.width / 2;
+          const y = rect.top + rect.height / 2;
+          return { x, y, clickable: link.contains(document.elementFromPoint(x, y)) };
+        });
+        expect(point.clickable, `menu link to #${id} should receive input`).toBe(true);
+        if (isTouchProject(testInfo)) await page.touchscreen.tap(point.x, point.y);
+        else await page.mouse.click(point.x, point.y);
+        await expect(menu).toHaveCount(0);
       } else {
         await page.locator(`header nav a[href="#${id}"]`).click();
       }
@@ -122,15 +139,26 @@ test.describe('navigation', () => {
     test.skip(!isNarrow(testInfo), 'mobile/tablet only');
     await gotoHome(page);
     await page.getByRole('button', { name: 'Toggle menu' }).click();
-    await page.waitForTimeout(500);
-    const links = page.locator('header div.fixed.inset-x-4 a');
-    const count = await links.count();
-    expect(count).toBeGreaterThan(0);
-    for (let i = 0; i < count; i++) {
-      const link = links.nth(i);
-      await link.scrollIntoViewIfNeeded();
-      await expect(link).toBeInViewport({ ratio: 1 });
-    }
+    const menu = page.locator('header div.fixed.inset-x-4');
+    await expect(menu).toHaveCSS('opacity', '1');
+    const result = await menu.evaluate((panel) => {
+      const pageY = window.scrollY;
+      const links = [...panel.querySelectorAll('a')];
+      const clipped = links.filter((link) => {
+        link.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'instant' });
+        const rect = link.getBoundingClientRect();
+        const bounds = panel.getBoundingClientRect();
+        const top = Math.max(0, bounds.top + panel.clientTop);
+        const left = Math.max(0, bounds.left + panel.clientLeft);
+        const bottom = Math.min(window.innerHeight, bounds.top + panel.clientTop + panel.clientHeight);
+        const right = Math.min(window.innerWidth, bounds.left + panel.clientLeft + panel.clientWidth);
+        return rect.top < top - 1 || rect.left < left - 1 || rect.bottom > bottom + 1 || rect.right > right + 1;
+      }).map(link => link.textContent.trim());
+      return { count: links.length, clipped, pageScroll: Math.abs(window.scrollY - pageY) };
+    });
+    expect(result.count).toBeGreaterThan(0);
+    expect(result.clipped).toEqual([]);
+    expect(result.pageScroll).toBeLessThanOrEqual(1);
   });
 
   test('back to top returns to the hero', async ({ page }) => {
@@ -182,6 +210,7 @@ test.describe('portfolio', () => {
     test.skip(isTouchProject(testInfo), 'wheel input is desktop only');
     await gotoHome(page);
     await scrollToSection(page, '#work');
+    const originalOverflow = await page.locator('html').evaluate(el => el.style.overflow);
     await clickCentered(page.getByRole('button', { name: 'Open details modal for Rani Sarees & Boutique' }));
     await expect(page.locator(MODAL)).toBeVisible();
     await page.waitForTimeout(500);
@@ -209,6 +238,9 @@ test.describe('portfolio', () => {
       expect(after.inner, 'modal content should scroll').toBeGreaterThan(before.inner);
     }
     expect(Math.abs(after.pageY - before.pageY), 'page behind modal should not scroll').toBeLessThanOrEqual(2);
+    await page.getByRole('button', { name: 'Close modal' }).click();
+    await expect(page.locator(MODAL)).toHaveCount(0);
+    expect(await page.locator('html').evaluate(el => el.style.overflow)).toBe(originalOverflow);
   });
 });
 
@@ -314,6 +346,8 @@ test.describe('contact form', () => {
     await scrollToSection(page, '#contact');
     await page.evaluate(() => {
       window.__opened = [];
+      window.__conversionEvents = [];
+      document.addEventListener('vgl:conversion', event => window.__conversionEvents.push(event.detail));
       window.open = (url, target) => {
         window.__opened.push({
           url,
@@ -330,6 +364,9 @@ test.describe('contact form', () => {
     await clickCentered(page.locator('#contact button[type="submit"]'));
     await expect.poll(() => page.evaluate(() => window.__opened.length)).toBe(1);
     const opened = await page.evaluate(() => window.__opened[0]);
+    expect(await page.evaluate(() => window.__conversionEvents)).toEqual([
+      { action: 'enquiry_whatsapp_handoff' },
+    ]);
     testInfo.annotations.push({ type: 'userActivation', description: String(opened.userActivation) });
     expect(opened.url).toMatch(/^https:\/\/wa\.me\/918220034139\?text=/);
     const text = decodeURIComponent(opened.url.split('?text=')[1]);

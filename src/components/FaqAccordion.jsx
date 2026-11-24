@@ -18,8 +18,8 @@ const FaqAccordion = () => {
         <div className="flex flex-col items-start space-y-4 mb-12" data-aos="fade-up">
           <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded bg-black/80 backdrop-blur-2xl border border-[#4B72E8]/40 text-xs font-mono uppercase tracking-widest text-white shadow-2xl">
             <span className="w-2 h-2 rounded-full bg-[#4B72E8] animate-ping" />
-            <span className="text-[#4B72E8] font-bold">{FAQ_META.kicker.toUpperCase()}</span>
-            <span className="text-white/40">|</span>
+            <span className="text-brand-readable font-bold">{FAQ_META.kicker.toUpperCase()}</span>
+            <span aria-hidden="true" className="text-readable-muted">|</span>
             <span>COMMON QUESTIONS</span>
           </div>
 
@@ -44,12 +44,12 @@ const FaqAccordion = () => {
                 >
                   <span
                     className={`font-heading font-medium text-base sm:text-lg transition-colors ${
-                      isOpen ? 'text-[#4B72E8]' : 'text-white group-hover:text-blue-300'
+                      isOpen ? 'text-brand-readable' : 'text-white group-hover:text-blue-300'
                     }`}
                   >
                     {faq.question}
                   </span>
-                  <span className="shrink-0 text-[#4B72E8]" aria-hidden="true">
+                  <span className="shrink-0 text-brand-readable" aria-hidden="true">
                     {isOpen ? (
                       <Minus className="w-[18px] h-[18px]" />
                     ) : (

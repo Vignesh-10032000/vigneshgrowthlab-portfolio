@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { SERVICES_DATA } from '../data/portfolioData';
 import { Globe, ShoppingCart, LayoutTemplate, TrendingUp, Target, Rocket, Search, Cpu, ArrowUpRight } from 'lucide-react';
 import AnimatedCard from './AnimatedCard';

@@ -5,20 +5,34 @@ import { waLink } from '../utils/whatsapp';
 
 const ProjectModal = ({ project, onClose }) => {
   const closeButtonRef = useRef(null);
+  const bottomCloseRef = useRef(null);
   const onCloseRef = useRef(onClose);
   onCloseRef.current = onClose;
 
   useEffect(() => {
     if (!project) return undefined;
     const previouslyFocused = document.activeElement;
+    const page = document.documentElement;
+    const previousOverflow = page.style.overflow;
+    page.style.overflow = 'hidden';
     closeButtonRef.current?.focus({ preventScroll: true });
 
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') onCloseRef.current();
+
+      if (e.key !== 'Tab') return;
+      const current = document.activeElement;
+      const next = e.shiftKey && current === closeButtonRef.current ? bottomCloseRef.current :
+        !e.shiftKey && current === bottomCloseRef.current ? closeButtonRef.current : null;
+      if (next) {
+        e.preventDefault();
+        next.focus();
+      }
     };
     document.addEventListener('keydown', handleKeyDown);
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
+      page.style.overflow = previousOverflow;
       if (previouslyFocused instanceof HTMLElement) previouslyFocused.focus({ preventScroll: true });
     };
   }, [project]);
@@ -55,7 +69,7 @@ const ProjectModal = ({ project, onClose }) => {
           <button
             ref={closeButtonRef}
             onClick={onClose}
-            className="absolute top-6 right-6 p-2.5 rounded-full bg-black/60 border border-white/20 text-white hover:text-[#4B72E8] hover:bg-black transition-all z-20"
+            className="absolute top-6 right-6 p-2.5 rounded-full bg-black/80 border border-control-edge text-white hover:text-brand-readable hover:bg-black transition-all z-20"
             aria-label="Close modal"
           >
             <X className="w-5 h-5" />
@@ -63,7 +77,7 @@ const ProjectModal = ({ project, onClose }) => {
 
           <div className="mb-6">
             <div className="flex items-center gap-3 mb-3 flex-wrap">
-              <span className="px-3 py-1 rounded bg-[#4B72E8] text-white text-xs font-mono font-bold uppercase tracking-widest shadow-md">
+              <span className="px-3 py-1 rounded bg-brand-action text-white text-xs font-mono font-bold uppercase tracking-widest shadow-md">
                 CASE STUDY
               </span>
               {project.resultBadge && (
@@ -77,7 +91,7 @@ const ProjectModal = ({ project, onClose }) => {
               {project.title}
             </h2>
             <p className="text-xs sm:text-sm text-white/60 font-mono">
-              Client: <strong className="text-white font-bold">{project.client}</strong> &bull; Category: <span className="text-[#4B72E8]">{project.category}</span>
+              Client: <strong className="text-white font-bold">{project.client}</strong> &bull; Category: <span className="text-brand-readable">{project.category}</span>
             </p>
           </div>
 
@@ -119,7 +133,7 @@ const ProjectModal = ({ project, onClose }) => {
             <div className="grid grid-cols-3 gap-3 mb-8">
               {project.results.map((r) => (
                 <div key={r.label} className="p-4 rounded-xl bg-black/60 border border-white/10 text-center">
-                  <div className="text-xl sm:text-2xl font-black text-[#4B72E8] font-heading">{r.value}</div>
+                  <div className="text-xl sm:text-2xl font-black text-brand-readable font-heading">{r.value}</div>
                   <div className="text-[10px] font-mono text-white/50 uppercase tracking-wider mt-1">{r.label}</div>
                 </div>
               ))}
@@ -128,8 +142,8 @@ const ProjectModal = ({ project, onClose }) => {
 
           <div className="grid md:grid-cols-2 gap-6 mb-8">
             <div className="p-6 rounded-2xl bg-black/60 border border-white/10">
-              <h4 className="text-xs font-mono uppercase tracking-widest text-[#4B72E8] font-bold mb-3 flex items-center gap-2">
-                <Globe className="w-4 h-4 text-[#4B72E8]" /> Project Objective
+              <h4 className="text-xs font-mono uppercase tracking-widest text-brand-readable font-bold mb-3 flex items-center gap-2">
+                <Globe className="w-4 h-4 text-brand-readable" /> Project Objective
               </h4>
               <p className="text-xs sm:text-sm text-white/80 font-light leading-relaxed">
                 {project.objective}
@@ -137,8 +151,8 @@ const ProjectModal = ({ project, onClose }) => {
             </div>
 
             <div className="p-6 rounded-2xl bg-black/60 border border-white/10">
-              <h4 className="text-xs font-mono uppercase tracking-widest text-[#4B72E8] font-bold mb-3 flex items-center gap-2">
-                <Layers className="w-4 h-4 text-[#4B72E8]" /> Core Tech Stack
+              <h4 className="text-xs font-mono uppercase tracking-widest text-brand-readable font-bold mb-3 flex items-center gap-2">
+                <Layers className="w-4 h-4 text-brand-readable" /> Core Tech Stack
               </h4>
               <div className="flex flex-wrap gap-2">
                 {project.technologies.map((tech) => (
@@ -154,13 +168,13 @@ const ProjectModal = ({ project, onClose }) => {
           </div>
 
           <div className="mb-8 p-6 sm:p-8 rounded-2xl bg-black/80 border border-white/10">
-            <h4 className="text-xs font-mono uppercase tracking-widest text-[#4B72E8] font-bold mb-4">
+            <h4 className="text-xs font-mono uppercase tracking-widest text-brand-readable font-bold mb-4">
               What Was Delivered
             </h4>
             <ul className="grid sm:grid-cols-2 gap-3">
               {project.workPerformed.map((item, idx) => (
                 <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-white/80 font-light">
-                  <CheckCircle2 className="w-4 h-4 text-[#4B72E8] shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-4 h-4 text-brand-readable shrink-0 mt-0.5" />
                   <span>{item}</span>
                 </li>
               ))}
@@ -202,6 +216,7 @@ const ProjectModal = ({ project, onClose }) => {
             )}
 
             <button
+              ref={bottomCloseRef}
               onClick={onClose}
               className="w-full sm:w-auto px-6 py-3.5 rounded text-xs font-mono uppercase tracking-widest text-white/70 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-colors"
             >

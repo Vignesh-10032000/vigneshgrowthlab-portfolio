@@ -13,7 +13,9 @@ export function collectRuntimeIssues(page, baseURL) {
     if (req.url().startsWith(origin)) {
       const failure = req.failure()?.errorText || '';
       // Media requests are routinely aborted by the browser once metadata is read.
-      if (!/ERR_ABORTED|NS_BINDING_ABORTED|cancelled/i.test(failure)) {
+      // Gecko also cancels a media channel with this status when reusing parsed data.
+      const cachedMedia = req.resourceType() === 'media' && failure === 'NS_ERROR_PARSED_DATA_CACHED';
+      if (!cachedMedia && !/ERR_ABORTED|NS_BINDING_ABORTED|cancelled/i.test(failure)) {
         issues.failedRequests.push(`${req.url()} ${failure}`);
       }
     }

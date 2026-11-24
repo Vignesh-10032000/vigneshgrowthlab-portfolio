@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, MessageCircle, Play } from 'lucide-react';
 import { BRAND, NAV_LINKS, DOCUMENTS } from '../data/portfolioData';
@@ -17,9 +17,17 @@ const Navbar = () => {
   }, []);
 
   const navLinks = NAV_LINKS;
+  const menuToggleRef = useRef(null);
+
+  const handleMenuKeyDown = (event) => {
+    if (event.key !== "Escape" || !mobileMenuOpen) return;
+    event.preventDefault();
+    setMobileMenuOpen(false);
+    menuToggleRef.current?.focus();
+  };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-8 py-4 transition-all duration-300">
+    <header onKeyDown={handleMenuKeyDown} className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-8 py-4 transition-all duration-300">
       <div
         className={`max-w-7xl mx-auto rounded-2xl px-5 py-3 transition-all duration-300 flex items-center justify-between ${
           scrolled
@@ -40,7 +48,7 @@ const Navbar = () => {
             <span className="font-black text-lg tracking-tight text-white font-netflix leading-none flex items-center gap-1">
               VIGNESH <span className="text-[#4B72E8]">GROWTH LAB</span>
             </span>
-            <span className="text-[9px] text-white/50 uppercase tracking-widest font-mono">
+            <span className="text-[9px] text-readable-muted uppercase tracking-widest font-mono">
               {BRAND.tagline}
             </span>
           </div>
@@ -51,7 +59,7 @@ const Navbar = () => {
             <a
               key={link.name}
               href={link.href}
-              className="text-xs font-mono uppercase tracking-widest text-white/70 hover:text-[#4B72E8] transition-colors relative py-1 group"
+              className="text-xs font-mono uppercase tracking-widest text-white/70 hover:text-brand-readable transition-colors relative py-1 group"
             >
               {link.name}
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#4B72E8] transition-all duration-300 group-hover:w-full" />
@@ -88,9 +96,11 @@ const Navbar = () => {
         </div>
 
         <button
+          ref={menuToggleRef}
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="lg:hidden p-2.5 rounded-xl bg-[#141414] border border-white/10 text-white hover:text-[#4B72E8] transition-colors focus:outline-none"
+          className="lg:hidden p-2.5 rounded-xl bg-[#141414] border border-control-edge text-white hover:text-brand-readable transition-colors"
           aria-label="Toggle menu"
+          aria-expanded={mobileMenuOpen}
         >
           {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
@@ -112,7 +122,7 @@ const Navbar = () => {
                   key={link.name}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="text-sm font-mono uppercase tracking-widest text-white/80 hover:text-[#4B72E8] py-2.5 px-3 rounded-lg hover:bg-white/5 transition-all"
+                  className="text-sm font-mono uppercase tracking-widest text-white/80 hover:text-brand-readable py-2.5 px-3 rounded-lg hover:bg-white/5 transition-all"
                 >
                   {link.name}
                 </a>

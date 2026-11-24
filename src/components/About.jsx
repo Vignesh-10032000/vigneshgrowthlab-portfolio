@@ -95,9 +95,7 @@ const About = () => {
       className="relative z-10 w-full min-h-screen bg-[#050505] text-white pt-24 sm:pt-28 pb-36 sm:pb-48 px-4 sm:px-8 flex flex-col select-none overflow-hidden"
     >
       <div className="absolute inset-0 flex items-center justify-center z-0 pointer-events-none">
-        <h2 className="welcome-huge-text text-[22vw] sm:text-[18vw] font-black font-netflix uppercase text-white tracking-tighter leading-none whitespace-nowrap opacity-0">
-          WELCOME
-        </h2>
+        <div aria-hidden="true" data-decoration="WELCOME" className="welcome-huge-text text-[22vw] sm:text-[18vw] font-black font-netflix uppercase text-white tracking-tighter leading-none whitespace-nowrap opacity-0" />
       </div>
 
       <div className="absolute top-1/4 left-10 w-[500px] h-[500px] bg-[#4B72E8]/15 rounded-full blur-[160px] pointer-events-none"></div>
@@ -107,8 +105,8 @@ const About = () => {
         <div className="flex flex-col items-start space-y-4" data-aos="fade-up">
           <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded bg-black/80 backdrop-blur-2xl border border-[#4B72E8]/40 text-xs font-mono uppercase tracking-widest text-white shadow-2xl">
             <span className="w-2 h-2 rounded-full bg-[#4B72E8] animate-ping"></span>
-            <span className="text-[#4B72E8] font-bold">EPISODE 01</span>
-            <span className="text-white/40">|</span>
+            <span className="text-brand-readable font-bold">EPISODE 01</span>
+            <span aria-hidden="true" className="text-readable-muted">|</span>
             <span>{ABOUT.episodeLabel}</span>
           </div>
 
@@ -134,7 +132,7 @@ const About = () => {
               href={DOCUMENTS.resume}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#4B72E8] text-white text-sm font-bold hover:bg-[#3b60d4] transition-colors shadow-[0_0_24px_rgba(75,114,232,0.35)]"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-action text-white text-sm font-bold hover:bg-[#3154C2] transition-colors shadow-[0_0_24px_rgba(75,114,232,0.35)]"
             >
               <FileText className="w-4 h-4" />
               View Resume
@@ -163,15 +161,17 @@ const About = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           <div ref={addToRefs} data-aos="fade-right" className="lg:col-span-5">
             <AnimatedCard className="h-full">
-              <div className="absolute top-0 right-0 p-6 text-white/5 font-mono text-7xl font-black pointer-events-none">
-                01
-              </div>
+              <div aria-hidden="true" data-decoration="01" className="absolute top-0 right-0 p-6 text-white/5 font-mono text-7xl font-black pointer-events-none" />
 
               <div className="flex flex-col items-center text-center space-y-5">
                 <div className="relative w-36 h-36 rounded-full p-1 bg-gradient-to-tr from-[#4B72E8] via-indigo-500 to-cyan-400 shadow-2xl">
                   <img
                     src={profileImg}
                     alt={FOUNDER.photoAlt}
+                    width={1122}
+                    height={1402}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full rounded-full object-cover object-top border-4 border-[#050505]"
                   />
                   <span className="absolute bottom-1 right-1 w-5 h-5 bg-emerald-400 border-2 border-[#050505] rounded-full shadow-lg shadow-emerald-400/50" />
@@ -179,7 +179,7 @@ const About = () => {
 
                 <div>
                   <h3 className="text-2xl font-black font-heading text-white">{BRAND.founder}</h3>
-                  <p className="text-xs font-mono font-bold uppercase tracking-widest text-[#4B72E8] mt-1">
+                  <p className="text-xs font-mono font-bold uppercase tracking-widest text-brand-readable mt-1">
                     {FOUNDER.jobTitle}
                   </p>
                 </div>
@@ -190,11 +190,11 @@ const About = () => {
 
                 <div className="flex flex-wrap items-center justify-center gap-3 w-full text-xs font-mono text-white/70 pt-4 border-t border-white/10">
                   <span className="flex items-center gap-1.5">
-                    <MapPin className="w-3.5 h-3.5 text-[#4B72E8]" /> {ABOUT.location}
+                    <MapPin className="w-3.5 h-3.5 text-brand-readable" /> {ABOUT.location}
                   </span>
                   <span>•</span>
                   <span className="flex items-center gap-1.5">
-                    <Award className="w-3.5 h-3.5 text-[#4B72E8]" /> {ABOUT.projectsBadge}
+                    <Award className="w-3.5 h-3.5 text-brand-readable" /> {ABOUT.projectsBadge}
                   </span>
                 </div>
               </div>
@@ -208,16 +208,16 @@ const About = () => {
                 <div key={pillar.title} ref={addToRefs}>
                   <AnimatedCard className="h-full">
                     <div className="flex items-center justify-between mb-4">
-                      <div className="p-3 rounded-xl bg-[#4B72E8]/10 text-[#4B72E8] border border-[#4B72E8]/20 group-hover:bg-[#4B72E8] group-hover:text-white transition-all duration-300">
+                      <div className="p-3 rounded-xl bg-[#4B72E8]/10 text-brand-readable border border-[#4B72E8]/20 group-hover:bg-[#4B72E8] group-hover:text-white transition-all duration-300">
                         <Icon className="w-5 h-5" />
                       </div>
-                      <span className="text-xs font-mono text-white/30 font-bold">0{idx + 2}</span>
+                      <span className="text-xs font-mono text-readable-muted font-bold">0{idx + 2}</span>
                     </div>
 
                     <div className="space-y-2">
-                      <h4 className="text-lg font-bold font-heading text-white group-hover:text-[#4B72E8] transition-colors">
+                      <h3 className="text-lg font-bold font-heading text-white group-hover:text-brand-readable transition-colors">
                         {pillar.title}
-                      </h4>
+                      </h3>
                       <p className="text-xs sm:text-sm text-white/70 font-light leading-relaxed">
                         {pillar.desc}
                       </p>
@@ -233,8 +233,8 @@ const About = () => {
           <div className="flex flex-col items-start space-y-3">
             <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded bg-black/80 backdrop-blur-2xl border border-[#4B72E8]/40 text-xs font-mono uppercase tracking-widest text-white shadow-2xl">
               <span className="w-2 h-2 rounded-full bg-[#4B72E8] animate-ping"></span>
-              <span className="text-[#4B72E8] font-bold">CREDENTIALS</span>
-              <span className="text-white/40">|</span>
+              <span className="text-brand-readable font-bold">CREDENTIALS</span>
+              <span aria-hidden="true" className="text-readable-muted">|</span>
               <span>VERIFIED, NOT CLAIMED</span>
             </div>
             <h3 className="text-2xl sm:text-3xl font-black tracking-tight text-white">
@@ -264,13 +264,13 @@ const About = () => {
                     className={`p-3.5 rounded-xl border shrink-0 transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 ${
                       cred.highlight
                         ? 'bg-[#4B72E8] text-white border-[#4B72E8] shadow-lg shadow-[#4B72E8]/40'
-                        : 'bg-[#4B72E8]/10 text-[#4B72E8] border-[#4B72E8]/20 group-hover:bg-[#4B72E8] group-hover:text-white group-hover:border-[#4B72E8]'
+                        : 'bg-[#4B72E8]/10 text-brand-readable border-[#4B72E8]/20 group-hover:bg-[#4B72E8] group-hover:text-white group-hover:border-[#4B72E8]'
                     }`}
                   >
                     <Icon className="w-5 h-5 transition-transform duration-300 group-hover:scale-105" />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <h4 className="text-base sm:text-lg font-bold text-white group-hover:text-[#4B72E8] transition-colors">
+                    <h4 className="text-base sm:text-lg font-bold text-white group-hover:text-brand-readable transition-colors">
                       {cred.title}
                     </h4>
                     <p className="mt-1.5 text-xs font-mono text-white/60 inline-flex items-center gap-1.5 group-hover:text-white/90 transition-colors">

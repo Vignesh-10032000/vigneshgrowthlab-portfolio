@@ -22,12 +22,6 @@
   status = 302
 # ─────────────────────────────────────────────────────────────────────────────
 
-# SPA routing redirect rule
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-
 # Long-term cache for immutable Vite hashed assets
 [[headers]]
   for = "/assets/*"

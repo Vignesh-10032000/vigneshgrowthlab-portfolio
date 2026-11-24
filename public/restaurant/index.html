@@ -3,7 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trattoria Bella Napoli — Authentic Italian Woodfired Kitchen & Wine Bar</title>
+  <title>Restaurant Ordering Website Demo | Vignesh Growth Lab</title>
+  <meta name="description" content="Explore Vignesh Growth Lab's restaurant website concept with an interactive menu, WhatsApp ordering and a table reservation demo.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href="https://vigneshgrowthlab.dev/restaurant/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Vignesh Growth Lab">
+  <meta property="og:url" content="https://vigneshgrowthlab.dev/restaurant/">
+  <meta property="og:title" content="Restaurant Ordering Website Demo | Vignesh Growth Lab">
+  <meta property="og:description" content="Explore Vignesh Growth Lab's restaurant website concept with an interactive menu, WhatsApp ordering and a table reservation demo.">
+  <meta property="og:image" content="https://vigneshgrowthlab.dev/brand/vgl-logo.png">
+  <meta property="og:image:alt" content="Vignesh Growth Lab logo">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Restaurant Ordering Website Demo | Vignesh Growth Lab">
+  <meta name="twitter:description" content="Explore Vignesh Growth Lab's restaurant website concept with an interactive menu, WhatsApp ordering and a table reservation demo.">
+  <meta name="twitter:image" content="https://vigneshgrowthlab.dev/brand/vgl-logo.png">
+  <meta name="twitter:image:alt" content="Vignesh Growth Lab logo">
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Google Fonts: Cormorant Garamond & Plus Jakarta Sans -->
@@ -174,7 +189,7 @@
           <span class="text-xs text-slate-400">When you order directly through our website, you get fresh hot kitchen priority and 100% of your bill supports our chefs.</span>
         </div>
       </div>
-      <button onclick="openCartDrawer()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-lg shrink-0 transition">
+      <button onclick="openCartDrawer()" class="px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold rounded-lg shrink-0 transition">
         Start Direct Order ↗
       </button>
     </div>
@@ -229,7 +244,7 @@
       <!-- Visual Card -->
       <div class="relative rounded-2xl overflow-hidden border border-italian-border bg-italian-card p-8 space-y-4 shadow-2xl">
         <div class="flex items-center space-x-3 pb-4 border-b border-italian-border">
-          <div class="w-12 h-12 rounded-full bg-italian-red/20 text-italian-red flex items-center justify-center font-serif text-xl font-bold">BN</div>
+          <div class="w-12 h-12 rounded-full bg-italian-red/20 text-red-300 flex items-center justify-center font-serif text-xl font-bold">BN</div>
           <div>
             <h4 class="font-bold text-white text-base">Chef Marco & Kitchen Team</h4>
             <span class="text-xs text-slate-400">Master Pizzaiolo & Head Chef</span>
@@ -346,7 +361,7 @@
           <i data-lucide="shopping-bag" class="w-5 h-5 text-italian-red"></i>
           <h3 class="font-serif text-xl font-bold text-white">Your Direct Kitchen Order</h3>
         </div>
-        <button onclick="closeCartDrawer()" class="p-1.5 rounded-lg hover:bg-italian-card text-slate-400 hover:text-white transition">
+        <button onclick="closeCartDrawer()" aria-label="Close order cart" class="p-1.5 rounded-lg hover:bg-italian-card text-slate-400 hover:text-white transition">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>

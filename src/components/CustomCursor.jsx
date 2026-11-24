@@ -1,10 +1,11 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 
 const CustomCursor = () => {
   const dotRef = useRef(null);
   const ringRef = useRef(null);
   const spotlightRef = useRef(null);
+  const [isTouch, setIsTouch] = useState(false);
 
   useEffect(() => {
     const dot = dotRef.current;
@@ -13,6 +14,7 @@ const CustomCursor = () => {
 
     // Hide default system cursor on desktop
     if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+      setIsTouch(true);
       return;
     }
 
@@ -64,7 +66,7 @@ const CustomCursor = () => {
     };
   }, []);
 
-  if (typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0)) {
+  if (isTouch) {
     return null;
   }
 
@@ -82,13 +84,13 @@ const CustomCursor = () => {
       {/* Global Custom Cursor Dot */}
       <div
         ref={dotRef}
-        className="fixed top-0 left-0 z-[99999] pointer-events-none w-3 h-3 bg-[#4B72E8] rounded-full shadow-[0_0_15px_#4B72E8]"
+        className="fixed top-0 left-0 z-[99999] pointer-events-none w-3 h-3 bg-[#4B72E8] rounded-full shadow-[0_0_15px_#4B72E8] opacity-0"
       ></div>
 
       {/* Global Custom Cursor Ring */}
       <div
         ref={ringRef}
-        className="fixed top-0 left-0 z-[99999] pointer-events-none w-12 h-12 border border-[#4B72E8]/60 rounded-full flex items-center justify-center backdrop-blur-[1px]"
+        className="fixed top-0 left-0 z-[99999] pointer-events-none w-12 h-12 border border-[#4B72E8]/60 rounded-full flex items-center justify-center backdrop-blur-[1px] opacity-0"
       ></div>
     </>
   );
