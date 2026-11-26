@@ -2,6 +2,7 @@ import { writeFile } from 'node:fs/promises';
 import axe from 'axe-core';
 import { expect, test } from '@playwright/test';
 import { clickCentered, gotoHome } from './helpers';
+import { policyPages } from '../src/data/marketingPages.js';
 
 const profiles = ['desktop-chromium', 'mobile-android', 'mobile-iphone'];
 const tags = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'];
@@ -190,4 +191,21 @@ test('keyboard focus follows the mobile menu, service cards and project dialog',
   await page.keyboard.press('Tab');
   await expectKeyboardFocus(page.getByRole('textbox', { name: /WhatsApp Number/ }));
   await capture(page, testInfo, 'keyboard-contact');
+});
+
+test('all policy pages expose accessible legal navigation', async ({ page }, testInfo) => {
+  test.skip(!profiles.includes(testInfo.project.name), 'desktop, Android and iPhone audit profiles');
+  test.setTimeout(240_000);
+  for (const policy of policyPages) {
+    await page.goto(policy.path);
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText(policy.name);
+    const footer = page.getByRole('navigation', { name: 'Policies' });
+    await expect(footer.getByRole('link')).toHaveCount(policyPages.length);
+    await expect(footer.getByRole('link', { name: policy.name, exact: true })).toHaveAttribute('href', policy.path);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(page.viewportSize().width);
+    await page.addScriptTag({ content: axe.source });
+    const violations = await page.evaluate(rules => window.axe.run({ runOnly: { type: 'tag', values: rules } })
+      .then(result => result.violations.map(({ id, nodes }) => ({ id, targets: nodes.map(node => node.target) }))), tags);
+    expect(violations, policy.path).toEqual([]);
+  }
 });

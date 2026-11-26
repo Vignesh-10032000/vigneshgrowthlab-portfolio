@@ -1,7 +1,10 @@
 import React from 'react';
 import { MessageCircle, Mail, Phone, ArrowUp } from 'lucide-react';
-import { BRAND, CONTACT, SOCIALS, SERVICES_DATA, DOCUMENTS } from '../data/portfolioData';
+import { BRAND, CONTACT, SOCIALS } from '../data/portfolioData';
 import { waLink } from '../utils/whatsapp';
+import { emitConversion } from '../utils/conversions';
+import { services, servicePath, policyPages } from '../data/marketingPages';
+import AnalyticsConsent from './AnalyticsConsent';
 
 const Footer = () => {
   const scrollToTop = () => {
@@ -33,6 +36,11 @@ const Footer = () => {
               {BRAND.tagline} — Websites, POS & WhatsApp automation for Tamil Nadu businesses. MSME {BRAND.msmeId}.
             </p>
 
+            <p className="flex gap-4 text-sm">
+              <a href={SOCIALS.facebook} rel="noreferrer">Facebook</a>
+              <a href={SOCIALS.youtube} rel="noreferrer">YouTube</a>
+
+            </p>
             <div className="pt-2 flex items-center gap-3">
               <a
                 href={waLink()}
@@ -83,7 +91,7 @@ const Footer = () => {
               <li><a href="#skills" className="hover:text-brand-readable transition-colors">Skills</a></li>
               <li><a href="#process" className="hover:text-brand-readable transition-colors">Process</a></li>
               <li><a href="#contact" className="hover:text-brand-readable transition-colors">Contact</a></li>
-              <li><a href={DOCUMENTS.resume} target="_blank" rel="noreferrer" className="hover:text-brand-readable transition-colors">Resume</a></li>
+              <li><a href="/projects/" className="hover:text-brand-readable transition-colors">Project portfolio</a></li>
             </ul>
           </div>
 
@@ -92,9 +100,9 @@ const Footer = () => {
               Services
             </h2>
             <ul className="space-y-2 text-xs font-mono">
-              {SERVICES_DATA.map((s) => (
-                <li key={s.id}>
-                  <a href="#services" className="hover:text-brand-readable transition-colors">{s.title}</a>
+              {services.map((s) => (
+                <li key={s.slug}>
+                  <a href={servicePath(s.slug)} onClick={() => emitConversion('service_select', s.slug)} className="hover:text-brand-readable transition-colors">{s.name}</a>
                 </li>
               ))}
             </ul>
@@ -113,7 +121,7 @@ const Footer = () => {
               </a>
               <p className="text-white/50">{CONTACT.location}</p>
               <a
-                href={DOCUMENTS.msmeCertificate}
+                href="/msme/"
                 target="_blank"
                 rel="noreferrer"
                 className="text-white/50 hover:text-brand-readable block"
@@ -128,8 +136,13 @@ const Footer = () => {
 
         </div>
 
+        <nav aria-label="Policies" className="flex flex-wrap gap-x-5 gap-y-3 pt-8 text-sm text-readable-muted">
+
+            {policyPages.map(page => <a key={page.path} href={page.path}>{page.name}</a>)}
+        </nav>
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-readable-muted">
           <p>{BRAND.copyright}</p>
+          <AnalyticsConsent />
 
           <button
             onClick={scrollToTop}

@@ -17,7 +17,6 @@ import Skills from './components/Skills';
 import Process from './components/Process';
 import WhyWorkWithMe from './components/WhyWorkWithMe';
 import ComparisonTable from './components/ComparisonTable';
-import SlideCardsSection from './components/SlideCardsSection';
 import FaqAccordion from './components/FaqAccordion';
 import ContactForm from './components/ContactForm';
 import ContactCTA from './components/ContactCTA';
@@ -94,7 +93,6 @@ function App() {
         <Process />
         <WhyWorkWithMe />
         <ComparisonTable />
-        <SlideCardsSection />
         <FaqAccordion />
         <ContactForm />
         <ContactCTA />

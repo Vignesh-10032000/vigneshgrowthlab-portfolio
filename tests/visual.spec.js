@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { gotoHome, scrollToSection } from './helpers';
 
-const SECTIONS = ['#home', '#about', '#services', '#work', '#skills', '#process', '#why-vgl', '#compare', '#clients', '#faq', '#contact', 'footer'];
+const SECTIONS = ['#home', '#about', '#services', '#work', '#skills', '#process', '#why-vgl', '#compare', '#faq', '#contact', 'footer'];
 
 test.skip(!process.env.VISUAL, 'set VISUAL=1 to run visual comparisons');
 

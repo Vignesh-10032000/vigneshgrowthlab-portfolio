@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { pages } from '../src/data/marketingPages.js';
 import { gotoHome } from './helpers';
 
 const site = 'https://vigneshgrowthlab.dev';
@@ -31,8 +32,9 @@ test('production homepage exposes its content and metadata without JavaScript', 
     const schemaScript = page.locator('script[type="application/ld+json"]');
     await expect(schemaScript).toHaveCount(1);
     const graph = JSON.parse(await schemaScript.textContent())['@graph'];
-    const business = graph.find(node => node['@type'].includes('LocalBusiness'));
-    expect(business.address).toMatchObject({ addressLocality: 'Pollachi', addressCountry: 'IN' });
+    const business = graph.find(node => node['@type'] === 'Organization');
+    expect(business.areaServed[0].name).toContain('Pollachi');
+    expect(business.address).toBeUndefined();
     expect(graph.find(node => node['@type'] === 'WebSite').publisher['@id']).toBe(business['@id']);
     const services = graph.filter(node => node['@type'] === 'Service');
     expect(services).toHaveLength(4);
@@ -50,7 +52,7 @@ test('production homepage exposes its content and metadata without JavaScript', 
 test('crawl endpoints list the homepage and exclude the concept demo and missing routes', async ({ request }) => {
   const sitemap = await request.get('/sitemap.xml');
   expect(sitemap.ok()).toBeTruthy();
-  expect((await sitemap.text()).match(/<loc>(.*?)<\/loc>/g)).toEqual([`<loc>${site}/</loc>`]);
+  expect((await sitemap.text()).match(/<loc>(.*?)<\/loc>/g)).toEqual(['/', ...pages.map(page => page.path)].map(path => `<loc>${site}${path}</loc>`));
   const robots = await request.get('/robots.txt');
   expect(robots.ok()).toBeTruthy();
   expect(await robots.text()).toMatch(/User-agent: \*\s+Allow: \//);
@@ -84,4 +86,46 @@ test('hydration retains one heading and emits contact intents without personal d
     { action: 'phone_click' }, { action: 'whatsapp_click' }, { action: 'enquiry_click' },
   ]);
   expect(hydrationErrors).toEqual([]);
+});
+
+test('every public route has unique prerendered metadata, content and valid internal links', async ({ request }) => {
+  const titles = new Set();
+  const descriptions = new Set();
+  const paths = new Set(['/', ...pages.map(page => page.path)]);
+  for (const page of pages) {
+    const response = await request.get(page.path);
+    expect(response.status(), page.path).toBe(200);
+    const html = await response.text();
+    for (const pattern of [/<h1[ >]/g, /<title>/g, /rel="canonical"/g, /name="description"/g,
+      /property="og:title"/g, /name="twitter:description"/g, /type="application\/ld\+json"/g]) {
+      expect(html.match(pattern), page.path).toHaveLength(1);
+    }
+    expect(html).toContain('href="' + site + page.path + '"');
+    expect(html).toContain('aria-label="Breadcrumb"');
+    expect(html).not.toContain('billing.vigneshgrowthlab.dev');
+    const graph = JSON.parse(html.match(/<script type="application\/ld\+json">(.*?)<\/script>/s)[1])['@graph'];
+    expect(graph.some(node => node['@type'] === 'BreadcrumbList')).toBe(true);
+    for (const match of html.matchAll(/href="(\/[^"#?]*)(?:#[^"]*)?"/g)) {
+      if (!match[1].includes('.')) expect(paths.has(match[1]), match[1]).toBe(true);
+    }
+    titles.add(html.match(/<title>(.*?)<\/title>/s)[1]);
+    descriptions.add(html.match(/name="description" content="([^"]+)"/)[1]);
+  }
+  expect(titles.size).toBe(pages.length);
+  expect(descriptions.size).toBe(pages.length);
+  for (const path of ['/documents/udyam-certificate.pdf', '/documents/vgl-resume.pdf', '/videos/client-testimonial.mp4',
+    '/videos/n8n-workflow.mp4']) {
+    expect((await request.get(path)).status(), path).toBe(404);
+  }
+});
+
+test('verified registration and the POS enquiry are available in static HTML', async ({ request }) => {
+  const registration = await (await request.get('/msme/')).text();
+  for (const value of ['UDYAM-TN-03-0328658', 'Micro Enterprise, 2026–27', '1 December 2025',
+    '7 June 2026', '62012 (Web-page designing)']) expect(registration).toContain(value);
+  const project = await (await request.get('/projects/vgl-pos/')).text();
+  expect(project).toContain('Request a POS demo');
+  expect(project).toMatch(/https:\/\/wa\.me\/918220034139\?text=/);
+  const homepage = await (await request.get('/')).text();
+  expect(homepage).not.toContain('billing.vigneshgrowthlab.dev');
 });

@@ -1,22 +1,29 @@
 import React, { useState } from 'react';
-import { PROJECTS_DATA, PROJECT_CATEGORIES, MORE_PROJECTS } from '../data/portfolioData';
+import { PROJECTS_DATA, PROJECT_CATEGORIES } from '../data/portfolioData';
 import ProjectModal from './ProjectModal';
-import { ExternalLink, Eye, ArrowUpRight, ShoppingBag, Gift, UtensilsCrossed, Dumbbell, MapPin, Sparkles } from 'lucide-react';
+import { ExternalLink, Eye, ArrowUpRight } from 'lucide-react';
 import AnimatedCard from './AnimatedCard';
-import { waLink } from '../utils/whatsapp';
+import ProjectImage from './ProjectImage';
+import { emitConversion } from '../utils/conversions';
+import { portfolioCategoryId } from '../utils/analytics';
 
-const iconMap = {
-  ShoppingBag,
-  Gift,
-  UtensilsCrossed,
-  Dumbbell,
-};
 
 const categories = PROJECT_CATEGORIES;
 
 const Portfolio = () => {
   const [activeCategory, setActiveCategory] = useState("All");
   const [selectedProject, setSelectedProject] = useState(null);
+
+  function selectCategory(category) {
+    if (category === activeCategory) return;
+    setActiveCategory(category);
+    emitConversion('portfolio_filter', portfolioCategoryId(category));
+  }
+
+  function openProject(project) {
+    setSelectedProject(project);
+    emitConversion('project_open', project.id);
+  }
 
   const filteredProjects = activeCategory === "All"
     ? PROJECTS_DATA
@@ -40,18 +47,18 @@ const Portfolio = () => {
             <span className="w-2 h-2 rounded-full bg-[#4B72E8] animate-ping"></span>
             <span className="text-brand-readable font-bold">EPISODE 03</span>
             <span aria-hidden="true" className="text-readable-muted">|</span>
-            <span>VERIFIED CLIENT CASE STUDIES</span>
+            <span>PROJECT PORTFOLIO</span>
           </div>
 
           <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-white leading-tight">
-            RECENT CLIENT WORK & <br />
+            CLIENT WORK & <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4B72E8] via-blue-500 to-cyan-400 drop-shadow-[0_0_30px_rgba(75,114,232,0.4)]">
-              FEATURED DIGITAL ORIGINALS.
+              VGL PROJECTS.
             </span>
           </h2>
 
           <p className="text-base sm:text-lg text-white/70 font-light leading-relaxed max-w-3xl">
-            Explore live e-commerce stores, retail POS, WhatsApp AI automation, and custom web apps delivered for Tamil Nadu businesses.
+            Explore storefronts, billing counters and custom software. Each case study identifies the client, family or product context.
           </p>
         </div>
 
@@ -64,7 +71,7 @@ const Portfolio = () => {
             return (
               <button
                 key={cat}
-                onClick={() => setActiveCategory(cat)}
+                onClick={() => selectCategory(cat)}
                 aria-pressed={activeCategory === cat}
                 className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-mono tracking-wider transition-all duration-300 flex items-center gap-2 shrink-0 cursor-pointer border focus-visible:outline-offset-[-3px] ${
                   activeCategory === cat
@@ -94,15 +101,10 @@ const Portfolio = () => {
                 <div>
                   
                   <div 
-                    onClick={() => setSelectedProject(project)}
+                    onClick={() => openProject(project)}
                     className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden mb-6 bg-black border border-white/10 group-hover:border-[#4B72E8]/50 transition-colors"
                   >
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 filter brightness-95"
-                      loading="lazy"
-                    />
+                    <ProjectImage project={project} />
                     
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
 
@@ -124,13 +126,13 @@ const Portfolio = () => {
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between text-[11px] font-mono text-brand-readable font-bold uppercase tracking-wider mb-2">
+                  <div className="flex flex-wrap items-center justify-between gap-1 text-[11px] font-mono text-brand-readable font-bold uppercase tracking-wider mb-2">
                     <span>{project.category}</span>
-                    <span className="text-readable-muted">{project.platform}</span>
+                    <span className="text-readable-muted">{project.classification}</span>
                   </div>
 
                   <h3 
-                    onClick={() => setSelectedProject(project)}
+                    onClick={() => openProject(project)}
                     className="text-xl font-black font-heading text-white mb-2.5 group-hover:text-brand-readable transition-colors leading-tight"
                   >
                     {project.title}
@@ -160,7 +162,10 @@ const Portfolio = () => {
                         href={project.url}
                         target="_blank"
                         rel="noreferrer"
-                        onClick={(e) => e.stopPropagation()}
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          emitConversion('project_link_click', project.id);
+                        }}
                         className="w-8 h-8 rounded-full bg-white/5 hover:bg-brand-action text-white flex items-center justify-center transition-all duration-300 border border-control-edge hover:border-brand-readable shadow-md"
                         aria-label={`Visit live site for ${project.title}`}
                       >
@@ -168,7 +173,7 @@ const Portfolio = () => {
                       </a>
                     )}
                     <button
-                      onClick={() => setSelectedProject(project)}
+                      onClick={() => openProject(project)}
                       className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/20 text-white flex items-center justify-center transition-all duration-300 border border-control-edge"
                       aria-label={`Open details modal for ${project.title}`}
                     >
@@ -181,135 +186,7 @@ const Portfolio = () => {
           ))}
         </div>
 
-        {/* More delivered work (no full case studies) */}
-        <div className="mt-20 pt-16 border-t border-white/10" data-aos="fade-up">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
-            <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#4B72E8]/10 border border-[#4B72E8]/30 text-[11px] font-mono uppercase tracking-widest text-brand-readable mb-3 shadow-lg">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#4B72E8] animate-ping"></span>
-                <span>ADDITIONAL PRODUCTION BUILDS</span>
-              </div>
-              <h3 className="text-2xl sm:text-3xl font-black font-heading tracking-tight text-white">
-                MORE PROJECTS{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4B72E8] via-blue-500 to-cyan-400">
-                  DELIVERED.
-                </span>
-              </h3>
-              <p className="text-xs sm:text-sm text-white/60 font-light mt-1">
-                Regional e-commerce stores, custom retail catalogues, and local high-converting landing pages.
-              </p>
-            </div>
-            <div className="text-xs font-mono text-readable-muted uppercase tracking-widest shrink-0">
-              04 Live Deployments
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {MORE_PROJECTS.map((p, idx) => {
-              const IconComponent = iconMap[p.icon] || Sparkles;
-              const hasLiveUrl = Boolean(p.liveUrl && p.liveUrl.length > 0);
-              const cardHref = hasLiveUrl
-                ? p.liveUrl
-                : waLink(`Hi Vignesh, I saw ${p.name} in your portfolio and would like to learn more.`);
-
-              return (
-                <a
-                  key={p.name}
-                  href={cardHref}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="group relative flex flex-col justify-between p-6 rounded-2xl bg-gradient-to-b from-[#141414] via-[#101010] to-[#0a0a0a] border border-white/10 hover:border-[#4B72E8]/60 transition-all duration-300 ease-out cursor-pointer transform hover:-translate-y-2.5 hover:scale-[1.025] hover:shadow-[0_20px_45px_rgba(75,114,232,0.25)] will-change-transform overflow-hidden"
-                >
-                  {/* Top glowing ambient line */}
-                  <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#4B72E8]/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-
-                  {/* Lower background subtle watermark */}
-                  <span aria-hidden="true" data-decoration={`0${idx + 1}`} className="absolute bottom-16 right-4 text-white/[0.02] font-mono text-6xl font-black group-hover:text-[#4B72E8]/[0.08] transition-colors pointer-events-none select-none" />
-
-                  <div>
-                    {/* Header: Icon + Index + Category + Location */}
-                    <div className="flex items-start justify-between gap-3 mb-5">
-                      <div className="w-11 h-11 rounded-xl bg-[#4B72E8]/10 text-brand-readable border border-[#4B72E8]/20 flex items-center justify-center group-hover:bg-[#4B72E8] group-hover:text-white group-hover:border-[#4B72E8] group-hover:shadow-[0_0_20px_rgba(75,114,232,0.5)] group-hover:scale-110 transition-all duration-300 shrink-0">
-                        <IconComponent className="w-5 h-5 transition-transform duration-300 group-hover:rotate-6" />
-                      </div>
-                      <div className="flex flex-col items-end text-right">
-                        <div className="flex items-center gap-1.5 mb-1">
-                          <span className="text-[9px] font-mono font-bold uppercase tracking-wider text-readable-muted bg-white/5 px-2 py-0.5 rounded border border-white/10 group-hover:border-[#4B72E8]/40 group-hover:text-brand-readable group-hover:bg-[#4B72E8]/10 transition-colors">
-                            #0{idx + 1}
-                          </span>
-                          <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-brand-readable group-hover:text-blue-300 transition-colors">
-                            {p.type}
-                          </span>
-                        </div>
-                        <span className="text-[10px] font-mono text-readable-muted flex items-center gap-1">
-                          <MapPin className="w-2.5 h-2.5 text-[#4B72E8]/80" />
-                          {p.location}
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Title */}
-                    <h4 className="text-lg font-black font-heading text-white group-hover:text-brand-readable transition-colors leading-snug mb-2 flex items-center justify-between">
-                      <span>{p.name}</span>
-                      <ArrowUpRight className="w-4 h-4 text-white/20 group-hover:text-brand-readable group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
-                    </h4>
-
-                    {/* Copy */}
-                    <p className="text-xs text-white/60 font-light leading-relaxed mb-4 min-h-[58px]">
-                      {p.copy}
-                    </p>
-
-                    {/* Feature tags */}
-                    {p.tags && p.tags.length > 0 && (
-                      <div className="flex flex-wrap gap-1.5 mb-5">
-                        {p.tags.map((tag, tIdx) => (
-                          <span
-                            key={tIdx}
-                            className="text-[10px] font-mono text-readable-muted bg-white/5 px-2 py-0.5 rounded border border-white/10 group-hover:border-[#4B72E8]/30 group-hover:text-white/80 transition-colors"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Action link button */}
-                  <div className="pt-4 border-t border-white/10 mt-auto">
-                    {hasLiveUrl ? (
-                      <div className="w-full flex items-center justify-between px-3 py-2 rounded-xl bg-white/5 group-hover:bg-brand-action border border-white/10 group-hover:border-[#4B72E8] text-xs font-mono font-bold text-white transition-all duration-300 shadow-sm">
-                        <span className="flex items-center gap-2">
-                          <span className="relative flex h-2 w-2">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
-                          </span>
-                          <span className="text-[11px] tracking-wider uppercase group-hover:text-white text-white/90">
-                            Visit Live Site
-                          </span>
-                        </span>
-                        <ExternalLink className="w-3.5 h-3.5 text-white/50 group-hover:text-white transition-colors" />
-                      </div>
-                    ) : (
-                      <div className="w-full flex items-center justify-between px-3 py-2 rounded-xl bg-[#4B72E8]/10 group-hover:bg-brand-action border border-[#4B72E8]/30 group-hover:border-[#4B72E8] text-xs font-mono font-bold text-white transition-all duration-300 shadow-sm">
-                        <span className="flex items-center gap-2">
-                          <span className="relative flex h-2 w-2">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-400"></span>
-                          </span>
-                          <span className="text-[11px] tracking-wider uppercase text-amber-300 group-hover:text-white">
-                            Client Store · Live
-                          </span>
-                        </span>
-                        <ExternalLink className="w-3.5 h-3.5 text-amber-400/80 group-hover:text-white transition-colors" />
-                      </div>
-                    )}
-                  </div>
-                </a>
-              );
-            })}
-          </div>
-        </div>
-
+        <a className="mt-8 inline-block underline" href="/projects/">Browse all project case studies</a>
       </div>
 
       {selectedProject && (

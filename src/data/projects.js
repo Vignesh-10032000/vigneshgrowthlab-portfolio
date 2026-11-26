@@ -1,0 +1,56 @@
+export const projects = [
+  {
+    id: 'nextgen-toys', title: 'NextGen Toys', category: 'E-Commerce Store',
+    platform: 'E-commerce website', classification: 'Client project', url: 'https://nextgentoys.in/',
+    shortDesc: 'A toy retailer’s online storefront with product discovery by age and a browsable toy catalogue.',
+    objective: 'Help shoppers find toys before they visit the shop or place an online order.',
+    workPerformed: ['Built the retailer’s e-commerce website.', 'Organised the storefront around toy collections and age groups.'],
+    technologies: ['E-commerce', 'Product catalogue'], service: 'e-commerce-development',
+    photo: 'nextgen-toys', width: 840, height: 377, alt: 'NextGen Toys storefront with its shop-by-age navigation',
+  },
+  {
+    id: 'rani-sarees', title: 'Rani Sarees & Boutique', category: 'Business Website',
+    platform: 'Web catalogue', classification: 'Client project', url: 'https://ranisareesandbotique.com/',
+    shortDesc: 'A clothing catalogue where shoppers can pick a garment and ask the boutique about that item on WhatsApp.',
+    objective: 'Give customers a way to browse clothing before contacting the shop about availability.',
+    workPerformed: ['Grouped clothing into browsable collections.', 'Added product images, descriptions and item-specific WhatsApp enquiry links.'],
+    technologies: ['Catalogue', 'WhatsApp enquiries'], service: 'website-development',
+    photo: 'rani-sarees', width: 840, height: 333, alt: 'Clothing catalogue with a WhatsApp enquiry action beneath each item',
+  },
+  {
+    id: 'vgl-pos', title: 'VGL POS Software', category: 'Retail POS',
+    platform: 'Retail billing application', classification: 'VGL product', enquiry: 'Request a POS demo',
+    shortDesc: 'VGL’s own retail billing application brings counter billing, stock and sales reporting together.',
+    objective: 'Give a retail counter one place to enter sales and review inventory.',
+    workPerformed: ['Retail billing and stock management.', 'Sales reporting and digital receipts.'],
+    technologies: ['Billing', 'Inventory'], service: 'pos-billing-software',
+  },
+  {
+    id: 'restaurant-android-pos', title: 'Restaurant Android POS', category: 'Restaurant POS',
+    platform: 'Android and SQLite', classification: 'Client installation',
+    shortDesc: 'An offline Android billing counter installed on 16 November 2026, with receipt printing and local backups.',
+    objective: 'Let restaurant staff bill from the menu and reprint a receipt without depending on an internet connection.',
+    workPerformed: ['Set up menu categories, portions, held bills and split payments.', 'Implemented biller access, receipt preview and 80 mm receipt printing.', 'Delivered local backup and restore, including menu images.'],
+    technologies: ['Android', 'SQLite', 'Receipt printing'], service: 'android-app-development',
+    photo: 'restaurant-counter', width: 460, height: 207, alt: 'Menu selection on the installed Android restaurant billing counter',
+  },
+  {
+    id: 'kms-vision', title: 'KMS Vision', category: 'Custom Software',
+    platform: 'Quotation and stock software', classification: 'Client project',
+    shortDesc: 'Quotation preparation and stock management software for a CCTV shop.',
+    objective: 'Support the shop’s equipment quotation and inventory workflows.',
+    workPerformed: ['Developed quotation tools for the shop.', 'Implemented stock management for its equipment catalogue.'],
+    technologies: ['Quotations', 'Inventory'], service: 'custom-software',
+  },
+  {
+    id: 'velnirai', title: 'VELNIRAI', category: 'E-Commerce Store',
+    platform: 'Saree storefront', classification: 'Family-owned project', url: 'https://velnirai.com/',
+    shortDesc: 'A family-owned saree e-commerce project with collection browsing and product photography.',
+    objective: 'Present the family brand’s saree collections in an online storefront.',
+    workPerformed: ['Developed the e-commerce website.', 'Presented the saree collections through a visual catalogue.'],
+    technologies: ['E-commerce', 'Collections'], service: 'e-commerce-development',
+    photo: 'velnirai', width: 840, height: 282, alt: 'VELNIRAI saree storefront with its collection photograph',
+  },
+];
+
+export const projectPath = project => '/projects/' + project.id + '/';

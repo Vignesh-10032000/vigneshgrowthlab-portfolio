@@ -110,10 +110,8 @@ _Sent via ${BRAND.name} Web Portal_`;
     const whatsappUrl = waLink(rawMessage);
     emitConversion('enquiry_whatsapp_handoff');
 
-    setTimeout(() => {
-      setIsSubmitting(false);
-      window.open(whatsappUrl, '_blank');
-    }, 400);
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    setIsSubmitting(false);
   };
 
   return (
@@ -136,7 +134,7 @@ _Sent via ${BRAND.name} Web Portal_`;
           </h2>
 
           <p className="text-base sm:text-lg text-white/70 font-light leading-relaxed max-w-3xl">
-            Tell Vignesh about your project goals and budget. You&apos;ll get a free 30-min strategy call — honest advice, no sales pitch.
+            Tell Vignesh about your project goals, budget and timeline.
           </p>
         </div>
 
@@ -197,9 +195,9 @@ _Sent via ${BRAND.name} Web Portal_`;
                 <Sparkles className="w-5 h-5" />
               </div>
               <div>
-                <h4 className="text-xs font-mono font-bold text-white uppercase tracking-wider mb-1">Proposal in 24 Hours</h4>
+                <h4 className="text-xs font-mono font-bold text-white uppercase tracking-wider mb-1">Project quotation</h4>
                 <p className="text-xs text-white/60 font-light leading-relaxed">
-                  Free 30-min strategy call. Custom proposal in 24 hours — fixed price, clear scope, no hidden costs.
+                  Tell us what you need. We will review the scope, delivery and ongoing costs with you.
                 </p>
               </div>
             </div>
@@ -211,6 +209,7 @@ _Sent via ${BRAND.name} Web Portal_`;
             viewport={{ once: true }}
             className="lg:col-span-8 glass-card p-6 sm:p-10 rounded-3xl border-white/10 bg-[#141414]/95 shadow-2xl"
           >
+            <p className="mb-4 text-sm text-white/75">This form prepares a message in WhatsApp. Review it before sending. <a className="underline" href="/privacy-policy/">Privacy policy</a></p>
             <form onSubmit={handleSubmit} className="space-y-8">
               
               <div className="grid sm:grid-cols-2 gap-6">

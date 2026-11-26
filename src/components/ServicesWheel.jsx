@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SERVICES_WHEEL } from '../data/portfolioData';
 import { waLink } from '../utils/whatsapp';
+import { emitConversion } from '../utils/conversions';
 
 import redImg    from '../assets/service/red.webp';
 import purpleImg from '../assets/service/purple.webp';
@@ -203,6 +204,7 @@ const ServicesWheel = () => {
 
                   <a
                     href={waLink(`Hi Vignesh, I'm interested in ${s.title}.`)}
+                    onClick={() => emitConversion('service_select', s.slug)}
                     onFocus={(event) => revealFocusedService(event, i)}
                     target="_blank"
                     rel="noreferrer"

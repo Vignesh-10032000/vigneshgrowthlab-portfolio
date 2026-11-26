@@ -18,13 +18,11 @@ import {
   ScrollText,
 } from 'lucide-react';
 import AnimatedCard from './AnimatedCard';
-import profileImg from '../assets/profile.webp';
 import {
   ABOUT,
   BRAND,
   FOUNDER,
   CREDENTIALS,
-  DOCUMENTS,
   SOCIALS,
 } from '../data/portfolioData';
 
@@ -129,13 +127,13 @@ const About = () => {
 
           <div className="flex flex-wrap items-center gap-3 pt-2">
             <a
-              href={DOCUMENTS.resume}
+              href="/projects/"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-action text-white text-sm font-bold hover:bg-[#3154C2] transition-colors shadow-[0_0_24px_rgba(75,114,232,0.35)]"
             >
               <FileText className="w-4 h-4" />
-              View Resume
+              View projects
             </a>
             <a
               href={SOCIALS.linkedin}
@@ -166,10 +164,12 @@ const About = () => {
               <div className="flex flex-col items-center text-center space-y-5">
                 <div className="relative w-36 h-36 rounded-full p-1 bg-gradient-to-tr from-[#4B72E8] via-indigo-500 to-cyan-400 shadow-2xl">
                   <img
-                    src={profileImg}
+                    src="/images/proof/founder.webp"
+                    srcSet="/images/proof/founder-small.webp 320w, /images/proof/founder.webp 840w"
+                    sizes="(max-width: 640px) 75vw, 400px"
                     alt={FOUNDER.photoAlt}
-                    width={1122}
-                    height={1402}
+                    width={840}
+                    height={1050}
                     loading="lazy"
                     decoding="async"
                     className="w-full h-full rounded-full object-cover object-top border-4 border-[#050505]"
@@ -230,22 +230,14 @@ const About = () => {
         </div>
 
         <div className="space-y-8" data-aos="fade-up">
-          <div className="flex flex-col items-start space-y-3">
-            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded bg-black/80 backdrop-blur-2xl border border-[#4B72E8]/40 text-xs font-mono uppercase tracking-widest text-white shadow-2xl">
-              <span className="w-2 h-2 rounded-full bg-[#4B72E8] animate-ping"></span>
-              <span className="text-brand-readable font-bold">CREDENTIALS</span>
-              <span aria-hidden="true" className="text-readable-muted">|</span>
-              <span>VERIFIED, NOT CLAIMED</span>
-            </div>
-            <h3 className="text-2xl sm:text-3xl font-black tracking-tight text-white">
-              VERIFIED{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4B72E8] via-blue-500 to-cyan-400">
-                CREDENTIALS.
-              </span>
-            </h3>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <h3 className="text-2xl font-black tracking-tight text-white sm:text-3xl">Credentials</h3>
+          <figure className="my-6 max-w-lg">
+            <img src="/images/proof/workstation.webp" srcSet="/images/proof/workstation-small.webp 320w, /images/proof/workstation.webp 840w"
+              sizes="(max-width: 640px) 90vw, 500px" width="840" height="598" loading="lazy"
+              alt="Vignesh’s development desk with monitor, laptop and test devices" />
+            <figcaption>VGL development workspace</figcaption>
+          </figure>
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
             {CREDENTIALS.map((cred, idx) => {
               const Icon = credIcons[idx % credIcons.length];
               return (

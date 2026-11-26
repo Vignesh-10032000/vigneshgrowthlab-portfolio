@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, MessageCircle, Play } from 'lucide-react';
-import { BRAND, NAV_LINKS, DOCUMENTS } from '../data/portfolioData';
+import { BRAND, NAV_LINKS } from '../data/portfolioData';
 import { waLink } from '../utils/whatsapp';
 
 const Navbar = () => {
@@ -69,12 +69,10 @@ const Navbar = () => {
 
         <div className="hidden lg:flex items-center gap-4">
           <a
-            href={DOCUMENTS.resume}
-            target="_blank"
-            rel="noreferrer"
+            href="/projects/"
             className="px-3.5 py-2 rounded-lg text-xs font-mono uppercase tracking-wider text-white/70 bg-white/5 border border-white/15 hover:bg-white/10 transition-all"
           >
-            Resume
+            Portfolio
           </a>
           <a
             href={waLink()}

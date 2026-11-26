@@ -57,17 +57,9 @@ test.describe('load & runtime', () => {
     expect(broken).toEqual([]);
   });
 
-  test('videos expose poster and light preload', async ({ page }) => {
+  test('marketing markup contains no embedded videos', async ({ page }) => {
     await gotoHome(page);
-    const videos = await page.$$eval('video', (els) =>
-      els.map((v) => ({ src: v.getAttribute('src'), poster: v.getAttribute('poster'), preload: v.getAttribute('preload') }))
-    );
-    expect(videos.length).toBeGreaterThan(0);
-    for (const v of videos) {
-      expect(v.src).toBeTruthy();
-      expect(v.poster).toBeTruthy();
-      expect(['metadata', 'none']).toContain(v.preload);
-    }
+    await expect(page.locator('video')).toHaveCount(0);
   });
 });
 
@@ -175,11 +167,11 @@ test.describe('portfolio', () => {
     await gotoHome(page);
     await scrollToSection(page, '#work');
     const cards = page.locator('#work button[aria-label^="Open details modal for"]');
-    await expect(cards).toHaveCount(7);
+    await expect(cards).toHaveCount(6);
     await page.locator('#work button', { hasText: 'Retail POS' }).click();
     await expect(cards).toHaveCount(1);
     await page.locator('#work button', { hasText: /^All/ }).click();
-    await expect(cards).toHaveCount(7);
+    await expect(cards).toHaveCount(6);
   });
 
   test('project modal opens and closes via button and backdrop', async ({ page }) => {
@@ -187,11 +179,11 @@ test.describe('portfolio', () => {
     await scrollToSection(page, '#work');
     await clickCentered(page.getByRole('button', { name: 'Open details modal for Rani Sarees & Boutique' }));
     await expect(page.locator(MODAL)).toBeVisible();
-    await expect(page.locator(MODAL).getByText('CASE STUDY')).toBeVisible();
+    await expect(page.locator(MODAL).getByText('CASE STUDY', { exact: true })).toBeVisible();
     await page.getByRole('button', { name: 'Close modal' }).click();
     await expect(page.locator(MODAL)).toHaveCount(0);
 
-    await clickCentered(page.getByRole('button', { name: 'Open details modal for Nexus CRM Platform' }));
+    await clickCentered(page.getByRole('button', { name: 'Open details modal for KMS Vision' }));
     await expect(page.locator(MODAL)).toBeVisible();
     await page.mouse.click(5, 5);
     await expect(page.locator(MODAL)).toHaveCount(0);
@@ -304,15 +296,12 @@ test.describe('animations & interactive sections', () => {
     await expect(buttons.nth(1)).toHaveAttribute('aria-expanded', 'false');
   });
 
-  test('testimonial slider arrows update state', async ({ page }) => {
+  test('static project proof links to the case studies without video embeds', async ({ page }) => {
     await gotoHome(page);
-    await scrollToSection(page, '#clients');
-    const prev = page.getByRole('button', { name: 'Previous slide' });
-    const next = page.getByRole('button', { name: 'Next slide' });
-    await expect(prev).toBeDisabled();
-    await expect(next).toBeEnabled();
-    await next.click();
-    await expect(prev).toBeEnabled({ timeout: 3000 });
+    await expect(page.locator('video')).toHaveCount(0);
+    await page.getByRole('link', { name: 'Browse all project case studies' }).click();
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Project portfolio');
+    await expect(page.getByText(/Family-owned project/).first()).toBeVisible();
   });
 
   test('custom cursor present on desktop and absent on touch', async ({ page }, testInfo) => {

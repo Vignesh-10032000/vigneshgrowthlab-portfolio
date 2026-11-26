@@ -1,13 +1,17 @@
+import ProjectImage from './ProjectImage';
+import { projectPath } from '../data/projects';
 import React, { useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ExternalLink, CheckCircle2, Globe, Layers, Play } from 'lucide-react';
 import { waLink } from '../utils/whatsapp';
+import { emitConversion } from '../utils/conversions';
 
 const ProjectModal = ({ project, onClose }) => {
   const closeButtonRef = useRef(null);
   const bottomCloseRef = useRef(null);
   const onCloseRef = useRef(onClose);
   onCloseRef.current = onClose;
+  const trackProjectLink = () => emitConversion('project_link_click', project.id);
 
   useEffect(() => {
     if (!project) return undefined;
@@ -39,6 +43,9 @@ const ProjectModal = ({ project, onClose }) => {
 
   if (!project) return null;
 
+  const enquiry = project.enquiry
+    ? waLink('Hi Vignesh, I’d like to request a demo of ' + project.title + '.')
+    : waLink('Hi Vignesh, I saw the ' + project.title + ' case study.');
   const hasUrl = project.url && project.url !== '#';
   const titleId = `project-modal-title-${project.id}`;
 
@@ -91,22 +98,19 @@ const ProjectModal = ({ project, onClose }) => {
               {project.title}
             </h2>
             <p className="text-xs sm:text-sm text-white/60 font-mono">
-              Client: <strong className="text-white font-bold">{project.client}</strong> &bull; Category: <span className="text-brand-readable">{project.category}</span>
+              <strong className="text-white font-bold">{project.classification}</strong> &bull; Category: <span className="text-brand-readable">{project.category}</span>
             </p>
           </div>
 
           <div className="relative w-full h-64 sm:h-96 rounded-2xl overflow-hidden border border-white/10 mb-8 bg-black group">
-            <img
-              src={project.image}
-              alt={project.title}
-              className="w-full h-full object-cover filter contrast-105"
-            />
+            <ProjectImage project={project} />
             <div className="absolute inset-0 bg-gradient-to-t from-[#141414] via-transparent to-transparent" />
 
             <div className="absolute bottom-6 left-6 right-6 flex flex-wrap items-center justify-between gap-4">
               {hasUrl ? (
                 <a
                   href={project.url}
+                  onClick={trackProjectLink}
                   target="_blank"
                   rel="noreferrer"
                   className="netflix-red-btn px-6 py-3 rounded-lg text-xs font-mono uppercase tracking-widest flex items-center gap-2 shadow-[0_0_25px_rgba(75,114,232,0.8)]"
@@ -115,12 +119,13 @@ const ProjectModal = ({ project, onClose }) => {
                 </a>
               ) : (
                 <a
-                  href={waLink(`Hi Vignesh, I saw the ${project.title} case study.`)}
+                  href={enquiry}
+                  onClick={trackProjectLink}
                   target="_blank"
                   rel="noreferrer"
                   className="netflix-red-btn px-6 py-3 rounded-lg text-xs font-mono uppercase tracking-widest flex items-center gap-2 shadow-[0_0_25px_rgba(75,114,232,0.8)]"
                 >
-                  <Play className="w-4 h-4 fill-current" /> Discuss Similar Project
+                  <Play className="w-4 h-4 fill-current" /> {project.enquiry || 'Discuss Similar Project'}
                 </a>
               )}
               <span className="text-xs font-mono text-white/70 bg-black/60 px-3 py-1.5 rounded border border-white/10">
@@ -181,23 +186,13 @@ const ProjectModal = ({ project, onClose }) => {
             </ul>
           </div>
 
-          {project.videoSrc && (
-            <div className="mb-8 rounded-2xl overflow-hidden border border-white/10 bg-black">
-              <video
-                controls
-                poster={project.videoPoster}
-                className="w-full"
-                src={project.videoSrc}
-              >
-                Your browser does not support the video tag.
-              </video>
-            </div>
-          )}
+          <a className="underline" href={projectPath(project)}>Read the project case study</a>
 
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-white/10">
             {hasUrl ? (
               <a
                 href={project.url}
+                onClick={trackProjectLink}
                 target="_blank"
                 rel="noreferrer"
                 className="netflix-red-btn w-full sm:w-auto px-8 py-3.5 rounded text-xs font-mono uppercase tracking-widest flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(75,114,232,0.6)]"
@@ -206,12 +201,13 @@ const ProjectModal = ({ project, onClose }) => {
               </a>
             ) : (
               <a
-                href={waLink(`Hi Vignesh, I saw the ${project.title} case study.`)}
+                href={enquiry}
+                onClick={trackProjectLink}
                 target="_blank"
                 rel="noreferrer"
                 className="netflix-red-btn w-full sm:w-auto px-8 py-3.5 rounded text-xs font-mono uppercase tracking-widest flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(75,114,232,0.6)]"
               >
-                Discuss on WhatsApp
+                {project.enquiry ? 'Ask about VGL POS on WhatsApp' : 'Discuss on WhatsApp'}
               </a>
             )}
 

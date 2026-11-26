@@ -26,7 +26,7 @@ const WhyWorkWithMe = () => {
           </h2>
 
           <p className="text-base sm:text-lg text-white/70 font-light leading-relaxed max-w-3xl">
-            Pollachi-based MSME. Direct founder WhatsApp. 100% ownership. Fixed price. Average delivery around 2 weeks.
+            Discuss your workflow with the founder in Pollachi and agree the delivery and support scope in writing.
           </p>
         </div>
 

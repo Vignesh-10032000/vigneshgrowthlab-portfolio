@@ -1,5 +1,6 @@
-export function emitConversion(action) {
-  document.dispatchEvent(new CustomEvent('vgl:conversion', { detail: { action } }));
+export function emitConversion(action, itemId) {
+  const detail = itemId === undefined ? { action } : { action, itemId };
+  document.dispatchEvent(new CustomEvent('vgl:conversion', { detail }));
 }
 
 export function trackContactLink(event) {

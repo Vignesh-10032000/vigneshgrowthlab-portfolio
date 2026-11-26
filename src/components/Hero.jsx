@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Play, MessageCircle } from 'lucide-react';
-import profileImg from '../assets/profile.webp';
 import { HERO, BRAND, SOCIALS, CONTACT } from '../data/portfolioData';
 import { waLink } from '../utils/whatsapp';
 
@@ -281,10 +280,12 @@ const Hero = () => {
 
                 <div className="relative w-full aspect-[4/4] rounded-xl overflow-hidden mb-4 bg-black">
                   <img
-                    src={profileImg}
+                    src="/images/proof/founder.webp"
+                    srcSet="/images/proof/founder-small.webp 320w, /images/proof/founder.webp 840w"
+                    sizes="(max-width: 640px) 75vw, 400px"
                     alt={`${BRAND.founder}, founder of ${BRAND.name}`}
-                    width={1122}
-                    height={1402}
+                    width={840}
+                    height={1050}
                     className="w-full h-full object-cover object-top filter brightness-105 contrast-110 group-hover:scale-[1.03] transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />

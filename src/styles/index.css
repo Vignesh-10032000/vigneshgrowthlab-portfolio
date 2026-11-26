@@ -264,3 +264,32 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+.marketing-page { color: #f5f5f5; background: #0c1019; min-height: 100vh; font-family: inherit; cursor: auto; }
+.marketing-page * { cursor: auto; }
+.marketing-page a, .marketing-page button { cursor: pointer; }
+.marketing-page a { color: #b4c8ff; text-decoration: underline; text-underline-offset: .22em; }
+.marketing-page :focus-visible { outline: 3px solid #e5ae57; outline-offset: 3px; }
+.marketing-page header, .marketing-page footer { padding: 1.25rem max(5vw, calc((100vw - 64rem)/2)); background: #111827; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.3rem; }
+.marketing-page header > a, .marketing-page header nav, .marketing-page footer nav { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.marketing-page header > a { color: white; font-weight: 700; text-decoration: none; }
+.marketing-page main { width: min(90%, 48rem); margin: auto; padding: 2rem 0 4rem; line-height: 1.65; overflow-wrap: anywhere; }
+.marketing-page main nav { font-size: .875rem; color: #d0d6e0; }
+.marketing-page h1 { margin: 2.5rem 0 1rem; font-size: clamp(2.4rem, 6vw, 4rem); line-height: 1.08; font-weight: 700; }
+.marketing-page .intro { font-size: 1.25rem; color: #dce5f9; }
+.marketing-page h2 { margin: 2rem 0 .5rem; font-size: 1.45rem; font-weight: 650; line-height: 1.25; }
+.marketing-page main ul { padding-left: 1.25rem; list-style: disc; }
+.marketing-page li, .marketing-page main p { margin: .65rem 0; }
+.marketing-page figure { margin: 1.5rem 0; }
+.skip-content { position: absolute; top: -10rem; }
+.skip-content:focus { top: 0; background: #111827; padding: 1rem; }
+
+/* Keep the prerender usable if the homepage JavaScript cannot be fetched. */
+.homepage-hydration-failed, .homepage-hydration-failed * { cursor: auto !important; }
+.homepage-hydration-failed #contact form { display: none !important; }
+.homepage-hydration-failed [data-aos],
+.homepage-hydration-failed #contact [style*="opacity:0"],
+.homepage-hydration-failed #contact-cta [style*="opacity:0"] { opacity: 1 !important; transform: none !important; }
+.homepage-hydration-failed #services, .homepage-hydration-failed #services [data-service-list] { height: auto; }
+.homepage-hydration-failed #services [data-service-list] { flex-wrap: wrap; gap: 1rem; padding: 6rem 1rem 2rem; }
+.homepage-hydration-failed #services [data-service-card] { position: relative; }

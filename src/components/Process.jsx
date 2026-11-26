@@ -26,7 +26,7 @@ const Process = () => {
           </h2>
 
           <p className="text-base sm:text-lg text-white/70 font-light leading-relaxed max-w-3xl">
-            Free strategy call → proposal in 24 hours → build within a week → you own everything.
+            From the first workflow discussion to installation and handover, the accepted quotation defines the work.
           </p>
         </div>
 
