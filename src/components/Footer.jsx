@@ -21,8 +21,10 @@ const Footer = () => {
             <div className="flex items-center gap-3">
               <div className="relative w-9 h-9 rounded-xl overflow-hidden border border-[#4B72E8]/60 p-0.5 bg-black shadow-[0_0_15px_rgba(75,114,232,0.4)]">
                 <img
-                  src="/brand/vgl-logo-mark.png"
-                  srcSet="/brand/vgl-logo-mark.png 1x, /brand/vgl-logo-mark@2x.png 2x"
+                  src="/brand/vgl-logo-navigation.webp"
+                  loading="lazy"
+                  width={120}
+                  height={59}
                   alt="Vignesh Growth Lab"
                   className="w-full h-full object-contain"
                 />

@@ -13,7 +13,7 @@ const CustomCursor = () => {
     const spotlight = spotlightRef.current;
 
     // Hide default system cursor on desktop
-    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+    if ('ontouchstart' in window || navigator.maxTouchPoints > 0 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       setIsTouch(true);
       return;
     }

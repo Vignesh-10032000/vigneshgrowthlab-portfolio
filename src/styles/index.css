@@ -1,5 +1,41 @@
 @import "tailwindcss";
 
+/* Preserve the approved stylesheet on clean Git checkouts. */
+@source inline("isolate resize lowercase");
+
+@font-face {
+  font-family: 'Bebas Neue';
+  font-style: normal;
+  font-weight: 400;
+  font-display: optional;
+  src: url(/fonts/bebasneue-normal.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: italic;
+  font-weight: 400;
+  font-display: optional;
+  src: url(/fonts/plusjakartasans-italic.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 300 800;
+  font-display: optional;
+  src: url(/fonts/plusjakartasans-normal.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 500 700;
+  font-display: optional;
+  src: url(/fonts/spacegrotesk-normal.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 @theme {
   --color-brand-readable: #779BFF;
   --color-brand-action: #3B60D4;
@@ -154,15 +190,22 @@
 /* Portnewstich Marquee Infinite Scroll Keyframes */
 @keyframes marqueeScroll {
   0% { transform: translateX(0%); }
-  100% { transform: translateX(var(--marquee-shift, -50%)); }
+  100% { transform: translateX(calc((-100% - var(--marquee-gap)) / 3)); }
 }
 
 .marquee-inner {
-  animation: marqueeScroll var(--marquee-duration, 22s) linear infinite;
+  /* Three identical sets and one missing trailing gap span this track. */
+  --marquee-gap: 1.25rem;
+  width: max-content;
+  animation: marqueeScroll 14.667s linear infinite;
 }
 
 .marquee-reverse {
   animation-direction: reverse;
+}
+
+@media (max-width: 639px) {
+  .marquee-reverse { --marquee-gap: 1rem; }
 }
 
 .marquee-row-wrap {
@@ -222,18 +265,20 @@
 }
 
 /* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: #050505;
-}
-::-webkit-scrollbar-thumb {
-  background: var(--color-control-edge);
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #4B72E8;
+@media (hover: hover) and (pointer: fine) {
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #050505;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-control-edge);
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #4B72E8;
+  }
 }
 
 /* Background Grid & Vignette Pattern */
@@ -293,3 +338,48 @@
 .homepage-hydration-failed #services, .homepage-hydration-failed #services [data-service-list] { height: auto; }
 .homepage-hydration-failed #services [data-service-list] { flex-wrap: wrap; gap: 1rem; padding: 6rem 1rem 2rem; }
 .homepage-hydration-failed #services [data-service-card] { position: relative; }
+
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+  [data-site-preloader] { display: none; }
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .reveal-pending { opacity: 0; }
+  .reveal-pending[data-aos="fade-up"] { transform: translateY(100px); }
+  .reveal-pending[data-aos="fade-down"] { transform: translateY(-100px); }
+  .reveal-pending[data-aos="fade-right"] { transform: translateX(-100px); }
+  .reveal-pending[data-aos="fade-left"] { transform: translateX(100px); }
+  .reveal-pending[data-aos="zoom-in"] { transform: scale(.6); }
+  .reveal-ready { transition: opacity .8s cubic-bezier(.215,.61,.355,1), transform .8s cubic-bezier(.215,.61,.355,1); transition-delay: var(--reveal-delay, 0ms); }
+  .reveal-pending:focus-within { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html.scroll-smooth { scroll-behavior: auto; }
+  #root *, #root *::before, #root *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  #services, #services [data-service-list] { height: auto; }
+  #services [data-service-list] { flex-wrap: wrap; gap: 1rem; padding: 6rem 1rem 2rem; }
+  #services [data-service-card] { position: relative; }
+}
+
+/* Skip layout and painting of lengthy offscreen sections on compact screens.
+   Remember each measured size after the first visit. The dialog lives in #work. */
+@media (max-width: 639px) {
+  /* Fragment jumps need the true heights above the destination. */
+  html:not(:has(:target)) :is(#skills, #process, #why-vgl, #faq, #contact, #contact-cta) {
+    content-visibility: auto;
+  }
+  #skills { contain-intrinsic-block-size: auto 900px; }
+  #process { contain-intrinsic-block-size: auto 1450px; }
+  #why-vgl { contain-intrinsic-block-size: auto 1180px; }
+  #faq { contain-intrinsic-block-size: auto 780px; }
+  #contact { contain-intrinsic-block-size: auto 2600px; }
+  #contact-cta { contain-intrinsic-block-size: auto 680px; }
+}
+
+
+/* Keep the floating link out of hit testing and focus until the menu finishes exiting. */
+@media (width < 64rem) {
+  header:has(#mobile-navigation) ~ .floating-whatsapp { display: none; }
+}
+
+/* Keyboard focus must settle before the next Tab or arrow key. */
+html:has(:focus-visible) { scroll-behavior: auto; }

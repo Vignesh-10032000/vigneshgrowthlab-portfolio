@@ -15,7 +15,7 @@ const AnimatedCard = ({
 
   useEffect(() => {
     const card = cardRef.current;
-    if (!card) return;
+    if (!card || !window.matchMedia("(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)").matches) return;
 
     const xTilt = gsap.quickTo(card, "rotationY", { duration: 0.35, ease: "power3.out" });
     const yTilt = gsap.quickTo(card, "rotationX", { duration: 0.35, ease: "power3.out" });

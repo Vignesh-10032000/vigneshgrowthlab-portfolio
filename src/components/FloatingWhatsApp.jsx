@@ -8,7 +8,7 @@ const FloatingWhatsApp = () => {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat with Vignesh on WhatsApp"
-      className="fixed z-[100] bottom-[calc(20px+env(safe-area-inset-bottom,0px))] right-[calc(20px+env(safe-area-inset-right,0px))] w-[58px] h-[58px] rounded-full bg-[#25D366] flex items-center justify-center shadow-[0_8px_28px_rgba(37,211,102,0.35)] hover:scale-105 transition-transform duration-200 motion-reduce:transition-none motion-reduce:hover:scale-100 group"
+      className="floating-whatsapp fixed z-[100] bottom-[calc(20px+env(safe-area-inset-bottom,0px))] right-[calc(20px+env(safe-area-inset-right,0px))] w-[58px] h-[58px] rounded-full bg-[#25D366] flex items-center justify-center shadow-[0_8px_28px_rgba(37,211,102,0.35)] hover:scale-105 transition-transform duration-200 motion-reduce:transition-none motion-reduce:hover:scale-100 group"
     >
       <span className="absolute inset-0 rounded-full border-2 border-[#25D366] animate-ping opacity-40 motion-reduce:animate-none pointer-events-none" />
       <svg

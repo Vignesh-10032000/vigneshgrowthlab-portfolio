@@ -38,8 +38,9 @@ const Navbar = () => {
         <a href="#home" className="flex items-center gap-3 group">
           <div className="relative w-10 h-10 rounded-xl overflow-hidden border border-[#4B72E8]/60 p-0.5 bg-black transition-transform duration-300 group-hover:scale-105 shadow-[0_0_15px_rgba(75,114,232,0.4)]">
             <img
-              src="/brand/vgl-logo-mark.png"
-              srcSet="/brand/vgl-logo-mark.png 1x, /brand/vgl-logo-mark@2x.png 2x"
+              src="/brand/vgl-logo-navigation.webp"
+              width={120}
+              height={59}
               alt="Vignesh Growth Lab"
               className="w-full h-full object-contain"
             />
@@ -99,6 +100,7 @@ const Navbar = () => {
           className="lg:hidden p-2.5 rounded-xl bg-[#141414] border border-control-edge text-white hover:text-brand-readable transition-colors"
           aria-label="Toggle menu"
           aria-expanded={mobileMenuOpen}
+          aria-controls={mobileMenuOpen ? "mobile-navigation" : undefined}
         >
           {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
@@ -107,6 +109,7 @@ const Navbar = () => {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
+            id="mobile-navigation"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}

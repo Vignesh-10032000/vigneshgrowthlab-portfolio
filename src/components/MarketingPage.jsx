@@ -35,7 +35,7 @@ export default function MarketingPage({ page }) {
   const relatedServices = services.filter(service => serviceLinks[page.slug]?.includes(service.slug));
   return <div className="marketing-page">
     <a className="skip-content" href="#main">Skip to content</a>
-    <header><a href="/"><img src="/brand/vgl-logo-mark.png" width="40" height="40" alt="" />{BRAND.name}</a>
+    <header><a href="/"><img src="/brand/vgl-logo-navigation.webp" width="40" height="40" alt="" />{BRAND.name}</a>
       <nav aria-label="Main"><a href="/#services">Services</a><a href="/projects/">Projects</a><a href="/pricing/">Pricing</a></nav>
     </header>
     <main id="main">

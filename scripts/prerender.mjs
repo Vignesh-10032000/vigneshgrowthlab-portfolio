@@ -17,7 +17,7 @@ try {
   const homeChunk = manifest['src/App.jsx'];
   if (!homeChunk?.file) throw new Error('The homepage chunk is missing from the client build.');
   const homeResources = [
-    '<link rel="modulepreload" href="/' + homeChunk.file + '">',
+    '<link rel="modulepreload" fetchpriority="low" href="/' + homeChunk.file + '">',
     ...(homeChunk.css ?? []).map(file => '<link rel="stylesheet" href="/' + file + '">'),
   ].join('\n');
   await unlink(manifestPath);

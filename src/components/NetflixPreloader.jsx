@@ -1,17 +1,20 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { BRAND } from '../data/portfolioData';
 
-const NetflixPreloader = ({ onComplete }) => {
+const NetflixPreloader = () => {
   const preloaderRef = useRef(null);
   const contentRef = useRef(null);
-  const onCompleteRef = useRef(onComplete);
-  onCompleteRef.current = onComplete;
+  const [complete, setComplete] = useState(false);
 
   useEffect(() => {
+    if (window.matchMedia("(hover: none), (pointer: coarse), (prefers-reduced-motion: reduce)").matches) {
+      setComplete(true);
+      return;
+    }
     const tl = gsap.timeline({
       onComplete: () => {
-        if (onCompleteRef.current) onCompleteRef.current();
+        setComplete(true);
       }
     });
 
@@ -39,6 +42,8 @@ const NetflixPreloader = ({ onComplete }) => {
       tl.kill();
     };
   }, []);
+
+  if (complete) return null;
 
   return (
     <div

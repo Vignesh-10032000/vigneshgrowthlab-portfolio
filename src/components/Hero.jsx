@@ -22,7 +22,7 @@ const Hero = () => {
     const section = sectionRef.current;
     const card = cardRef.current;
     const content = contentRef.current;
-    if (!section || !card || !content) return;
+    if (!section || !card || !content || !window.matchMedia("(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)").matches) return;
 
     const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
 
@@ -280,6 +280,7 @@ const Hero = () => {
 
                 <div className="relative w-full aspect-[4/4] rounded-xl overflow-hidden mb-4 bg-black">
                   <img
+                    fetchPriority="high"
                     src="/images/proof/founder.webp"
                     srcSet="/images/proof/founder-small.webp 320w, /images/proof/founder.webp 840w"
                     sizes="(max-width: 640px) 75vw, 400px"

@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test:e2e": "playwright test tests/regression.spec.js tests/seo.spec.js",
-    "test:a11y": "playwright test tests/accessibility.spec.js --project=desktop-chromium --project=mobile-android --project=mobile-iphone"
+    "test:a11y": "playwright test tests/accessibility.spec.js --project=desktop-chromium --project=mobile-android --project=mobile-iphone",
+    "test:menu": "playwright test tests/menu-interaction.spec.js --project=desktop-chromium --project=mobile-android --project=mobile-iphone --output=test-results/menu-interaction"
   },
   "dependencies": {
     "aos": "^2.3.4",

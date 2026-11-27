@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import Lenis from 'lenis';
+import React, { useEffect } from 'react';
+import { MotionConfig } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import { observeReveals } from './utils/reveals';
 
 import NetflixPreloader from './components/NetflixPreloader';
 import CustomCursor from './components/CustomCursor';
@@ -27,79 +26,67 @@ import { trackContactLink } from './utils/conversions';
 gsap.registerPlugin(ScrollTrigger);
 
 function App() {
-  const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     document.addEventListener('click', trackContactLink);
     return () => document.removeEventListener('click', trackContactLink);
   }, []);
 
   useEffect(() => {
-    AOS.init({
-      duration: 800,
-      once: true,
-      easing: 'ease-out-cubic',
-      // Check element visibility on every scroll frame (offsets are re-measured only on layout change below).
-      throttleDelay: 0,
+    const stopReveals = observeReveals(document.getElementById('root'));
+    // Touch scrolling is native. Only enhance wheel input on pointer devices.
+    const media = gsap.matchMedia();
+    media.add('(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)', () => {
+      let active = true;
+      let lenis;
+      const tick = time => lenis.raf(time * 1000);
+      import('lenis').then(({ default: Lenis }) => {
+        if (!active) return;
+        lenis = new Lenis({
+          duration: 1.2,
+          easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          smoothWheel: true,
+        });
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add(tick);
+        gsap.ticker.lagSmoothing(0);
+      }).catch(() => { /* Native wheel scrolling remains available. */ });
+      return () => {
+        active = false;
+        gsap.ticker.remove(tick);
+        lenis?.destroy();
+      };
     });
-
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-      smoothTouch: false,
-      touchMultiplier: 2,
-    });
-
-    lenis.on('scroll', () => {
-      ScrollTrigger.update();
-    });
-
-    let aosRefreshFrame = 0;
-    const layoutObserver = new ResizeObserver(() => {
-      cancelAnimationFrame(aosRefreshFrame);
-      aosRefreshFrame = requestAnimationFrame(() => AOS.refresh());
-    });
-    layoutObserver.observe(document.body);
-
-    const tick = (time) => {
-      lenis.raf(time * 1000);
-    };
-    gsap.ticker.add(tick);
-
-    gsap.ticker.lagSmoothing(0);
-
     return () => {
-      layoutObserver.disconnect();
-      cancelAnimationFrame(aosRefreshFrame);
-      gsap.ticker.remove(tick);
-      lenis.destroy();
+      stopReveals?.();
+      media.revert();
     };
   }, []);
 
   return (
-    <div className="bg-[#050505] text-white min-h-screen relative font-sans selection:bg-brand-action selection:text-white">
-      {loading && <NetflixPreloader onComplete={() => setLoading(false)} />}
+    <MotionConfig reducedMotion="user">
+      <div className="bg-[#050505] text-white min-h-screen relative font-sans selection:bg-brand-action selection:text-white">
+        <NetflixPreloader />
 
-      <CustomCursor />
-      <Navbar />
-      <main>
-        <Hero />
-        <TrustStats />
-        <About />
-        <ServicesWheel />
-        <Portfolio />
-        <Skills />
-        <Process />
-        <WhyWorkWithMe />
-        <ComparisonTable />
-        <FaqAccordion />
-        <ContactForm />
-        <ContactCTA />
-      </main>
-      <Footer />
-      <FloatingWhatsApp />
-    </div>
+        <CustomCursor />
+        <Navbar />
+        <main>
+          <Hero />
+          <TrustStats />
+          <About />
+          <ServicesWheel />
+          <Portfolio />
+          <Skills />
+          <Process />
+          <WhyWorkWithMe />
+          <ComparisonTable />
+          <FaqAccordion />
+          <ContactForm />
+          <ContactCTA />
+        </main>
+        <Footer />
+        <FloatingWhatsApp />
+      </div>
+    </MotionConfig>
   );
 }
 

@@ -39,8 +39,8 @@ const ServicesWheel = () => {
 
       mm.add(
         {
-          isDesktop: '(min-width: 769px)',
-          isMobile:  '(max-width: 768px)',
+          isDesktop: '(min-width: 769px) and (prefers-reduced-motion: no-preference)',
+          isMobile:  '(max-width: 768px) and (prefers-reduced-motion: no-preference)',
         },
         (context) => {
           const { isDesktop } = context.conditions;
