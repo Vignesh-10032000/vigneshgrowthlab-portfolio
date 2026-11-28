@@ -10,7 +10,9 @@ export function trackContactLink(event) {
   const url = new URL(link.href, location.href);
   if (url.protocol === 'tel:') {
     emitConversion('phone_click');
-  } else if (url.hostname === 'wa.me') {
+  } else if (url.protocol === 'mailto:') {
+    emitConversion('email_click');
+  } else if (url.origin === 'https://wa.me') {
     emitConversion('whatsapp_click');
   } else if (url.origin === location.origin && url.hash === '#contact') {
     emitConversion('enquiry_click');

@@ -2,6 +2,10 @@
   publish = "dist"
   command = "npm run build"
 
+[context.production.environment]
+  VITE_GA4_ENABLED = "true"
+  VITE_GA4_MEASUREMENT_ID = "G-FDQ2NEH7L1"
+
 # Force 301 permanent redirect from Netlify subdomain to primary custom domain
 [[redirects]]
   from = "https://vigneshgrowthlab.netlify.app/*"

@@ -1,9 +1,7 @@
-import { PROJECT_CATEGORIES, PROJECTS_DATA, SERVICES_WHEEL } from '../data/portfolioData';
+import { pages } from '../data/marketingPages';
 
-import { pages, services } from '../data/marketingPages';
-
-const MEASUREMENT_ID = 'G-FDQ2NEH7L1';
-const HOME = 'https://vigneshgrowthlab.dev/';
+const MEASUREMENT_ID = import.meta.env.VITE_GA4_MEASUREMENT_ID;
+const ORIGIN = 'https://vigneshgrowthlab.dev';
 const DISABLE_KEY = 'ga-disable-' + MEASUREMENT_ID;
 export const ANALYTICS_CHOICE_KEY = 'vgl:analytics-choice';
 
@@ -14,20 +12,26 @@ const denied = {
   ad_personalization: 'denied',
 };
 const granted = { ...denied, analytics_storage: 'granted' };
+const watchedPages = new Map([
+  ['/pricing/', ['pricing_view']],
+  ...pages.flatMap(page => {
+    if (page.kind === 'service') return [[page.path, ['service_view', { service_id: page.slug }]]];
+    if (page.kind === 'project') return [[page.path, ['case_study_view', { project_id: page.project.id }]]];
+    return [];
+  }),
+]);
 const publicPaths = new Set(['/', ...pages.map(page => page.path)]);
-const pageContext = () => ({ page_location: new URL(window.location.pathname, HOME).href, page_referrer: '' });
-const contactActions = new Set([
-  'whatsapp_click', 'phone_click', 'enquiry_click', 'enquiry_whatsapp_handoff',
+const interactions = new Map([
+  ['whatsapp_click', ['whatsapp_click']],
+  ['enquiry_whatsapp_handoff', ['project_enquiry']],
+  ['phone_click', ['contact_click', { contact_method: 'phone' }]],
+  ['email_click', ['contact_click', { contact_method: 'email' }]],
+  ['enquiry_click', ['contact_click', { contact_method: 'contact_section' }]],
 ]);
-const serviceIds = new Set([...SERVICES_WHEEL, ...services].map(service => service.slug));
-const projectIds = new Set(PROJECTS_DATA.map(project => project.id));
-const categoryIds = new Set(PROJECT_CATEGORIES.map(portfolioCategoryId));
-const catalogEvents = new Map([
-  ['service_select', ['service_id', serviceIds]],
-  ['project_open', ['project_id', projectIds]],
-  ['project_link_click', ['project_id', projectIds]],
-  ['portfolio_filter', ['category_id', categoryIds]],
-]);
+const pageContext = () => ({
+  page_location: ORIGIN + window.location.pathname,
+  page_referrer: '',
+});
 
 let tag;
 let tagFailed = false;
@@ -39,27 +43,47 @@ export function portfolioCategoryId(category) {
 
 export function isAnalyticsAvailable() {
   return import.meta.env.PROD && import.meta.env.VITE_GA4_ENABLED === 'true'
-    && typeof window !== 'undefined' && window.location.origin === new URL(HOME).origin && publicPaths.has(window.location.pathname);
+    && typeof MEASUREMENT_ID === 'string' && /^G-[A-Z0-9]+$/.test(MEASUREMENT_ID)
+    && typeof window !== 'undefined' && window.location.origin === ORIGIN && publicPaths.has(window.location.pathname);
 }
 
-export function readAnalyticsChoice() {
+function readChoice(storageName) {
   try {
-    const choice = window.localStorage.getItem(ANALYTICS_CHOICE_KEY);
+    const choice = window[storageName].getItem(ANALYTICS_CHOICE_KEY);
     return choice === 'allow' || choice === 'deny' ? choice : null;
   } catch {
     return null;
   }
 }
 
+export function readAnalyticsChoice() {
+  return readChoice('sessionStorage') ?? readChoice('localStorage');
+}
+
 export function saveAnalyticsChoice(choice) {
   try {
     window.localStorage.setItem(ANALYTICS_CHOICE_KEY, choice);
   } catch {
-    // The choice still takes effect in this document if storage is unavailable.
+    try {
+      window.sessionStorage.setItem(ANALYTICS_CHOICE_KEY, choice);
+      return true;
+    } catch {
+      return false;
+    }
   }
+  try {
+    window.sessionStorage.removeItem(ANALYTICS_CHOICE_KEY);
+  } catch {
+    // Tab storage may be unavailable even when local storage is writable.
+  }
+  return true;
 }
 
-export function applyAnalyticsChoice(choice) {
+function sendEvent(name, parameters) {
+  tag('event', name, { ...pageContext(), send_to: MEASUREMENT_ID, ...parameters });
+}
+
+export function applyAnalyticsChoice(choice, persisted = true) {
   if (!isAnalyticsAvailable()) return;
 
   const disabled = choice !== 'allow';
@@ -68,16 +92,16 @@ export function applyAnalyticsChoice(choice) {
 
   if (disabled) {
     for (const name of ['_ga', '_ga_' + MEASUREMENT_ID.slice(2)]) {
-      document.cookie = name + '=; Max-Age=0; Path=/; Secure; SameSite=Lax';
+      const expired = name + '=; Max-Age=0; Path=/; Secure; SameSite=Lax';
+      document.cookie = expired;
+      document.cookie = expired + '; Domain=' + window.location.hostname;
     }
-    // Unload the running vendor script and its automatic listeners on withdrawal.
-    // A consent update sent to a loaded tag could itself trigger a request.
-    if (tag && !wasDisabled) window.location.reload();
+    // Unload the tag without sending a consent ping. Reload only if the choice survived storage.
+    if (tag && !wasDisabled && persisted) window.location.reload();
     return;
   }
 
   if (!tag) {
-    // One owner for the tag and its queue, including with React Strict Mode.
     if (window.gtag || document.querySelector('script[src^="https://www.googletagmanager.com/"]')) return;
     window.dataLayer = window.dataLayer || [];
     tag = window.gtag = function () {
@@ -108,22 +132,14 @@ export function applyAnalyticsChoice(choice) {
 
   if (!pageViewSent) {
     pageViewSent = true;
-    tag('event', 'page_view', { ...pageContext(), send_to: MEASUREMENT_ID });
+    sendEvent('page_view');
+    const view = watchedPages.get(window.location.pathname);
+    if (view) sendEvent(...view);
   }
 }
 
 export function trackAnalyticsConversion(event) {
-  if (!tag || tagFailed || window[DISABLE_KEY]) return;
-  const { action, itemId } = event.detail || {};
-  if (contactActions.has(action)) {
-    tag('event', action, { ...pageContext(), send_to: MEASUREMENT_ID });
-    return;
-  }
-
-  const catalog = catalogEvents.get(action);
-  if (!catalog) return;
-  const [parameter, allowedIds] = catalog;
-  if (allowedIds.has(itemId)) {
-    tag('event', action, { ...pageContext(), send_to: MEASUREMENT_ID, [parameter]: itemId });
-  }
+  if (!tag || tagFailed || window[DISABLE_KEY] || !isAnalyticsAvailable()) return;
+  const interaction = interactions.get(event.detail?.action);
+  if (interaction) sendEvent(...interaction);
 }

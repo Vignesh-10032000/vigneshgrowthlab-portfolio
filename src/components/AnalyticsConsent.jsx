@@ -56,8 +56,8 @@ export default function AnalyticsConsent() {
   }
 
   function choose(nextChoice) {
-    saveAnalyticsChoice(nextChoice);
-    applyAnalyticsChoice(nextChoice);
+    const persisted = saveAnalyticsChoice(nextChoice);
+    applyAnalyticsChoice(nextChoice, persisted);
     setChoice(nextChoice);
     closeSettings();
   }
@@ -86,9 +86,9 @@ export default function AnalyticsConsent() {
           </h2>
           <p className="my-2 text-sm leading-relaxed text-white/80">
             With your permission, Google Analytics uses cookies to measure page views and interactions
-            with this website. We send interaction types and catalog IDs. The enquiry form opens
-            WhatsApp with a pre-filled message. Your browser remembers your analytics choice,
-            which you can change in the footer. <a href="/cookie-policy/" className="underline">About these settings</a>.
+            with this website. We send page and interaction types and site catalog IDs. Enquiry
+            details go to WhatsApp when you open the prepared message. You can change your analytics
+            choice in the footer. <a href="/cookie-policy/" className="underline">About these settings</a>.
           </p>
           <div className="flex flex-wrap gap-2">
             <button type="button" className={buttonStyle} onClick={() => choose('allow')}>Accept Analytics</button>
