@@ -15,7 +15,7 @@ export const projects = [
     objective: 'Give customers a way to browse clothing before contacting the shop about availability.',
     workPerformed: ['Grouped clothing into browsable collections.', 'Added product images, descriptions and item-specific WhatsApp enquiry links.'],
     technologies: ['Catalogue', 'WhatsApp enquiries'], service: 'website-development',
-    photo: 'rani-sarees', width: 840, height: 333, alt: 'Clothing catalogue with a WhatsApp enquiry action beneath each item',
+    photo: 'rani-sarees', width: 840, height: 333, alt: 'Rani Sarees & Boutique catalogue with garment photos and View on WhatsApp buttons',
   },
   {
     id: 'vgl-pos', title: 'VGL POS Software', category: 'Retail POS',
@@ -49,7 +49,7 @@ export const projects = [
     objective: 'Present the family brand’s saree collections in an online storefront.',
     workPerformed: ['Developed the e-commerce website.', 'Presented the saree collections through a visual catalogue.'],
     technologies: ['E-commerce', 'Collections'], service: 'e-commerce-development',
-    photo: 'velnirai', width: 840, height: 282, alt: 'VELNIRAI saree storefront with its collection photograph',
+    photo: 'velnirai', width: 840, height: 282, alt: 'VELNIRAI storefront featuring a green embroidered saree',
   },
 ];
 

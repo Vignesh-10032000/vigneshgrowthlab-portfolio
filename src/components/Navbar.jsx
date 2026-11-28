@@ -41,7 +41,7 @@ const Navbar = () => {
               src="/brand/vgl-logo-navigation.webp"
               width={120}
               height={59}
-              alt="Vignesh Growth Lab"
+              alt=""
               className="w-full h-full object-contain"
             />
           </div>

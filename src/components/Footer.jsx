@@ -25,7 +25,7 @@ const Footer = () => {
                   loading="lazy"
                   width={120}
                   height={59}
-                  alt="Vignesh Growth Lab"
+                  alt=""
                   className="w-full h-full object-contain"
                 />
               </div>

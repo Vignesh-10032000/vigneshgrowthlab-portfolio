@@ -234,7 +234,7 @@ const About = () => {
           <figure className="my-6 max-w-lg">
             <img src="/images/proof/workstation.webp" srcSet="/images/proof/workstation-small.webp 320w, /images/proof/workstation.webp 840w"
               sizes="(max-width: 640px) 90vw, 500px" width="840" height="598" loading="lazy"
-              alt="Vignesh’s development desk with monitor, laptop and test devices" />
+              alt="Vignesh’s development desk with a monitor, laptop and keyboard" />
             <figcaption>VGL development workspace</figcaption>
           </figure>
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
